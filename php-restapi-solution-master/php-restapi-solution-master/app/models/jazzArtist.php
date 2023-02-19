@@ -1,11 +1,11 @@
 <?php
 
-class Landmark{
+class JazzaArtist{
     
-        private int $landmarkID;
-        private string $title;
+        private int $artistID;
         private string $description;
         private string $image;
+        private string $name;
 }
 
 ?>

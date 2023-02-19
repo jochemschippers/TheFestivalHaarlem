@@ -1,12 +1,11 @@
 <?php
 
-class historyDetailpage{
+class HistoryDetailpage{
     
-        private int $guideID;
-
-        private int $languageID;
-    
-        private string $guideName;
+        private int $landmarkID;
+        private string $description;
+        private string $image;
+        private string $scheduleDescription;
 
 }
 

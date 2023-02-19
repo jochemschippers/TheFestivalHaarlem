@@ -3,10 +3,8 @@
 class Guide{
     
         private int $guideID;
-
-        private int $languageID;
-    
         private string $guideName;
+        private int $languageID;
 
 }
 

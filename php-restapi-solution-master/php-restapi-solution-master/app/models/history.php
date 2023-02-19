@@ -1,6 +1,6 @@
 <?php
 
-class history{
+class History{
     
         private int $eventID;
         private int $landmarkID;
