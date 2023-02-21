@@ -7,7 +7,6 @@
     "https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="login.css">
     <title>Admin Page</title>
     
 </head>
@@ -35,13 +34,13 @@
     </main>
 
 
-    <!-- <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             $("#loginForm").on('submit', function(e) {
                 var remember_meBool = $("#remember_me").is(":checked");
                 $.ajax({
-                    url: 'login/loginToAccount',
+                    url: 'user/LoginToAccount',
                     type: "POST",
                     data: {
                         email: $("#email").val(),
@@ -65,5 +64,5 @@
 
             });
         })
-    </script> -->
+    </script>
 </body>
