@@ -35,7 +35,7 @@ SET time_zone = "+00:00";
 --   `posted_at` datetime NOT NULL
 -- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE DATABASE thefestivaldb;XXXXX
+CREATE DATABASE thefestivaldb;
 USE thefestivaldb;
 CREATE TABLE `FestivalInformation` (
 	`festivalID` INT NOT NULL AUTO_INCREMENT,
