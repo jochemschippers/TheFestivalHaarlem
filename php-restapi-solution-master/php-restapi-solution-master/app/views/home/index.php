@@ -1,3 +1,4 @@
+
 <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -18,7 +19,7 @@
                 </p>
             </div>
         </div>
-        <div class="container text-left" style="width:1200px margin:left">
+        <div class="container text-left" style="width:1200px margin=left">
             <div class="row">
                 <div class="col" style="font-size: 50px; color: #000; font-weight: bold;">
                     It’s Time To Celebrate Culture And Community
@@ -65,3 +66,7 @@
 
     </body>
 </html>
+
+<?php 
+include __DIR__ . '/../footer.php';
+?>
