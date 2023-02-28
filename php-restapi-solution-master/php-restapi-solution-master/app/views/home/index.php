@@ -1,4 +1,11 @@
+<?php 
+if (function_exists('apcu_enabled')) {
+    echo 'APCu is installed and enabled!';
+} else {
+    echo 'APCu is NOT installed or enabled!';
+}
 
+?>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
