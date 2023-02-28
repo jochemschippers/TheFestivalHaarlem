@@ -39,7 +39,7 @@ $events = $eventcontroller->getEvents();
           </div>
 
           <div class="col-sm-12 col-md-5 legal-nav text-center">
-<img src="https://i.ibb.co/XLh16FT/Logo-small.png" alt="the festival logo" class="festival-logo-small" width=160 height=130>
+              <img src="https://i.ibb.co/XLh16FT/Logo-small.png" alt="the festival logo" class="festival-logo-small" width=160 height=130>
                       <ul class="footer-links">
               <li><a href="#">Terms and Conditions</a></li>
               <li><a href="#">Privacy</a></li>
@@ -52,16 +52,15 @@ $events = $eventcontroller->getEvents();
             </ul>
             <p class="text-justify"> </p>
             <p class="text-justify"> Follow us on our socials! </p>
-                       <ul class="social-icons">
+              <ul class="social-icons">
               <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
               <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
               <li><a class="instagram" href="#"><i class="fa fa-instagram"></i></a></li>
-                         <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li> 
-                          <li><a class="youtube" href="#"><i class="fa fa-youtube"></i></a></li>   
-    </div>
-            </ul>   
-    </div>
-            
+              <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li> 
+              <li><a class="youtube" href="#"><i class="fa fa-youtube"></i></a></li>   
           </div>
+        </ul>   
       </div>
+    </div>
+  </div>
 </footer>

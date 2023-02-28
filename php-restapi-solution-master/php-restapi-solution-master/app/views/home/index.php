@@ -70,7 +70,7 @@ if (function_exists('apcu_enabled')) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>The Festival</title>    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link href="../css/home.css" rel="stylesheet">
 </head>
@@ -101,7 +101,7 @@ if (function_exists('apcu_enabled')) {
         <div class="container">
             <h2>The Haarlem Jazz Event</h2>
             <p>Haarlem Jazz is a premier annual event for all jazz lovers. With more than 10 years of experience in showcasing the best in local and international jazz talent, you’d be certain to experience a vibrant and lively atmosphere for music fans!</p>
-            <a class="btn btn-primary" href="#" role="button">Link</a>
+            <a class="btn btn-primary" href="/template" role="button">Link</a>
          </div>  
     </div>
 
