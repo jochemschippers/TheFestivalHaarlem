@@ -41,22 +41,23 @@ if (function_exists('apcu_enabled')) {
             Check out the following events:
         </div>       
 
-        <div class="card">            
-            <div class="container" style="background: rgba(0, 0, 0, 0.5);">
+        <div class="card" style="background: rgba(0, 0, 0, 0.5); background-image: url('/image/home/Jazz-picture.jpg');">            
+            <div class="container" style="background: rgba(0, 0, 0, 0.5); width: 60%;">
                 <h1 style="font-weight: bold; font-family: martel; font-size: 37; color: #FFFFFF;">The Haarlem Jazz Event</h1>
                 <p style="font-family: open+sans; font-size: 22; width: 1000px; color: #FFFFFF;">Haarlem Jazz is a premier annual event for all jazz lovers. With more than 10 years of experience in showcasing the best in local and international jazz talent, you’d be certain to experience a vibrant and lively atmosphere for music fans!</p>
                 <a class="btn btn-primary" style="width: 200px;" href="#" role="button">Link</a>
              </div>  
         </div>
         </div>
-        <div class="card" style="text-align: right;">
-                <h1 style="font-weight: bold; font-family: martel; font-size: 37;">A Stroll Through History</h1>
-                <p style="font-family: open+sans; font-size: 22; width: 1000px;">See what cultural monuments the city of Haarlem has to offer and walk with one of our guides to get to know the stories behind them during our guided tour through the streets of Haarlem.</p>
+        <div class="card" style="text-align: right; background-image: url('/image/home/history-picture.jpg');">
+            <div class="container" style="background: rgba(0, 0, 0, 0.5); width: 60%;">
+                <h1 style="font-weight: bold; font-family: martel; font-size: 37; color: #FFFFFF;">A Stroll Through History</h1>
+                <p style="font-family: open+sans; font-size: 22; width: 1000px;  color: #FFFFFF;">See what cultural monuments the city of Haarlem has to offer and walk with one of our guides to get to know the stories behind them during our guided tour through the streets of Haarlem.</p>
                 <a class="btn btn-primary" style="width: 200px; " href="#" role="button">Link</a>
             </div>               
         </div>
         <div class="card" style="background-image: url('/image/home/foodStyles.jpg');">   
-             <div class="container" style="background: rgba(0, 0, 0, 0.5);">
+             <div class="container" style="background: rgba(0, 0, 0, 0.5); width: 60%;">
                 <h1 style="font-weight: bold; font-family: martel; font-size: 37; color: #FFFFFF;">Explore the TASTE of Haarlem</h1>
                 <p style="font-family: open+sans; font-size: 22; width: 1000px; color: #FFFFFF;">Explore every Food and Drink in this years Haarlem Yummy! event. Here its Eat first Talk later. Come and enjoy all culinary options Haarlem has to offer in this cities most versitile Food and Drink Festival.</p>
                 <a class="btn btn-primary" style="width: 200px;" href="#" role="button">Link</a>
