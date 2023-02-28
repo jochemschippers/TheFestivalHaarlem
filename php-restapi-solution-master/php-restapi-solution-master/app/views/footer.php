@@ -26,8 +26,7 @@ $events = $eventcontroller->getEvents();
               <?php 
               try{
                 foreach ($events as $event) {
-                    $eventTitle = str_replace(' ', '-', $event->getEventTitle());
-                    echo '<li><a href="' . $eventTitle . '">' . $eventTitle  . '</a></li>';
+                    echo '<li><a href="' . str_replace(' ', '-', $event->getEventTitle()) . '">' . $$event->getEventTitle()  . '</a></li>';
                   }
               }
               catch(error $e)
@@ -40,7 +39,7 @@ $events = $eventcontroller->getEvents();
           </div>
 
           <div class="col-sm-12 col-md-5 legal-nav text-center">
-<img src="https://i.ibb.co/XLh16FT/Logo-small.png" alt="the festival logo" class="festival-logo-small center" width=160 height=130>
+<img src="https://i.ibb.co/XLh16FT/Logo-small.png" alt="the festival logo" class="festival-logo-small" width=160 height=130>
                       <ul class="footer-links">
               <li><a href="#">Terms and Conditions</a></li>
               <li><a href="#">Privacy</a></li>
