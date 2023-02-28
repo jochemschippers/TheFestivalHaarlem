@@ -11,7 +11,7 @@
     </head>
     <body>
         <div class="border-box" style="height: 600px; border: 2px solid #000; padding: 10px; background-image: url('/image/home/homegif.gif'); background-size: cover; ">
-            <div class="container" style="background: rgba(0, 0, 0, 0.5); ">
+            <div class="container" style="background: rgba(0, 0, 0, 0.5); display: flex; flex-direction: column; justify-content: space-between;">
                 <H1 style="color: #FFFFFF; text-align: center;">Explore The Festival</H1>
                 <p style="color: #FFFFFF; text-align: center;">
                     Learn more about the amazing Haarlem Festival experience Dutch cuisine, take a stroll around the rich historic center and experience some amazing jazz artists! 
