@@ -117,7 +117,7 @@ if (function_exists('apcu_enabled')) {
         <div class="container">
             <h2>Explore the Taste of Haarlem</h2>
             <p>Explore every Food and Drink in this years Haarlem Yummy! event. Here its Eat first Talk later. Come and enjoy all culinary options Haarlem has to offer in this cities most versitile Food and Drink Festival.</p>
-            <a class="btn btn-primary" href="#" role="button">Link</a>
+            <a class="btn btn-primary" href="/yummy" role="button">Link</a>
         </div>  
     </div>
 

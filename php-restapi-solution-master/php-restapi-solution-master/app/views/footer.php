@@ -22,7 +22,7 @@ $events = $eventcontroller->getEvents();
           <div class="col-xs-6 col-md-2">
             <h6>Navigation:</h6>
             <ul class="footer-links">
-              <li><a href="#">Home</a></li>
+              <li><a href="/">Home</a></li>
               <?php 
               try{
                 foreach ($events as $event) {
@@ -46,7 +46,7 @@ $events = $eventcontroller->getEvents();
               <li><a href="#">Cookies</a></li>
           </div>
           <div class="col-sm-12 col-md-3">
-      <h6>Our Sponsor:</h6>
+            <h6>Our Sponsor:</h6>
             <ul class="footer-links">
                     <li><a href="#">Visit Haarlem</a></li>
             </ul>
