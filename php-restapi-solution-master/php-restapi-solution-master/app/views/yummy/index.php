@@ -16,7 +16,7 @@
         
         <div class="border-box" id="titleBorder"> <!-- <<<<<<< GEEF DIT EEN IMAGE VIA CSS -->
             <div class="container" id="titleContainer">
-                <h1>Yummy</h1> <!-- HIER DE TITLE VAN HET EVENT -->
+                <h1>Yummy!</h1> <!-- HIER DE TITLE VAN HET EVENT -->
             </div>
         </div>
         <div class="container">
@@ -69,7 +69,8 @@
                                 Mr & Mrs is known for its quality Dutch cuisine and seafood. 
                                 Interested? 
                             </p>
-                            <a href="#" class="btn btn-primary">Menu and reservations</a>
+                            <a href="#" class="btn btn-primary">Menu and info</a>
+                            <a href="#" class="btn btn-primary">Make your reservation</a>
                         </div>
                     </div>
                 </div>
@@ -100,7 +101,7 @@
                 <div class="col-md-6">
                     <h1>Stroll Through Haarlem</h1>
                     <p>The historical inner city of Haarlem features a lot of extraordinary monuments. Discover the many interesting, beautiful and surprising monuments that this city makes unique through this tour. </p>
-                    <a href="#" class="btn btn-primary">Go to Str. History</a>
+                    <a href="#" class="btn btn-primary">Go to Stroll though History</a>
                 </div>
             </div>
         </div>
