@@ -1,5 +1,5 @@
 .border-box {
-    height: 600px;
+    height: 500px;
     border: 2px solid #000;
     padding: 10px;
     /* background-image: url('/image/HIER-FOLDER/HIER-IMAGE.gif'); ------> DOE HIER EEN ANDERE IMAGE <------ */
@@ -27,6 +27,6 @@
     font-family: 'Martel', serif;
   }
   #titleText p {
-    font-size: 28px;
+    font-size: 22px;
     font-family: 'Open Sans', sans-serif;
   }

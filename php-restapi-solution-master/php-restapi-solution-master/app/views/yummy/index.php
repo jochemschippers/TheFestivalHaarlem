@@ -88,6 +88,23 @@
                 </div>
             </div>
         </div>
+        <div class="container" id="otherEventInformation">
+            <div class="row" id="oERow">
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h1>Jazz</h1>
+                    <p>Haarlem Jazz is the premier event for all jazz lovers. We are here to provide a vibrant and lively atmosphere for music fans to come together and enjoy the sounds of the genre.</p>
+                    <a href="#" class="btn btn-primary">Go to Jazz</a>
+                </div>
+                <div class="col-md-6">
+                    <h1>Stroll Through Haarlem</h1>
+                    <p>The historical inner city of Haarlem features a lot of extraordinary monuments. Discover the many interesting, beautiful and surprising monuments that this city makes unique through this tour. </p>
+                    <a href="#" class="btn btn-primary">Go to Str. History</a>
+                </div>
+            </div>
+        </div>
+
 
     </body>
 </html>

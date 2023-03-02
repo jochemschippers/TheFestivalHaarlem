@@ -37,3 +37,11 @@
     background-color: #D9E1BA;
     padding: 10px;
   }
+  #otherEventInformation {
+    padding-top: 50px;
+  }
+  #otherEventInformation #oERow{
+    background-color: #961B1B; 
+    height: 100px;
+  }
+  
