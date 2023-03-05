@@ -13,7 +13,7 @@
  
 <body class='text-center'>
     <main class="form-login">
-        <form method="POST" id="loginForm" onSubmit="return false; // Returning false stops the page from reloading">
+        <form method="POST" id="loginForm" onSubmit="return false;"> <!-- Returning false stops the page from reloading -->
             <h1 class="h3 mb-3 fw-normal">Login hier</h1>
             <div class="infoMessage"> </div>
             <div class="form-floating">

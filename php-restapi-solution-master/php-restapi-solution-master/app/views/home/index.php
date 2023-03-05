@@ -7,8 +7,15 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
         <link href="../css/home.css" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+        <script src="ckeditor/ckeditor.js"></script>
     </head>
     <body>
+        <div class="container"> 
+            <form action="homecontroller.php" method="post"> <!-- homecontroller could be the wrong file here -->
+            <textarea name="editor" id="editor"></textarea>
+            <input type="submit" class="save-btn" name="submit_data" value="publish">
+        </div>
+        <script> CKEDITOR.replace( 'editor' ); </script>
         <div class="border-box" style="height: 600px; border: 2px solid #000; padding: 10px; background-image: url('/image/home/homegif.gif'); background-size: cover; ">
             <!-- <img src="final_639b013b960dc300259d655b_372637.gif" class="img-fluid" alt="..."> -->
             <div class="container" style="background: rgba(0, 0, 0, 0.5);">
@@ -21,7 +28,7 @@
         <div class="container text-left" style="width:1200px margin:left">
             <div class="row">
                 <div class="col" style="font-size: 50px; color: #000; font-weight: bold;">
-                    It’s Time To Celebrate Culture And Community
+                    It's Time To Celebrate Culture And Community
                 </div>
                 <div class="col" style="font-size: 25px;">
                     The Festival is an annual celebration of arts and culture is an inclusive festival meant for all, regardless of age or budget.
@@ -65,3 +72,16 @@
 
     </body>
 </html>
+
+<script>
+    const editor = document.querySelector('#editor');
+
+    ClassicEditor
+        .create(editor)
+        .then(editor => {
+            console.log('Editor initialized', editor);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+</script>
