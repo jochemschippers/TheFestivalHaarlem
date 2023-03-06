@@ -38,8 +38,7 @@
         </div>
         <div class="container" style="background-color: #E5E5E5; width: 100%; font-size: 48px; font-weight: bold; color: #000;">  
             Check out the following events:
-        </div>       
-
+        </div>
         <div class="card">            
             <div class="container" style="background: rgba(0, 0, 0, 0.5);">
                 <h1 style="font-weight: bold; font-family: martel; font-size: 37; color: #FFFFFF;">The Haarlem Jazz Event</h1>
