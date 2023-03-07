@@ -13,7 +13,7 @@
     text-align: left;
     width: 1000px;
     height: 130px;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: #262626;
     display: flex;
     justify-content: left; /* horizontally center child elements */
     align-items: center; /* vertically center child elements */
@@ -41,4 +41,10 @@
   .landingPageContainer{
     margin-left: 60px;
     height: calc(23vw);
+    }
+    h3{
+      color: #262626;
+      font-size: 37px;
+      font-family: ''
+
     }

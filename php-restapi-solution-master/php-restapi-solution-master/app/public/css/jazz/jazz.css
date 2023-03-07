@@ -48,3 +48,23 @@ button:active {
   position: relative;
   z-index: -1;
 }
+
+.carousel {
+  position: relative;
+}
+
+.carousel-item:before,
+.carousel-item:after {
+  content: "";
+  position: absolute;
+  opacity: 0.5;
+  top: 0;
+}
+
+.carousel-item:before {
+  left: -100%;
+}
+
+.carousel-item:after {
+  right: -100%;
+}
