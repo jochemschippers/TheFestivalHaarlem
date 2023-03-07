@@ -9,6 +9,17 @@ class RestaurantMenuItem{
         private string $description;
         private float $price;
         private int $foodType;
+
+
+        public function __construct(int $menuItemID, int $restaurantID, int $courseID, string $name, string $description, float $price, int $foodType){
+            $this->menuItemID = $menuItemID;
+            $this->restaurantID = $restaurantID;
+            $this->courseID = $courseID;
+            $this->name = $name;
+            $this->description = $description;
+            $this->price = $price;
+            $this->foodType = $foodType;
+        }
 }
 
 ?>
