@@ -1,0 +1,9 @@
+body{
+  background-image: url('/image/jazz/banner.png');
+  background-repeat: no-repeat;
+  background-size: 100vw;
+}
+.border-box {
+    background-image: url('/image/jazz/banner.png');
+
+  }
