@@ -4,19 +4,24 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Articles</title>
+        <title>A stroll Through History</title>
+        <script src="ckeditor/ckeditor.js"></script>
     </head>
 
     <body>
         <div class="container">
-            <!-- <form action="homecontroller.php" method="post"></form> homecontroller could be the wrong file here -->
-            <textarea name="editor" id="editor" cols="30" rows="10"></textarea>
-            <input type="submit" class="save-btn" name="submit_data" value="publish">
+            
         </div>
+        <form action="historycontroller.php" method="post"></form>
+            <textarea name="historyeditor" id="historyeditor" cols="80" rows="10"></textarea>
+            <script>
+                CKEDITOR.replace('historyeditor');
+            </script>
+            <p>
+                <input type="submit" name="submit_data" value="submit">
+            </p>
+        </form>
         
-        <script src="ckeditor/ckeditor.js"></script>
-        <script>
-            CKEDITOR.replace("editor");
-        </script>
+        
     </body>
 </html>

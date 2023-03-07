@@ -2,14 +2,16 @@
 require __DIR__ . '/../repositories/historyrepository.php';
 
 
-class UserService {
+class HistoryService {
     private $repository;
     function __construct()
     {
-        $this->repository = new UserRepository();
+        $this->repository = new HistoryRepository();
     }
-    public function login() {
-        $this->repository->login();
+    public function insert($history) {
+        // retrieve data
+        $repository = new HistoryRepository();
+        $repository->insert($history);        
     }
 }
 
