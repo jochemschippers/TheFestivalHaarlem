@@ -2,7 +2,7 @@
     height: 26.041666666vw;
     padding: 10px;
     /* background-image: url('/image/HIER-FOLDER/HIER-IMAGE.gif'); ------> DOE HIER EEN ANDERE IMAGE <------ */
-    background-color: darkgray; /* ------> KAN WEG ZODRA IMAGE IS TOEGEVOEGD <------ */
+
     background-size: cover;
     position: relative; /* Set position to relative for absolute positioning of container */
   }
@@ -23,9 +23,6 @@
     color: white;
     margin-left: 60px;
   }
-  #titleText{
-    margin-left: 60px;
-  }
   #titleText h2 {
     font-size: 48px;
     font-family: 'Martel', serif;
@@ -39,7 +36,9 @@
   #titleText p {
     font-size: 22px;
     font-family: 'Open Sans', sans-serif;
+    font-weight: 500;
   }
-  #landingPageContainer{
-    width: 50vw;
-  }
+  .landingPageContainer{
+    margin-left: 60px;
+    height: calc(23vw);
+    }
