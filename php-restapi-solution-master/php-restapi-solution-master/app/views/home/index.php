@@ -24,7 +24,7 @@ include __DIR__ . '/../navbar.php';
         <div class="container text-left" style="width:1200px margin=left">
             <div class="row">
                 <div class="col" style="font-size: 50px; color: #000; font-weight: bold;">
-                    It’s Time To Celebrate Culture And Community
+                    It's Time To Celebrate Culture And Community
                 </div>
                 <div class="col" style="font-size: 25px;">
                     The Festival is an annual celebration of arts and culture is an inclusive festival meant for all, regardless of age or budget.
@@ -35,13 +35,12 @@ include __DIR__ . '/../navbar.php';
         <div class="container" style="background-color: #E5E5E5; width: 100%; font-size: 48px; font-weight: bold; color: #000;">  
             Check out the following events:
         </div>       
-
         <div class="card" style="background: rgba(0, 0, 0, 0.5); background-image: url('/image/home/Jazz-picture.jpg');">            
             <div class="container" style="background: rgba(0, 0, 0, 0.5); width: 60%;">
                 <h1 style="font-weight: bold; font-family: martel; font-size: 37; color: #FFFFFF;">The Haarlem Jazz Event</h1>
                 <p style="font-family: open+sans; font-size: 22; width: 1000px; color: #FFFFFF;">Haarlem Jazz is a premier annual event for all jazz lovers. With more than 10 years of experience in showcasing the best in local and international jazz talent, you’d be certain to experience a vibrant and lively atmosphere for music fans!</p>
                 <a class="btn btn-primary" style="width: 200px;" href="#" role="button">Link</a>
-             </div>  
+             </div>
         </div>
         </div>
         <div class="card text-end" style="background-image: url('/image/home/history-picture.jpg');">
@@ -49,7 +48,7 @@ include __DIR__ . '/../navbar.php';
                 <h1 style="font-weight: bold; font-family: martel; font-size: 37; color: #FFFFFF;">A Stroll Through History</h1>
                 <p style="font-family: open+sans; font-size: 22; width: 1000px;  color: #FFFFFF;">See what cultural monuments the city of Haarlem has to offer and walk with one of our guides to get to know the stories behind them during our guided tour through the streets of Haarlem.</p>
                 <a class="btn btn-primary" style="width: 200px; " href="#" role="button">Link</a>
-            </div>               
+            </div>
         </div>
         <div class="card" style="background-image: url('/image/home/foodStyles.jpg');">   
              <div class="container" style="background: rgba(0, 0, 0, 0.5); width: 60%;">
@@ -99,7 +98,6 @@ include __DIR__ . '/../navbar.php';
             <a class="btn btn-primary" href="/template" role="button">Link</a>
          </div>  
     </div>
-
     <div class="card text-end" style="background-image: url('/image/home/history-picture.jpg');">            
         <div class="container">
             <h2>A Stroll Through History</h2>
@@ -131,3 +129,16 @@ include __DIR__ . '/../navbar.php';
 <?php 
 include __DIR__ . '/../footer.php';
 ?>
+
+<!-- <script>
+    const editor = document.querySelector('#editor');
+
+    ClassicEditor
+        .create(editor)
+        .then(editor => {
+            console.log('Editor initialized', editor);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+</script> -->
