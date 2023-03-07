@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -7,15 +8,8 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
         <link href="../css/home.css" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
-        <script src="ckeditor/ckeditor.js"></script>
     </head>
     <body>
-        <div class="container"> 
-            <form action="homecontroller.php" method="post"> <!-- homecontroller could be the wrong file here -->
-            <textarea name="editor" id="editor"></textarea>
-            <input type="submit" class="save-btn" name="submit_data" value="publish">
-        </div>
-        <script> CKEDITOR.replace( 'editor' ); </script>
         <div class="border-box" style="height: 600px; border: 2px solid #000; padding: 10px; background-image: url('/image/home/homegif.gif'); background-size: cover; ">
             <!-- <img src="final_639b013b960dc300259d655b_372637.gif" class="img-fluid" alt="..."> -->
             <div class="container" style="background: rgba(0, 0, 0, 0.5);">
@@ -39,28 +33,28 @@
         <div class="container" style="background-color: #E5E5E5; width: 100%; font-size: 48px; font-weight: bold; color: #000;">  
             Check out the following events:
         </div>
-        <div class="card">            
+        <div class="card">
             <div class="container" style="background: rgba(0, 0, 0, 0.5);">
                 <h1 style="font-weight: bold; font-family: martel; font-size: 37; color: #FFFFFF;">The Haarlem Jazz Event</h1>
                 <p style="font-family: open+sans; font-size: 22; width: 1000px; color: #FFFFFF;">Haarlem Jazz is a premier annual event for all jazz lovers. With more than 10 years of experience in showcasing the best in local and international jazz talent, you’d be certain to experience a vibrant and lively atmosphere for music fans!</p>
                 <a class="btn btn-primary" style="width: 200px;" href="#" role="button">Link</a>
-             </div>  
+             </div>
         </div>
         </div>
         <div class="card" style="text-align: right;">
                 <h1 style="font-weight: bold; font-family: martel; font-size: 37;">A Stroll Through History</h1>
                 <p style="font-family: open+sans; font-size: 22; width: 1000px;">See what cultural monuments the city of Haarlem has to offer and walk with one of our guides to get to know the stories behind them during our guided tour through the streets of Haarlem.</p>
                 <a class="btn btn-primary" style="width: 200px; " href="#" role="button">Link</a>
-            </div>               
+            </div>
         </div>
-        <div class="card" style="background-image: url('/image/home/foodStyles.jpg');">   
+        <div class="card" style="background-image: url('/image/home/foodStyles.jpg');">
              <div class="container" style="background: rgba(0, 0, 0, 0.5);">
                 <h1 style="font-weight: bold; font-family: martel; font-size: 37; color: #FFFFFF;">Explore the TASTE of Haarlem</h1>
                 <p style="font-family: open+sans; font-size: 22; width: 1000px; color: #FFFFFF;">Explore every Food and Drink in this years Haarlem Yummy! event. Here its Eat first Talk later. Come and enjoy all culinary options Haarlem has to offer in this cities most versitile Food and Drink Festival.</p>
                 <a class="btn btn-primary" style="width: 200px;" href="#" role="button">Link</a>
-             </div>            
+             </div>
         </div>
-
+        
 
 
         <!-- <h1>Index view!</h1>
@@ -72,7 +66,7 @@
     </body>
 </html>
 
-<script>
+<!-- <script>
     const editor = document.querySelector('#editor');
 
     ClassicEditor
@@ -83,4 +77,4 @@
         .catch(error => {
             console.error(error);
         });
-</script>
+</script> -->
