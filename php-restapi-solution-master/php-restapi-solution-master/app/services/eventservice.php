@@ -6,8 +6,8 @@ class EventService {
     public function getAll() {
         // retrieve data
         $repository = new EventRepository();
-        $articles = $repository->getAll();
-        return $articles;
+        $events = $repository->getAll();
+        return $events;
     }
 }
 
