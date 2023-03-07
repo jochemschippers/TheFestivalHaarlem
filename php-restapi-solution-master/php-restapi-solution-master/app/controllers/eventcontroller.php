@@ -1,7 +1,7 @@
 <?php
 require __DIR__ . '/../services/eventservice.php';
 
-class EventController {
+class EventController{
     private $eventService; 
     function __construct() {
         $this->eventService = new EventService();
