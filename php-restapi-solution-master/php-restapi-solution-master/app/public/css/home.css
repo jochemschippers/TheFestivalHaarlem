@@ -1,0 +1,171 @@
+.border-box{
+    min-height: 600px;    
+}
+
+/* Global styles */
+html {
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Styles for the hero section */
+  .border-box {
+    height: 600px;
+    border: 2px solid #000;
+    padding: 10px;
+    background-image: url('/image/home/homegif.gif');
+    background-size: cover;
+    position: relative; /* Set position to relative for absolute positioning of container */
+  }
+
+  #titleContainer {
+    position: absolute; /* Set position to absolute for positioning at the bottom of the border box */
+    bottom: 0; /* Set bottom to 0 to position container at the bottom */
+    text-align: center;
+  }
+  
+  .container {
+    background: rgba(0, 0, 0, 0.5);
+  }
+  
+  h1 {
+    color: #FFFFFF;
+    text-align: center;    
+    font-weight: bold;
+    font-family: 'Martel', serif;
+    font-size: 3.7rem;
+  }
+  
+  p {
+    color: #FFFFFF;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 22px;
+    width: 1000px;
+    margin: 0 auto;
+  }
+  
+  /* Styles for the "It's Time To Celebrate Culture And Community" section */
+  #intro {
+    background-color: #FFFFFF;
+  }
+
+  #intro .col-6 h1{
+    color: #000000;
+    text-align: left;    
+    font-weight: bold;
+    font-family: 'Open Sans', sans-serif;;
+    font-size: 3.0rem;
+    padding-left: 20px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+  #intro .col-6 p{
+    color: #000000;
+    padding-right: 40px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+
+  .text-left {
+    text-align: left;
+  }
+  
+  .col {
+    font-size: 50px;
+    color: #000;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+  }
+  
+  .col:last-child {
+    font-size: 25px;
+    font-family: 'Open Sans', sans-serif;
+  }
+  
+  /* Styles for the "Check out the following events" section */
+  #banner h2 {
+    font-size: 2.6rem;
+    padding-left: 20px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+
+  .card {
+    background: rgba(0, 0, 0, 0.5);
+    background-size: cover;
+    background-position: center center;
+  }
+  
+  .card .container {
+    width: 60%;
+    margin: 0 auto;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 22px;
+  }
+  
+  .card h2 {
+    /* font-weight: bold; */
+    font-family: 'Martel', serif;
+    font-size: 2.5rem;
+    color: #FFFFFF;
+  }
+  
+  .card p {
+    width: 1000px;
+    color: #FFFFFF;
+  }
+  
+  .btn {
+    width: 200px;
+    margin: 20px 0;
+  }
+  
+  /* Styles for responsive layout */
+  @media screen and (max-width: 1200px) {
+    .container {
+      width: 90%;
+    }
+  
+    .border-box {
+      height: 500px;
+    }
+  
+    h1 {
+      font-size: 3rem;
+    }
+  
+    p {
+      font-size: 20px;
+      width: 90%;
+    }
+  
+    .col {
+      font-size: 40px;
+    }
+  
+    .col:last-child {
+      font-size: 20px;
+    }
+  
+    .card .container {
+      width: 80%;
+    }
+  
+    .card h1 {
+      font-size: 3rem;
+    }
+  
+    .card p {
+      width: 90%;
+      font-size: 20px;
+    }
+  
+    .btn {
+      width: 150px;
+    }
+  }
