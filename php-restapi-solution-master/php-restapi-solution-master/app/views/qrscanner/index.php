@@ -9,48 +9,51 @@
     <link href="../css/qrscanner.css" rel="stylesheet">
     </head>
   <body>
-  <form>
+  <div class = "container">
+    <div class="row">
+    <form>
       <label for="ticketNumber">Ticket Number:</label>
       <input type="text" id="ticketNumber" name="ticketNumber" readonly><br><br>
-      <button type="button" id="scanButton">Scan QR Code</button>
     </form>
-  
-    
+    </div>
+    <div class="row">
+    <video id="preview"></video>
+    </div>
+    <div class="row">
+    <img id="correctImage" src="\image\qrscanner\green check.png" alt="Correct" >
+    <img id="incorrectImage" src="\image\qrscanner\redcross.png" alt="Incorrect" >
+    </div>
+  </div>
     <br>
-    <video id="preview" style="display:none;"></video>
-    <script type="text/javascript" src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
+    
     <script type="text/javascript">
-
-
       let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
-      scanner.addListener('scan', function (content) {
-        console.log(content);
-        let ticketNumber = document.getElementById('ticketNumber');
-        if (content == '1234') {
-          ticketNumber.value = content;
-          ticketNumber.classList.remove('red-box');
-          ticketNumber.classList.add('green-box');
-        } else {
-          ticketNumber.value = '';
-          ticketNumber.classList.remove('green-box');
-          ticketNumber.classList.add('red-box');
-        }
-      });
+      let correctImage = document.getElementById('correctImage');
+    let incorrectImage = document.getElementById('incorrectImage');
+    Instascan.Camera.getCameras().then(function (cameras) {
+    if (cameras.length > 0) {
+      scanner.start(cameras[0]);
+      document.getElementById('preview').style.display = 'block';
+    } else {
+      console.error('No cameras found.');
+    }
+    }).catch(function (e) {
+      console.error(e);
+    });
 
 
-
-      document.getElementById('scanButton').addEventListener('click', function() {
-        Instascan.Camera.getCameras().then(function (cameras) {
-          if (cameras.length > 0) {
-            scanner.start(cameras[0]);
-            document.getElementById('preview').style.display = 'block';
-          } else {
-            console.error('No cameras found.');
-          }
-        }).catch(function (e) {
-          console.error(e);
-        });
-      });
+    scanner.addListener('scan', function (content) {
+    console.log(content);
+    if (content == '1234') {
+      correctImage.style.display = 'block';
+      ticketNumber.value = content;
+      incorrectImage.style.display = 'none';
+    } else {
+      correctImage.style.display = 'none';
+      ticketNumber.value = content;
+      incorrectImage.style.display = 'block';
+  }
+});
     </script>
   </body>
 </html>
