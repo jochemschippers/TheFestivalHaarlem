@@ -15,7 +15,8 @@ class UserController extends Controller {
             'status' => 1,
             'message' => 'Inloggen gelukt, je wordt nu gebracht naar de homepagina.'
         );
-        try{
+        try{ //geef variable door
+            //session vanuit aparte controller
             $this->userService->login();
         }catch(ErrorException $e){
             $response['message'] = $e->getMessage();

@@ -33,36 +33,37 @@
         </form>
     </main>
 
-
-    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
     <script type="text/javascript">
-        $(document).ready(function() {
-            $("#loginForm").on('submit', function(e) {
-                var remember_meBool = $("#remember_me").is(":checked");
-                $.ajax({
-                    url: 'user/LoginToAccount',
-                    type: "POST",
-                    data: {
-                        email: $("#email").val(),
-                        password: $("#password").val(),
-                        remember_me: remember_meBool,
-                    },
-                    dataType: 'json',
-                    processdate: false,
-                    cache: false,
-                    procesData: false,
-                    success: function(response) {
-                        $(".infoMessage").css("display", "block");
-                        if (response.status === 1) {
-                            $("#loginForm")[0].reset();
-                            document.location.href="/";
-                        }
-                        $(".infoMessage").html('<p>' + response.message + '</p>');
-
-                    },
-                });
-
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelector("#loginForm").addEventListener('submit', function(e) {
+            e.preventDefault();
+            var remember_meBool = document.querySelector("#remember_me").checked;
+            fetch('user/LoginToAccount', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: document.querySelector("#email").value,
+                    password: document.querySelector("#password").value,
+                    remember_me: remember_meBool,
+                }),
+            })
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(data) {
+                document.querySelector(".infoMessage").style.display = "block";
+                if (data.status === 1) {
+                    document.querySelector("#loginForm").reset();
+                    document.location.href="/";
+                }
+                document.querySelector(".infoMessage").innerHTML = '<p>' + data.message + '</p>';
+            })
+            .catch(function(error) {
+                console.error('There was a problem with the fetch operation:', error);
             });
-        })
-    </script>
+        });
+    });
+</script>
 </body>
