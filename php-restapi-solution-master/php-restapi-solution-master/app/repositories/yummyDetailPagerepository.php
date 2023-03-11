@@ -8,8 +8,8 @@ class YummyDetailPageRepository extends Repository
 {
     function getAll() {
         try {
-            $stmt = $this->connection->prepare(" 
-            SELECT * 
+            $stmt = $this->connection->prepare("
+            SELECT *
             FROM YummyRestaurants
             ");
 
@@ -28,6 +28,7 @@ class YummyDetailPageRepository extends Repository
                     $row["restaurantID"],
                     $row['restaurantName'],
                     $row['address'],
+                    $row['contact'],
                     $row['description'],
                     $row['amountOfStars'],
                     $row['bannerImage'],
@@ -50,8 +51,8 @@ class YummyDetailPageRepository extends Repository
 
     function getOne($restaurantId) {
         try {
-            $stmt = $this->connection->prepare(" 
-            SELECT * 
+            $stmt = $this->connection->prepare("
+            SELECT *
             FROM YummyRestaurants WHERE restaurantId = :_restaurantId
             ");
 
@@ -74,6 +75,7 @@ class YummyDetailPageRepository extends Repository
                     $row["restaurantID"],
                     $row['restaurantName'],
                     $row['address'],
+                    $row['contact'],
                     $row['description'],
                     $row['amountOfStars'],
                     $row['bannerImage'],
@@ -83,7 +85,7 @@ class YummyDetailPageRepository extends Repository
                     $row['childPrice'],
                     new DateTime($row['startTime']),
                     new DateTime($row['duration'])
-                );                
+                );
                 array_push($restaurants, $restaurant);
                 
             }
@@ -97,7 +99,7 @@ class YummyDetailPageRepository extends Repository
 
     function getMenuItems($restaurantId) {
         try {
-            $stmt = $this->connection->prepare(" 
+            $stmt = $this->connection->prepare("
             SELECT * FROM `RestaurantMenuItems` WHERE restaurantId = :_restaurantId
             ");
 
@@ -113,7 +115,7 @@ class YummyDetailPageRepository extends Repository
             $results = $stmt->fetchAll();
     
             $menus = [];
-            foreach($results as $row){
+            foreach ($results as $row) {
                 $menu = new RestaurantMenuItem(
 
                     $row["menuItemID"],
@@ -122,7 +124,7 @@ class YummyDetailPageRepository extends Repository
                     $row['name'],
                     $row['description'],
                     $row['price'],
-                    $row['specialty']  
+                    $row['specialty']
                 );
                 array_push($menus, $menu);
             }
@@ -135,7 +137,7 @@ class YummyDetailPageRepository extends Repository
     }
     function getImages($restaurantId) {
         try {
-            $stmt = $this->connection->prepare(" 
+            $stmt = $this->connection->prepare("
             SELECT * FROM `RestaurantImages` WHERE restaurantId = :_restaurantId
             ");
 
@@ -147,7 +149,7 @@ class YummyDetailPageRepository extends Repository
             $results = $stmt->fetchAll();
     
             $images = [];
-            foreach($results as $row){
+            foreach ($results as $row) {
                 $image = new RestaurantImage(
 
                     $row["imageID"],

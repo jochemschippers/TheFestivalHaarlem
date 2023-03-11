@@ -36,12 +36,15 @@
     font-family: 'Open Sans', sans-serif;
   }
   #restaurantLogo{
-    height: 250px;
-    width: 650px;
+    height: 225px;
+    width: 550px;
     background-size: cover;
     border: 2px solid #000;
+    align-self: flex-end;
+    margin-top: 10px;
+    margin-right: 2rem;
     margin-bottom: 50px;
-    margin-left: 100px;
+    margin-left: 210px;
   }
   #restaurantInfo{
     margin-left: 50px;
@@ -70,6 +73,7 @@
   } 
   #foodPictures{
     margin-top: 50px;
+    margin-left: 65px;
   }
   #scedulePrice{
     margin-left: 50px;

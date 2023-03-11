@@ -1,6 +1,6 @@
-<?php 
+<?php
 // Assuming the ID of the specific restaurant you want to display is stored in the $restaurantId variable
-$restaurantId = 1;
+$restaurantId = 4;
 
 // Create a new instance of the DetailPageService class
 $detailPageService = new YummyDetailPageService();
@@ -28,7 +28,10 @@ $images = $detailPageService->getImages($restaurantId);
         <title>The Festival</title>
 
         <!-- ----- BOOTSTRAP EN CSS LINKS ----- -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+        rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+        crossorigin="anonymous">
+
         <link href="../css/yummy/detailPage.css" rel="stylesheet">
         <!-- ----- EINDE HEAD ----- -->
     </head>
@@ -69,11 +72,11 @@ $images = $detailPageService->getImages($restaurantId);
                     }
                     }
                 ?>
-            </div>        
+            </div>
         </div>
         <div class="container">
             <div class="row">
-                <div class="col-md-6" > 
+                <div class="col-md-6" >
                     <div class="border-box" id="restaurantInfo">
                         <div class="row">
                             <div class="col-md-3">
@@ -81,7 +84,7 @@ $images = $detailPageService->getImages($restaurantId);
                             </div>
                             <div class="col-md-5">
                                 <p></p>
-                            </div>  
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-md-3">
@@ -89,7 +92,7 @@ $images = $detailPageService->getImages($restaurantId);
                             </div>
                             <div class="col-md-5">
                                 <p><i><?= $restaurant[0]->getHeadChef() ?></i> </p>
-                            </div>  
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-md-3">
@@ -97,24 +100,24 @@ $images = $detailPageService->getImages($restaurantId);
                             </div>
                             <div class="col-md-5">
                                 <p><i><?= str_replace(',', ',<br>', $restaurant[0]->getAddress()) ?></i></p>
-                            </div>  
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-md-3">
                                 <p>Star rating:</p>
                             </div>
                             <div class="col-md-5">
-                                <?php for($im = 1; $im <= $restaurant[0]->getAmountOfStars(); $im ++) { ?>
+                                <?php for ($im = 1; $im <= $restaurant[0]->getAmountOfStars(); $im ++) { ?>
                                     <img src="/image/yummy/detail/star.png" width="20" height="20" alt="Yummy Start Image">
                                 <?php } ?>
-                            </div>  
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-5" id="restaurantLocation">
 
                     <?php
-                        try{
+                        try {
                             $address = $restaurant[0]->getAddress();
                             // Split the address into street, postal code, and city
                             list($street, $postal_code, $city) = preg_split("/[,\/]/", $address);
@@ -135,21 +138,21 @@ $images = $detailPageService->getImages($restaurantId);
                             
                                 // Embed the Google Maps location in HTML using an iframe element
                                 echo '<iframe src="' . $url . '" width="700" height="250" frameborder="0" style="border: 2px solid black;" allowfullscreen></iframe>';
-                        }catch(Exception $e){
+                        }catch (Exception $e) {
                             echo "Could not retrieve location information from Google Maps API. $e";
                         }
                         ?>
-                </div>    
-            </div>        
+                </div>
+            </div>
         </div>
         <div class="container">
             <div class="row">
-                <div class="col-md-8" style="margin-top: 50px;"> 
+                <div class="col-md-8" style="margin-top: 50px;">
                     <div class="border-box" id="restaurantMenu">
 
                         <h1>Menu Items:</h1>
 
-                        <?php 
+                        <?php
                         $voorgerechten = [];
                         $hoofdgerechten = [];
                         $nagerechten = [];
@@ -191,32 +194,34 @@ $images = $detailPageService->getImages($restaurantId);
                     </div>
                 </div>
                 <div class="col-md-3" id="foodPictures">
-                    <?php 
+                    <?php
                         foreach ($images as $image) {
-                            if($image->getImageIndex() > 3)
+                            if ($image->getImageIndex() > 3) {
                                 echo "<img src='/image/{$image->getImageLink()}' alt='picture'>";
-                            else {
-                                continue;
                             }
                         }
                     ?>
-                </div>    
-            </div>        
+                </div>
+            </div>
         </div>
         <div class="container">
             <div class="row">
-                <div class="col-md-8" id="scedulePrice"> 
+                <div class="col-md-8" id="scedulePrice">
                     <h3>Our scedule and prices </h3>
-                       <p>We have planned 3 sessions the first of which will start at <i><?= $restaurant[0]->getStartTime()->format("H:i") ?></i>. Each session will last <i><?php $duration = $restaurant[0]->getDuration()->format("H:i"); $hour = date("G.i", strtotime($duration)); echo $hour; ?></i> hours.</p>     <!-- RESTAURANT SCEDULE AND PRICES -->
+                       <p>We have planned 3 sessions the first of which will start at
+                        <i><?= $restaurant[0]->getStartTime()->format("H:i") ?></i>. Each session will last
+                        <i><?php $duration = $restaurant[0]->getDuration()->format("H:i");
+                        $hour = date("G.i", strtotime($duration)); echo $hour; ?></i>
+                        hours.</p>     <!-- RESTAURANT SCEDULE AND PRICES -->
                 </div>
                 <div class="col-md-3" id="guestPrices">
                     <h3>Prices</h3>
                     <p>Adults: <i><?= $restaurant[0]->getAdultPrice() ?></i> </p>
                     <p>Children: <i><?= $restaurant[0]->getChildPrice() ?></i> </p> <!-- HERE RESTAURANT PRICES -->
-                </div>    
-            </div>      
+                </div>
+            </div>
             <div class="row">
-                <div class="col-md-8" id="reservation"> 
+                <div class="col-md-8" id="reservation">
                     <a href="#" class="btn btn-primary">Make a reservation</a>    <!-- RESERVATION BUTTON -->
                     <p>Any special requests? <br>
                     Please put that in your reservation.</p>
@@ -241,12 +246,14 @@ $images = $detailPageService->getImages($restaurantId);
                         $start_datetime->add($session_duration);
                     }
                     ?>
-                </div>    
-            </div>    
+                </div>
+            </div>
             <div class="row">
-                <div class="col-md-5" id="contactBottom"> 
+                <div class="col-md-5" id="contactBottom">
                     <h4>Contact</h4>
                     <p><i><?= str_replace(',', ',<br>', $restaurant[0]->getAddress()) ?></i></p> <!-- HERE CONTACT INFO EXTRA-->
+                    <p><i><?= str_replace(',', ',<br>', $restaurant[0]->getContact()) ?></i></p> <!-- HERE CONTACT INFO EXTRA-->
+                    
                 </div>
                 <?php
                     foreach ($images as $image) {
@@ -258,12 +265,12 @@ $images = $detailPageService->getImages($restaurantId);
                         }
                     }
                 ?>
-            </div>    
-        </div>      
-        <!-- -------- HERE END GETTING DATA FROM DATABASE -------- -->        
+            </div>
+        </div>
+        <!-- -------- HERE END GETTING DATA FROM DATABASE -------- -->
     </body>
 </html>
 
-<?php 
+<?php
 include __DIR__ . '/../footer.php';
 ?>

@@ -17,12 +17,12 @@ class YummyDetailPageService {
     public function getMenuItems($restaurantId){
        // retrieve data
        $repository = new YummyDetailPageRepository();
-       return $repository->getMenuItems($restaurantId); 
+       return $repository->getMenuItems($restaurantId);
     }
     public function getImages($restaurantId){
         // retrieve data
         $repository = new YummyDetailPageRepository();
-        return $repository->getImages($restaurantId); 
+        return $repository->getImages($restaurantId);
      }
 }
 
