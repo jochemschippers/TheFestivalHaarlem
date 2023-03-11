@@ -58,6 +58,11 @@
             </div>
         </div>
         <div class="border-box" id="restaurantBorder">
+            <?php 
+            
+
+            
+            ?>
             <div class="row">
                 <div class="col-md-2">
                     <div class="card" style="width: 18rem;">
@@ -69,7 +74,7 @@
                                 Mr & Mrs is known for its quality Dutch cuisine and seafood. 
                                 Interested? 
                             </p>
-                            <a href="#" class="btn btn-primary">Menu and info</a>
+                            <a href="/yummy/restaurant" class="btn btn-primary">Menu and info</a>
                             <a href="#" class="btn btn-primary">Make your reservation</a>
                         </div>
                     </div>

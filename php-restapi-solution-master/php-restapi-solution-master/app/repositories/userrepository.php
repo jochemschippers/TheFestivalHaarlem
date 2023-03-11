@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/repository.php';
+require_once __DIR__ . '/repository.php';
 require __DIR__ . '/../models/user.php';
 
 class UserRepository extends Repository
@@ -72,3 +72,4 @@ class UserRepository extends Repository
         }
     }
 }
+?>
