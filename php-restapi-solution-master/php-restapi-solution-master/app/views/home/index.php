@@ -1,10 +1,5 @@
 <?php 
-if (function_exists('apcu_enabled')) {
-    echo 'APCu is installed and enabled!';
-} else {
-    echo 'APCu is NOT installed or enabled!';
-}
-
+include __DIR__ . '/../navbar.php';
 ?>
 <!-- <html lang="en">
     <head>
