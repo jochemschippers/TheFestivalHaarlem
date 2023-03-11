@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/repository.php';
+require_once __DIR__ . '/repository.php';
 require __DIR__ . '/../models/PDF.php';
 
 class PDFRepository extends Repository
@@ -30,3 +30,4 @@ class PDFRepository extends Repository
     //     }
     // }
 }
+?>

@@ -15,15 +15,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
      
     $username = test_input($_POST["username"]);
     $password = test_input($_POST["password"]);
-    $stmt = $conn->prepare("SELECT * FROM users");
+    $stmt = $conn->prepare("SELECT * FROM admin");
     $stmt->execute();
-    $users = $stmt->fetchAll();
+    $admins = $stmt->fetchAll();
      
-    foreach($users as $user) {
+    foreach($admins as $admin) {
          
-        if(($user['username'] == $username) &&
-            ($user['password'] == $password)) {
+        if(($admin['username'] == $username) &&
+            ($admin['password'] == $password)) {
                 header("location: index.php"); // Needs To be to the admin page
+                $_SESSION['username'] = $username; //HIER SLA JE DE USER GLOBAAL OP. 
+                $_SESSION['password'] = $password;
         }
         else {
             echo "<script language='javascript'>";
