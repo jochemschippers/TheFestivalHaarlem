@@ -51,13 +51,14 @@ include __DIR__ . '/../navbar.php';
       <div class="carousel-inner">
         <div class="carousel-item active">
           <img src="/image/jazz/candyAndHansDulfer.png">
+          <h3>Candy and Hans Dulfer</h3>
           <h1></h1>
         </div>
         <div class="carousel-item">
-          <img src="/image/jazz/candyAndHansDulfer.png">
+          <p>this is the second one</p>
         </div>
         <div class="carousel-item">
-          <img src="/image/jazz/candyAndHansDulfer.png">
+          <p>this is the third one</p>
         </div>
       </div>
       <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
