@@ -72,6 +72,7 @@ h3 {
 .background-Image{
   background-image: url("/image/jazz/banner.png");
   background-repeat: no-repeat;
+  position:relative;
   z-index: -1;
   top: 0;
   right: 0;
