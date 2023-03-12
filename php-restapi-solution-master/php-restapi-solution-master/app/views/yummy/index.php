@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>The Festival</title> 
+        <title>The Festival</title>
 
         <!-- ----- BOOTSTRAP EN CSS LINKS ----- -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
@@ -27,11 +27,11 @@
                         You say food, we say Yummy! One of the most anticipated and well-known food festival in North Holland, 
                         specialising in showing its visitors all the best the beautiful city of Haarlem has to offer. Get ready to get a taste of heaven.
                         <br></br>Below you can choose between the participating restaurants.
-                    </p>  
+                    </p>
                 </div>
                 <div class="col-md-4">
                     HIER KOMT OF EEN IMAGE OF GAAT WEG VOOR LANGERE TEKST <!-- GAAT WEG OF BLIJFT (LIGT AAN ONTWERP) -->
-                </div>    
+                </div>
             <div class="row text-center">
                 <h1>Participating Restaurants</h1>
             </div>
@@ -66,10 +66,10 @@
                             <h5 class="card-title">Restaurant Mr & Mrs</h5>
                             <h6 class="card-sub-title">Lange Veerstraat 4, <br> 2011 DB Haarlem, Netherlands</h6>
                             <p class="card-text">
-                                Mr & Mrs is known for its quality Dutch cuisine and seafood. 
-                                Interested? 
+                                Mr & Mrs is known for its quality Dutch cuisine and seafood.
+                                Interested?
                             </p>
-                            <a href="#" class="btn btn-primary">Menu and info</a>
+                            <a href="/yummy/restaurant" class="btn btn-primary">Menu and info</a>
                             <a href="#" class="btn btn-primary">Make your reservation</a>
                         </div>
                     </div>
@@ -80,7 +80,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Ratatouille</h5>
                             <h6 class="card-sub-title">Twijnderslaan 7, <br> 2012 BG Haarlem, Netherlands</h6>
-                            <p class="card-text">           
+                            <p class="card-text">
                                 This is the place to be for a chic French dining experience. Serving dinner A La Carte, here at Ratatouille you will experience a whole new level of dining.
                             </p>
                             <a href="#" class="btn btn-primary">Menu and reservations</a>
@@ -110,6 +110,6 @@
     </body>
 </html>
 
-<?php 
+<?php
 include __DIR__ . '/../footer.php';
 ?>

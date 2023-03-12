@@ -3,9 +3,12 @@
 class FestivalEvent {
     
         private int $eventID;
-        private string $eventTitle;
+        private string $eventName;
         private string $bannerImage;
         private string $bannerDescription;
+
+        private string $eventTitle;
+
 
         public function getEventID(): int {
                 return $this->eventID;
@@ -15,12 +18,12 @@ class FestivalEvent {
                 $this->eventID = $eventID;
             }
         
-            public function getEventTitle(): string {
-                return $this->eventTitle;
+            public function getEventName(): string {
+                return $this->eventName;
             }
         
-            public function setEventTitle(string $eventTitle): void {
-                $this->eventTitle = $eventTitle;
+            public function setEventName(string $eventName): void {
+                $this->eventName = $eventName;
             }
         
             public function getBannerImage(): string {
@@ -37,6 +40,13 @@ class FestivalEvent {
         
             public function setBannerDescription(string $bannerDescription): void {
                 $this->bannerDescription = $bannerDescription;
+            }
+            public function getEventTitle(): string {
+                return $this->eventTitle;
+            }
+        
+            public function setEventTitle(string $eventTitle): void {
+                $this->eventTitle = $eventTitle;
             }
 }
 

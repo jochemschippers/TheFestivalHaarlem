@@ -20,7 +20,7 @@ $events = $eventcontroller->getEvents();
     <?php
     try {
       foreach ($events as $event) {
-        echo '<span class="nav-item"><a href="/' . str_replace(' ', '-', $event->getEventTitle()) . '">' . $event->getEventTitle()  . '</a></span>';
+        echo '<span class="nav-item"><a href="/' . str_replace(' ', '-', $event->getEventName()) . '">' . $event->getEventName()  . '</a></span>';
       }
     } catch (error $e) {
       echo "something went wrong while loading the navigation! Please try again later";

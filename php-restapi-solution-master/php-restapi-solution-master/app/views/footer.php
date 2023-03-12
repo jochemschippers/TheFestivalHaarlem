@@ -25,7 +25,7 @@ $events = $eventcontroller->getEvents();
               <?php 
               try{
                 foreach ($events as $event) {
-                    echo '<li><a href="/' . str_replace(' ', '-', $event->getEventTitle()) . '">' . $event->getEventTitle()  . '</a></li>';
+                    echo '<li><a href="/' . str_replace(' ', '-', $event->getEventName()) . '">' . $event->getEventName()  . '</a></li>';
                   }
               }
               catch(error $e)

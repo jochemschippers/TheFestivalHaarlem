@@ -1,0 +1,103 @@
+#titleBorder {
+    height: 500px;
+    border: 2px solid #000;
+    padding: 10px;
+    background-color: darkgray; /* ------> KAN WEG ZODRA IMAGE IS TOEGEVOEGD <------ */
+    /* background-size: cover; */
+    position: relative; /* Set position to relative for absolute positioning of container */
+  }
+  #titleContainer {
+    position: absolute; /* Set position to absolute for positioning at the bottom of the border box */
+    bottom: 0; /* Set bottom to 0 to position container at the bottom */
+    left: 0;
+    text-align: center;
+    width: 1000px;
+    height: 130px;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center; /* horizontally center child elements */
+    align-items: center; /* vertically center child elements */
+  }
+  #titleContainer h1 {
+    font-size: 3.0rem;
+    color: #FFF;
+  }
+  #titleContainer h5 {
+    color: #FFF;
+    align-self: flex-end;
+    justify-content: center;
+  }
+  #titleText h2 {
+    font-size: 48px;
+    font-family: 'Martel', serif;
+  }
+  #titleText p {
+    font-size: 22px;
+    font-family: 'Open Sans', sans-serif;
+  }
+  #restaurantLogo{
+    height: 225px;
+    width: 550px;
+    background-size: cover;
+    border: 2px solid #000;
+    align-self: flex-end;
+    margin-top: 10px;
+    margin-right: 2rem;
+    margin-bottom: 50px;
+    margin-left: 210px;
+  }
+  #restaurantInfo{
+    margin-left: 50px;
+    height: 250px;
+    border: 2px solid #000;
+    padding: 2px;
+    background-color: #FFCC80; 
+    background-size: cover;
+  }
+  #restaurantLocation{
+    margin-left: 50px;
+  }
+  #restaurantMenu{
+    padding-top: 50px;
+    margin-left: 50px;
+    padding-left: 50px;
+    border: 2px solid #A7B45E;
+    padding: 3px;
+    background-color: #D9E1BA; 
+    background-size: cover;
+    display: inline-block;
+    width: 900px;
+  }
+  #restaurantMenu .h1{
+    text-align: center;
+  } 
+  #foodPictures{
+    margin-top: 50px;
+    margin-left: 65px;
+  }
+  #scedulePrice{
+    margin-left: 50px;
+    margin-top: 50px;
+  }
+  #guestPrices{
+    margin-top: 50px;
+  }
+  #reservation{
+    margin-left: 50px;
+    margin-top: 50px;
+  }
+  #sessionPrices{
+    margin-top: 50px;
+  }
+  #contactBottom{
+    margin-left: 50px;
+    margin-top: 150px;
+  }
+  #bottomPicture{
+    width: 700px;
+    height: 400px;
+    align-self: left;
+    background-size: cover;
+    background-position: left;
+    margin-left: 360px;
+  }

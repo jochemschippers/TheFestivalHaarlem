@@ -51,18 +51,45 @@ button:active {
   position: relative;
 }
 
-.carousel-item:before,
-.carousel-item:after {
-  content: "";
-  position: absolute;
-  opacity: 0.5;
-  top: 0;
-}
-
 .carousel-item:before {
-  left: -100%;
+  left: -1000%;
 }
 
 .carousel-item:after {
-  right: -100%;
+  right: -1000%;
+}
+.carousel-item{
+   display: flex;
+   align-items: center;
+}
+.carousel-item {
+  display: none;
+}
+.carousel-item .active {
+  display: flex !important;
+  align-items: center;
+}
+
+.carousel-item img {
+  float: left;
+  margin: auto;
+  margin-left: 25%;
+}
+
+.carouselContainer {
+  float: left;
+  text-align: left;
+  margin-top: 40px;
+  width: 600px !important;
+}
+.carouselContainer button{
+  margin-top: 30px;
+
+}
+
+.textSmall{
+  all:inherit;
+  margin-top: auto;
+  padding-left: 0px;
+  font-weight: 200;
 }
