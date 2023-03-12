@@ -19,11 +19,16 @@ class YummyDetailPageService {
        $repository = new YummyDetailPageRepository();
        return $repository->getMenuItems($restaurantId);
     }
+    public function getAllImages(){
+        // retrieve data
+        $repository = new YummyDetailPageRepository();
+        return $repository->getAllImages();
+    }
     public function getImages($restaurantId){
         // retrieve data
         $repository = new YummyDetailPageRepository();
         return $repository->getImages($restaurantId);
-     }
+    }
 }
 
 ?>

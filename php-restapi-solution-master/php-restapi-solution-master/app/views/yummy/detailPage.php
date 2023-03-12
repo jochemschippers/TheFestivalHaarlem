@@ -17,7 +17,9 @@ $images = $detailPageService->getImages($restaurantId);
 // Use the retrieved data to display the restaurant and menu information on the page
 ?>
 
-<!-- ----- HIER MOET HEADER/ NAV BAR ----- -->
+<?php 
+include __DIR__ . '/../navbar.php';
+?>
 
 <html lang="en">
     <head>
