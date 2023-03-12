@@ -48,7 +48,7 @@ class PatternRouter
             $filename = __DIR__ . '/api/controllers/' . $controllerName . '.php';
         }
         if (file_exists($filename)) {
-            require $filename;
+            require_once $filename;
         } else {
             http_response_code(404);
             die();

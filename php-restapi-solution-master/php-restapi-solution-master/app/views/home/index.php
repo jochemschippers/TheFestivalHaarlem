@@ -1,5 +1,7 @@
 <?php 
 include __DIR__ . '/../navbar.php';
+$eventcontroller = new EventController();
+$events = $eventcontroller->getEvents();
 ?>
 
 <!DOCTYPE html>
@@ -19,7 +21,6 @@ include __DIR__ . '/../navbar.php';
             <p>Learn more about the amazing Haarlem Festival experience Dutch cuisine, take a stroll around the rich historic center and experience some amazing jazz artists!</p>
         </div>
     </div>
-
     <div class="container" id="intro" style="color: #000;">
         <div class="row">
             <div class="col-6">
@@ -57,7 +58,6 @@ include __DIR__ . '/../navbar.php';
             <a class="btn btn-primary" href="/yummy" role="button">Link</a>
         </div>
     </div>
-
 </body>
 </html>
 
