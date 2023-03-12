@@ -29,6 +29,7 @@ class YummyDetailPageRepository extends Repository
                     $row['restaurantName'],
                     $row['address'],
                     $row['contact'],
+                    $row['cardDescription'],
                     $row['description'],
                     $row['amountOfStars'],
                     $row['bannerImage'],
@@ -76,6 +77,7 @@ class YummyDetailPageRepository extends Repository
                     $row['restaurantName'],
                     $row['address'],
                     $row['contact'],
+                    $row['cardDescription'],
                     $row['description'],
                     $row['amountOfStars'],
                     $row['bannerImage'],
@@ -129,6 +131,34 @@ class YummyDetailPageRepository extends Repository
                 array_push($menus, $menu);
             }
             return $menus;
+    
+        } catch (PDOException $e)
+        {
+            echo $e;
+        }
+    }
+    function getAllImages() {
+        try {
+            $stmt = $this->connection->prepare("
+            SELECT * FROM `RestaurantImages`
+            ");
+
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $stmt->execute();
+            $results = $stmt->fetchAll();
+    
+            $images = [];
+            foreach ($results as $row) {
+                $image = new RestaurantImage(
+
+                    $row["imageID"],
+                    $row["restaurantID"],
+                    $row['imageLink'],
+                    $row['imageIndex']
+                );
+                array_push($images, $image);
+            }
+            return $images;
     
         } catch (PDOException $e)
         {

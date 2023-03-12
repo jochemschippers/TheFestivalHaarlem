@@ -6,6 +6,7 @@ class YummyRestaurant{
         private string $restaurantName;
         private string $address;
 		private string $contact;
+		private string $cardDescription;
         private string $description;
         private int $amountOfStars;
         private string $bannerImage;
@@ -21,6 +22,7 @@ class YummyRestaurant{
                 string $restaurantName,
                 string $address,
 				string $contact,
+				string $cardDescription,
                 string $description,
                 int $amountOfStars,
                 string $bannerImage,
@@ -35,6 +37,7 @@ class YummyRestaurant{
                 $this->restaurantName = $restaurantName;
                 $this->address = $address;
 				$this->contact = $contact;
+				$this->cardDescription = $cardDescription;
                 $this->description = $description;
                 $this->amountOfStars = $amountOfStars;
                 $this->bannerImage = $bannerImage;
@@ -107,6 +110,22 @@ class YummyRestaurant{
 	 */
 	public function setContact(string $contact): self {
 		$this->contact = $contact;
+		return $this;
+	}
+
+		/**
+	 * @return string
+	 */
+	public function getCardDescription(): string {
+		return $this->cardDescription;
+	}
+	
+	/**
+	 * @param string $cardDescription 
+	 * @return self
+	 */
+	public function setCardDescription(string $cardDescription): self {
+		$this->cardDescription = $cardDescription;
 		return $this;
 	}
 
@@ -252,6 +271,6 @@ class YummyRestaurant{
 	public function setChildPrice(float $childPrice): self {
 		$this->childPrice = $childPrice;
 		return $this;
-	}	
+	}
 }
 ?>

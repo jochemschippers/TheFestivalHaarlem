@@ -1,4 +1,14 @@
-<!-- ----- HIER MOET HEADER/ NAV BAR ----- -->
+<?php 
+
+$detailPageService = new YummyDetailPageService();
+
+// Call the getRestaurant method to retrieve the restaurant information
+$restaurants = $detailPageService->getAll();
+
+$images = $detailPageService->getAllImages();
+
+include __DIR__ . '/../navbar.php';
+?>
 
 <html lang="en">
     <head>
@@ -59,34 +69,30 @@
         </div>
         <div class="border-box" id="restaurantBorder">
             <div class="row">
-                <div class="col-md-2">
-                    <div class="card" style="width: 18rem;">
-                        <img src="..." class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Restaurant Mr & Mrs</h5>
-                            <h6 class="card-sub-title">Lange Veerstraat 4, <br> 2011 DB Haarlem, Netherlands</h6>
-                            <p class="card-text">
-                                Mr & Mrs is known for its quality Dutch cuisine and seafood.
-                                Interested?
-                            </p>
-                            <a href="/yummy/restaurant" class="btn btn-primary">Menu and info</a>
-                            <a href="#" class="btn btn-primary">Make your reservation</a>
+                <?php foreach ($restaurants as $restaurant) { ?>
+                    <div class="col-md-2">
+                        <div class="card" style="width: 18rem;">
+                            <?php foreach ($images as $image) {
+                                if ($image->GetImageIndex() == 2 && $restaurant->getRestaurantID() == $image->getRestaurantID()) {
+                                    $imageLink = $image->getImageLink();
+                                    $imageLink = str_replace('&', '%26', $imageLink); // replace '&' with '%26' in the image link
+                            ?>
+                                <img src="/image/<?php echo $image->getImageLink() ?>" class="card-img-top" alt="Logo" id="cardLogo">
+                            <?php
+                                    break;
+                                }
+                            }
+                            ?>                            
+                            <div class="card-body d-flex flex-column" id="cardBody">
+                                <h5 class="card-title"><i><?= $restaurant->getRestaurantName() ?></i></h5>
+                                <h6 class="card-sub-title"><i><?= str_replace(',', ',<br>', $restaurant->getAddress()) ?></i></h6>
+                                <p class="card-text"><i><?= $restaurant->getCardDescription() ?></i></p>
+                                <a href="/yummy/restaurant" class="btn btn-primary mt-auto">Menu and info</a>
+                                <a href="#" class="btn btn-primary">Make your reservation</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="card" style="width: 18rem;">
-                        <img src="..." class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Ratatouille</h5>
-                            <h6 class="card-sub-title">Twijnderslaan 7, <br> 2012 BG Haarlem, Netherlands</h6>
-                            <p class="card-text">
-                                This is the place to be for a chic French dining experience. Serving dinner A La Carte, here at Ratatouille you will experience a whole new level of dining.
-                            </p>
-                            <a href="#" class="btn btn-primary">Menu and reservations</a>
-                        </div>
-                    </div>
-                </div>
+                <?php } ?>
             </div>
         </div>
         <div class="container" id="otherEventInformation">
