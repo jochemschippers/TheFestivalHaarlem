@@ -44,4 +44,13 @@
     background-color: #961B1B; 
     height: 50px;
   }
+  #cardLogo{
+    height: 120px;
+  }
+  #cardBody{
+    height: 350px;
+  }
+  #cardBody #btn{
+    align-self: flex-end;
+  }
   
