@@ -1,5 +1,43 @@
 <?php
 include __DIR__ . '/../navbar.php';
+
+require_once 'landmarkservice.php';
+
+$controller = new LandmarkService();
+
+// Handle form submissions
+if (isset($_POST['submit'])) {
+  switch ($_POST['submit']) {
+    case 'Create':
+      $title = $_POST['title'];
+      $description = $_POST['description'];
+      $image = $_POST['image'];
+
+      $service->createLandmark($title, $description, $image);
+
+      break;
+    case 'Update':
+      $landmarkID = $_POST['landmarkID'];
+      $title = $_POST['title'];
+      $description = $_POST['description'];
+      $image = $_POST['image'];
+
+      $service->updateLandmark($landmarkID, $title, $description, $image);
+
+      break;
+  }
+}
+
+// Display landmarks and form
+$view->displayLandmarks();
+$view->displayForm();
+if (isset($_GET['action']) && $_GET['action'] == 'edit') {
+  $landmarkID = $_GET['landmarkID'];
+  $landmark = $service->getLandmark($landmarkID);
+  if ($landmark) {
+    $view->displayEditForm($landmarkID, $landmark->getTitle(), $landmark->getDescription(), $landmark->getImage());
+  }
+}
 ?>
 
 <html lang="en">
@@ -89,6 +127,36 @@ include __DIR__ . '/../navbar.php';
               <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
             </div>
+          </div>
         </div>
+    <div>
+      <h1>Landmarks</h1>
+
+      <div id="landmarks-table">
+        <?php $view->displayLandmarks(); ?>
+      </div>
+
+      <h2>Add Landmark</h2>
+
+      <div id="landmark-form">
+        <?php $view->displayForm(); ?>
+      </div>
+
+      <h2>Edit Landmark</h2>
+
+      <div id="edit-landmark-form">
+        <?php
+          if (isset($_GET['action']) && $_GET['action'] == 'edit') {
+            $landmarkID = $_GET['landmarkID'];
+            $landmark = $service->getLandmark($landmarkID);
+            if ($landmark) {
+              $view->displayEditForm($landmarkID, $landmark->getTitle(), $landmark->getDescription(), $landmark->getImage());
+            } else {
+              echo "Landmark not found";
+            }
+          }
+        ?>
+      </div>
+    </div>
     </body>
 </html>
