@@ -7,8 +7,26 @@ $events = $eventcontroller->getEvents();
 <html lang="en">
 
 <head>
-  <link href="/css/navbar.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://kit.fontawesome.com/384ef59d1a.js" crossorigin="anonymous"></script>
+  <script>
+      const paramss = window.location.pathname.split("/");
+
+      var style = document.createElement('link');
+      style.setAttribute("rel", "stylesheet");
+      style.setAttribute("type", "text/css");
+      
+      style.setAttribute("href", "../css/"   + paramss[1] + "/" + paramss[1] +".css");
+      document.head.appendChild(style);
+  </script>
+
+
+  <link href="/css/navbar.css" rel="stylesheet">
+  <link href="/css/footer.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <link href="../css/template.css" rel="stylesheet">
 </head>
 
 <header class="header-container">
@@ -29,24 +47,6 @@ $events = $eventcontroller->getEvents();
 
     ?>
 
-    <script>
-      const params = window.location.pathname.split("/");
-      const navbar = document.getElementById("navbar");
-      const links = navbar.getElementsByTagName("span");
-      console.log(links);
-      console.log(params[1]);
-      if(params[1] === "" || params[1] === null){
-        links[0].classList.add("selected");
-      }
-      else{
-        for (let i = 0; i < links.length; i++) {
-        if (links[i].textContent === params[1]) {
-          links[i].classList.add("selected");
-        }
-      }
-      }
-     
-    </script>
   </nav>
   <div class="user-options">
     <div class="option"><i class="fa fa-user fa-2x"></i></div>
@@ -54,5 +54,3 @@ $events = $eventcontroller->getEvents();
     <div class="option"><i class="fa fa-sharp fa-solid fa-screwdriver-wrench fa-2x"></i></div>
   </div>
 </header>
-
-</html>

@@ -6,20 +6,6 @@ $jazzcontroller = new JazzInformationController();
 $artists = $jazzcontroller->getAllArtists();
 ?>
 
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Festival - Jazz</title>
-
-
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-  <link href="../css/template.css" rel="stylesheet">
-  <link href="../css/jazz/jazz.css" rel="stylesheet">
-</head>
-
 <body>
   <div class="layered">
     <div class="background-Image">
@@ -58,7 +44,7 @@ $artists = $jazzcontroller->getAllArtists();
           <div class="container carouselContainer">
             <h3>' . $artists[0]->getName() . '</h3>
             <p> ' . $artists[0]->getDescription() . '</p>
-            <hr><span class="textSmall">Plays the ' . $artists[0]->getTimeSlots()[0]->getStartTime()->format('dS') .'!</span>
+            <hr><span class="textSmall">Plays the ' . $artists[0]->getTimeSlots()[0]->getStartTime()->format('dS') . '!</span>
             <button> Learn More About artist</button>
             </div> 
             </div>';
@@ -69,7 +55,7 @@ $artists = $jazzcontroller->getAllArtists();
           <div class="container carouselContainer">
             <h3>' . $artists[$i]->getName() . '</h3>
             <p> ' . $artists[$i]->getDescription() . '</p>
-            <hr><span class="textSmall">Plays the ' . $artists[$i]->getTimeSlots()[0]->getStartTime()->format('dS') .'!</span>
+            <hr><span class="textSmall">Plays the ' . $artists[$i]->getTimeSlots()[0]->getStartTime()->format('dS') . '!</span>
 
             <button> Learn More About artist</button>
             </div>
@@ -117,11 +103,8 @@ $artists = $jazzcontroller->getAllArtists();
 
 
   </div>
-</body>
 
 
-</html>
-
-<?php
-include __DIR__ . '/../footer.php';
-?>
+  <?php
+  include __DIR__ . '/../footer.php';
+  ?>

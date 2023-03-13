@@ -3,11 +3,8 @@ require_once __DIR__ . '../../controllers/eventcontroller.php';
 $eventcontroller = new EventController();
 $events = $eventcontroller->getEvents();
 ?>
-  
-  <head>
-  <link href="/css/footer.css" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/384ef59d1a.js" crossorigin="anonymous"></script>
-  </head>
+
+
   <footer class="site-footer">
 
       <div class="container">
@@ -63,4 +60,26 @@ $events = $eventcontroller->getEvents();
       </div>
     </div>
   </div>
+  
+  <script>
+      const params = window.location.pathname.split("/");
+      const navbar = document.getElementById("navbar");
+      const links = navbar.getElementsByTagName("span");
+      document.title = "The Festival";
+      console.log(links);
+      console.log(params[1]);
+      if(params[1] === "" || params[1] === null){
+        links[0].classList.add("selected");
+      }
+      else{
+        for (let i = 0; i < links.length; i++) {
+        if (links[i].textContent === params[1]) {
+          links[i].classList.add("selected");
+          document.title += " - " + links[i].textContent;
+        }
+      }
+      }
+     
+    </script>
 </footer>
+</html>

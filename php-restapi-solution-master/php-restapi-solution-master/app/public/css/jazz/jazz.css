@@ -14,7 +14,7 @@ body{
 button {
   background-color: #9B1C31;
   border: 4px solid #262626;
-  border-radius: 20px;
+  border-radius: 20px !important;
   font-size: 22px;
   box-sizing: border-box;
   color: #FFFFFF;
@@ -96,4 +96,12 @@ button:active {
   position: relative;
   padding: 0;
   z-index: -99999;
+}
+#titleContainer {
+  position: absolute; /* Set position to absolute for positioning at the bottom of the border box */
+  bottom: 0; /* Set bottom to 0 to position container at the bottom */
+  text-align: center;
+  width: auto;
+  display: unset;
+  max-width: 100vw !important;
 }
