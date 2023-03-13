@@ -6,7 +6,6 @@ class FestivalEvent {
         private string $eventName;
         private string $bannerImage;
         private string $bannerDescription;
-
         private string $eventTitle;
 
 

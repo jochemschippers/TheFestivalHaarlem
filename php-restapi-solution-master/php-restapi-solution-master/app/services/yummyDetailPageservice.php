@@ -29,6 +29,11 @@ class YummyDetailPageService {
         $repository = new YummyDetailPageRepository();
         return $repository->getImages($restaurantId);
     }
+    public function getFoodTypes(){
+        // retrieve data
+        $repository = new YummyDetailPageRepository();
+        return $repository->getFoodTypes();
+    }    
 }
 
 ?>

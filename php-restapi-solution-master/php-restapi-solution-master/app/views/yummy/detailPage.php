@@ -3,16 +3,16 @@
 $restaurantId = 4;
 
 // Create a new instance of the DetailPageService class
-$detailPageService = new YummyDetailPageService();
+$detailPageController = new YummyController();
 
 // Call the getRestaurant method to retrieve the restaurant information
-$restaurant = $detailPageService->getOne($restaurantId);
+$restaurant = $detailPageController->getOne($restaurantId);
 
 // Call the getMenu method to retrieve the menu items for the restaurant
-$menuItems = $detailPageService->getMenuItems($restaurantId);
+$menuItems = $detailPageController->getMenuItems($restaurantId);
 
 // Call the getImage methode to retrieve the menu items for the page.
-$images = $detailPageService->getImages($restaurantId);
+$images = $detailPageController->getImages($restaurantId);
 
 // Use the retrieved data to display the restaurant and menu information on the page
 ?>

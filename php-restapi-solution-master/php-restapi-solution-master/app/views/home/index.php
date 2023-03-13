@@ -1,5 +1,8 @@
-<?php 
+<?php
 include __DIR__ . '/../navbar.php';
+
+$eventcontroller = new EventController();
+$events = $eventcontroller->getEvents();
 ?>
 
 <!DOCTYPE html>
@@ -35,28 +38,29 @@ include __DIR__ . '/../navbar.php';
         <h2>Check out the following events:</h2>
     </div>
 
-    <div class="card" style="background-image: url('/image/home/Jazz-picture.jpg');">
-        <div class="container">
-            <h2>The Haarlem Jazz Event</h2>
-            <p>Haarlem Jazz is a premier annual event for all jazz lovers. With more than 10 years of experience in showcasing the best in local and international jazz talent, you’d be certain to experience a vibrant and lively atmosphere for music fans!</p>
-            <a class="btn btn-primary" href="/template" role="button">Link</a>
-         </div>
-    </div>
-    <div class="card text-end" style="background-image: url('/image/home/history-picture.jpg');">
-        <div class="container">
-            <h2>A Stroll Through History</h2>
-            <p>See what cultural monuments the city of Haarlem has to offer and walk with one of our guides to get to know the stories behind them during our guided tour through the streets of Haarlem.</p>
-            <a class="btn btn-primary" href="#" role="button">Link</a>
-        </div>
-    </div>
+    <?php
+    
+        // Assume $data is an array of objects containing information for each card
+        foreach ($events as $event) {
 
-    <div class="card" style="background-image: url('/image/home/yummy-picture.jpg');">
-        <div class="container">
-            <h2>Explore the Taste of Haarlem</h2>
-            <p>Explore every Food and Drink in this years Haarlem Yummy! event. Here its Eat first Talk later. Come and enjoy all culinary options Haarlem has to offer in this cities most versitile Food and Drink Festival.</p>
-            <a class="btn btn-primary" href="/yummy" role="button">Link</a>
+            $alignment = ($event->getEventID() % 2 == 0) ? 'text-start' : 'text-end';
+            $background_image = $event->getBannerImage();
+            $title = $event->getEventTitle();
+            $description = $event->getBannerDescription();
+            $button_link = "/" . $event->getEventName();
+        ?>
+
+        <div class="card <?php echo $alignment ?>" style="background-image: url('<?php echo $background_image ?>');">
+            <div class="container">
+                <h2><?php echo $title ?></h2>
+                <p><?php echo $description ?></p>
+                <a class="btn btn-primary" href="<?php echo $button_link ?>" role="button">Link</a>
+            </div>
         </div>
-    </div>
+
+    <?php
+    }
+    ?>
 
 </body>
 </html>
