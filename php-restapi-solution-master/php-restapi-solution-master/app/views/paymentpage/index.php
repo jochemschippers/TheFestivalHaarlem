@@ -44,7 +44,6 @@ $grand_total = 0;
                 <!-- Create table header -->
                 <thead class="thead-dark">
                     <tr>
-                        <th>ID</th>
                         <th>Date</th>
                         <th>Name</th>
                         <th>Price</th>
@@ -56,9 +55,8 @@ $grand_total = 0;
                     <?php foreach ($tickets as $ticket) { ?>
                     <!-- Loop through each ticket and display its data in a row -->
                     <tr>
-                    <td><?php echo $ticket["id"]; ?></td>
-                <td><?php echo $ticket["date"]; ?></td>
                 <td><?php echo $ticket["name"]; ?></td>
+                <td><?php echo $ticket["date"]; ?></td>
                 <td>$<?php echo number_format($ticket["price"],2); ?></td> 
                 <!-- Format price with two decimal places -->
                 <td><input type="number" value=<?php echo $ticket["amount"]; ?> min="0"></td> 
