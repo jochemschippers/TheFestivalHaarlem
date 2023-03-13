@@ -1,9 +1,7 @@
 <?php
 include __DIR__ . '/../navbar.php';
-include __DIR__ . '/../../services/landmarkservice.php';
-
-
-//require_once __DIR__ . '/../../services/landmarkservice.php';
+//include __DIR__ . '/../../services/landmarkservice.php';
+require_once __DIR__ . '../../services/landmarkservice.php';
 
 $service = new LandmarkService();
 
@@ -59,7 +57,9 @@ if (isset($_GET['action']) && $_GET['action'] == 'edit') {
     <body>
         <div class="container">
             <form action="historycontroller.php" method="post"></form>
-                <textarea name="historyeditor" id="historyeditor">test</textarea>
+                <textarea name="historyeditor" id="historyeditor">
+                    <p>This is some sample content.</p>
+                </textarea>
 
                 <p>
                     <input type="submit" name="submit_data" value="submit">
@@ -76,26 +76,26 @@ if (isset($_GET['action']) && $_GET['action'] == 'edit') {
                     CKEDITOR.replace('historyeditor');
             </script> -->
 
-            <div class="background-Image">
+            <div class="background-Image-History">
             <div class="border-box">
               <div class="container" id="titleContainer">
-                <h1>Haarlem History</h1>
+                <h1>A stroll through history</h1>
               </div>
             </div>
             <div class="container landingPageContainer">
               <div class="row">
                 <div class="col-md-7" id="titleText">
-                  <h2>Learn about our <strong>artists</strong></h2>
-                  <p>The Festival Jazz is a premier event. 
-                    Showcasing the best in local and international jazz talent, 
-                    in partnership with Haarlem Jazz, the festival’s jazz events provide a vibrant and lively atmosphere 
-                    for music fans to come together and enjoy the sounds of the genre.
-                    <br> <br>
-                    Read below more about the artists, schedule and locations!
-                  </p>
+                    <h2><strong>Visit</strong> all the historic sights of Haarlem</h2>
+                    <p>The historical inner city of Haarlem features lots of extraordinary monuments. 
+                    Discover the many interesting and surprising monuments that this city makes unique through this tour. 
+                    Our guides will take you along several monuments in the city of Haarlem as you can see below.
+                    </p>
+                    <p>
+                    <h4><strong>Check out our Schedule</strong></h4>
+                    </p>
                 </div>
                 <div class="col-md-7">
-                  <button> See Schedule <strong>↓</strong> </button>
+                  <button><strong>↓</strong></button>
                 </div>
               </div>
             </div>
