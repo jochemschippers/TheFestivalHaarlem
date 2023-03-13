@@ -62,7 +62,6 @@ $events = $eventcontroller->getEvents();
   </div>
   
   <script>
-      const params = window.location.pathname.split("/");
       const navbar = document.getElementById("navbar");
       const links = navbar.getElementsByTagName("span");
       document.title = "The Festival";
@@ -70,6 +69,7 @@ $events = $eventcontroller->getEvents();
       console.log(params[1]);
       if(params[1] === "" || params[1] === null){
         links[0].classList.add("selected");
+        setStyle("home");
       }
       else{
         for (let i = 0; i < links.length; i++) {

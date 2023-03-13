@@ -12,14 +12,23 @@ $events = $eventcontroller->getEvents();
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://kit.fontawesome.com/384ef59d1a.js" crossorigin="anonymous"></script>
   <script>
-      const paramss = window.location.pathname.split("/");
+    const params = window.location.pathname.split("/");
 
+    function setStyle(foldername, styleName) {
       var style = document.createElement('link');
       style.setAttribute("rel", "stylesheet");
       style.setAttribute("type", "text/css");
-      
-      style.setAttribute("href", "../css/"   + paramss[1] + "/" + paramss[1] +".css");
+      if (params[1] != "") {
+        style.setAttribute("href", "../css/" + foldername + "/" + styleName + ".css");
+      } else {
+        style.setAttribute("href", "../css/home.css");
+      }
       document.head.appendChild(style);
+    }
+    setStyle(params[1], params[1]);
+    if (params[2] != "") {
+      setStyle(params[1], "detailpage")
+    }
   </script>
 
 

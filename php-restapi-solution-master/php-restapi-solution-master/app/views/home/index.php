@@ -4,12 +4,6 @@ $eventcontroller = new EventController();
 $events = $eventcontroller->getEvents();
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>The Festival</title>
-    <link href="../css/home.css" rel="stylesheet">
-</head>
 <body>
     <div class="border-box">
         <div class="container" id="titleContainer">
@@ -58,7 +52,6 @@ $events = $eventcontroller->getEvents();
     ?>
 
 </body>
-</html>
 
 <?php
 include __DIR__ . '/../footer.php';
