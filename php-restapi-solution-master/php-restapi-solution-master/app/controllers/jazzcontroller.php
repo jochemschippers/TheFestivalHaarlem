@@ -9,5 +9,8 @@ class JazzController extends Controller {
     public function about() {
         echo "you've reached the about method of the home controller";
     }
+    public function getAllArtists(){
+        
+    }
 }
 ?>

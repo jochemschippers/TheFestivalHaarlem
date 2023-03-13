@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/../services/eventservice.php';
+require_once __DIR__ . '/../services/eventservice.php';
 
 class EventController{
     private $eventService; 

@@ -1,44 +1,81 @@
 .border-box {
-    height: 26.041666666vw;
-    padding: 10px;
-    /* background-image: url('/image/HIER-FOLDER/HIER-IMAGE.gif'); ------> DOE HIER EEN ANDERE IMAGE <------ */
+  height: 26.041666666vw;
+  padding: 10px;
+  /* background-image: url('/image/HIER-FOLDER/HIER-IMAGE.gif'); ------> DOE HIER EEN ANDERE IMAGE <------ */
 
-    background-size: cover;
-    position: relative; /* Set position to relative for absolute positioning of container */
-  }
-  #titleContainer {
-    position: absolute; /* Set position to absolute for positioning at the bottom of the border box */
-    bottom: 0; /* Set bottom to 0 to position container at the bottom */
-    left: 0;
-    text-align: left;
-    width: 1000px;
-    height: 130px;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: left; /* horizontally center child elements */
-    align-items: center; /* vertically center child elements */
-  }
-  #titleContainer h1 {
-    font-size: 73px;
-    color: white;
-    margin-left: 60px;
-  }
-  #titleText h2 {
-    font-size: 48px;
-    font-family: 'Martel', serif;
-    font-weight: 800;
-    color: #262626;
-  }
-  #titleText h2 strong{
-    font-weight: 900;
-    color: #FEB548;
-  }
-  #titleText p {
-    font-size: 22px;
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 500;
-  }
-  .landingPageContainer{
-    margin-left: 60px;
-    height: calc(23vw);
-    }
+  background-size: cover;
+  position: relative;
+  /* Set position to relative for absolute positioning of container */
+}
+
+#titleContainer {
+  position: absolute;
+  /* Set position to absolute for positioning at the bottom of the border box */
+  bottom: 0;
+  /* Set bottom to 0 to position container at the bottom */
+  left: 0;
+  text-align: left;
+  width: 1000px;
+  height: 130px;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: left;
+  /* horizontally center child elements */
+  align-items: center;
+  /* vertically center child elements */
+}
+
+#titleContainer h1 {
+  font-size: 73px;
+  color: white;
+  margin-left: 60px;
+}
+
+#titleText h2 {
+  font-size: 48px;
+  font-family: 'Martel', serif;
+  font-weight: 800;
+  color: #262626;
+}
+
+#titleText h2 strong {
+  font-weight: 900;
+  color: #FEB548;
+}
+
+#titleText p {
+  font-size: 22px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 500;
+}
+
+.landingPageContainer {
+  margin-left: 60px;
+  height: calc(23vw);
+}
+
+h3 {
+  color: #262626;
+  font-size: 37px;
+  font-family: ''
+
+}
+.background {
+  top: 0;
+  left: 0;
+  z-index: -1;
+
+  overflow: hidden; 
+
+}
+
+.background-Image{
+  background-image: url("/image/jazz/banner.png");
+  background-repeat: no-repeat;
+  position:relative;
+  z-index: -1;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}

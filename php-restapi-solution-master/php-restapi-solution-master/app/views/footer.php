@@ -1,9 +1,8 @@
 <?php
-require __DIR__ . '../../controllers/eventcontroller.php';
+require_once __DIR__ . '../../controllers/eventcontroller.php';
 $eventcontroller = new EventController();
 $events = $eventcontroller->getEvents();
-
-?>  
+?>
   
   <head>
   <link href="/css/footer.css" rel="stylesheet">
@@ -26,12 +25,13 @@ $events = $eventcontroller->getEvents();
               <?php 
               try{
                 foreach ($events as $event) {
-                    echo '<li><a href="/' . str_replace(' ', '-', $event->getEventTitle()) . '">' . $$event->getEventTitle()  . '</a></li>';
+                    echo '<li><a href="/' . str_replace(' ', '-', $event->getEventName()) . '">' . $event->getEventName()  . '</a></li>';
                   }
               }
               catch(error $e)
               {
-                echo "something went wrong while loading the page! Please try again later";
+                echo "something went wrong while loading the navigation! Please try again later";
+                echo "<script>console.log('Debug Objects: " . $e->getMessage() . "' );</script>";
               }
               
               ?>
