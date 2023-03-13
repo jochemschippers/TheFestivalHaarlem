@@ -6,7 +6,7 @@ $events = $eventcontroller->getEvents();
   
   <head>
   <link href="/css/footer.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://kit.fontawesome.com/384ef59d1a.js" crossorigin="anonymous"></script>
   </head>
   <footer class="site-footer">
 

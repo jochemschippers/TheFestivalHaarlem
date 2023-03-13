@@ -58,6 +58,7 @@ $artists = $jazzcontroller->getAllArtists();
           <div class="container carouselContainer">
             <h3>' . $artists[0]->getName() . '</h3>
             <p> ' . $artists[0]->getDescription() . '</p>
+            <hr><span class="textSmall">Plays the ' . $artists[0]->getTimeSlots()[0]->getStartTime()->format('dS') .'!</span>
             <button> Learn More About artist</button>
             </div> 
             </div>';
@@ -68,6 +69,8 @@ $artists = $jazzcontroller->getAllArtists();
           <div class="container carouselContainer">
             <h3>' . $artists[$i]->getName() . '</h3>
             <p> ' . $artists[$i]->getDescription() . '</p>
+            <hr><span class="textSmall">Plays the ' . $artists[$i]->getTimeSlots()[0]->getStartTime()->format('dS') .'!</span>
+
             <button> Learn More About artist</button>
             </div>
             </div>';

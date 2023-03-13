@@ -8,7 +8,7 @@ $events = $eventcontroller->getEvents();
 
 <head>
   <link href="/css/navbar.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://kit.fontawesome.com/384ef59d1a.js" crossorigin="anonymous"></script>
 </head>
 
 <header class="header-container">
@@ -51,6 +51,7 @@ $events = $eventcontroller->getEvents();
   <div class="user-options">
     <div class="option"><i class="fa fa-user fa-2x"></i></div>
     <div class="option"><i class="fa fa-shopping-cart fa-2x"></i></div>
+    <div class="option"><i class="fa fa-sharp fa-solid fa-screwdriver-wrench fa-2x"></i></div>
   </div>
 </header>
 
