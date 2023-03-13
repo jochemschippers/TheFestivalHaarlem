@@ -69,11 +69,11 @@ $events = $eventcontroller->getEvents();
       console.log(params[1]);
       if(params[1] === "" || params[1] === null){
         links[0].classList.add("selected");
-        setStyle("home");
       }
       else{
         for (let i = 0; i < links.length; i++) {
-        if (links[i].textContent === params[1]) {
+        if (links[i].textContent.toLowerCase() === params[1].toLowerCase()) {
+          console.log(links[i].textContent)
           links[i].classList.add("selected");
           document.title += " - " + links[i].textContent;
         }
