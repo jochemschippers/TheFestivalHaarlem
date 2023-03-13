@@ -44,6 +44,7 @@ CREATE TABLE `FestivalInformation` (
 	`reservationFee` FLOAT NOT NULL,
 	PRIMARY KEY (`festivalID`)
 );
+
 CREATE TABLE `Users` (
 	`userID` INT NOT NULL AUTO_INCREMENT,
 	`userName` VARCHAR(45) NOT NULL,
@@ -78,15 +79,26 @@ CREATE TABLE `YummyRestaurants` (
 	`childPrice` FLOAT NOT NULL,
 	PRIMARY KEY (`restaurantID`)
 );
+CREATE TABLE `FoodTypes`(
+	`FoodTypeID` INT NOT NULL,
+	`FoodTypeName` VARCHAR(45) NOT NULL,
+	PRIMARY KEY (`FoodTypeID`)
+);
+INSERT INTO `FoodTypes` (`FoodTypeID`, `FoodTypeName`) VALUES
+(0, 'Dutch'),
+(1, 'Seafood'),
+(2, 'French'),
+(3, 'European');
 CREATE TABLE `RestaurantFoodTypes` (
 	`foodType` INT,
 	`restaurantID` INT,
 
 	PRIMARY KEY (`restaurantID`, `foodType`),
-  	FOREIGN KEY (restaurantID) REFERENCES YummyRestaurants(restaurantID)
+  	FOREIGN KEY (restaurantID) REFERENCES YummyRestaurants(restaurantID),
+	FOREIGN KEY (`foodType`) REFERENCES FoodTypes(FoodTypeID)
 );
 CREATE TABLE `RestaurantImages` (
-	`imageID` INT NOT NULL,
+	`imageID` INT NOT NULL AUTO_INCREMENT,
 	`restaurantID` INT,
 	`imageLink` VARCHAR(90),
 	`imageIndex` INT,
@@ -94,7 +106,7 @@ CREATE TABLE `RestaurantImages` (
   	FOREIGN KEY (restaurantID) REFERENCES YummyRestaurants(restaurantID)
 );
 CREATE TABLE `RestaurantMenuItems` (
-	`menuItemID` INT NOT NULL,
+	`menuItemID` INT NOT NULL AUTO_INCREMENT,
 	`restaurantID` INT,
 	`courseID` INT,
 	`name` VARCHAR(90),
@@ -104,15 +116,20 @@ CREATE TABLE `RestaurantMenuItems` (
 	PRIMARY KEY (`menuItemID`),
   	FOREIGN KEY (restaurantID) REFERENCES YummyRestaurants(restaurantID)
 );
+
+
+
+
 CREATE TABLE `JazzArtists` (
-	`artistID` INT NOT NULL,
+	`artistID` INT NOT NULL AUTO_INCREMENT,
 	`description` VARCHAR(1500),
 	`image` VARCHAR(90),
 	`name` VARCHAR(90),
 	PRIMARY KEY (`artistID`)
 );
-CREATE TABLE `JazzLocation` (
-	`locationID` INT NOT NULL,
+CREATE TABLE `JazzLocations` (
+	`locationID` INT NOT NULL AUTO_INCREMENT,
+	`locationName` VARCHAR(45) NOT NULL,
 	`address` VARCHAR(250),
 	`locationImage` VARCHAR(90),
 	`toAndFromText` VARCHAR(1500),
@@ -124,14 +141,14 @@ CREATE TABLE `Halls`(
 	`locationID` INT,
 	`hallName` VARCHAR(90),
 	PRIMARY KEY (`hallID`),
-	FOREIGN KEY (`locationID`) REFERENCES JazzLocation(locationID)
+	FOREIGN KEY (`locationID`) REFERENCES JazzLocations(locationID)
 );
 
-
+ALTER TABLE `thefestivaldb`.`Halls` DROP PRIMARY KEY, ADD PRIMARY KEY (`hallID`, `locationID`) USING BTREE; 
 
 
 CREATE TABLE `FestivalEvents` (
-	`eventID` INT NOT NULL,
+	`eventID` INT NOT NULL AUTO_INCREMENT,
 	`eventTitle` VARCHAR(45),
 	`bannerImage` VARCHAR(90),
 	`bannerDescription` VARCHAR(1500),
@@ -141,7 +158,7 @@ CREATE TABLE `FestivalEvents` (
 
 
 CREATE TABLE `timeSlots` (
-	`timeSlotID` INT NOT NULL,
+	`timeSlotID` INT NOT NULL AUTO_INCREMENT,
 	`eventID` INT,
 	`price` FLOAT,
 	`startTime` DATETIME,
@@ -151,7 +168,7 @@ CREATE TABLE `timeSlots` (
 	FOREIGN KEY (`eventID`) REFERENCES FestivalEvents(`eventID`)
 );
 CREATE TABLE `eventTickets` (
-	`ticketID` INT NOT NULL,
+	`ticketID` INT NOT NULL AUTO_INCREMENT,
 	`timeSlotID` INT,
 	`programID` INT,
 	PRIMARY KEY (`ticketID`),
@@ -172,14 +189,17 @@ CREATE TABLE `RestaurantReservations` (
 CREATE TABLE `TimeSlotsJazz` (
 	`timeSlotID` INT NOT NULL,
 	`artistID` INT,
+	`locationID` INT,
 	`hallID` INT,
 	PRIMARY KEY (`timeSlotID`),
   	FOREIGN KEY (timeSlotID) REFERENCES timeSlots(timeSlotID),
-  	FOREIGN KEY (artistID) REFERENCES JazzArtists(artistID)
+  	FOREIGN KEY (artistID) REFERENCES JazzArtists(artistID),
+	FOREIGN KEY (locationID) REFERENCES JazzLocations(locationID),
+	FOREIGN KEY (hallID) REFERENCES Halls(`hallID`)
 );
 CREATE TABLE `JazzAlbums` (
 	`artistID` INT NOT NULL,
-	`albumID` INT NOT NULL,
+	`albumID` INT NOT NULL AUTO_INCREMENT,
 	`image` VARCHAR(90),
 	`title` VARCHAR(120),
 	`spotifyLink` VARCHAR(120),
@@ -187,8 +207,11 @@ CREATE TABLE `JazzAlbums` (
 	PRIMARY KEY (`albumID`),
   	FOREIGN KEY (artistID) REFERENCES JazzArtists(artistID)
 );
+
+
+
 CREATE TABLE `Languages` (
-	`languageID` INT NOT NULL,
+	`languageID` INT NOT NULL AUTO_INCREMENT,
 	`language` VARCHAR(45),
 	`languageFlag` VARCHAR(90),
 	`guideID` INT,
@@ -202,20 +225,29 @@ CREATE TABLE `TimeSlotsStrollThroughHistory` (
   	FOREIGN KEY (languageID) REFERENCES Languages(languageID)
 );
 CREATE TABLE `Guides` (
-	`guideID` INT NOT NULL,
+	`guideID` INT NOT NULL AUTO_INCREMENT,
 	`guideName` VARCHAR(45),
 	`languageID` INT,
 	PRIMARY KEY (`guideID`),
   	FOREIGN KEY (languageID) REFERENCES Languages(languageID)
 );
+
+
+
+
 CREATE TABLE `StaticPage` (
-	`pageID` INT NOT NULL,
+	`pageID` INT NOT NULL AUTO_INCREMENT,
 	`bannerImage` VARCHAR(90),
 	`title` VARCHAR(90),
 	`secondTitle` VARCHAR(250),
 	`description` VARCHAR(1500),
 	PRIMARY KEY (`pageID`)
 );
+
+
+
+
+
 CREATE TABLE `History` (
 	`eventID` INT NOT NULL,
 	`landMarkID` INT,
@@ -227,7 +259,7 @@ CREATE TABLE `History` (
 	FOREIGN KEY (`eventID`) REFERENCES FestivalEvents(`eventID`)
 );
 CREATE TABLE `LandMarks` (
-	`landMarkID` INT NOT NULL,
+	`landMarkID` INT NOT NULL AUTO_INCREMENT,
 	`title` VARCHAR(45),
 	`description` VARCHAR(1500),
 	`image` VARCHAR(90),
@@ -241,6 +273,44 @@ CREATE TABLE `HistoryDetailPages` (
 	PRIMARY KEY (`landMarkID`),
 	FOREIGN KEY (`landMarkID`) REFERENCES LandMarks(`landMarkID`)
 );
+
+
+ALTER TABLE `FestivalEvents` CHANGE `eventTitle` `eventName` VARCHAR(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL;
+ALTER TABLE `FestivalEvents` ADD `EventTitle` VARCHAR(150) NOT NULL AFTER `bannerDescription`;
+
+INSERT INTO `FestivalEvents` (`eventName`, `bannerImage`, `bannerDescription`, `EventTitle`) VALUES ('Jazz', 'FILE HERE!', 'Haarlem Jazz is a premier annual event for all jazz lovers. With more than 10 years of experience in showcasing the best in local and international jazz talent, you’d be certain to experience a vibrant and lively atmosphere for music fans! ', 'The Haarlem Jazz Event'), ('Yummy', 'FILE HERE!', 'Explore every Food and Drink in this years Haarlem Yummy! event. Here its Eat first Talk later.\r\nCome and enjoy all culinary options Haarlem has to offer in this cities most versitile Food and Drink Festival.', 'Explore the TASTE of Haarlem'), ('Stroll Through History', 'FILE HERE!', 'See what cultural monuments the city of Haarlem has to offer and walk with one of our guides to get to know the stories behind them during our guided tour through the streets of Haarlem.', 'A Stroll Through History');
+
+INSERT INTO `JazzLocations` (`locationName`, `address`, `locationImage`, `toAndFromText`, `accessibillityText`) VALUES
+('Patronaat', 'Zijlsingel 2, 2013 DN Haarlem', '!FILE HERE', 'Patronaat is about 15 minutes walking distance from Haarlem station (a 1 km distance)\r\nAlternatively, you can take ride buses 340, 346 or 356 one stop to the Raaksburg. From there, it’ll be a minute on foot\r\nThere are also several parking options available, like the parking garage RAAKS, which is a 5 minute walk away from the Grote Markt.', 'Do you have a disability? We and our partners at the Patronaat strive to make your visit as comfortable and enjoyable as possible. \r\nTo see the facilities the patronaat has to offer, please download the \'Ongehinderd\' mobile app here and/or contact the patronaat through mail on info@patronaat.nl to discuss the options.'),
+('Grote Markt', 'Grote Markt 2011 RD Haarlem\r\n', '!FILE HERE', 'Grote Markt is easily accessible by foot within just 10 minutes from the station (800m distance)\r\nIt is also accessible with buses 3, 73 or 300. Ride two stops for busses 3 and 73 to Ruychaverstraat, which is right next to the Grote Markt. For busline 300, ride one stop to Haarlem Centre/Verwulft\r\nThere are also several parking options available, like the parking garage De Appelaar, which is a 5 minute walk away from the Grote Markt', '\r\nDo you have a disability? The square is located at ground level and is easily accessible by wheelchair or other assistive devices\r\nMany of the shops and restaurants around the square have wheelchair ramps and other accessibility features\r\nAlso special toilets have been placed around the square in order to accommodate for people with disabilities');
+
+ALTER TABLE `thefestivaldb`.`Halls` DROP PRIMARY KEY, ADD PRIMARY KEY (`hallID`, `locationID`) USING BTREE;
+
+INSERT INTO `Halls` (`hallID`, `locationID`, `hallName`) VALUES
+(0, 1, 'Main hall'),
+(0, 2, 'Grote Markt'),
+(1, 1, 'Second hall'),
+(2, 1, 'Third hall');
+
+
+INSERT INTO `JazzArtists` (`artistID`, `description`, `image`, `name`) VALUES
+(0, 'Hans and Candy Dulfer are as a father-daughter duo both inseparable from their saxophones. Hans is a renowned saxophonist, known for his soulful and energetic performances, while Candy is a skilled saxophonist and flautist in her own right. Together, they have had multiple successful albums and have performed at some of the most prestigious jazz festivals around the world. ', '/image/jazz/candyAndHansDulfer.png', 'Candy and Hans Dulfer');
+
+
+INSERT INTO `timeSlots` (`timeSlotID`, `eventID`, `price`, `startTime`, `endTime`, `maximumAmountTickets`) VALUES
+(0, 1, 15, '2023-07-27 15:00:00', '2023-07-27 16:00:00', 300);
+
+
+INSERT INTO `Users` (`userID`, `userName`, `email`, `userRole`, `fullName`, `phoneNumber`, `password`) VALUES
+(1, 'harry', 'harry@harrymail.com', 1, 'harry', '0615448333', '$2y$10$7TTsjOmq2UJhFLY/6yoXCeE8cEnR5ddg3UmUI/tvsTCPvU5z5scUS');
+
+INSERT INTO `TimeSlotsJazz` (`timeSlotID`, `artistID`, `locationID`, `hallID`) VALUES ('1', '1', '1', '0');
+
+
+
+
+
+
 
 --
 -- Dumping data for table `article`

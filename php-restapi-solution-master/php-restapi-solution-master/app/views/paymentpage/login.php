@@ -30,7 +30,7 @@ $grand_total = 0;
     <title>Tickets</title>
     <!-- Include Bootstrap CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link href="../css/paymentpage/overview.css" rel="stylesheet">
+    <link href="../css/paymentpage/login.css" rel="stylesheet">
 </head>
 <body>
 <img id="background" src="\image\Payment\overview\backgroundpayment.png"  >
@@ -155,8 +155,7 @@ $grand_total = 0;
 </tr>
 <tr>
     <td colspan="2spa">
-        <button id="continueButton" formaction="paymentpage/login"> Continue</button>
-        
+        <a href="/Stroll Through History" class="btn btn-primary" id="continueButton">Continue</a>
     </td>
 </tr>
 </tbody> 
