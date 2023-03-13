@@ -6,7 +6,7 @@ body{
     overflow-x: hidden;
   }
   .background-Image-History{
-    background-image: url("/image/history/historybanner.png");
+    background-image: url("/image/history/historybanner.jpg");
     background-repeat: no-repeat;
     z-index: -1;
     top: 0;
