@@ -1,7 +1,7 @@
 <?php 
 include __DIR__ . '/../navbar.php';
-$items = array();
-$item = new Item('Ticket', 10, 1);
+//$items = array();
+//$item = new Item('Ticket', 10, 1);
 ?>
 
 <html lang="en">
@@ -15,17 +15,17 @@ $item = new Item('Ticket', 10, 1);
         <div class="table" id="itemsTable">
             <?php
             
-            $items = $_SESSION['items'];
-            foreach ($items as $item) {
-                echo '<div class="row">';
-                echo '<div class="col-6">';
-                echo '<p>' . $item['name'] . '</p>';
-                echo '</div>';
-                echo '<div class="col-6">';
-                echo '<p>' . $item['price'] . '</p>';
-                echo '</div>';
-                echo '</div>';
-            }
+            // $items = $_SESSION['items'];
+            // foreach ($items as $item) {
+            //     echo '<div class="row">';
+            //     echo '<div class="col-6">';
+            //     echo '<p>' . $item['name'] . '</p>';
+            //     echo '</div>';
+            //     echo '<div class="col-6">';
+            //     echo '<p>' . $item['price'] . '</p>';
+            //     echo '</div>';
+            //     echo '</div>';
+            // }
             ?>
         </div>
     </div>
