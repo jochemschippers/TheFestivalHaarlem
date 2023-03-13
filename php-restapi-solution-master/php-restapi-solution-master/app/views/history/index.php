@@ -1,9 +1,11 @@
 <?php
 include __DIR__ . '/../navbar.php';
+include __DIR__ . '/../../services/landmarkservice.php';
 
-require_once 'landmarkservice.php';
 
-$controller = new LandmarkService();
+//require_once __DIR__ . '/../../services/landmarkservice.php';
+
+$service = new LandmarkService();
 
 // Handle form submissions
 if (isset($_POST['submit'])) {
@@ -40,6 +42,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'edit') {
 }
 ?>
 
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -83,7 +86,10 @@ if (isset($_GET['action']) && $_GET['action'] == 'edit') {
               <div class="row">
                 <div class="col-md-7" id="titleText">
                   <h2>Learn about our <strong>artists</strong></h2>
-                  <p>The Festival Jazz is a premier event. Showcasing the best in local and international jazz talent, in partnership with Haarlem Jazz, the festival’s jazz events provide a vibrant and lively atmosphere for music fans to come together and enjoy the sounds of the genre.
+                  <p>The Festival Jazz is a premier event. 
+                    Showcasing the best in local and international jazz talent, 
+                    in partnership with Haarlem Jazz, the festival’s jazz events provide a vibrant and lively atmosphere 
+                    for music fans to come together and enjoy the sounds of the genre.
                     <br> <br>
                     Read below more about the artists, schedule and locations!
                   </p>
