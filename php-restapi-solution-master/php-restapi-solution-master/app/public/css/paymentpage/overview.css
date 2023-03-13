@@ -1,0 +1,27 @@
+  /* Select the table element */
+  table {
+    /* Set a solid border for the table */
+    border: 1px solid;
+    /* Set a full width for the table */
+    width: 100%;
+    /* Collapse the table borders into a single border */
+    border-collapse: collapse;
+  }
+
+  /* Select the table header cells */
+  th {
+    /* Set a solid border for the header cells */
+    border: 1px solid;
+    /* Set a background color for the header cells */
+    background-color: lightblue;
+    /* Set a padding for the header cells */
+    padding: 10px;
+  }
+
+  /* Select the table data cells */
+  td {
+    /* Set a solid border for the data cells */
+    border: 1px solid;
+    /* Set a padding for the data cells */
+    padding: 10px;
+  }

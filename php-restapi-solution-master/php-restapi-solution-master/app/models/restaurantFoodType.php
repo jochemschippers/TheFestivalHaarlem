@@ -6,6 +6,11 @@ class RestaurantFoodType{
 		private int $foodTypeId;
 		private string $foodTypeName;
 
+		public function __construct(int $foodTypeId, int $restaurantID, string $foodTypeName) {
+			$this->foodTypeId = $foodTypeId;
+			$this->restaurantID = $restaurantID;
+			$this->foodTypeName = $foodTypeName;
+		}
 
 	/**
 	 * @return int

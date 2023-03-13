@@ -3,6 +3,7 @@ include_once __DIR__ . '/repository.php';
 require_once __DIR__ . '/../models/yummyRestaurant.php';
 require_once __DIR__ . '/../models/restaurantImage.php';
 require_once __DIR__ . '/../models/restaurantMenuItem.php';
+require_once __DIR__ . '/../models/restaurantFoodType.php';
 
 class YummyDetailPageRepository extends Repository
 {
@@ -190,6 +191,41 @@ class YummyDetailPageRepository extends Repository
                 array_push($images, $image);
             }
             return $images;
+    
+        } catch (PDOException $e)
+        {
+            echo $e;
+        }
+    }
+    function getFoodTypes() {
+        try {
+            $stmt = $this->connection->prepare("
+            SELECT r.*, f.foodTypeName
+            FROM RestaurantFoodTypes r
+            JOIN FoodTypes f ON r.foodType = f.foodTypeId
+            ");
+
+            // SELECT r.*, m.-----, m.----
+            // FROM yummyRestaurants r
+            // JOIN restaurantMenuItems m ON r.restaurantId = m.restaurantId
+
+            // Bind the parameter value to the placeholder
+
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $stmt->execute();
+            $results = $stmt->fetchAll();
+    
+            $types = [];
+            foreach ($results as $row) {
+                $type = new RestaurantFoodType(
+
+                    $row["foodType"],
+                    $row["restaurantID"],
+                    $row['foodTypeName']
+                );
+                array_push($types, $type);
+            }
+            return $types;
     
         } catch (PDOException $e)
         {
