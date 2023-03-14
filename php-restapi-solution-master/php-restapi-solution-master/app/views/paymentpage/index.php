@@ -36,7 +36,7 @@ $grand_total = 0;
 <img id="background" src="\image\Payment\overview\backgroundpayment.png"  >
 
 
-<div class="container">
+<div class="container" id="progressContainer">
     <div class="card">
         <div class="row d-flex justify-content-between px-3 top">
             <div class="d-flex">
