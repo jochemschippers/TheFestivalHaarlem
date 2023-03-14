@@ -1,6 +1,7 @@
 <?php
 // Assuming the ID of the specific restaurant you want to display is stored in the $restaurantId variable
-$restaurantId = 4;
+
+$restaurantId = $_GET['restaurantId'];
 
 // Create a new instance of the DetailPageService class
 $detailPageController = new YummyController();
