@@ -49,14 +49,14 @@ class LandmarkService {
             foreach ($landmarks as $landmark) {
                 $html .= "<div class='col-md-4'>";
                 $html .= "<div class='card mb-4 shadow-sm'>";
-                $html .= "<img class='card-img-top' src='images/" . $landmark->image . "' alt='Card image cap'>";
+                $html .= "<img class='card-img-top' src='images/" . $landmark->getImage() . "' alt='Card image cap'>";
                 $html .= "<div class='card-body'>";
-                $html .= "<h5 class='card-title'>" . $landmark->title . "</h5>";
-                $html .= "<p class='card-text'>" . $landmark->description . "</p>";
+                $html .= "<h5 class='card-title'>" . $landmark->getTitle() . "</h5>";
+                $html .= "<p class='card-text'>" . $landmark->getDescription() . "</p>";
                 $html .= "<div class='d-flex justify-content-between align-items-center'>";
                 $html .= "<div class='btn-group'>";
-                $html .= "<a href='index.php?controller=landmark&action=edit&landmarkID=" . $landmark->landmarkID . "' class='btn btn-sm btn-outline-secondary'>Edit</a>";
-                $html .= "<a href='index.php?controller=landmark&action=delete&landmarkID=" . $landmark->landmarkID . "' class='btn btn-sm btn-outline-secondary'>Delete</a>";
+                $html .= "<a href='index.php?controller=landmark&action=edit&landmarkID=" . $landmark->getLandmarkID() . "' class='btn btn-sm btn-outline-secondary'>Edit</a>";
+                $html .= "<a href='index.php?controller=landmark&action=delete&landmarkID=" . $landmark->getLandmarkID() . "' class='btn btn-sm btn-outline-secondary'>Delete</a>";
                 $html .= "</div>";
                 $html .= "</div>";
                 $html .= "</div>";
