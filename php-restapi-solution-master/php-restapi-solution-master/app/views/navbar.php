@@ -62,7 +62,7 @@ $events = $eventcontroller->getEvents();
   </nav>
   <div class="user-options">
     <div class="option"><i class="fa fa-user fa-2x"></i></div>
-    <div class="option"><i class="fa fa-shopping-cart fa-2x"></i></div>
+    <div class="option"><a href="/paymentpage"><i class="fa fa-shopping-cart fa-2x"></i></a></div>
     <div class="option"><i class="fa fa-sharp fa-solid fa-screwdriver-wrench fa-2x"></i></div>
   </div>
 </header>
