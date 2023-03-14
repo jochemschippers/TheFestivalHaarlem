@@ -49,7 +49,7 @@ $grand_total = 0;
             <div class="col-12">
             <ul id="progressbar" class="text-center">
                 <li class="active step0"></li>
-                <li class="active step0"></li>
+                <li class="step0"></li>
                 <li class="step0"></li>
                 <li class="step0"></li>
             </ul>
@@ -155,7 +155,7 @@ $grand_total = 0;
 </tr>
 <tr>
     <td colspan="2spa">
-        <button id="continueButton" formaction="paymentpage/login"> Continue</button>
+        <a href="/paymentpage/login" class="btn btn-primary" id="continueButton">Continue</a>
         
     </td>
 </tr>
