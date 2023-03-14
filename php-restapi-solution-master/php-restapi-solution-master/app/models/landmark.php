@@ -15,7 +15,7 @@ class Landmark{
             $this->image = $image;
         }
 
-        public function getLandmarkID() 
+        public function getLandmarkID()
         {
           return $this->landmarkID;
         }

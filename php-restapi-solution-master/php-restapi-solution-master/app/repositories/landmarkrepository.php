@@ -11,14 +11,16 @@ class LandmarkRepository extends Repository
             $stmt->execute();
 
             $stmt->setFetchMode(PDO::FETCH_CLASS, 'Landmark');
-            return $stmt->fetchAll();
+            $landmarks = $stmt->fetchAll();
+            
+            return $landmarks;
         } catch (PDOException $e) {
             echo $e;
         }
     }
 
     // Create a new landmark
-    function createLandmark($title, $description, $image) 
+    function createLandmark($title, $description, $image)
     {
         try {
           $stmt = $this->connection->prepare("INSERT INTO LandMarks (title, description, image) VALUES (?,?,?)");
