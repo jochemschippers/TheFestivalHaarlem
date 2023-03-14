@@ -3,11 +3,8 @@ require_once __DIR__ . '../../controllers/eventcontroller.php';
 $eventcontroller = new EventController();
 $events = $eventcontroller->getEvents();
 ?>
-  
-  <head>
-  <link href="/css/footer.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  </head>
+
+
   <footer class="site-footer">
 
       <div class="container">
@@ -25,7 +22,7 @@ $events = $eventcontroller->getEvents();
               <?php 
               try{
                 foreach ($events as $event) {
-                    echo '<li><a href="/' . str_replace(' ', '-', $event->getEventTitle()) . '">' . $event->getEventTitle()  . '</a></li>';
+                    echo '<li><a href="/' . str_replace(' ', '-', $event->getEventName()) . '">' . $event->getEventName()  . '</a></li>';
                   }
               }
               catch(error $e)
@@ -63,4 +60,26 @@ $events = $eventcontroller->getEvents();
       </div>
     </div>
   </div>
+  
+  <script>
+      const navbar = document.getElementById("navbar");
+      const links = navbar.getElementsByTagName("span");
+      document.title = "The Festival";
+      console.log(links);
+      console.log(params[1]);
+      if(params[1] === "" || params[1] === null){
+        links[0].classList.add("selected");
+      }
+      else{
+        for (let i = 0; i < links.length; i++) {
+        if (links[i].textContent.toLowerCase() === params[1].toLowerCase()) {
+          console.log(links[i].textContent)
+          links[i].classList.add("selected");
+          document.title += " - " + links[i].textContent;
+        }
+      }
+      }
+     
+    </script>
 </footer>
+</html>

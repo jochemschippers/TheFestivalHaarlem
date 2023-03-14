@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/../repositories/eventrepository.php';
+require_once __DIR__ . '/../repositories/eventrepository.php';
 
 
 class EventService {
@@ -10,5 +10,4 @@ class EventService {
         return $events;
     }
 }
-
 ?>

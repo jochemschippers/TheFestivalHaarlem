@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/repository.php';
+require_once __DIR__ . '/repository.php';
 require __DIR__ . '/../models/FestivalEvent.php';
 
 class EventRepository extends Repository
@@ -19,3 +19,4 @@ class EventRepository extends Repository
         }
     }
 }
+?>
