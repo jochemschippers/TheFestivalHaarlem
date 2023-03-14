@@ -55,21 +55,6 @@ if (isset($_GET['action']) && $_GET['action'] == 'edit') {
 
     <body>
         <div class="container">
-            <form action="historycontroller.php" method="post"></form>
-                <textarea name="historyeditor" id="historyeditor">
-                    <p>This is some sample content.</p>
-                </textarea>
-
-                <p>
-                    <input type="submit" name="submit_data" value="submit">
-                </p>
-            </form>
-            <script>
-            ClassicEditor
-            .create( document.querySelector( '#historyeditor' ) )
-            .catch( error => {
-                console.error( error );
-            } );
             </script>
             <div class="background-Image-History">
             <div class="border-box">
@@ -94,30 +79,36 @@ if (isset($_GET['action']) && $_GET['action'] == 'edit') {
                 </div>
               </div>
             </div>
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe
+                class="embed-responsive-item"
+                src="https://www.google.com/maps/d/u/0/embed?mid=1xMakWcCkWRc-eW4IGAR_zDG1UttbB1k&ehbc=2E312F"
+                title="Landmark Route">
+                </iframe>
+            </div>
             <div class="container special">
-                <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1xMakWcCkWRc-eW4IGAR_zDG1UttbB1k&ehbc=2E312F" width="640" height="480"></iframe>
                 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
                 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
             </div>
           </div>
         </div>
-    <div>
-      <h1>Landmarks</h1>
+        <div class="">
+        <h1>Landmarks</h1>
 
-      <div id="landmarks-table">
-        <?php $service->displayLandmarks(); ?>
-      </div>
+         <div id="landmarks-table">
+          <?php $service->displayLandmarks(); ?>
+        </div>
 
-      <h2>Add Landmark</h2>
+        <h2>Add Landmark</h2>
 
-      <div id="landmark-form">
-        <?php $service->displayCreateForm(); ?>
-      </div>
+        <div id="landmark-form">
+            <?php $service->displayCreateForm(); ?>
+        </div>
 
-      <h2>Edit Landmark</h2>
+        <h2>Edit Landmark</h2>
 
-      <div id="edit-landmark-form">
+        <div id="edit-landmark-form">
         <?php
           if (isset($_GET['action']) && $_GET['action'] == 'edit') {
             $landmarkID = $_GET['landmarkID'];
@@ -129,7 +120,21 @@ if (isset($_GET['action']) && $_GET['action'] == 'edit') {
             }
           }
         ?>
-      </div>
-    </div>
+        </div>
+        </div>
+        <form action="historycontroller.php" method="post"></form>
+        <textarea name="historyeditor" id="historyeditor">
+            <p>This is some sample content.</p>
+            </textarea>
+            <p>
+                <input type="submit" name="submit_data" value="submit">
+            </p>
+        </form>
+            <script>
+            ClassicEditor
+            .create( document.querySelector( '#historyeditor' ) )
+            .catch( error => {
+                console.error( error );
+            } );
     </body>
 </html>
