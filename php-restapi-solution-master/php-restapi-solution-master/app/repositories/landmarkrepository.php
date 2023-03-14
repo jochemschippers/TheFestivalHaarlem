@@ -7,12 +7,21 @@ class LandmarkRepository extends Repository
     function getAllLandmarks()
     {
         try {
-            $stmt = $this->connection->prepare("SELECT * FROM LandMarks");
+            $stmt = $this->connection->prepare("SELECT landMarkID, 'title', 'description', 'image' FROM LandMarks");
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $stmt->execute();
+            $results = $stmt->fetchAll();
 
-            $stmt->setFetchMode(PDO::FETCH_CLASS, 'Landmark');
-            $landmarks = $stmt->fetchAll();
-            
+            $landmarks = [];
+            foreach ($results as $row) {
+                $landmark = new Landmark(
+                    $row["landMarkID"],
+                    $row['title'],
+                    $row['description'],
+                    $row['image']
+                );
+                array_push($landmarks, $landmark);
+            }
             return $landmarks;
         } catch (PDOException $e) {
             echo $e;
@@ -34,7 +43,7 @@ class LandmarkRepository extends Repository
     function updateLandmark($landmarkID, $title, $description, $image) 
     {
         try {
-          $stmt = $this->connection->prepare("UPDATE LandMarks SET title = ?, description = ?, image = ? WHERE landmarkID = ?");
+          $stmt = $this->connection->prepare("UPDATE LandMarks SET title = ?, description = ?, image = ? WHERE landMarkID = ?");
           $stmt->execute([$title, $description, $image, $landmarkID]);
         } catch (PDOException $e) {
           echo $e;
@@ -45,7 +54,7 @@ class LandmarkRepository extends Repository
     function deleteLandmark($landmarkID) 
     {
         try {
-          $stmt = $this->connection->prepare("DELETE FROM LandMarks WHERE landmarkID = ?");
+          $stmt = $this->connection->prepare("DELETE FROM LandMarks WHERE landMarkID = ?");
           $stmt->execute([$landmarkID]);
         } catch (PDOException $e) {
           echo $e;
@@ -56,7 +65,7 @@ class LandmarkRepository extends Repository
     function getLandmark($landmarkID) 
     {
         try {
-          $stmt = $this->connection->prepare("SELECT * FROM LandMarks WHERE landmarkID = ?");
+          $stmt = $this->connection->prepare("SELECT * FROM LandMarks WHERE landMarkID = ?");
           $stmt->execute([$landmarkID]);
           $stmt->setFetchMode(PDO::FETCH_CLASS, 'Landmark');
           return $stmt->fetch();
