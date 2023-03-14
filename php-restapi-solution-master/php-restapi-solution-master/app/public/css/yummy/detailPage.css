@@ -1,3 +1,9 @@
+/* Global styles */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 #titleBorder {
     height: 500px;
     border: 2px solid #000;

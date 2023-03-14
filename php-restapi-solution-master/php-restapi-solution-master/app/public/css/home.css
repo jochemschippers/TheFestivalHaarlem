@@ -3,7 +3,10 @@
 }
 
 /* Global styles */
-
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
   
   body {
     margin: 0;
@@ -59,17 +62,21 @@
     color: #000000;
     text-align: left;    
     font-weight: bold;
-    font-family: 'Open Sans', sans-serif;;
+    font-family: 'Open Sans', sans-serif;
     font-size: 3.0rem;
     padding-left: 20px;
     padding-top: 40px;
     padding-bottom: 40px;
+    position: relative;
+    left: 0;
   }
-  #intro .col-6 p{
+  #intro .col-5 p{
     color: #000000;
     padding-right: 40px;
     padding-top: 40px;
     padding-bottom: 40px;
+    position: relative;
+    width: 900px;
   }
 
   .text-left {
@@ -89,6 +96,7 @@
   }
   
   /* Styles for the "Check out the following events" section */
+
   #banner h2 {
     font-size: 2.6rem;
     padding-left: 20px;
