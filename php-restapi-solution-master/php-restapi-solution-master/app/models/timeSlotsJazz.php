@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../models/TimeSlot.php';
 
 class TimeSlotsJazz extends TimeSlot{
     
@@ -6,8 +7,8 @@ class TimeSlotsJazz extends TimeSlot{
         private int $hallID;
 
 
-        public function __construct(int $timeSlotID, int $eventID, float $priceID, DateTime $startTime, DateTime $endTime, int $maximmumAmountTickets, int $artistID, int $hallID) {
-            parent::__construct($timeSlotID, $eventID, $priceID, $startTime, $endTime, $maximmumAmountTickets);
+        public function __construct(int $timeSlotID, int $eventID, float $price, string $startTime, string $endTime, int $maximmumAmountTickets, int $artistID, int $hallID) {
+            parent::__construct($timeSlotID, $eventID, $price,  DateTime::createFromFormat('Y-m-d H:i:s', $startTime), DateTime::createFromFormat('Y-m-d H:i:s', $endTime), $maximmumAmountTickets);
             $this->artistID = $artistID;
             $this->hallID = $hallID;
         }
