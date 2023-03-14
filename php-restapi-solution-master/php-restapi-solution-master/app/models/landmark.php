@@ -8,14 +8,15 @@ class Landmark{
         private string $image;
 
 
-        public function __construct(int $landmarkID, string $title, string $description, string $image){
-            $this->landmarkID = $landmarkID;
+        public function __construct(string $title, string $description, string $image)
+        {
             $this->title = $title;
             $this->description = $description;
             $this->image = $image;
         }
 
-        public function getLandmarkID() {
+        public function getLandmarkID() 
+        {
           return $this->landmarkID;
         }
 

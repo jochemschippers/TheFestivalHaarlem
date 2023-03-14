@@ -1,6 +1,5 @@
 <?php
 include __DIR__ . '/../navbar.php';
-//include __DIR__ . '/../../services/landmarkservice.php';
 require_once __DIR__ . '/../../services/landmarkservice.php';
 
 $service = new LandmarkService();
@@ -29,13 +28,13 @@ if (isset($_POST['submit'])) {
 }
 
 // Display landmarks and form
-$view->displayLandmarks();
-$view->displayForm();
+$service->displayLandmarks();
+$service->displayCreateForm();
 if (isset($_GET['action']) && $_GET['action'] == 'edit') {
   $landmarkID = $_GET['landmarkID'];
   $landmark = $service->getLandmark($landmarkID);
   if ($landmark) {
-    $view->displayEditForm($landmarkID, $landmark->getTitle(), $landmark->getDescription(), $landmark->getImage());
+    $service->displayEditForm($landmarkID, $landmark->getTitle(), $landmark->getDescription(), $landmark->getImage());
   }
 }
 ?>
@@ -72,10 +71,6 @@ if (isset($_GET['action']) && $_GET['action'] == 'edit') {
                 console.error( error );
             } );
             </script>
-            <!-- <script>
-                    CKEDITOR.replace('historyeditor');
-            </script> -->
-
             <div class="background-Image-History">
             <div class="border-box">
               <div class="container" id="titleContainer">
@@ -100,9 +95,10 @@ if (isset($_GET['action']) && $_GET['action'] == 'edit') {
               </div>
             </div>
             <div class="container special">
-              <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-              <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-              <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+                <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1xMakWcCkWRc-eW4IGAR_zDG1UttbB1k&ehbc=2E312F" width="640" height="480"></iframe>
+                <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
             </div>
           </div>
         </div>
@@ -110,13 +106,13 @@ if (isset($_GET['action']) && $_GET['action'] == 'edit') {
       <h1>Landmarks</h1>
 
       <div id="landmarks-table">
-        <?php $view->displayLandmarks(); ?>
+        <?php $service->displayLandmarks(); ?>
       </div>
 
       <h2>Add Landmark</h2>
 
       <div id="landmark-form">
-        <?php $view->displayForm(); ?>
+        <?php $service->displayCreateForm(); ?>
       </div>
 
       <h2>Edit Landmark</h2>
@@ -127,7 +123,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'edit') {
             $landmarkID = $_GET['landmarkID'];
             $landmark = $service->getLandmark($landmarkID);
             if ($landmark) {
-              $view->displayEditForm($landmarkID, $landmark->getTitle(), $landmark->getDescription(), $landmark->getImage());
+              $service->displayEditForm($landmarkID, $landmark->getTitle(), $landmark->getDescription(), $landmark->getImage());
             } else {
               echo "Landmark not found";
             }

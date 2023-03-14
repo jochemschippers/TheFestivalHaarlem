@@ -9,14 +9,14 @@ class LandmarkService {
         $this->repository = new LandmarkRepository();
     }
 
-    public function getAll() {
+    public function getAllLandmarks() {
         // retrieve data
         $repository = new LandmarkRepository();
-        $landmarks = $repository->getAll();
+        $landmarks = $repository->getAllLandmarks();
         return $landmarks;
     }
 
-    public function get($landmarkID) {
+    public function getLandmark($landmarkID) {
         // retrieve data
         $repository = new LandmarkRepository();
         $landmark = $repository->getLandmark($landmarkID);
@@ -42,10 +42,10 @@ class LandmarkService {
     }
 
     public function displayLandmarks() {
-        $landmarks = $this->getAll();
+        $landmarks = $this->getAllLandmarks();
         $html = "";
         
-        if(count($landmarks) > 0) {
+        if(!is_null($landmarks) && count($landmarks) > 0) {
             foreach ($landmarks as $landmark) {
                 $html .= "<div class='col-md-4'>";
                 $html .= "<div class='card mb-4 shadow-sm'>";
@@ -61,8 +61,8 @@ class LandmarkService {
                 $html .= "</div>";
                 $html .= "</div>";
                 $html .= "</div>";
-            }   
-        } 
+            }
+        }
         else {
             $html .= "<div class='col-md-12'>";
             $html .= "<div class='card mb-4 shadow-sm'>";
@@ -75,6 +75,26 @@ class LandmarkService {
         }
     }
 
+    public function displayCreateForm() {
+        $html = "";
+        $html .= "<form action='index.php?controller=landmark&action=create' method='post' enctype='multipart/form-data'>";
+        $html .= "<div class='form-group'>";
+        $html .= "<label for='title'>Title</label>";
+        $html .= "<input type='text' class='form-control' id='title' name='title'>";
+        $html .= "</div>";
+        $html .= "<div class='form-group'>";
+        $html .= "<label for='description'>Description</label>";
+        $html .= "<input type='text' id='description' name='description'>";
+        $html .= "</div>";
+        $html .= "<div class='form-group'>";
+        $html .= "<label for='image'>Image</label>";
+        $html .= "<input type='text' id='image' name='image'>";
+        $html .= "</div>";
+        $html .= "<button type='submit' class='btn btn-primary'>Create</button>";
+        $html .= "</form>";
+        return $html;
+    }
+
     public function displayEditForm($landmarkID) {
         $landmark = $this->get($landmarkID);
         $html = "";
@@ -85,11 +105,11 @@ class LandmarkService {
         $html .= "</div>";
         $html .= "<div class='form-group'>";
         $html .= "<label for='description'>Description</label>";
-        $html .= "<textarea class='form-control' id='description' name='description' rows='3'>" . $landmark->description . "</textarea>";
+        $html .= "<input type='text' id='description' name='description' value='" . $landmark->description . "'>";
         $html .= "</div>";
         $html .= "<div class='form-group'>";
         $html .= "<label for='image'>Image</label>";
-        $html .= "<input type='file' class='form-control-file' id='image' name='image'>";
+        $html .= "<input type='text' id='image' name='image'>";
         $html .= "</div>";
         $html .= "<input type='text' name='landmarkID' value='" . $landmark->landmarkID . "'>";
         $html .= "<button type='submit' class='btn btn-primary'>Update</button>";
