@@ -2,9 +2,6 @@
 thead{
     background-color: gray;
   }
-  #tableTickets{
-    background-color: lightgray;
-  }
   #background{
     width: 100%;
   }
@@ -19,8 +16,7 @@ thead{
     height: 30%;  }
   #tablePrice{
     background-color: lightgray;
-    width: 50%;
-    margin-left: auto;
+    width: 100%;
   }
   #left{
     background-color: darkgray;
@@ -30,7 +26,7 @@ thead{
     background-color: red;
     border-color: white;
     color: white;
-    width: 10%;
+    width: 80%;
     display: block;
     margin: auto;
   }
@@ -154,4 +150,17 @@ thead{
     text-decoration: underline;
     text-align: center;
     padding-top: 100px;
+}
+#paypal-button-container{
+    height: 25vw;
+    padding-top: 5%;
+}
+
+#priceTable{
+    width: 50%;
+    float: right;
+}
+#smart-button-container{
+    width: 50%;
+    float: left;
 }

@@ -8,6 +8,9 @@ class paymentpageController {
     public function login() {
         require __DIR__ . '/../views/paymentpage/login.php';
     }
+    public function payment() {
+        require __DIR__ . '/../views/paymentpage/payment.php';
+    }
     private $paymentService; 
     function __construct() {
         $this->paymentService = new PaymentService();
