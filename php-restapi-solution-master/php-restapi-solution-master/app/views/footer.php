@@ -1,11 +1,4 @@
-<?php
-require_once __DIR__ . '../../controllers/eventcontroller.php';
-$eventcontroller = new EventController();
-$events = $eventcontroller->getEvents();
-?>
-
-
-  <footer class="site-footer">
+<footer class="site-footer">
 
       <div class="container">
         <div class="row width:1720px">

@@ -1,12 +1,4 @@
 <?php 
-
-$detailPageController = new YummyController();
-
-// Call the getRestaurant method to retrieve the restaurant information
-$restaurants = $detailPageController->getAll();
-
-$foodTypes = $detailPageController->getFoodTypes();
-
 include __DIR__ . '/../navbar.php';
 ?>
 
