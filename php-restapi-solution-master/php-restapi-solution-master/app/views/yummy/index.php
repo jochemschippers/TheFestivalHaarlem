@@ -1,29 +1,6 @@
-<?php 
 
-$yummyController = new YummyController();
 
-// Call the getRestaurant method to retrieve the restaurant information
-$restaurants = $yummyController->getAll();
-
-$foodTypes = $yummyController->getFoodTypes();
-
-$restaurantFoodTypes = $yummyController->getRestaurantFoodTypes();
-
-include __DIR__ . '/../navbar.php';
-?>
-
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>The Festival</title>
-
-        <!-- ----- BOOTSTRAP EN CSS LINKS ----- -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-        <link href="../css/yummy/yummy.css" rel="stylesheet">
-
-        <!-- ----- EINDE HEAD ----- -->
-    </head>
+    
     <body>
         
         <div class="border-box" id="titleBorder"> <!-- <<<<<<< GEEF DIT EEN IMAGE VIA CSS -->
@@ -201,7 +178,3 @@ include __DIR__ . '/../navbar.php';
 
     </body>
 </html>
-
-<?php
-include __DIR__ . '/../footer.php';
-?>
