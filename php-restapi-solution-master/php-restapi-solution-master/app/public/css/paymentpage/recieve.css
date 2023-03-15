@@ -1,7 +1,3 @@
-
-thead{
-    background-color: gray;
-  }
   #background{
     width: 100%;
   }
@@ -171,7 +167,7 @@ thead{
     padding-bottom: 1%;
 }
 #qrText{
-    font-size: 20px;
+    font-size: 20px; 
     font-weight: bold;
 }
 #qrcodeimage{
@@ -179,8 +175,32 @@ thead{
 }
 #returnButton{
     background-color: 961B1B;
-    width: 20%;
     margin-top: 1%;
-    margin-bottom: 1%;
+    margin-bottom: 2%;
     border: none;
 }
+#eventCol{
+    width: 25%;
+}
+#dateCol{
+    width: 20%;
+}
+#timeCol{
+    width: 20%;
+}
+#amountCol{
+    width: 15%;
+}
+#priceCol{
+    width: 30%;
+}
+table {
+    border-collapse: collapse;
+    margin: 3%;
+  }
+
+  th, td {
+    border: 2px solid #961B1B;
+    padding: 10px;
+    text-align: left;
+  }
