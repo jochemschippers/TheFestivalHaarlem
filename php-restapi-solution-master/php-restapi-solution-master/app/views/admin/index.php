@@ -1,69 +1,95 @@
+<?php
+include __DIR__ . '/../navbar.php';
+
+// Handle form submissions
+if (isset($_POST['submit'])) {
+  switch ($_POST['submit']) {
+    case 'Create':
+      $title = $_POST['title'];
+      $description = $_POST['description'];
+      $image = $_POST['image'];
+
+      $controller->createLandmark($title, $description, $image);
+
+      break;
+    case 'Update':
+      $landmarkID = $_POST['landmarkID'];
+      $title = $_POST['title'];
+      $description = $_POST['description'];
+      $image = $_POST['image'];
+
+      $controller->updateLandmark($landmarkID, $title, $description, $image);
+
+      break;
+  }
+}
+
+// Display landmarks and form
+$controller->displayLandmarks();
+$controller->displayCreateForm();
+if (isset($_GET['action']) && $_GET['action'] == 'edit') {
+  $landmarkID = $_GET['landmarkID'];
+  $landmark = $controller->getLandmark($landmarkID);
+  if ($landmark) {
+    $controller->displayEditForm($landmarkID, $landmark->getTitle(), $landmark->getDescription(), $landmark->getImage());
+  }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
  
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href=
-    "https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css">
+    <link rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Admin Page</title>
-    
 </head>
  
-<body class='text-center'>
-    <main class="form-login">
-        <form method="POST" id="loginForm" onSubmit="return false;"> <!-- Returning false stops the page from reloading -->
-            <h1 class="h3 mb-3 fw-normal">Login hier</h1>
-            <div class="infoMessage"> </div>
-            <div class="form-floating">
-                <input type="email" class="form-control" placeholder="name@example.com" id="email" minlength="7" required>
-                <label for="floatingInput">Email address</label>
-            </div>
-            <div class="form-floating">
-                <input type="password" class="form-control" placeholder="Password" id="password" minlength="8" required>
-                <label for="floatingPassword">Wachtwoord</label>
-            </div>
-            <div class="checkbox mb-3">
-                <label>
-                    <input type="checkbox" value="remember_me" id="remember_me"> Onthoud mij
-                </label>
-            </div>
-            <button class="w-100 btn btn-lg btn-primary" type="submit" id="login">login</button>
-        </form>
-    </main>
+<body>
+    <h1>Landmarks</h1>
 
-    <script type="text/javascript">
-    document.addEventListener("DOMContentLoaded", function() {
-        document.querySelector("#loginForm").addEventListener('submit', function(e) {
-            e.preventDefault();
-            var remember_meBool = document.querySelector("#remember_me").checked;
-            fetch('user/LoginToAccount', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    email: document.querySelector("#email").value,
-                    password: document.querySelector("#password").value,
-                    remember_me: remember_meBool,
-                }),
-            })
-            .then(function(response) {
-                return response.json();
-            })
-            .then(function(data) {
-                document.querySelector(".infoMessage").style.display = "block";
-                if (data.status === 1) {
-                    document.querySelector("#loginForm").reset();
-                    document.location.href="/";
+    <div id="landmarks-table">
+      <?php $controller->displayLandmarks(); ?>
+    </div>
+
+    <h2>Add Landmark</h2>
+
+    <div id="landmark-form">
+        <?php $controller->displayCreateForm(); ?>
+    </div>
+
+    <h2>Edit Landmark</h2>
+
+    <div id="edit-landmark-form">
+        <?php
+            if (isset($_GET['action']) && $_GET['action'] == 'edit') {
+                $landmarkID = $_GET['landmarkID'];
+                $landmark = $controller->getLandmark($landmarkID);
+
+                if ($landmark) {
+                    $controller->displayEditForm($landmarkID);
+                    
+                } else {
+                    echo "Landmark not found";
                 }
-                document.querySelector(".infoMessage").innerHTML = '<p>' + data.message + '</p>';
-            })
-            .catch(function(error) {
-                console.error('There was a problem with the fetch operation:', error);
-            });
-        });
-    });
-</script>
+            }
+        ?>
+    </div>
+    <form action="historycontroller.php" method="post"></form>
+        <textarea name="historyeditor" id="historyeditor">
+            <p>This is some sample content.</p>
+        </textarea>
+        <p>
+            <input type="submit" name="submit_data" value="submit">
+        </p>
+    </form>
+    <script>
+        ClassicEditor
+        .create( document.querySelector( '#historyeditor' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+    </script>
 </body>
