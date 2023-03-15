@@ -2,8 +2,12 @@
 html, body {
   max-width: 100%;
   overflow-x: hidden;
+  z-index: -999;
+  position: relative;
 }
-
+.background-Image{
+  background-image: url("/image/yummy/home/YummyBanner.png");
+}
 #titleBorder {
     height: 500px;
     border: 2px solid #000;

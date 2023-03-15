@@ -104,3 +104,6 @@ button:active {
   display: unset;
   max-width: 100vw !important;
 }
+.background-Image{
+  background-image: url("/image/jazz/banner.png");
+}
