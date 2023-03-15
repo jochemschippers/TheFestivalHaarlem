@@ -4,7 +4,7 @@ require __DIR__ . '/../services/articleservice.php';
 
 class ArticleController extends Controller {
 
-    private $articleService; 
+    private $articleService;
 
     // initialize services
     function __construct() {
@@ -14,7 +14,7 @@ class ArticleController extends Controller {
     // router maps this to /article and /article/index automatically
     public function index() {
       
-        // retrieve data 
+        // retrieve data
         $articles = $this->articleService->getAll();
     
         // show view, param = accessible as $model in the view

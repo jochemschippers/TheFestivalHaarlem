@@ -8,7 +8,7 @@ class UserController extends Controller {
         $this->userService = new UserService();
     }
     public function index() {
-        require __DIR__ . '/../views/admin/index.php';
+        require __DIR__ . '/../views/admin/login.php';
     }
     public function loginToAccount(){
         $response = array(

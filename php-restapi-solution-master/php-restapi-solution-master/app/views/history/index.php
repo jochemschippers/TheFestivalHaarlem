@@ -1,42 +1,6 @@
 <?php
 include __DIR__ . '/../navbar.php';
-require_once __DIR__ . '/../../services/landmarkservice.php';
 
-$service = new LandmarkService();
-
-// Handle form submissions
-if (isset($_POST['submit'])) {
-  switch ($_POST['submit']) {
-    case 'Create':
-      $title = $_POST['title'];
-      $description = $_POST['description'];
-      $image = $_POST['image'];
-
-      $service->createLandmark($title, $description, $image);
-
-      break;
-    case 'Update':
-      $landmarkID = $_POST['landmarkID'];
-      $title = $_POST['title'];
-      $description = $_POST['description'];
-      $image = $_POST['image'];
-
-      $service->updateLandmark($landmarkID, $title, $description, $image);
-
-      break;
-  }
-}
-
-// Display landmarks and form
-$service->displayLandmarks();
-$service->displayCreateForm();
-if (isset($_GET['action']) && $_GET['action'] == 'edit') {
-  $landmarkID = $_GET['landmarkID'];
-  $landmark = $service->getLandmark($landmarkID);
-  if ($landmark) {
-    $service->displayEditForm($landmarkID, $landmark->getTitle(), $landmark->getDescription(), $landmark->getImage());
-  }
-}
 ?>
 
 <!DOCTYPE html>
@@ -92,49 +56,6 @@ if (isset($_GET['action']) && $_GET['action'] == 'edit') {
                 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
             </div>
           </div>
-        </div>
-        <div class="">
-        <h1>Landmarks</h1>
-
-         <div id="landmarks-table">
-          <?php $service->displayLandmarks(); ?>
-        </div>
-
-        <h2>Add Landmark</h2>
-
-        <div id="landmark-form">
-            <?php $service->displayCreateForm(); ?>
-        </div>
-
-        <h2>Edit Landmark</h2>
-
-        <div id="edit-landmark-form">
-        <?php
-          if (isset($_GET['action']) && $_GET['action'] == 'edit') {
-            $landmarkID = $_GET['landmarkID'];
-            $landmark = $service->getLandmark($landmarkID);
-            if ($landmark) {
-              $service->displayEditForm($landmarkID, $landmark->getTitle(), $landmark->getDescription(), $landmark->getImage());
-            } else {
-              echo "Landmark not found";
-            }
-          }
-        ?>
-        </div>
-        </div>
-        <form action="historycontroller.php" method="post"></form>
-        <textarea name="historyeditor" id="historyeditor">
-            <p>This is some sample content.</p>
-            </textarea>
-            <p>
-                <input type="submit" name="submit_data" value="submit">
-            </p>
-        </form>
-            <script>
-            ClassicEditor
-            .create( document.querySelector( '#historyeditor' ) )
-            .catch( error => {
-                console.error( error );
-            } );
+        </div>  
     </body>
 </html>

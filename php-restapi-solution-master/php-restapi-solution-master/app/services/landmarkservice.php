@@ -23,19 +23,19 @@ class LandmarkService {
         return $landmark;
     }
 
-    public function create($landmark) {
+    public function createLandmark($title, $description, $image) {
         // retrieve data
         $repository = new LandmarkRepository();
-        $repository->createLandmark($landmark->title, $landmark->description, $landmark->image);
+        $repository->createLandmark($title, $description, $image);
     }
 
-    public function update($landmark) {
+    public function updateLandmark($landmarkID, $title, $description, $image) {
         // retrieve data
         $repository = new LandmarkRepository();
-        $repository->updateLandmark($landmark->landmarkID, $landmark->title, $landmark->description, $landmark->image);
+        $repository->updateLandmark($landmarkID, $title, $description, $image);
     }
 
-    public function delete($landmarkID) {
+    public function deleteLandmark($landmarkID) {
         // retrieve data
         $repository = new LandmarkRepository();
         $repository->deleteLandmark($landmarkID);
@@ -96,18 +96,18 @@ class LandmarkService {
     }
 
     public function displayEditForm($landmarkID) {
-        $landmark = $this->get($landmarkID);
+        $landmark = $this->getLandmark($landmarkID);
         $html = "";
         $html .= "<form action='index.php?controller=landmark&action=update' method='post' enctype='multipart/form-data'>";
-        $html .= "<div class='form-group'>";
+        $html .= "<div class='mb-3'>";
         $html .= "<label for='title'>Title</label>";
         $html .= "<input type='text' class='form-control' id='title' name='title' value='" . $landmark->getTitle() . "'>";
         $html .= "</div>";
-        $html .= "<div class='form-group'>";
+        $html .= "<div class='mb-3'>";
         $html .= "<label for='description'>Description</label>";
         $html .= "<input type='text' id='description' name='description' value='" . $landmark->getDescription() . "'>";
         $html .= "</div>";
-        $html .= "<div class='form-group'>";
+        $html .= "<div class='mb-3'>";
         $html .= "<label for='image'>Image</label>";
         $html .= "<input type='text' id='image' name='image'>";
         $html .= "</div>";
