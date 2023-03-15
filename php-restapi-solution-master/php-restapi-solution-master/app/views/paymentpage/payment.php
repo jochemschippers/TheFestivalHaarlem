@@ -162,7 +162,7 @@ $tickets = array(
 </tr>
 <tr>
     <td colspan="2spa">
-        <a href="/paymentpage/login" class="btn btn-primary" id="continueButton">Continue</a>
+        <a href="/paymentpage/recieve" class="btn btn-primary" id="continueButton">Continue</a>
         
     </td>
 </tr>
