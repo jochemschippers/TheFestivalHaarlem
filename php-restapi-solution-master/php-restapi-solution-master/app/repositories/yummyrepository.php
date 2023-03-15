@@ -1,11 +1,12 @@
 <?php
 include_once __DIR__ . '/repository.php';
+require_once __DIR__ . '/../models/foodType.php';
 require_once __DIR__ . '/../models/yummyRestaurant.php';
 require_once __DIR__ . '/../models/restaurantImage.php';
 require_once __DIR__ . '/../models/restaurantMenuItem.php';
 require_once __DIR__ . '/../models/restaurantFoodType.php';
 
-class YummyDetailPageRepository extends Repository
+class YummyRepository extends Repository
 {
     function getAll() {
         try {
@@ -198,6 +199,32 @@ class YummyDetailPageRepository extends Repository
         }
     }
     function getFoodTypes() {
+        try {
+            $stmt = $this->connection->prepare("
+            SELECT * 
+            FROM `FoodTypes`
+            ");
+
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $stmt->execute();
+            $results = $stmt->fetchAll();
+    
+            $types = [];
+            foreach ($results as $row) {
+                $type = new FoodType(
+                    $row["foodTypeID"],
+                    $row['foodTypeName']
+                );
+                array_push($types, $type);
+            }
+            return $types;
+    
+        } catch (PDOException $e)
+        {
+            echo $e;
+        }
+    }
+    function getRestaurantFoodTypes() {
         try {
             $stmt = $this->connection->prepare("
             SELECT r.*, f.foodTypeName

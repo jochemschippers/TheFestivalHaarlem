@@ -50,7 +50,7 @@ html, body {
     margin-top: 10px;
     margin-right: 2rem;
     margin-bottom: 50px;
-    margin-left: 210px;
+    margin-left: 212px;
   }
   #restaurantInfo{
     margin-left: 50px;
@@ -73,6 +73,7 @@ html, body {
     background-size: cover;
     display: inline-block;
     width: 900px;
+    height: auto;
   }
   #restaurantMenu .h1{
     text-align: center;
