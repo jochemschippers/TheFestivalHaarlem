@@ -66,12 +66,12 @@
     justify-content: center;
   }
 
-  .option {
+  .option *{
     padding: 1rem;
     color: white;
   }
 
-  .option:hover {
+  .option:hover *{
     cursor: pointer;
     color: #FEB548;
   }

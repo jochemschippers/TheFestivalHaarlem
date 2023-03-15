@@ -7,8 +7,38 @@ $events = $eventcontroller->getEvents();
 <html lang="en">
 
 <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <link href="/css/navbar.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="/css/footer.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <link href="../css/template.css" rel="stylesheet">
+
+  <script src="https://kit.fontawesome.com/384ef59d1a.js" crossorigin="anonymous"></script>
+  <script>
+    const params = window.location.pathname.split("/");
+
+    function setStyle(foldername, styleName) {
+      var style = document.createElement('link');
+      style.setAttribute("rel", "stylesheet");
+      style.setAttribute("type", "text/css");
+      if (params[1] != "") {
+        style.setAttribute("href", "../css/" + foldername + "/" + styleName + ".css");
+      } else {
+        style.setAttribute("href", "../css/home.css");
+      }
+      document.head.appendChild(style);
+    }
+    setStyle(params[1], params[1]);
+    if (params[2] != "") {
+      setStyle(params[1], "detailPage")
+    }
+  </script>
+
+
+
 </head>
 
 <header class="header-container">
@@ -29,29 +59,10 @@ $events = $eventcontroller->getEvents();
 
     ?>
 
-    <script>
-      const params = window.location.pathname.split("/");
-      const navbar = document.getElementById("navbar");
-      const links = navbar.getElementsByTagName("span");
-      console.log(links);
-      console.log(params[1]);
-      if(params[1] === "" || params[1] === null){
-        links[0].classList.add("selected");
-      }
-      else{
-        for (let i = 0; i < links.length; i++) {
-        if (links[i].textContent === params[1]) {
-          links[i].classList.add("selected");
-        }
-      }
-      }
-     
-    </script>
   </nav>
   <div class="user-options">
     <div class="option"><i class="fa fa-user fa-2x"></i></div>
-    <div class="option"><i class="fa fa-shopping-cart fa-2x"></i></div>
+    <div class="option"><a href="/paymentpage"><i class="fa fa-shopping-cart fa-2x"></i></a></div>
+    <div class="option"><i class="fa fa-sharp fa-solid fa-screwdriver-wrench fa-2x"></i></div>
   </div>
 </header>
-
-</html>
