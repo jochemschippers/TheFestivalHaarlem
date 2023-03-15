@@ -1,7 +1,7 @@
 <?php
 require __DIR__ . '/controller.php';
 
-class HistoryController extends Controller {
+class StrollThroughHistoryController extends Controller {
     public function index() {
         require __DIR__ . '/../views/history/index.php';
     }
