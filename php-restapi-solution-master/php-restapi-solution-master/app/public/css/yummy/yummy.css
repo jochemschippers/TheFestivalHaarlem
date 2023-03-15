@@ -8,7 +8,7 @@ html, body {
     height: 500px;
     border: 2px solid #000;
     padding: 10px;
-    background-image: url('/image/yummy/home/yummy-home.jpg'); 
+    background-image: url('/image/yummy/home/yummyImage.jpg'); 
     background-color: darkgray; /* ------> KAN WEG ZODRA IMAGE IS TOEGEVOEGD <------ */
     background-size: cover;
     position: relative; /* Set position to relative for absolute positioning of container */
@@ -42,6 +42,8 @@ html, body {
   #restaurantBorder {
     background-color: #D9E1BA;
     padding: 10px;
+    display: inline-block;
+    height: auto;
   }
   #otherEventInformation {
     padding-top: 50px;
@@ -50,6 +52,10 @@ html, body {
     background-color: #961B1B; 
     height: 50px;
   }
+  .filtered-items{
+    display: none; /* Hidden by default */
+  }
+
   #cardLogo{
     height: 120px;
   }
@@ -58,5 +64,21 @@ html, body {
   }
   #cardBody #btn{
     align-self: flex-end;
+  }
+  
+
+  /* DIT MOET ZO WEG */
+
+  .container {
+    overflow: hidden;
+  }
+  
+  .filterDiv {
+    display: none; /* Hidden by default */
+  }
+  
+  /* The "show" class is added to the filtered elements */
+  .show {
+    display: block;
   }
   
