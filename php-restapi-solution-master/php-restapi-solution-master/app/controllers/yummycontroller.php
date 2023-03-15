@@ -9,6 +9,7 @@ class YummyController extends Controller
 
     // initialize services
     function __construct() {
+        parent::__construct();
         $this->yummyService = new YummyService();
     }
 
@@ -18,7 +19,6 @@ class YummyController extends Controller
             "restaurants" => $this->yummyService->getAll(),
             "foodTypes" =>  $this->yummyService->getFoodTypes(),
             "restaurantFoodTypes" => $this->yummyService->getRestaurantFoodTypes(),
-
         ];
 
         $this->displayView($models);
