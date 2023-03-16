@@ -220,7 +220,7 @@ include __DIR__ . '/../navbar.php';
             </div>
             <div class="row">
                 <div class="col-md-8" id="reservation">
-                    <a href="/reservation/index" class="btn btn-primary">Make a reservation</a>    <!-- RESERVATION BUTTON -->
+                    <a href="/reservation/index" class="btn btn-primary btn-lg">Make a reservation</a>    <!-- RESERVATION BUTTON -->
                     <p>Any special requests? <br>
                     Please put that in your reservation.</p>
                 </div>
