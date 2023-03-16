@@ -4,16 +4,19 @@
 $restaurantId = $_GET['restaurantId'];
 
 // Create a new instance of the DetailPageService class
-$detailPageController = new YummyController();
+$yummyController = new YummyController();
 
 // Call the getRestaurant method to retrieve the restaurant information
-$restaurant = $detailPageController->getOne($restaurantId);
+$restaurant = $yummyController->getOne($restaurantId);
 
 // Call the getMenu method to retrieve the menu items for the restaurant
-$menuItems = $detailPageController->getMenuItems($restaurantId);
+$menuItems = $yummyController->getMenuItems($restaurantId);
 
 // Call the getImage methode to retrieve the menu items for the page.
-$images = $detailPageController->getImages($restaurantId);
+$images = $yummyController->getImages($restaurantId);
+
+
+$restaurantFoodTypes = $yummyController->getRestaurantFoodTypes();
 
 // Use the retrieved data to display the restaurant and menu information on the page
 ?>
@@ -67,10 +70,18 @@ include __DIR__ . '/../navbar.php';
                     <div class="border-box" id="restaurantInfo">
                         <div class="row">
                             <div class="col-md-3">
-                                <p>Restaurant type:</p>
+                            <p>Restaurant type: </p>                                
                             </div>
                             <div class="col-md-5">
-                                <p></p>
+                            <?php
+                                $foodTypesOutput = '';
+                                foreach ($restaurantFoodTypes as $foodType) {
+                                    if ($foodType->getRestaurantID() == $restaurantId) {
+                                        $foodTypesOutput .= $foodType->getFoodTypeName() . ", ";
+                                    }
+                                }
+                                echo rtrim($foodTypesOutput, ", ");
+                                ?>
                             </div>
                         </div>
                         <div class="row">
@@ -209,7 +220,7 @@ include __DIR__ . '/../navbar.php';
             </div>
             <div class="row">
                 <div class="col-md-8" id="reservation">
-                    <a href="#" class="btn btn-primary">Make a reservation</a>    <!-- RESERVATION BUTTON -->
+                    <a href="/reservation/index" class="btn btn-primary btn-lg">Make a reservation</a>    <!-- RESERVATION BUTTON -->
                     <p>Any special requests? <br>
                     Please put that in your reservation.</p>
                 </div>

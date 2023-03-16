@@ -71,5 +71,94 @@ class UserRepository extends Repository
             throw new ErrorException($e->getMessage());
         }
     }
+
+    function logout()
+    {
+        try {
+            if (isset($_SESSION['user'])) {
+                unset($_SESSION['user']);
+            }
+            if (isset($_COOKIE['user'])) {
+                unset($_COOKIE['user']);
+            }
+            return true;
+        } catch (Exception $e) {
+            throw new ErrorException($e->getMessage());
+        }
+    }
+
+    function getUser()
+    {
+        try {
+            if (isset($_SESSION['user'])) {
+                return $_SESSION['user'];
+            }
+            if (isset($_COOKIE['user'])) {
+                return $_COOKIE['user'];
+            }
+            return false;
+        } catch (Exception $e) {
+            throw new ErrorException($e->getMessage());
+        }
+    }
+
+    function getUserById($id)
+    {
+        try {
+            $stmt = $this->connection->prepare("SELECT * FROM `Users` WHERE ID = ?");
+            $stmt->execute([$id]);
+            $user = $stmt->fetch();
+            return $user;
+        } catch (Exception $e) {
+            throw new ErrorException($e->getMessage());
+        }
+    }
+
+    function getAllUsers()
+    {
+        try {
+            $stmt = $this->connection->prepare("SELECT * FROM `Users`");
+            $stmt->execute();
+            $users = $stmt->fetchAll();
+            return $users;
+        } catch (Exception $e) {
+            throw new ErrorException($e->getMessage());
+        }
+    }
+
+    function updateUser($id, $firstname, $lastname, $email, $password, $postalcode, $housenumber)
+    {
+        try {
+            $stmt = $this->connection->prepare("UPDATE `Users` SET `firstname`=?,`lastname`=?,`email`=?,`password`=?,`postalcode`=?,`housenumber`=? WHERE ID = ?");
+            $stmt->execute([$firstname, $lastname, $email, $password, $postalcode, $housenumber, $id]);
+            return true;
+        } catch (Exception $e) {
+            throw new ErrorException($e->getMessage());
+        }
+    }
+
+    function deleteUser($id)
+    {
+        try {
+            $stmt = $this->connection->prepare("DELETE FROM `Users` WHERE ID = ?");
+            $stmt->execute([$id]);
+            return true;
+        } catch (Exception $e) {
+            throw new ErrorException($e->getMessage());
+        }
+    }
+
+    function getOrdersByUserId($id)
+    {
+        try {
+            $stmt = $this->connection->prepare("SELECT * FROM `Orders` WHERE user_id = ?");
+            $stmt->execute([$id]);
+            $orders = $stmt->fetchAll();
+            return $orders;
+        } catch (Exception $e) {
+            throw new ErrorException($e->getMessage());
+        }
+    }
+
 }
 ?>

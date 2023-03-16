@@ -1,48 +1,65 @@
 <?php
 require __DIR__ . '/controller.php';
-include_once __DIR__ . '/../services/yummyDetailPageservice.php';
+include_once __DIR__ . '/../services/yummyservice.php';
 
-class YummyController extends Controller {
+class YummyController extends Controller
+{
 
-    private $yummyDetailPageService;
+    private $yummyService;
 
     // initialize services
     function __construct() {
-        $this->yummyDetailPageService = new YummyDetailPageService();
+        parent::__construct();
+        $this->yummyService = new YummyService();
     }
 
-    public function index() {
-        require __DIR__ . '/../views/yummy/index.php';
+    public function index()
+    {
+        $models = [
+            "restaurants" => $this->yummyService->getAll(),
+            "foodTypes" =>  $this->yummyService->getFoodTypes(),
+            "restaurantFoodTypes" => $this->yummyService->getRestaurantFoodTypes(),
+        ];
+
+        $this->displayView($models);
     }    
     public function restaurant() {
-        $model = $this->yummyDetailPageService->getAll();
+        // $model = $this->yummyDetailPageService->getAll();
         require __DIR__ . '/../views/yummy/detailPage.php';
     }
-    public function getAll() {
+    public function getAll()
+    {
         // retrieve data
-        return $this->yummyDetailPageService->getAll();
+        return $this->yummyService->getAll();
     }
 
-    public function getOne($restaurantId) {
+    public function getOne($restaurantId)
+    {
         // retrieve data
-        return $this->yummyDetailPageService->getOne($restaurantId);
+        return $this->yummyService->getOne($restaurantId);
     }
 
     public function getMenuItems($restaurantId){
        // retrieve data
-       return $this->yummyDetailPageService->getMenuItems($restaurantId);
+       return $this->yummyService->getMenuItems($restaurantId);
     }
-    public function getAllImages(){
+    public function getAllImages()
+    {
         // retrieve data
-        return $this->yummyDetailPageService->getAllImages();
+        return $this->yummyService->getAllImages();
     }
-    public function getImages($restaurantId){
+    public function getImages($restaurantId)
+    {
         // retrieve data
-        return $this->yummyDetailPageService->getImages($restaurantId);
+        return $this->yummyService->getImages($restaurantId);
     }
-    public function getFoodTypes(){
+    public function getFoodTypes()
+    {
         // retrieve data
-        return $this->yummyDetailPageService->getFoodTypes();
+        return $this->yummyService->getFoodTypes();
+    }
+    public function getRestaurantFoodTypes(){
+        // retrieve data
+        return $this->yummyService->getRestaurantFoodTypes();
     }
 }
-?>

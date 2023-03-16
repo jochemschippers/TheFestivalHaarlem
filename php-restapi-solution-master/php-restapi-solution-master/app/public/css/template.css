@@ -26,9 +26,9 @@
 }
 
 #titleContainer h1 {
-  font-size: 73px;
+  font-size: 73px !important;
   color: white;
-  margin-left: 60px;
+  margin-left: 60px !important;
 }
 
 #titleText h2 {
@@ -70,7 +70,7 @@ h3 {
 }
 
 .background-Image{
-  background-image: url("/image/jazz/banner.png");
+  /* background-image: url("/image/jazz/banner.png"); */
   background-repeat: no-repeat;
   position:sticky;
   z-index: -1;

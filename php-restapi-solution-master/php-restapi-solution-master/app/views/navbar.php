@@ -1,8 +1,3 @@
-<?php
-require_once __DIR__ . '../../controllers/eventcontroller.php';
-$eventcontroller = new EventController();
-$events = $eventcontroller->getEvents();
-?>
 
 <html lang="en">
 
