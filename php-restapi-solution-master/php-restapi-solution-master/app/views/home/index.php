@@ -32,17 +32,18 @@ $events = $eventcontroller->getEvents();
         foreach ($events as $event) {
 
             $alignment = ($event->getEventID() % 2 == 0) ? 'text-start' : 'text-end';
+            $position = ($event->getEventID() % 2 == 0) ? 'margin-left: 0px;' : 'margin-right: 0px;';
             $background_image = $event->getBannerImage();
             $title = $event->getEventTitle();
             $description = $event->getBannerDescription();
             $button_link = "/" . $event->getEventName();
         ?>
 
-        <div class="card <?php echo $alignment ?>" style="background-image: url('<?php echo $background_image ?>');">
-            <div class="container">
-                <h2><?php echo $title ?></h2>
+        <div class="card <?php echo $alignment ?>" style="background-image: url('<?php echo $background_image ?>'">
+            <div class="container" style="<?php echo $position ?>">
+                <h2><ins><?php echo $title ?></ins></h2>
                 <p><?php echo $description ?></p>
-                <a class="btn btn-primary" href="<?php echo $button_link ?>" role="button">Link</a>
+                <a class="btn btn-primary" href="<?php echo $button_link ?>" role="button">Learn More</a>
             </div>
         </div>
 
