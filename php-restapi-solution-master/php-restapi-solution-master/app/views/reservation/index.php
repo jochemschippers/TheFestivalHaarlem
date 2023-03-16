@@ -112,9 +112,6 @@
                                 </div>
                             </div>
 
-                            <!-- <input class="form-control" type="text" placeholder="Default input"
-                        aria-label="default input example"> -->
-
                             <h4>Number of children (-12)</h4>
 
                             <div class="input-group">
@@ -126,10 +123,6 @@
                                     <button class="btn btn-outline-secondary Cplus-btn" type="button">+</button>
                                 </div>
                             </div>
-
-
-                            <!-- <input class="form-control" type="text" placeholder="Default input"
-                        aria-label="default input example"> -->
                         </div>
                     </div>
                     <div class="row">
@@ -143,7 +136,6 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <!-- <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label> -->
                                 <textarea class="form-control" id="textArea" rows="3"></textarea>
                             </div>
                         </div>
