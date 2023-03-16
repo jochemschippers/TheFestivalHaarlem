@@ -21,11 +21,22 @@ class YummyController extends Controller
             "restaurantFoodTypes" => $this->yummyService->getRestaurantFoodTypes(),
         ];
 
+        
+
         $this->displayView($models);
-    }    
+    }
     public function restaurant() {
-        // $model = $this->yummyDetailPageService->getAll();
-        require __DIR__ . '/../views/yummy/detailPage.php';
+        
+        $restaurantId = $_GET['restaurantId'];
+        $models = [
+            "restaurantId"=> $restaurantId,
+            "restaurant" => $this->yummyService->getOne($restaurantId),
+            "menuItems" =>  $this->yummyService->getMenuItems($restaurantId),
+            "images" => $this->yummyService->getImages($restaurantId),
+            "restaurantFoodTypes" => $this->yummyService->getRestaurantFoodTypes(),
+        ];
+
+       $this->displayView($models);
     }
     public function getAll()
     {
