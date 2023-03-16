@@ -11,6 +11,9 @@ class paymentpageController {
     public function payment() {
         require __DIR__ . '/../views/paymentpage/payment.php';
     }
+    public function recieve() {
+        require __DIR__ . '/../views/paymentpage/recieve.php';
+    }
     private $paymentService; 
     function __construct() {
         $this->paymentService = new PaymentService();

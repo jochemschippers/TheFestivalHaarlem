@@ -1,10 +1,4 @@
-<?php
-require_once __DIR__ . '/../../controllers/jazzinformationcontroller.php';
 
-include __DIR__ . '/../navbar.php';
-$jazzcontroller = new JazzInformationController();
-$artists = $jazzcontroller->getAllArtists();
-?>
 
 <body>
   <div class="layered">
@@ -62,31 +56,6 @@ $artists = $jazzcontroller->getAllArtists();
             </div>';
         };
         ?>
-        <!-- <div class="carousel-item active">
-          <img src="/image/jazz/candyAndHansDulfer.png">
-          <div class="container carouselContainer">
-            <h3><?php echo $artists[0]->getName() ?></h3>
-            <p> Hans and Candy Dulfer are as a father-daughter duo both inseparable from their saxophones. Hans is a renowned saxophonist, known for his soulful and energetic performances, while Candy is a skilled saxophonist and flautist in her own right. Together, they have had multiple successful albums and have performed at some of the most prestigious jazz festivals around the world. <hr><span class="textSmall">Plays the 27th of July!</span></p>
-          <button> Learn More About artist</button>
-          </div>
-        </div>
-        <div class="carousel-item ">
-          <img src="/image/jazz/candyAndHansDulfer.png">
-          <div class="container carouselContainer">
-            <h3>wwwwwr</h3>
-            <p> Hans and Candy Dulfer are as a father-daughter duo both inseparable from their saxophones. Hans is a renowned saxophonist, known for his soulful and energetic performances, while Candy is a skilled saxophonist and flautist in her own right. Together, they have had multiple successful albums and have performed at some of the most prestigious jazz festivals around the world. <hr><span class="textSmall">Plays the 27th of July!</span></p>
-          <button> Learn More About artist</button>
-          </div>
-        </div>
-        <div class="carousel-item ">
-          <img src="/image/jazz/candyAndHansDulfer.png">
-          <div class="container carouselContainer">
-            <h3>rrrr and Hans rrrr</h3>
-            <p> Hans and Candy Dulfer are as a father-daughter duo both inseparable from their saxophones. Hans is a renowned saxophonist, known for his soulful and energetic performances, while Candy is a skilled saxophonist and flautist in her own right. Together, they have had multiple successful albums and have performed at some of the most prestigious jazz festivals around the world. <hr><span class="textSmall">Plays the 27th of July!</span></p>
-          <button> Learn More About artist</button>
-          </div>
-        </div> -->
-
       </div>
       <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -105,6 +74,3 @@ $artists = $jazzcontroller->getAllArtists();
   </div>
 
 
-  <?php
-  include __DIR__ . '/../footer.php';
-  ?>

@@ -1,8 +1,4 @@
-<?php
-include __DIR__ . '/../navbar.php';
-$eventcontroller = new EventController();
-$events = $eventcontroller->getEvents();
-?>
+
 
 <body>
     <div class="border-box">
@@ -52,7 +48,3 @@ $events = $eventcontroller->getEvents();
     ?>
 
 </body>
-
-<?php
-include __DIR__ . '/../footer.php';
-?>

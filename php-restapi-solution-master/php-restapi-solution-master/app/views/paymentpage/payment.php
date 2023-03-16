@@ -49,8 +49,8 @@ $tickets = array(
             <div class="col-12">
             <ul id="progressbar" class="text-center">
                 <li class="active step0"></li>
-                <li class="step0"></li>
-                <li class="step0"></li>
+                <li class="active step0"></li>
+                <li class="active step0"></li>
                 <li class="step0"></li>
             </ul>
             </div>
@@ -162,7 +162,7 @@ $tickets = array(
 </tr>
 <tr>
     <td colspan="2spa">
-        <a href="/paymentpage/login" class="btn btn-primary" id="continueButton">Continue</a>
+        <a href="/paymentpage/recieve" class="btn btn-primary" id="continueButton">Continue</a>
         
     </td>
 </tr>
