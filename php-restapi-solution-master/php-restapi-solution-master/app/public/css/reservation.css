@@ -20,6 +20,7 @@ body {
     padding: 50px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    width: 1300px;
 }
 
 #overlay {
@@ -28,7 +29,7 @@ body {
 }
 
 #textArea {
-    height: 265px;
+    height: 283px;
 }
 
 #overview {

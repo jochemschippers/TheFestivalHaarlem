@@ -31,30 +31,30 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                    <!-- <div class="btn-group" role="group" aria-label="Basic radio toggle button group"> -->
                         <div class="col-md-3">
                             <h4><ins>Thursday 26 July</ins></h4>
                             <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off"
                                 checked>
-                            <label class="btn btn-outline-primary" for="btnradio1">Radio 1</label><br>
+                            <label class="btn btn-outline-primary w-100" for="btnradio1">Radio 1</label><br>
 
                             <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
-                            <label class="btn btn-outline-primary" for="btnradio2">Radio 2</label><br>
+                            <label class="btn btn-outline-primary w-100" for="btnradio2">Radio 2</label><br>
 
                             <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
-                            <label class="btn btn-outline-primary" for="btnradio3">Radio 3</label>
+                            <label class="btn btn-outline-primary w-100" for="btnradio3">Radio 3</label>
                         </div>
                         <div class="col-md-3">
                             <h4><ins>Friday 27 July</ins></h4>
                             <input type="radio" class="btn-check" name="btnradio" id="btnradio4" autocomplete="off"
                                 checked>
-                            <label class="btn btn-outline-primary" for="btnradio4">Radio 4</label><br>
+                            <label class="btn btn-outline-primary w-100" for="btnradio4">Radio 4</label><br>
 
                             <input type="radio" class="btn-check" name="btnradio" id="btnradio5" autocomplete="off">
-                            <label class="btn btn-outline-primary" for="btnradio5">Radio 5</label><br>
+                            <label class="btn btn-outline-primary w-100" for="btnradio5">Radio 5</label><br>
 
                             <input type="radio" class="btn-check" name="btnradio" id="btnradio6" autocomplete="off">
-                            <label class="btn btn-outline-primary" for="btnradio6">Radio 6</label>
+                            <label class="btn btn-outline-primary w-100" for="btnradio6">Radio 6</label>
                         </div>
                         <div class="col-md-4">
                             <h4>Name on reservation</h4>
@@ -79,25 +79,25 @@
                             <h4><ins>Saturday 28 July</ins></h4>
                             <input type="radio" class="btn-check" name="btnradio" id="btnradio7" autocomplete="off"
                                 checked>
-                            <label class="btn btn-outline-primary" for="btnradio7">Radio 7</label><br>
+                            <label class="btn btn-outline-primary w-100" for="btnradio7">Radio 7</label><br>
 
                             <input type="radio" class="btn-check" name="btnradio" id="btnradio8" autocomplete="off">
-                            <label class="btn btn-outline-primary" for="btnradio8">Radio 8</label><br>
+                            <label class="btn btn-outline-primary w-100" for="btnradio8">Radio 8</label><br>
 
                             <input type="radio" class="btn-check" name="btnradio" id="btnradio9" autocomplete="off">
-                            <label class="btn btn-outline-primary" for="btnradio9">Radio 9</label>
+                            <label class="btn btn-outline-primary w-100" for="btnradio9">Radio 9</label>
                         </div>
-                        <div class="col-3">
+                        <div class="col-md-3">
                             <h4><ins>Sunday 29 July</ins></h4>
                             <input type="radio" class="btn-check" name="btnradio" id="btnradio10" autocomplete="off"
                                 checked>
-                            <label class="btn btn-outline-primary" for="btnradio10">Radio 10</label><br>
+                            <label class="btn btn-outline-primary w-100" for="btnradio10">Radio 10</label><br>
 
                             <input type="radio" class="btn-check" name="btnradio" id="btnradio11" autocomplete="off">
-                            <label class="btn btn-outline-primary" for="btnradio11">Radio 11</label><br>
+                            <label class="btn btn-outline-primary w-100" for="btnradio11">Radio 11</label><br>
 
                             <input type="radio" class="btn-check" name="btnradio" id="btnradio12" autocomplete="off">
-                            <label class="btn btn-outline-primary" for="btnradio12">Radio 12</label>
+                            <label class="btn btn-outline-primary w-100" for="btnradio12">Radio 12</label>
                         </div>
                         <div class="col-6">
                             <h4>Number of adults</h4>
