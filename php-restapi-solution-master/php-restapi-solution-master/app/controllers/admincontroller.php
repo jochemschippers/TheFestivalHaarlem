@@ -31,17 +31,17 @@ class AdminController extends Controller {
 
     public function createLandmark() {
         $this->LandmarkService->createLandmark($_POST['title'], $_POST['description'], $_POST['image']);
-        header('Location: index.php?controller=admin&action=create');
+        header('Location: index.php?controller=admin&action=createLandmark');
     }
 
     public function updateLandmark() {
         $this->LandmarkService->updateLandmark($_POST['landmarkID'], $_POST['title'], $_POST['description'], $_POST['image']);
-        header('Location: index.php?controller=admin&action=edit');
+        header('Location: index.php?controller=admin&action=editLandmark');
     }
 
     public function deleteLandmark() {
         $this->LandmarkService->deleteLandmark($_POST['landmarkID']);
-        header('Location: index.php?controller=admin&action=delete');
+        header('Location: index.php?controller=admin&action=deleteLandmark');
     }
 
 }
