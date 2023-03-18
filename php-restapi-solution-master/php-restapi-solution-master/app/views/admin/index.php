@@ -2,17 +2,6 @@
 include __DIR__ . '/../navbar.php';
 
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
- 
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Admin Page</title>
-</head>
  
 <body>
     <h1>Landmarks</h1>
@@ -22,9 +11,9 @@ include __DIR__ . '/../navbar.php';
 
         foreach ($models as $landmark)
         {
-            echo "<h2>" . $landmark->getTitle() . "</h2>";
-            echo "<p>" . $landmark->getDescription() . "</p>";
-            echo "<p>" . $landmark->getImage() . "</p>";
+            echo "<h2>$landmark->title</h2>";
+            echo "<p>$landmark->description</p>";
+            echo "<p>$landmark->image</p>";
             // echo "<img src='images/" . $landmark->getImage() . "' alt='Landmark image'>";
         }
         ?>
@@ -55,7 +44,7 @@ include __DIR__ . '/../navbar.php';
     <div id="edit-landmark-form">
         <?php
             // edit landmark form
-            
+
             
 
         ?>
