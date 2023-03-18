@@ -32,7 +32,7 @@ class LandmarkRepository extends Repository
     function createLandmark($title, $description, $image)
     {
         try {
-          $stmt = $this->connection->prepare("INSERT INTO LandMarks (title, description, image) VALUES (?,?,?)");
+          $stmt = $this->connection->prepare("INSERT INTO LandMarks ('title', 'description', 'image') VALUES (?,?,?)");
           $stmt->execute([$title, $description, $image]);
         } catch (PDOException $e) {
           echo $e;
@@ -43,7 +43,7 @@ class LandmarkRepository extends Repository
     function updateLandmark($landmarkID, $title, $description, $image) 
     {
         try {
-          $stmt = $this->connection->prepare("UPDATE LandMarks SET title = ?, description = ?, image = ? WHERE landMarkID = ?");
+          $stmt = $this->connection->prepare("UPDATE LandMarks SET 'title' = ?, 'description' = ?, 'image' = ? WHERE landMarkID = ?");
           $stmt->execute([$title, $description, $image, $landmarkID]);
         } catch (PDOException $e) {
           echo $e;

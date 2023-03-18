@@ -4,30 +4,43 @@ require_once __DIR__ . '/../services/landmarkservice.php';
 
 class AdminController extends Controller {
 
-    private $landmarkService;
+    private $LandmarkService;
 
     // initialize services
     function __construct() {
         parent::__construct();
-        $this->landmarkService = new LandmarkService();
+        $this->LandmarkService = new LandmarkService();
     }
 
     public function index() {
+        $models = [
+            'landmarks' => $this->LandmarkService->getAllLandmarks()
+        ];
 
-        // retrieve data
-        $landmarks = $this->landmarkService->getAllLandmarks();
         //$landmark = $this->landmarkService->getLandmark($_GET['landmarkID']);
+        $this->displayView($models);
+    }
 
-
-        require __DIR__ . '/../views/admin/index.php';
+    public function getAllLandmarks() {
+        return $this->LandmarkService->getAllLandmarks();
     }
 
     public function getLandmark(int $landmarkID){
-        return $this->landmarkService->getLandmark($landmarkID);
+        return $this->LandmarkService->getLandmark($landmarkID);
     }
 
     public function createLandmark() {
-        $this->landmarkService->createLandmark($_POST['title'], $_POST['description'], $_POST['image']);
+        $this->LandmarkService->createLandmark($_POST['title'], $_POST['description'], $_POST['image']);
+        header('Location: index.php?controller=admin&action=index');
+    }
+
+    public function updateLandmark() {
+        $this->LandmarkService->updateLandmark($_POST['landmarkID'], $_POST['title'], $_POST['description'], $_POST['image']);
+        header('Location: index.php?controller=admin&action=index');
+    }
+
+    public function deleteLandmark() {
+        $this->LandmarkService->deleteLandmark($_POST['landmarkID']);
         header('Location: index.php?controller=admin&action=index');
     }
 
