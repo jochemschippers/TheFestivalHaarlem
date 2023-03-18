@@ -23,7 +23,7 @@ include __DIR__ . '/../navbar.php';
     <h2>Add Landmark</h2>
 
     <div id="landmark-form">
-        <form action="index.php?controller=admin&action=create" method="post" enctype="multipart/form-data">
+        <form action="index.php?controller=admin&action=createLandmark" method="post" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="title">Title</label>
                 <input type="text" class="form-control" id="title" name="title">
@@ -42,7 +42,7 @@ include __DIR__ . '/../navbar.php';
     <h2>Edit Landmark</h2>
 
     <div id="edit-landmark-form">
-        <form action="index.php?controller=admin&action=edit" method="post" enctype="multipart/form-data">
+        <form action="index.php?controller=admin&action=editLandmark" method="post" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="landmarkID">Landmark ID</label>
                 <input type="text" class="form-control" id="landmarkID" name="landmarkID">
@@ -60,9 +60,19 @@ include __DIR__ . '/../navbar.php';
                 <input type="text" id="image" name="image">
             </div>
             <button type="submit" class="btn btn-primary">Edit</button>    
+        </form>
+    </div>
+    
+    <h2>Delete Landmark</h2>
 
-        <?php 
-        ?>
+    <div id="delete-landmark-form">
+        <form action="index.php?controller=admin&action=deleteLandmark" method="post" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="landmarkID">Landmark ID</label>
+                <input type="text" class="form-control" id="landmarkID" name="landmarkID">
+            </div>
+            <button type="submit" class="btn btn-primary">Delete</button>    
+        </form>
     </div>
     <!-- <form action="historycontroller.php" method="post"></form>
         <textarea name="historyeditor" id="historyeditor">
