@@ -23,7 +23,7 @@ include __DIR__ . '/../navbar.php';
     <h2>Add Landmark</h2>
 
     <div id="landmark-form">
-        <form action="index.php?controller=landmark&action=create" method="post" enctype="multipart/form-data">
+        <form action="index.php?controller=admin&action=create" method="post" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="title">Title</label>
                 <input type="text" class="form-control" id="title" name="title">
@@ -42,14 +42,29 @@ include __DIR__ . '/../navbar.php';
     <h2>Edit Landmark</h2>
 
     <div id="edit-landmark-form">
-        <?php
-            // edit landmark form
+        <form action="index.php?controller=admin&action=edit" method="post" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="landmarkID">Landmark ID</label>
+                <input type="text" class="form-control" id="landmarkID" name="landmarkID">
+            </div>
+            <div class="mb-3">
+                <label for="title">Title</label>
+                <input type="text" class="form-control" id="title" name="title">
+            </div>
+            <div class="mb-3">
+                <label for="description">Description</label>
+                <input type="text" id="description" name="description">
+            </div>
+            <div class="mb-3">
+                <label for="image">Image</label>
+                <input type="text" id="image" name="image">
+            </div>
+            <button type="submit" class="btn btn-primary">Edit</button>    
 
-            
-
+        <?php 
         ?>
     </div>
-    <form action="historycontroller.php" method="post"></form>
+    <!-- <form action="historycontroller.php" method="post"></form>
         <textarea name="historyeditor" id="historyeditor">
             <p>This is some sample content.</p>
         </textarea>
@@ -63,5 +78,5 @@ include __DIR__ . '/../navbar.php';
         .catch( error => {
             console.error( error );
         } );
-    </script>
+    </script> -->
 </body>
