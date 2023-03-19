@@ -4,17 +4,23 @@ require_once __DIR__ . '/../services/landmarkservice.php';
 
 class AdminController extends Controller {
 
-    private $LandmarkService;
+    private $landmarkService;
 
     // initialize services
     function __construct() {
         parent::__construct();
-        $this->LandmarkService = new LandmarkService();
+        $this->landmarkService = new LandmarkService();
     }
 
     public function index() {
+
+        $landmarkID = $_GET['landmarkID'];
+
         $models = [
-            'landmarks' => $this->LandmarkService->getAllLandmarks()
+            "landmarkID" => $landmarkID,
+            "landmarks" => $this->landmarkService->getAllLandmarks(),
+            "landmark" => $this->landmarkService->getLandmark($_GET['landmarkID']),
+            
         ];
 
         //$landmark = $this->landmarkService->getLandmark($_GET['landmarkID']);
@@ -22,25 +28,25 @@ class AdminController extends Controller {
     }
 
     public function getAllLandmarks() {
-        return $this->LandmarkService->getAllLandmarks();
+        return $this->landmarkService->getAllLandmarks();
     }
 
-    public function getLandmark(int $landmarkID){
-        return $this->LandmarkService->getLandmark($landmarkID);
+    public function getLandmark($landmarkID){
+        return $this->landmarkService->getLandmark($landmarkID);
     }
 
     public function createLandmark() {
-        $this->LandmarkService->createLandmark($_POST['title'], $_POST['description'], $_POST['image']);
+        $this->landmarkService->createLandmark($_POST['title'], $_POST['description'], $_POST['image']);
         header('Location: index.php?controller=admin&action=createLandmark');
     }
 
     public function updateLandmark() {
-        $this->LandmarkService->updateLandmark($_POST['landmarkID'], $_POST['title'], $_POST['description'], $_POST['image']);
+        $this->landmarkService->updateLandmark($_POST['landmarkID'], $_POST['title'], $_POST['description'], $_POST['image']);
         header('Location: index.php?controller=admin&action=editLandmark');
     }
 
     public function deleteLandmark() {
-        $this->LandmarkService->deleteLandmark($_POST['landmarkID']);
+        $this->landmarkService->deleteLandmark($_POST['landmarkID']);
         header('Location: index.php?controller=admin&action=deleteLandmark');
     }
 

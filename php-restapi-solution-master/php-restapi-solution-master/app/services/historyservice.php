@@ -25,11 +25,11 @@ class HistoryService
     }
 
     public function update($history) {
-        return $this->repository->update($history);
+        $this->repository->update($history);
     }
 
     public function delete($historyID) {
-        return $this->repository->delete($historyID);
+        $this->repository->delete($historyID);
     }
 }
 ?>

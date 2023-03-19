@@ -8,14 +8,29 @@ include __DIR__ . '/../navbar.php';
 
     <div id="landmarks-table">
         <?php
-
-        foreach ($models as $landmark)
-        {
-            echo "<h2>$landmark->title</h2>";
-            echo "<p>$landmark->description</p>";
-            echo "<p>$landmark->image</p>";
-            // echo "<img src='images/" . $landmark->getImage() . "' alt='Landmark image'>";
+        if (!is_null($landmarks) && count($landmarks) > 0) {
+            echo '<table>';
+            echo '<tr><th>ID</th><th>Title</th><th>Description</th><th>Image</th><th>Actions</th></tr>';
+            foreach ($landmarks as $landmark) {
+                echo '<tr>';
+                echo '<td>' . $landmark->getLandmarkID() . '</td>';
+                echo '<td>' . $landmark->getTitle() . '</td>';
+                echo '<td>' . $landmark->getDescription() . '</td>';
+                echo '<td>' . $landmark->getImage() . '</td>';
+                echo '<td><a href="index.php?action=edit&id=' . $landmark->getLandmarkID() . '">Edit</a> | <a href="index.php?action=delete&id=' . $landmark->getLandmarkID() . '">Delete</a></td>';
+                echo '</tr>';
+            }
+            echo '</table>';
+        } else {
+            echo '<p>No landmarks found.</p>';
         }
+        // foreach ($models as $landmark)
+        // {
+        //     echo "<h2>$landmark->title</h2>";
+        //     echo "<p>$landmark->description</p>";
+        //     echo "<p>$landmark->image</p>";
+        //     // echo "<img src='images/" . $landmark->getImage() . "' alt='Landmark image'>";
+        // }
         ?>
 
     </div>

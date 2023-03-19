@@ -23,6 +23,7 @@ class LandmarkRepository extends Repository
                 array_push($landmarks, $landmark);
             }
             return $landmarks;
+            
         } catch (PDOException $e) {
             echo $e;
         }
@@ -33,7 +34,8 @@ class LandmarkRepository extends Repository
     {
         try {
           $stmt = $this->connection->prepare("INSERT INTO LandMarks ('title', 'description', 'image') VALUES (?,?,?)");
-          $stmt->execute([$title, $description, $image]);
+          $stmt->execute([$title->getTitle(), $description->getDescription(), $image->getImage()]);
+
         } catch (PDOException $e) {
           echo $e;
         }
@@ -69,6 +71,7 @@ class LandmarkRepository extends Repository
           $stmt->execute([$landmarkID]);
           $stmt->setFetchMode(PDO::FETCH_CLASS, 'Landmark');
           return $stmt->fetch();
+
         } catch (PDOException $e) {
           echo $e;
         }
