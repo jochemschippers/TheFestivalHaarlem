@@ -1,5 +1,3 @@
-
-
 <body>
   <div class="layered">
     <div class="background-Image">
@@ -12,19 +10,20 @@
       <div class="container landingPageContainer">
         <div class="row">
           <div class="col-md-7" id="titleText">
-            <h2>Learn about our <strong>artists</strong></h2>
+            <h2 class="underlined">Learn about our <strong>artists</strong></h2>
             <p>The Festival Jazz is a premier event. Showcasing the best in local and international jazz talent, in partnership with Haarlem Jazz, the festival’s jazz events provide a vibrant and lively atmosphere for music fans to come together and enjoy the sounds of the genre.
               <br> <br>
               Read below more about the artists, schedule and locations!
             </p>
           </div>
           <div class="col-md-7">
-            <button> See Schedule <strong>↓</strong> </button>
+            <button id="seeScheduleButton"> See Schedule <strong>↓</strong> </button>
           </div>
+          <h2 class="underlined textCenter">Featuring:</h2>
         </div>
       </div>
     </div>
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <div id="myCarousel" class="carousel slide jazzContainer" data-ride="carousel">
       <ol class="carousel-indicators">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
         <li data-target="#myCarousel" data-slide-to="1"></li>
@@ -66,11 +65,55 @@
         <span class="sr-only">Next</span>
       </a>
     </div>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <h2 class="margin-bottom underlined textCenter">Schedule:</h2>
+
+    <div class="margin-top jazzContainer ">
+      <div class="row">
+      <h3 class="textCenter">Schedule:</h3>
+
+      <div class="col-md-2 margin-left" id="location-information">
+        <h4>Location: <br>
+          <span>The Patronaat </span>
+        </h4>
+        <p>
+          Would you rather have <strong>access</strong> to the <strong>whole day?</strong> Get your day ticket for only <strong>€35</strong>!
+        </p>
+        <button class="line-height longTermTicketButton"><strong>get a day ticket</strong> €35</button>
+        <p>
+          Can’t choose? You can purchase a week ticket and get <strong>access</strong> to the <strong>whole week</strong>! Get a week ticket for only <strong>€80</strong>!
+        </p>
+        <button class="line-height longTermTicketButton"><strong>get a day ticket</strong> €35</button>
+
+      </div>
+
+      <div class="col-md-7">
+        <table>
+          <tr>
+            <th>
+              Time
+            </th>
+            <th>
+              Main Hall
+            </th>
+            <th>
+              Second Hall
+            </th>
+          </tr>
+          <tr>
+
+          </tr>
+          <tr>
+
+          </tr>
+
+        </table>
+
+      </div>
+
+      </div>
+    </div>
+
 
 
   </div>
-
-

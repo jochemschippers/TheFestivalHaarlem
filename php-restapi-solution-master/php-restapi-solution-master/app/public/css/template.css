@@ -24,6 +24,9 @@
   align-items: center;
   /* vertically center child elements */
 }
+p{
+  word-wrap: break-word;
+}
 
 #titleContainer h1 {
   font-size: 73px !important;
@@ -31,11 +34,29 @@
   margin-left: 60px !important;
 }
 
-#titleText h2 {
+h2 {
   font-size: 48px;
-  font-family: 'Martel', serif;
+  font-family: 'Martel', serif !important;
   font-weight: 800;
   color: #262626;
+}
+
+h3 {
+  color: #262626;
+  font-size: 37px;
+  font-family: ''
+}
+h4{
+  font-size: 25px;
+  font-weight: 400;
+}
+h4 span{
+  font-size: 30px;
+  font-weight: 600
+}
+p{
+  font-size: 15px;
+  font-weight: 400;
 }
 
 #titleText h2 strong {
@@ -54,12 +75,6 @@
   height: calc(23vw);
 }
 
-h3 {
-  color: #262626;
-  font-size: 37px;
-  font-family: ''
-
-}
 .background {
   top: 0;
   left: 0;
@@ -78,4 +93,16 @@ h3 {
   bottom: 0;
   left: 0;
   height:1000px;
+}
+.margin-top{
+  margin-top: 3vh;
+}
+.margin-bottom{
+  margin-bottom: 6vh;
+}
+.margin-left{
+  margin-left: 3.12vw;
+}
+.line-height{
+  line-height: 2.5vh !important;
 }
