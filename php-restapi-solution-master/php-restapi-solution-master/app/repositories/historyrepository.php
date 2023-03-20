@@ -1,6 +1,5 @@
 <?php
 require_once __DIR__ . '/repository.php';
-require __DIR__ . '/../models/festivalEvent.php';
 require __DIR__ . '/../models/festivalinformation.php';
 require __DIR__ . '/../models/history.php';
 require __DIR__ . '/../models/landmark.php';
