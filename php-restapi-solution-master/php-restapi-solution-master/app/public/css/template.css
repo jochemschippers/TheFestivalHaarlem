@@ -106,12 +106,12 @@ p{
 .line-height{
   line-height: 2.5vh !important;
 }
+.line-height-medium{
+  line-height: 2vh !important;
+}
 .center{
   text-align:center;
   justify-content: center;
   position: absolute;
   display: flex;
-}
-.remove-line-height{
-  line-height: 0vh !important;
 }

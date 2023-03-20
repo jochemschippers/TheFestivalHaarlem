@@ -10,7 +10,8 @@ class JazzController extends Controller {
     }
     public function index() {
         $models = [
-            "artists" => $this->JazzService->getAllArtists()
+            "artists" => $this->JazzService->getAllArtists(),
+            "locations" => $this->JazzService->getAllLocations(),
         ];
         $this->displayView($models);
     }

@@ -114,32 +114,37 @@
       </div>
     </div>
 
-    <h2 class="margin-bottom underlined textCenter">location:</h2>
+    <h2 class="margin-bottom underlined textCenter">locations:</h2>
     <div class="margin-top" id="locations">
       <div class="row">
         <div class="col-md-6 text-center">
-          <img src="/image/jazz/location-patronaat.png" class="locationImage" alt="patronaat">
+          <img src="<?php echo $locations[0]->getLocationImage();?>" class="locationImage" alt="patronaat">
           <h3><span><strong>Patronaat</strong></span></h3>
-          <p class="line-height">
-          <strong>To & from</strong><br>
-          <pre>
-Patronaat is about 15 minutes walking distance from Haarlem station <br class="remove-line-height">(a 1km distance) <br></pre>
-Alternatively, you can take ride buses 340, 346 or 356 one stop to the Raaksburg. From there, it’ll be a minute on foot<br>
-There are also several parking options available, like the parking garage RAAKS, which is a 5 minute walk away from the Grote Markt.
-
-          </p>
+          <img src="/image/jazz/ToAndFrom.png" alt="to and from illustration">
           <p>
-          <strong>Accessibility</strong><br>
-Do you have a disability? We and our partners at the Patronaat strive to make your visit as comfortable and enjoyable as possible. 
-To see the facilities the patronaat has to offer, please download the 'Ongehinderd' mobile app here and/or contact the patronaat through mail on info@patronaat.nl to discuss the options.
+            <strong>To & from</strong><br>
+            <?php echo $locations[0]->getToAndFromText();?>
           </p>
-
+          <img src="/image/jazz/Accessibility.png" alt="Accessibility illustration">
+          <p>
+            <strong>Accessibility</strong><br>
+            <?php echo $locations[0]->getAccesibillityText();?>
+          </p>
         </div>
-        <div class="col-md-6">
-
-
-
-
+        <div class="col-md-6 text-center">
+        <img src="<?php echo $locations[1]->getLocationImage();?>" class="locationImage" alt="patronaat">
+          <h3><span><strong>Patronaat</strong></span></h3>
+          <img src="/image/jazz/ToAndFrom.png" alt="to and from illustration">
+          <p>
+            <strong>To & from</strong><br>
+            <?php echo $locations[1]->getToAndFromText();?>
+          </p>
+          <img src="/image/jazz/Accessibility.png" alt="Accessibility illustration">
+          <p>
+            <strong>Accessibility</strong><br>
+            <?php echo $locations[1]->getAccesibillityText();?>
+          </p>
+        </div>
         </div>
 
       </div>

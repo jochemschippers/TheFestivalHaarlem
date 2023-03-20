@@ -136,6 +136,7 @@ button:active {
   z-index: -2;
   height: 45vw;
   padding-left:75px;
+  padding-right: 75px;
 }
 .locationImage{
   width:30vw;
@@ -144,4 +145,10 @@ button:active {
   margin-left: 10vw;
   margin-right:10vw;
     text-align: left !important;
+    margin-bottom: 0.6rem;
+}
+p span{
+  font-weight:550;
+  font-style: italic;
+
 }

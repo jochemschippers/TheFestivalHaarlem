@@ -3,6 +3,7 @@ require_once __DIR__ . '/repository.php';
 require_once __DIR__ . '/../models/JazzArtist.php';
 require_once __DIR__ . '/../models/TimeSlotsJazz.php';
 require_once __DIR__ . '/../models/TimeSlot.php';
+require_once __DIR__ . '/../models/JazzLocation.php';
 
 
 class JazzRepository extends Repository
@@ -64,24 +65,32 @@ function getAllTimeSlots($artist)
     } catch (PDOException $e) {
         echo $e;
     }
-//         public function __construct(int $timeSlotID, int $eventID, float $priceID, DateTime $startTime, DateTime $endTime, int $maximmumAmountTickets, int $artistID, int $hallID) {
-//             parent::__construct($timeSlotID, $eventID, $priceID, $startTime, $endTime, $maximmumAmountTickets);
-//             $this->artistID = $artistID;
-//             $this->hallID = $hallID;
-//         }
-//         public function getArtistID(): int {
-//             return $this->artistID;
-//         }
-//         public function setArtistID(int $artistID): void {
-//             $this->artistID = $artistID;
-//         }
-    
-//         public function getHallID(): int {
-//             return $this->hallID;
-//         }
-    
-//         public function setHallID(int $hallID): void {
-//             $this->hallID = $hallID;
-//         }
+}
+function getAllLocations()
+{
+    try {
+        $stmt = $this->connection->prepare("SELECT locationID,`locationName`,`address`,`locationImage`, `toAndFromText`, `accessibillityText` FROM JazzLocations");
+
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $stmt->execute();
+        $results = $stmt->fetchAll();
+
+        $locations = [];
+        foreach ($results as $row) {
+            $jazzLocation = new JazzLocation(
+                $row["locationID"],
+                $row['locationName'],
+                $row['address'],
+                $row['locationImage'],
+                $row['toAndFromText'],
+                $row['accessibillityText'],
+            );
+            array_push($locations, $jazzLocation);
+        }
+        return $locations;
+
+    } catch (PDOException $e) {
+        echo $e;
+    }
 }
 }
