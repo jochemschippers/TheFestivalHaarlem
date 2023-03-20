@@ -22,8 +22,8 @@
         <div class="col-md-7">
           <h4><strong>Check out our Schedule</strong></h4>
           <div class="container">
-            <img scr="../images/strollthroughhistory/arrowsymbol.png" alt="See our schedule" class="img-fluid">
-            <button class="btn"><a href="#schedule"></button>
+            <img scr="../image/strollthroughhistory/arrowsymbol.png" alt="See our schedule" class="img-fluid">
+            <button class="btn"><a href="#schedule"></a></button>
           </div>
         </div>
       </div>
