@@ -18,6 +18,9 @@ body{
     left: 0;
     position: absolute;
   }
+  .background-Image{
+    background-image: url("/image/strollthroughhistory/historybackgroundimage.png");
+  }
   .banner{
     background-repeat: no-repeat;
     background-size: 100vw;
