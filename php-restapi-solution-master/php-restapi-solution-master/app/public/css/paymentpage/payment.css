@@ -160,10 +160,8 @@ thead{
 }
 
 #priceTable{
-    width: 50%;
     float: right;
 }
 #smart-button-container{
-    width: 50%;
     float: left;
 }
