@@ -30,11 +30,11 @@ class LandmarkRepository extends Repository
     }
 
     // Create a new landmark
-    function createLandmark($title, $description, $image)
+    function createLandmark($landmark)
     {
         try {
           $stmt = $this->connection->prepare("INSERT INTO LandMarks ('title', 'description', 'image') VALUES (?,?,?)");
-          $stmt->execute([$title->getTitle(), $description->getDescription(), $image->getImage()]);
+          $stmt->execute([$landmark->getTitle(), $landmark->getDescription(), $landmark->getImage()]);
 
         } catch (PDOException $e) {
           echo $e;
@@ -42,11 +42,11 @@ class LandmarkRepository extends Repository
     }
 
     // Update a landmark
-    function updateLandmark($landmarkID, $title, $description, $image) 
+    function updateLandmark($landmark) 
     {
         try {
           $stmt = $this->connection->prepare("UPDATE LandMarks SET 'title' = ?, 'description' = ?, 'image' = ? WHERE landMarkID = ?");
-          $stmt->execute([$title, $description, $image, $landmarkID]);
+          $stmt->execute([$landmark->getTitle(), $landmark->getDescription(), $landmark->getImage(), $landmark->getLandmarkID()]);
         } catch (PDOException $e) {
           echo $e;
         }
@@ -68,7 +68,7 @@ class LandmarkRepository extends Repository
     {
         try {
           $stmt = $this->connection->prepare("SELECT * FROM LandMarks WHERE landMarkID = ?");
-          $stmt->execute([$landmarkID]);
+          $stmt->execute([$landmarkID->getLandmarkID()]);
           $stmt->setFetchMode(PDO::FETCH_CLASS, 'Landmark');
           return $stmt->fetch();
 

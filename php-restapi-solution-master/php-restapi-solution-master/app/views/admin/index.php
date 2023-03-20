@@ -41,15 +41,15 @@ include __DIR__ . '/../navbar.php';
         <form action="index.php?controller=admin&action=createLandmark" method="post" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="title">Title</label>
-                <input type="text" class="form-control" id="title" name="title">
+                <input type="text" class="form-control" id="landmark-title" name="title">
             </div>
             <div class="mb-3">
                 <label for="description">Description</label>
-                <input type="text" id="description" name="description">
+                <input type="text" id="landmark-description" name="description">
             </div>
             <div class="mb-3">
                 <label for="image">Image</label>
-                <input type="text" id="image" name="image">
+                <input type="text" id="landmark-image" name="image">
             </div>
             <button type="submit" class="btn btn-primary">Create</button>
     </div>
@@ -64,15 +64,15 @@ include __DIR__ . '/../navbar.php';
             </div>
             <div class="mb-3">
                 <label for="title">Title</label>
-                <input type="text" class="form-control" id="title" name="title">
+                <input type="text" class="form-control" id="landmark-title" name="title">
             </div>
             <div class="mb-3">
                 <label for="description">Description</label>
-                <input type="text" id="description" name="description">
+                <input type="text" id="landmark-description" name="description">
             </div>
             <div class="mb-3">
                 <label for="image">Image</label>
-                <input type="text" id="image" name="image">
+                <input type="text" id="landmark-image" name="image">
             </div>
             <button type="submit" class="btn btn-primary">Edit</button>    
         </form>
