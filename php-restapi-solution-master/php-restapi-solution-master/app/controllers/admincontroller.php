@@ -13,17 +13,12 @@ class AdminController extends Controller {
     }
 
     public function index() {
-
-        $landmarkID = $_GET['landmarkID'];
-
+        
         $models = [
-            "landmarkID" => $landmarkID,
             "landmarks" => $this->landmarkService->getAllLandmarks(),
-            "landmark" => $this->landmarkService->getLandmark($_GET['landmarkID']),
-            
+            "landmark" => $this->landmarkService->getLandmark($_GET['landmarkID']),    
         ];
 
-        //$landmark = $this->landmarkService->getLandmark($_GET['landmarkID']);
         $this->displayView($models);
     }
 
@@ -31,8 +26,8 @@ class AdminController extends Controller {
         return $this->landmarkService->getAllLandmarks();
     }
 
-    public function getLandmark($landmarkID){
-        return $this->landmarkService->getLandmark($landmarkID);
+    public function getLandmark(){
+        return $this->landmarkService->getLandmark($_GET['landmarkID']);
     }
 
     public function createLandmark() {
