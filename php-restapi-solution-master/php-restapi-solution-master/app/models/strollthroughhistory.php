@@ -1,6 +1,6 @@
 <?php
 
-class History{
+class StrollThroughHistory{
     
         private int $eventID;
         private int $landmarkID;
