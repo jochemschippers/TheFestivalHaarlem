@@ -23,7 +23,7 @@
           <h4><strong>Check out our Schedule</strong></h4>
           <div class="container">
             <img scr="../image/strollthroughhistory/arrowsymbol.png" alt="See our schedule" class="img-fluid">
-            <button class="btn"><a href="#schedule"></a></button>
+            <button class="btn"><a href="#schedule"></a>xxxxxxxxxxx</button>
           </div>
         </div>
       </div>
@@ -40,7 +40,7 @@
       <li>Due to the nature of this walk participants must be a minimum of 12 years old.</li>
     </ul>
   </div>
-  <div>
+  <div class="landmark-container">
     <h2>Church of ST. Bavo</h2>
     <p>
       The Church of ST. Bavo is a Gothic style Catholic church located in the center of the city. 
@@ -48,6 +48,17 @@
       The church is dedicated to Saint Bavo, the patron saint of Haarlem.
     </p>
     <button> <a href="https://www.haarlem.nl/en/visiting-haarlem/attractions/church-of-st-bavo">Learn more</a></button>
+    <ol class="nummeric-list">
+      <li>Church of ST.Bavo</li>
+      <li>Grote Markt</li>
+      <li>De Hallen</li>
+      <li>Proveniershof</li>
+      <li>Jopenkerk</li>
+      <li>Waalse Kerk Haarlem</li>
+      <li>Molen de Adriaan</li>
+      <li>Amsterdamse Poort</li>
+      <li>Hof van Bakenes</li>
+    </ol>
     <img src="../images/strollthroughhistory/stbavo.jpg" alt="St. Bavo Church" class="img-fluid">
     <div class="embed-responsive embed-responsive-16by9">
       <iframe
@@ -74,7 +85,6 @@
     <p> Regular ticket (1 person):           €17,50 </p>
     <p> Family ticket (4 persons max.):      €60,00 </p>
     <p> Select a flag to see the available timeslots of the coherent language and a timeslot to book a guided tour:</p>
-    <div class="container">
     <div class="row">
       <div class="col-sm-4">
         <h3>Thursday 26 July</h3>
@@ -100,7 +110,6 @@
         <button class="btn" onclick="alert()">13:00 - 14:30</button>
         <button class="btn" onclick="alert()">16:00 - 17:30</button>
       </div>
-    </div>
     </div>
   </div>
   </div>
