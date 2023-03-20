@@ -24,6 +24,7 @@ body{
     border-radius: 1.3rem;
     border: 0.4rem solid #9B1C31;
     font-size: 1.4rem;
+    text-decoration-color: #FFFFFF;
     box-sizing: border-box;
     color: #FFFFFF;
     display: flex;
@@ -74,10 +75,6 @@ body{
     z-index: -2; height: 25vw; background-color: #F9C9C9
   }
   
-  .carousel {
-    position: relative;
-  }
-  
   .container {
     position: relative;
     width: 50%;
@@ -95,7 +92,7 @@ body{
     -ms-transform: translate(-50%, -50%);
     background-color: #555;
     color: white;
-    font-size: 1rem;
+    font-size: 1.2rem;
     padding: 0.8rem 1.6rem;
     border: none;
     cursor: pointer;
@@ -114,11 +111,19 @@ body{
     position: relative;
     width: 100%;
     background-color: #FEB548;
+    margin-bottom: 50rem;
   }
 
-  .nummeric-list{
+  ol.nummeric-list{
     list-style-type: none;
     counter-reset: my-counter;
+    background-color: #FEB548;
+    color: #243459;
+    font-weight: 600;
+    font-family: 'Open Sans',sans-serif;
+    line-height: 2.4rem;
+    text-align: left;
+    text-decoration-line: underline;
   }
 
   .nummeric-list li:before {
@@ -135,4 +140,47 @@ body{
     text-align: left;
     text-decoration-line: underline;
 
+  }
+
+  #schedule{
+    position: relative;
+    width: 100%;
+    background-color: #FEB548;
+    margin-bottom: 50rem;
+  }
+
+  .schedule-btn{
+    position: relative;
+    background-color: #FEB548;
+    box-sizing: border-box;
+    border-radius: 1.3rem;
+    border: 0.4rem solid #FEB548;
+    font-size: 1.4rem;
+    text-decoration-color: #FFFFFF;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 0.8rem;
+    gap: 0.4rem;
+  
+    font-family: 'Open Sans',sans-serif;
+    font-weight: 500;
+    line-height: 1.3rem;
+    margin: 0;
+    outline: none;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    touch-action: manipulation;
+    transition: background-color .2s, color .2s;
+  
+    width: 15.6rem;
+    height: 3.7rem;
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
   }

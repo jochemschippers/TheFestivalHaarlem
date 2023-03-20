@@ -23,7 +23,7 @@
           <h4><strong>Check out our Schedule</strong></h4>
           <div class="container">
             <img scr="../image/strollthroughhistory/arrowsymbol.png" alt="See our schedule" class="img-fluid">
-            <button class="btn"><a href="#schedule"></a>xxxxxxxxxxx</button>
+            <button class="btn"><a href="#schedule"></a></button>
           </div>
         </div>
       </div>
@@ -88,27 +88,27 @@
     <div class="row">
       <div class="col-sm-4">
         <h3>Thursday 26 July</h3>
-        <button class="btn" onclick="alert()">10:00 - 11:30</button>
-        <button class="btn" onclick="alert()">13:00 - 14:30</button>
-        <button class="btn" onclick="alert()">16:00 - 17:30</button>
+        <button class="schedule-btn" onclick="alert()">10:00 - 11:30</button>
+        <button class="schedule-btn" onclick="alert()">13:00 - 14:30</button>
+        <button class="schedule-btn" onclick="alert()">16:00 - 17:30</button>
       </div>
       <div class="col-sm-4">
         <h3>Friday 27 July</h3>
-        <button class="btn" onclick="alert()">10:00 - 11:30</button>
-        <button class="btn" onclick="alert()">13:00 - 14:30</button>
-        <button class="btn" onclick="alert()">16:00 - 17:30</button>
+        <button class="schedule-btn" onclick="alert()">10:00 - 11:30</button>
+        <button class="schedule-btn" onclick="alert()">13:00 - 14:30</button>
+        <button class="schedule-btn" onclick="alert()">16:00 - 17:30</button>
       </div>
       <div class="col-sm-4">
         <h3>Saturday 28 July</h3>
-        <button class="btn" onclick="alert()">10:00 - 11:30</button>
-        <button class="btn" onclick="alert()">13:00 - 14:30</button>
-        <button class="btn" onclick="alert()">16:00 - 17:30</button>
+        <button class="schedule-btn" onclick="alert()">10:00 - 11:30</button>
+        <button class="schedule-btn" onclick="alert()">13:00 - 14:30</button>
+        <button class="schedule-btn" onclick="alert()">16:00 - 17:30</button>
       </div>
       <div class="col-sm-4">
         <h3>Sunday 29 July</h3>
-        <button class="btn" onclick="alert()">10:00 - 11:30</button>
-        <button class="btn" onclick="alert()">13:00 - 14:30</button>
-        <button class="btn" onclick="alert()">16:00 - 17:30</button>
+        <button class="schedule-btn" onclick="alert()">10:00 - 11:30</button>
+        <button class="schedule-btn" onclick="alert()">13:00 - 14:30</button>
+        <button class="schedule-btn" onclick="alert()">16:00 - 17:30</button>
       </div>
     </div>
   </div>
