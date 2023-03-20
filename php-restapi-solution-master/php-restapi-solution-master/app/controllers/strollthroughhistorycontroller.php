@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/controller.php';
 require_once __DIR__ . '/../services/landmarkservice.php';
-require_once __DIR__ . '/../services/historyservice.php';
+require_once __DIR__ . '/../services/strollthroughhistoryservice.php';
 
 class StrollThroughHistoryController extends Controller {
     private $landmarkService;
