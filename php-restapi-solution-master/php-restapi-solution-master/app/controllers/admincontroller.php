@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/controller.php';
+require_once __DIR__ . '/controller.php';
 require_once __DIR__ . '/../services/landmarkservice.php';
 
 class AdminController extends Controller {
@@ -13,10 +13,9 @@ class AdminController extends Controller {
     }
 
     public function index() {
-        
+
         $models = [
             "landmarks" => $this->landmarkService->getAllLandmarks(),
-            "landmark" => $this->landmarkService->getLandmark($_GET['landmarkID']),    
         ];
 
         $this->displayView($models);

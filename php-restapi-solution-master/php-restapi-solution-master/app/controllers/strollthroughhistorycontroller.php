@@ -14,12 +14,9 @@ class StrollThroughHistoryController extends Controller {
     }
 
     public function index() {
-        $landmarkID = $_GET['landmarkID'];
 
         $models = [
-            "landmarkID" => $landmarkID,
             "landmarks" => $this->landmarkService->getAllLandmarks(),
-            "landmark" => $this->landmarkService->getLandmark($_GET['landmarkID']),
             
         ];
 
