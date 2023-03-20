@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/../repositories/historyrepository.php';
+require __DIR__ . '/../repositories/strollthroughhistoryrepository.php';
 
 
 class HistoryService 
