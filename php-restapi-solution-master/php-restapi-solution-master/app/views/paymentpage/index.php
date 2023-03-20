@@ -1,5 +1,4 @@
 <?php
-include __DIR__ . '/../navbar.php';
 // Create an array of test data for tickets
 $tickets = array(
   array(
@@ -237,6 +236,3 @@ $grand_total = 0;
 <!-- End of container -->
 </body> 
 </html>
-<?php
-include __DIR__ . '/../footer.php';
-?>

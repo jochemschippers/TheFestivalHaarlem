@@ -1,5 +1,5 @@
 <?php
-include __DIR__ . '/../navbar.php';
+
 // Create an array of test data for tickets
 $tickets = array(
     array(
