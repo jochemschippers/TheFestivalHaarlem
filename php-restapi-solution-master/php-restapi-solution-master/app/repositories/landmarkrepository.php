@@ -68,7 +68,7 @@ class LandmarkRepository extends Repository
     {
         try {
           $stmt = $this->connection->prepare("SELECT * FROM LandMarks WHERE landMarkID = ?");
-          $stmt->execute([$landmarkID->getLandmarkID()]);
+          $stmt->execute([$landmarkID]);
           $stmt->setFetchMode(PDO::FETCH_CLASS, 'Landmark');
           return $stmt->fetch();
 

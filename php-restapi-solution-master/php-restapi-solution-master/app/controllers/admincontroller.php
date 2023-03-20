@@ -14,12 +14,12 @@ class AdminController extends Controller {
 
     public function index() {
 
-        $landmarkID = $_GET['landMarkID'];
+        $landmarkID = $_GET['landmarkID'];
 
         $models = [
             "landmarkID" => $landmarkID,
             "landmarks" => $this->landmarkService->getAllLandmarks(),
-            "landmark" => $this->landmarkService->getLandmark($_GET['landMarkID']),
+            "landmark" => $this->landmarkService->getLandmark($_GET['landmarkID']),
             
         ];
 
@@ -41,12 +41,12 @@ class AdminController extends Controller {
     }
 
     public function updateLandmark() {
-        $this->landmarkService->updateLandmark($_POST['landMarkID'], $_POST['title'], $_POST['description'], $_POST['image']);
+        $this->landmarkService->updateLandmark($_POST['landmarkID'], $_POST['title'], $_POST['description'], $_POST['image']);
         header('Location: index.php?controller=admin&action=editLandmark');
     }
 
     public function deleteLandmark() {
-        $this->landmarkService->deleteLandmark($_POST['landMarkID']);
+        $this->landmarkService->deleteLandmark($_POST['landmarkID']);
         header('Location: index.php?controller=admin&action=deleteLandmark');
     }
 

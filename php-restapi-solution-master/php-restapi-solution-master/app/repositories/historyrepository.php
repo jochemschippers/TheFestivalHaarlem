@@ -1,8 +1,8 @@
 <?php
 require_once __DIR__ . '/repository.php';
-require __DIR__ . '/../models/festivalinformation.php';
-require __DIR__ . '/../models/history.php';
-//require __DIR__ . '/../models/landmark.php';
+require_once __DIR__ . '/../models/festivalinformation.php';
+require_once __DIR__ . '/../models/history.php';
+require_once __DIR__ . '/../models/landmark.php';
 
 
 class HistoryRepository extends Repository
