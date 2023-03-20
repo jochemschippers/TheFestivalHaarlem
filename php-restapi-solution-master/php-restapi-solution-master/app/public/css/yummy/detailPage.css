@@ -4,6 +4,82 @@ html, body {
   overflow-x: hidden;
 }
 
+/* HIER OVERLAY */
+
+body {
+  background-color: #F7F7F7;
+}
+
+.overlay-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.overlay {
+  background-color: #fff;
+  padding: 50px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  width: 1300px;
+}
+
+#overlay {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+#textArea {
+  height: 283px;
+}
+
+#overview {
+  background-color: #FFF;
+
+}
+#phoneNr{
+  width: 160px;
+  margin-left: 0;
+}
+
+/* input buttons */
+.input-group-append {
+  display: flex;
+}
+
+
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+  padding: 5px;
+  text-align: center;
+  width: 50px;
+  border: 1px solid #ced4da;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+#nrAdult {
+  width: 100px;
+}
+
+#nrChild {
+  width: 100px;
+}
+
+/* EINDE OVERLAY */
 #titleBorder {
     height: 500px;
     border: 2px solid #000;

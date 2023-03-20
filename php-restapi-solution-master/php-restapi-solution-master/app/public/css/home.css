@@ -21,6 +21,20 @@ html, body {
     background-image: url('/image/home/homegif.gif');
     background-size: cover;
     position: relative; /* Set position to relative for absolute positioning of container */
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  #titleImage{
+    background-image: url('/image/home/TheFestivalLogo.png');
+    background-size: cover;
+    height: 200px;
+    width: 400px;
+    margin-top: 72px;
+    justify-self: center;
   }
 
   #titleContainer {
