@@ -159,6 +159,5 @@ class UserRepository extends Repository
             throw new ErrorException($e->getMessage());
         }
     }
-
 }
 ?>

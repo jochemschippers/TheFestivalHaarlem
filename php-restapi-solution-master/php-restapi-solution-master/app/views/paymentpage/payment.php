@@ -97,7 +97,6 @@ $tickets = array(
           color: 'gold',
           layout: 'vertical',
           label: 'paypal',
-          
         },
 
         createOrder: function(data, actions) {

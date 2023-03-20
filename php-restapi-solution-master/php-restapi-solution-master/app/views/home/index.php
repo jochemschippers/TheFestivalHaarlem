@@ -2,6 +2,7 @@
 
 <body>
     <div class="border-box">
+        <div class="image" id="titleImage"></div>
         <div class="container" id="titleContainer">
             <h1>Explore The Festival</h1>
             <p>Learn more about the amazing Haarlem Festival experience Dutch cuisine, take a stroll around the rich historic center and experience some amazing jazz artists!</p>

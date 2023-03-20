@@ -3,7 +3,9 @@ require __DIR__ . '/../repositories/landmarkrepository.php';
 
 
 class LandmarkService {
+
     private $repository;
+
     function __construct()
     {
         $this->repository = new LandmarkRepository();
@@ -11,34 +13,23 @@ class LandmarkService {
 
     public function getAllLandmarks() {
         // retrieve data
-        $repository = new LandmarkRepository();
-        $landmarks = $repository->getAllLandmarks();
-        return $landmarks;
+        return $this->repository->getAllLandmarks();
     }
 
     public function getLandmark($landmarkID) {
-        // retrieve data
-        $repository = new LandmarkRepository();
-        $landmark = $repository->getLandmark($landmarkID);
-        return $landmark;
+        return $this->repository->getLandmark($landmarkID);
     }
 
     public function createLandmark($title, $description, $image) {
-        // retrieve data
-        $repository = new LandmarkRepository();
-        $repository->createLandmark($title, $description, $image);
+        return $this->repository->createLandmark($title, $description, $image);
     }
 
     public function updateLandmark($landmarkID, $title, $description, $image) {
-        // retrieve data
-        $repository = new LandmarkRepository();
-        $repository->updateLandmark($landmarkID, $title, $description, $image);
+        return $this->repository->updateLandmark($landmarkID, $title, $description, $image);
     }
 
     public function deleteLandmark($landmarkID) {
-        // retrieve data
-        $repository = new LandmarkRepository();
-        $repository->deleteLandmark($landmarkID);
+        return $this->repository->deleteLandmark($landmarkID);
     }
 
     public function displayLandmarks() {
