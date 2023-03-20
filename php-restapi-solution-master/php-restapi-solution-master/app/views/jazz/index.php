@@ -70,50 +70,80 @@
 
     <div class="margin-top jazzContainer ">
       <div class="row">
-      <h3 class="textCenter">Schedule:</h3>
+        <h3 class="textCenter">Schedule:</h3>
 
-      <div class="col-md-2 margin-left" id="location-information">
-        <h4>Location: <br>
-          <span>The Patronaat </span>
-        </h4>
-        <p>
-          Would you rather have <strong>access</strong> to the <strong>whole day?</strong> Get your day ticket for only <strong>€35</strong>!
-        </p>
-        <button class="line-height longTermTicketButton"><strong>get a day ticket</strong> €35</button>
-        <p>
-          Can’t choose? You can purchase a week ticket and get <strong>access</strong> to the <strong>whole week</strong>! Get a week ticket for only <strong>€80</strong>!
-        </p>
-        <button class="line-height longTermTicketButton"><strong>get a day ticket</strong> €35</button>
+        <div class="col-md-2 margin-left" id="location-information">
+          <h4>Location: <br>
+            <span>The Patronaat </span>
+          </h4>
+          <p>
+            Would you rather have <strong>access</strong> to the <strong>whole day?</strong> Get your day ticket for only <strong>€35</strong>!
+          </p>
+          <button class="line-height longTermTicketButton"><strong>get a day ticket</strong> €35</button>
+          <p>
+            Can’t choose? You can purchase a week ticket and get <strong>access</strong> to the <strong>whole week</strong>! Get a week ticket for only <strong>€80</strong>!
+          </p>
+          <button class="line-height longTermTicketButton"><strong>get a day ticket</strong> €35</button>
 
-      </div>
+        </div>
 
-      <div class="col-md-7">
-        <table>
-          <tr>
-            <th>
-              Time
-            </th>
-            <th>
-              Main Hall
-            </th>
-            <th>
-              Second Hall
-            </th>
-          </tr>
-          <tr>
+        <div class="col-md-7">
+          <table>
+            <tr>
+              <th>
+                Time
+              </th>
+              <th>
+                Main Hall
+              </th>
+              <th>
+                Second Hall
+              </th>
+            </tr>
+            <tr>
 
-          </tr>
-          <tr>
+            </tr>
+            <tr>
 
-          </tr>
+            </tr>
 
-        </table>
+          </table>
 
-      </div>
+        </div>
 
       </div>
     </div>
 
+    <h2 class="margin-bottom underlined textCenter">location:</h2>
+    <div class="margin-top" id="locations">
+      <div class="row">
+        <div class="col-md-6 text-center">
+          <img src="/image/jazz/location-patronaat.png" class="locationImage" alt="patronaat">
+          <h3><span><strong>Patronaat</strong></span></h3>
+          <p class="line-height">
+          <strong>To & from</strong><br>
+          <pre>
+Patronaat is about 15 minutes walking distance from Haarlem station <br class="remove-line-height">(a 1km distance) <br></pre>
+Alternatively, you can take ride buses 340, 346 or 356 one stop to the Raaksburg. From there, it’ll be a minute on foot<br>
+There are also several parking options available, like the parking garage RAAKS, which is a 5 minute walk away from the Grote Markt.
+
+          </p>
+          <p>
+          <strong>Accessibility</strong><br>
+Do you have a disability? We and our partners at the Patronaat strive to make your visit as comfortable and enjoyable as possible. 
+To see the facilities the patronaat has to offer, please download the 'Ongehinderd' mobile app here and/or contact the patronaat through mail on info@patronaat.nl to discuss the options.
+          </p>
+
+        </div>
+        <div class="col-md-6">
+
+
+
+
+        </div>
+
+      </div>
+    </div>
 
 
   </div>
