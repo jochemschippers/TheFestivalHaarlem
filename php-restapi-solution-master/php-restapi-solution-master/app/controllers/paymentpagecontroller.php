@@ -1,23 +1,30 @@
 <?php
 require __DIR__ . '/../services/PaymentService.php';
+require_once __DIR__ . '/controller.php';
 
-class paymentpageController {
-    public function index() {
-        require __DIR__ . '/../views/paymentpage/index.php';
-    }
-    public function login() {
-        require __DIR__ . '/../views/paymentpage/login.php';
-    }
-    public function payment() {
-        require __DIR__ . '/../views/paymentpage/payment.php';
-    }
-    public function recieve() {
-        require __DIR__ . '/../views/paymentpage/recieve.php';
-    }
-    private $paymentService; 
+class paymentpageController extends Controller{
     function __construct() {
         $this->paymentService = new PaymentService();
+        parent::__construct();
+        $this->models = [];
     }
+    private $models;
+  
+    public function index() {
+        $this->displayView($this->models);
+        //require __DIR__ . '/../views/paymentpage/index.php';
+    }
+  
+    public function login() {
+        $this->displayView($this->models);
+    }
+    public function payment() {
+        $this->displayView($this->models);
+    }
+    public function recieve() {
+        $this->displayView($this->models);
+    }
+    private $paymentService; 
     public function getEvents(){
         return $this->paymentService->getAll();
     }
