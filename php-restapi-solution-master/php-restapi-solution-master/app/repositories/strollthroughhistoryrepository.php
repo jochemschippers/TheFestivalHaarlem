@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/repository.php';
 require_once __DIR__ . '/../models/festivalinformation.php';
-require_once __DIR__ . '/../models/history.php';
+require_once __DIR__ . '/../models/strollthroughhistory.php';
 require_once __DIR__ . '/../models/landmark.php';
 
 
@@ -13,18 +13,18 @@ class HistoryRepository extends Repository
             $stmt = $this->connection->prepare("SELECT * FROM history");
             $stmt->execute();
 
-            $stmt->setFetchMode(PDO::FETCH_CLASS, 'History');
+            $stmt->setFetchMode(PDO::FETCH_CLASS, 'StrollThroughHistory');
             return $stmt->fetchAll();
         } catch (PDOException $e) {
             echo $e;
         }
     }
 
-    function insert($history) {
+    function insert($strollThroughHistory) {
         try {
             $stmt = $this->connection->prepare("INSERT into history (title, content, author, posted_at) VALUES (?,?,?, NOW())");
             
-            $stmt->execute([$history->getTitle(), $history->getContent(), $history->getAuthor()]);
+            $stmt->execute([$strollThroughHistory->getTitle(), $strollThroughHistory->getContent(), $strollThroughHistory->getAuthor()]);
 
         } catch (PDOException $e) {
             echo $e;
@@ -40,10 +40,10 @@ class HistoryRepository extends Repository
         }
     }
 
-    function update($history) {
+    function update($strollThroughHistory) {
         try {
             $stmt = $this->connection->prepare("UPDATE history SET title = ?, content = ?, author = ? WHERE id = ?");
-            $stmt->execute([$history->getTitle(), $history->getContent(), $history->getAuthor(), $history->getId()]);
+            $stmt->execute([$strollThroughHistory->getTitle(), $strollThroughHistory->getContent(), $strollThroughHistory->getAuthor(), $strollThroughHistory->getId()]);
         } catch (PDOException $e) {
             echo $e;
         }

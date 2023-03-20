@@ -1,6 +1,6 @@
 <?php
 
-class HistoryDetailpage{
+class StrollThroughHistoryDetailpage{
     
         private int $landmarkID;
         private string $description;
