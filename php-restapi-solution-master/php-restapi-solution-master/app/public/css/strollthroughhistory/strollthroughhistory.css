@@ -147,6 +147,8 @@ body{
     width: 100%;
     background-color: #FEB548;
     margin-bottom: 50rem;
+    color: #000;
+    font-family: 'Open Sans',sans-serif;
   }
 
   .schedule-btn{

@@ -35,7 +35,7 @@ include __DIR__ . '/../navbar.php';
 
     </div>
 
-    <h2>Add Landmark</h2>
+    <h3>Add Landmark</h3>
 
     <div id="landmark-form">
         <form action="index.php?controller=admin&action=createLandmark" method="post" enctype="multipart/form-data">
@@ -54,7 +54,7 @@ include __DIR__ . '/../navbar.php';
             <button type="submit" class="btn btn-primary">Create</button>
     </div>
 
-    <h2>Edit Landmark</h2>
+    <h3>Edit Landmark</h3>
 
     <div id="edit-landmark-form">
         <form action="index.php?controller=admin&action=editLandmark" method="post" enctype="multipart/form-data">
@@ -78,7 +78,7 @@ include __DIR__ . '/../navbar.php';
         </form>
     </div>
     
-    <h2>Delete Landmark</h2>
+    <h3>Delete Landmark</h3>
 
     <div id="delete-landmark-form">
         <form action="index.php?controller=admin&action=deleteLandmark" method="post" enctype="multipart/form-data">
