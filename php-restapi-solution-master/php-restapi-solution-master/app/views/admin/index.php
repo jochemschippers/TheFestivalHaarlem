@@ -38,26 +38,26 @@ include __DIR__ . '/../navbar.php';
     <h3>Add Landmark</h3>
 
     <div id="landmark-form">
-        <form action="index.php?controller=admin&action=createLandmark" method="post" enctype="multipart/form-data">
-            <div class="mb-3">
-                <label for="title">Title</label>
-                <input type="text" class="form-control" id="landmark-title" name="title">
-            </div>
-            <div class="mb-3">
-                <label for="description">Description</label>
-                <input type="text" id="landmark-description" name="description">
-            </div>
-            <div class="mb-3">
-                <label for="image">Image</label>
-                <input type="text" id="landmark-image" name="image">
-            </div>
+        <form action="/admin/createLandmark" method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" id="landmark-title" name="setTitle" value="<?php echo $landmark->getTitle(); ?>">
+        </div>
+        <div class="mb-3">
+            <label for="description">Description</label>
+            <input type="text" id="landmark-description" name="setDescription" value="<?php echo $landmark->getDescription(); ?>">
+        </div>
+        <div class="mb-3">
+            <label for="image">Image</label>
+            <input type="text" id="landmark-image" name="setImage" value="<?php echo $landmark->getImage(); ?>">
+        </div>
             <button type="submit" class="btn btn-primary">Create</button>
     </div>
 
     <h3>Edit Landmark</h3>
 
     <div id="edit-landmark-form">
-        <form action="index.php?controller=admin&action=editLandmark" method="post" enctype="multipart/form-data">
+        <form action="/admin/editLandmark" method="post" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="landmarkID">Landmark ID</label>
                 <input type="text" class="form-control" id="landmarkID" name="landmarkID">
@@ -81,7 +81,7 @@ include __DIR__ . '/../navbar.php';
     <h3>Delete Landmark</h3>
 
     <div id="delete-landmark-form">
-        <form action="index.php?controller=admin&action=deleteLandmark" method="post" enctype="multipart/form-data">
+        <form action="/admin/deleteLandmark" method="post" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="landmarkID">Landmark ID</label>
                 <input type="text" class="form-control" id="landmarkID" name="landmarkID">
