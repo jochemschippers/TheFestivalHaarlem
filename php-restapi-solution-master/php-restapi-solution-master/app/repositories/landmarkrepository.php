@@ -33,7 +33,7 @@ class LandmarkRepository extends Repository
     function createLandmark($landmark)
     {
         try {
-          $stmt = $this->connection->prepare("INSERT INTO `LandMarks` (`landMarkID`, `title`, `description`, `image`) VALUES (null, ?, ?, ?)");
+          $stmt = $this->connection->prepare("INSERT INTO `LandMarks` (`title`, `description`, `image`) VALUES (?,?,?)");
           $stmt->execute([$landmark->getTitle(), $landmark->getDescription(), $landmark->getImage()]);
 
         } catch (PDOException $e) {

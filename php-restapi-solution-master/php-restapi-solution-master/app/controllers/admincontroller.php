@@ -31,7 +31,6 @@ class AdminController extends Controller {
 
     public function createLandmark() {
         //$this->landmarkService->createLandmark($_POST['title'], $_POST['description'], $_POST['image']);
-
         $landmark = new Landmark(0, $_POST['setTitle'], $_POST['setDescription'], $_POST['setImage']);
         $this->landmarkService->createLandmark($landmark);
     }
