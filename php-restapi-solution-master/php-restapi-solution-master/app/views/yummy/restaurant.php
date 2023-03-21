@@ -1,15 +1,11 @@
 <body>
     <!-- UIT DB GEBRUIK JE (YUMMYRESTAURANTS, RESTAURANTRESERVATIONS, RestaurantMenuItems, RestaurantImages, RestaurantFoodTypes) -->
 
-
-
-
     <?php
     foreach ($images as $image) {
         if ($image->GetImageIndex() == 1) {
             ?>
-            <div class="border-box" id="titleBorder"
-                style="background-image: url('/image/<?php echo $image->getImageLink(); ?>');">
+            <div class="border-box" id="titleBorder" style="background-image: url('/image/<?= $image->getImageLink(); ?>');">
                 <div class="container" id="titleContainer">
                     <h1>Yummy</h1>
                     <h5>Discover Haarlem's Gastronomic Wonders: A Feast for the Senses!</h5>
@@ -39,7 +35,7 @@
                 if ($image->GetImageIndex() == 2) {
                     ?>
                     <div class="border-box" id="restaurantLogo"
-                        style="background-image: url('/image/<?php echo $image->getImageLink(); ?>');"></div>
+                        style="background-image: url('/image/<?= $image->getImageLink(); ?>');"></div>
                     <?php
                     break; // break the loop once we find the image with GetImageIndex = 2
                 }
@@ -161,14 +157,13 @@
                     // function checkSpecialty($item){
                     //     switch($item){
                     //         case($item ==)
-                    
                     //     }
                     // }
                     ?>
 
                     <h4>Starters</h4>
                     <?php foreach ($voorgerechten as $voorgerecht): ?>
-                        <?php echo '<span style="font-size: 16px; font-weight: bold;">' . $voorgerecht->getName() . '</span> &euro; ' . $voorgerecht->getPrice() ?>
+                        <?= '<span style="font-size: 16px; font-weight: bold;">' . $voorgerecht->getName() . '</span> &euro; ' . $voorgerecht->getPrice() ?>
                         <p><i>
                                 <?= $voorgerecht->getDescription() ?>
                             </i></p>
@@ -176,7 +171,7 @@
 
                     <h4>Main courses</h4>
                     <?php foreach ($hoofdgerechten as $hoofdgerecht): ?>
-                        <?php echo '<span style="font-size: 16px; font-weight: bold;">' . $hoofdgerecht->getName() . '</span> &euro; ' . $hoofdgerecht->getPrice() ?>
+                        <?= '<span style="font-size: 16px; font-weight: bold;">' . $hoofdgerecht->getName() . '</span> &euro; ' . $hoofdgerecht->getPrice() ?>
                         <p><i>
                                 <?= $hoofdgerecht->getDescription() ?>
                             </i></p>
@@ -184,7 +179,7 @@
 
                     <h4>Desserts</h4>
                     <?php foreach ($nagerechten as $nagerecht): ?>
-                        <?php echo '<span style="font-size: 16px; font-weight: bold;">' . $nagerecht->getName() . '</span> &euro; ' . $nagerecht->getPrice() ?>
+                        <?= '<span style="font-size: 16px; font-weight: bold;">' . $nagerecht->getName() . '</span> &euro; ' . $nagerecht->getPrice() ?>
                         <p><i>
                                 <?= $nagerecht->getDescription() ?>
                             </i></p>
@@ -204,7 +199,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8" id="scedulePrice">
-                <h3>Our scedule and prices </h3>
+                <h3>Our schedule and prices </h3>
                 <p>We have planned 3 sessions the first of which will start at
                     <i>
                         <?= $restaurant[0]->getStartTime()->format("H:i") ?>
@@ -229,7 +224,11 @@
         </div>
         <div class="row">
             <div class="col-md-8" id="reservation">
-                <a onclick="showOverlay();" class="btn btn-primary btn-lg">Make a reservation</a>
+                <!-- <a data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-primary btn-lg">Make a
+                    reservation</a> -->
+
+                <a onclick="showOverlay(<?= $restaurantId ?>);" class="btn btn-primary btn-lg">Make a
+                    reservation</a>
                 <p>Any special requests? <br>
                     Please put that in your reservation.</p>
             </div>
@@ -243,12 +242,16 @@
                 $duration_hours = $restaurant[0]->getDuration()->format('H');
                 // Create a DateInterval object using the duration in hours and minutes
                 $session_duration = new DateInterval('PT' . $duration_hours . 'H' . $duration_minutes . 'M');
+                // Initialize an empty array to store the session times
+                $session_times = array();
                 // Loop through each session and display the date and time
                 for ($i = 1; $i <= $restaurant[0]->getAmountSessions(); $i++) {
                     // Format the session date and time
                     $session_time = $start_datetime->format('H:i');
                     // Display the session date and time with the session number
                     echo "<b>Session $i: " . $session_time . "</b><br>";
+                    // Add the session time to the array
+                    array_push($session_times, $session_time);
                     // Increase the start date and time by 1.5 hours for the next session
                     $start_datetime->add($session_duration);
                 }
@@ -271,7 +274,7 @@
                 if ($image->GetImageIndex() == 3) {
                     ?>
                     <div class="col-md-6" id="bottomPicture"
-                        style="background-image: url('/image/<?php echo $image->getImageLink(); ?>');"></div>
+                        style="background-image: url('/image/<?= $image->getImageLink(); ?>');"></div>
                     <?php
                     break; // break the loop once we find the image with GetImageIndex = 3
                 }
@@ -280,9 +283,8 @@
 
         </div>
     </div>
-    <!-- -------- HERE END GETTING DATA FROM DATABASE -------- -->
 
-    <!-- HIER OVERLAY -->
+    <!-- MODAL OVERLAY -->
 
     <div class="overlay-container">
         <div class="overlay">
@@ -290,7 +292,9 @@
                 <?php $numberButtons = 1; ?>
                 <div class="row text-center">
                     HIER LOOP VOOR EVENT ID EN ACTIVITY ID
-                    <h1>Make a reservation for:</h1>
+                    <h1>Make a reservation for:
+                        <?= $restaurant[0]->getRestaurantName() ?>
+                    </h1>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
@@ -305,32 +309,15 @@
                     <div class="col-md-3">
                         <h4><ins>Thursday 26 July</ins></h4>
                         <?php
-                        // Set the start date and time for the sessions
-
-                        $start_datetime = $restaurant[0]->getStartTime();
-                        // Get the duration in minutes
-                        $duration_minutes = $restaurant[0]->getDuration()->format('i');
-                        // Get the duration in hours
-                        $duration_hours = $restaurant[0]->getDuration()->format('H');
-                        // Create a DateInterval object using the duration in hours and minutes
-                        $session_duration = new DateInterval('PT' . $duration_hours . 'H' . $duration_minutes . 'M');
-                        // Loop through each session and display the date and time
-                        for ($i = 1; $i <= $restaurant[0]->getAmountSessions(); $i++) {
-                            // Format the session date and time
-                            $session_time = $start_datetime->format('H:i'); ?>
+                        foreach ($session_times as $time) { ?>
                             <!-- Display the session date and time with the session number -->
-
-                            <input type="radio" class="btn-check" name="btnradio" id="btnradio<?php echo $numberButtons?>"
+                            <input type="radio" class="btn-check" name="btnradio" id="btnradio<?= $numberButtons ?>"
                                 autocomplete="off">
-                            <label class="btn btn-outline-primary w-100" for="btnradio<?php echo $numberButtons?>"><?php echo "<b>Session $i: " . $session_time . "</b>"?></label><br>
-
+                            <label class="btn btn-outline-primary w-100" for="btnradio<?= $numberButtons ?>"><?= "<b>Session $i: " . $time . "</b>" ?></label><br>
 
                             <!-- Increase the start date and time by 1.5 hours for the next session -->
-                            <?php $start_datetime->add($session_duration);
-                            $numberButtons++;
-                        } 
-                        ?>
-
+                            <?php $numberButtons++;
+                        } ?>
 
                         <!-- <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
                         <label class="btn btn-outline-primary w-100" for="btnradio2">Radio 2</label><br>
@@ -340,14 +327,16 @@
                     </div>
                     <div class="col-md-3">
                         <h4><ins>Friday 27 July</ins></h4>
-                        <input type="radio" class="btn-check" name="btnradio" id="btnradio4" autocomplete="off">
-                        <label class="btn btn-outline-primary w-100" for="btnradio4">Radio 4</label><br>
+                        <?php
+                        foreach ($session_times as $time) { ?>
+                            <!-- Display the session date and time with the session number -->
+                            <input type="radio" class="btn-check" name="btnradio" id="btnradio<?= $numberButtons ?>"
+                                autocomplete="off">
+                            <label class="btn btn-outline-primary w-100" for="btnradio<?= $numberButtons ?>"><?= "<b>Session $i: " . $time . "</b>" ?></label><br>
 
-                        <input type="radio" class="btn-check" name="btnradio" id="btnradio5" autocomplete="off">
-                        <label class="btn btn-outline-primary w-100" for="btnradio5">Radio 5</label><br>
-
-                        <input type="radio" class="btn-check" name="btnradio" id="btnradio6" autocomplete="off">
-                        <label class="btn btn-outline-primary w-100" for="btnradio6">Radio 6</label>
+                            <!-- Increase the start date and time by 1.5 hours for the next session -->
+                            <?php $numberButtons++;
+                        } ?>
                     </div>
                     <div class="col-md-4">
                         <h4>Name on reservation</h4>
@@ -370,25 +359,29 @@
                 <div class="row">
                     <div class="col-md-3">
                         <h4><ins>Saturday 28 July</ins></h4>
-                        <input type="radio" class="btn-check" name="btnradio" id="btnradio7" autocomplete="off">
-                        <label class="btn btn-outline-primary w-100" for="btnradio7">Radio 7</label><br>
+                        <?php
+                        foreach ($session_times as $time) { ?>
+                            <!-- Display the session date and time with the session number -->
+                            <input type="radio" class="btn-check" name="btnradio" id="btnradio<?= $numberButtons ?>"
+                                autocomplete="off">
+                            <label class="btn btn-outline-primary w-100" for="btnradio<?= $numberButtons ?>"><?= "<b>Session $i: " . $time . "</b>" ?></label><br>
 
-                        <input type="radio" class="btn-check" name="btnradio" id="btnradio8" autocomplete="off">
-                        <label class="btn btn-outline-primary w-100" for="btnradio8">Radio 8</label><br>
-
-                        <input type="radio" class="btn-check" name="btnradio" id="btnradio9" autocomplete="off">
-                        <label class="btn btn-outline-primary w-100" for="btnradio9">Radio 9</label>
+                            <!-- Increase the start date and time by 1.5 hours for the next session -->
+                            <?php $numberButtons++;
+                        } ?>
                     </div>
                     <div class="col-md-3">
                         <h4><ins>Sunday 29 July</ins></h4>
-                        <input type="radio" class="btn-check" name="btnradio" id="btnradio10" autocomplete="off">
-                        <label class="btn btn-outline-primary w-100" for="btnradio10">Radio 10</label><br>
+                        <?php
+                        foreach ($session_times as $time) { ?>
+                            <!-- Display the session date and time with the session number -->
+                            <input type="radio" class="btn-check" name="btnradio" id="btnradio<?= $numberButtons ?>"
+                                autocomplete="off">
+                            <label class="btn btn-outline-primary w-100" for="btnradio<?= $numberButtons ?>"><?= "<b>Session $i: " . $time . "</b>" ?></label><br>
 
-                        <input type="radio" class="btn-check" name="btnradio" id="btnradio11" autocomplete="off">
-                        <label class="btn btn-outline-primary w-100" for="btnradio11">Radio 11</label><br>
-
-                        <input type="radio" class="btn-check" name="btnradio" id="btnradio12" autocomplete="off">
-                        <label class="btn btn-outline-primary w-100" for="btnradio12">Radio 12</label>
+                            <!-- Increase the start date and time by 1.5 hours for the next session -->
+                            <?php $numberButtons++;
+                        } ?>
                     </div>
                     <div class="col-6">
                         <h4>Number of adults</h4>
@@ -422,6 +415,8 @@
                         <h4>Any special requests or allergies? Enter them below.</h4>
                     </div>
                     <div class="col-md-6">
+                        <br><br>
+                        <h4>Details</h4>
                     </div>
                 </div>
                 <div class="row">
@@ -432,9 +427,9 @@
                     </div>
                     <div class="col-md-6">
                         <div class="border" id="overview">
-                            <p>Adults(): </p>
-                            <p>Children(): </p>
-                            <p>Reservation fee: </p>
+                            <p>Number of adults: <span id="adults">1</span></p>
+                            <p>Number Children: <span id="children">0</span></p>
+                            <p>Reservation fee* (<span id="group">1</span>): </p>
                             <hr>
                             <p>Total price: </p>
                         </div>
@@ -452,6 +447,7 @@
         // <<<<<<<<<<-------------- HIER OVERLAY ---------------->>>>>>>>>>>>
 
         const overlayContainer = document.querySelector('.overlay-container');
+        const overlay = document.querySelector('.overlay');
 
         function showOverlay() {
             overlayContainer.style.display = 'flex';
@@ -469,14 +465,45 @@
         // hide the overlay after 5 seconds
         // setTimeout(hideOverlay, 5000);
 
+        document.addEventListener('mousedown', (event) => {
+            if (!overlayContainer.contains(event.target)) {
+                overlayContainer.style.display = 'none';
+            }
+        });
+
         // <<<<<<<<<<-------------- EINDE OVERLAY --------------->>>>>>>>>>>>
 
-        // <<<<<<<<-------------- HIER PLUS EN MIN KNOPPEN ------------>>>>>>>>
         // Get the input element and plus/minus buttons
         const adultInput = document.getElementById("nrAdult");
+        const childInput = document.getElementById("nrChild");
+
+        adultInput.addEventListener("change", function (event) {
+            // If the input value is above the max value, set it to the max value
+            if (adultInput.value > parseInt(adultInput.max)) {
+                adultInput.value = adultInput.max;
+            }
+            if (adultInput.value < adultInput.min) {
+                adultInput.value = adultInput.min;
+            }
+            document.getElementById("adults").textContent = adultInput.value;
+            updateGroupNr();
+        });
+
+        childInput.addEventListener("change", function (event) {
+            // If the input value is above the max value, set it to the max value
+            if (childInput.value > parseInt(childInput.max)) {
+                childInput.value = childInput.max;
+            }
+            if (childInput.value < childInput.min) {
+                childInput.value = childInput.min;
+            }
+            document.getElementById("children").textContent = childInput.value;
+            updateGroupNr();
+        });
+        // <<<<<<<<-------------- HIER PLUS EN MIN KNOPPEN ------------>>>>>>>>
         const aMinusBtn = document.querySelector(".Aminus-btn");
         const aPlusBtn = document.querySelector(".Aplus-btn");
-        const childInput = document.getElementById("nrChild");
+
         const cMinusBtn = document.querySelector(".Cminus-btn");
         const cPlusBtn = document.querySelector(".Cplus-btn");
 
@@ -484,12 +511,16 @@
         aMinusBtn.addEventListener("click", () => {
             if (adultInput.value > 1) {
                 adultInput.value = parseInt(adultInput.value) - 1;
+                document.getElementById("adults").textContent = adultInput.value;
+                updateGroupNr();
             }
         });
 
         aPlusBtn.addEventListener("click", () => {
             if (adultInput.value < 20) {
                 adultInput.value = parseInt(adultInput.value) + 1;
+                document.getElementById("adults").textContent = adultInput.value;
+                updateGroupNr();
             }
         });
 
@@ -497,17 +528,26 @@
         cMinusBtn.addEventListener("click", () => {
             if (childInput.value > 0) {
                 childInput.value = parseInt(childInput.value) - 1;
+                document.getElementById("children").textContent = childInput.value;
+                updateGroupNr();
             }
         });
 
         cPlusBtn.addEventListener("click", () => {
             if (childInput.value < 20) {
                 childInput.value = parseInt(childInput.value) + 1;
+                document.getElementById("children").textContent = childInput.value;
+                updateGroupNr();
             }
         });
-            // <<<<<<<<---------------- EINDE KNOPPEN ------------------>>>>>>>>>
+        // <<<<<<<<---------------- EINDE KNOPPEN ------------------>>>>>>>>>
+
+        function updateGroupNr() {
+            groupNr = parseInt(adultInput.value) + parseInt(childInput.value);
+            document.getElementById("group").textContent = groupNr;
+        }
+
     </script>
 
-    <!-- EINDE OVERLAY -->
 
 </body>
