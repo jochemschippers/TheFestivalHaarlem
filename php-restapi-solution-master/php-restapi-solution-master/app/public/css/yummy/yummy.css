@@ -5,6 +5,7 @@ html, body {
   z-index: -999;
   position: relative;
 }
+
 .background-Image{
   background-image: url("/image/yummy/home/YummyBanner.png");
 }

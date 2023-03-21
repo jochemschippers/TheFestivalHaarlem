@@ -38,6 +38,16 @@ class YummyController extends Controller
 
        $this->displayView($models);
     }
+    public function YummyReservation() {
+        
+        $restaurantId = $_GET['restaurantId'];
+        $models = [
+            "restaurantId"=> $restaurantId,
+            "restaurant" => $this->yummyService->getOne($restaurantId)
+        ];
+
+       $this->displayView($models);
+    }
     public function getAll()
     {
         // retrieve data
