@@ -20,12 +20,12 @@ class LandmarkService {
         return $this->repository->getLandmark($landmarkID);
     }
 
-    public function createLandmark($title, $description, $image) {
-        $this->repository->createLandmark($title, $description, $image);
+    public function createLandmark($landmark) {
+        $this->repository->createLandmark($landmark);
     }
 
-    public function updateLandmark($landmarkID, $title, $description, $image) {
-        $this->repository->updateLandmark($landmarkID, $title, $description, $image);
+    public function updateLandmark($landmark) {
+        $this->repository->updateLandmark($landmark);
     }
 
     public function deleteLandmark($landmarkID) {
