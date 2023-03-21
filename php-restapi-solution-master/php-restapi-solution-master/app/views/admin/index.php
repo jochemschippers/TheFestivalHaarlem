@@ -17,7 +17,7 @@ include __DIR__ . '/../navbar.php';
                 echo '<td>' . $landmark->getTitle() . '</td>';
                 echo '<td>' . $landmark->getDescription() . '</td>';
                 echo '<td>' . $landmark->getImage() . '</td>';
-                echo '<td><a href="index.php?action=edit&id=' . $landmark->getLandmarkID() . '">Edit</a> | <a href="index.php?action=delete&id=' . $landmark->getLandmarkID() . '">Delete</a></td>';
+                echo '<td><a href="index.php?action=editLandmark&id=' . $landmark->getLandmarkID() . '">Edit</a> | <a href="index.php?action=deleteLandmark&id=' . $landmark->getLandmarkID() . '">Delete</a></td>';
                 echo '</tr>';
             }
             echo '</table>';

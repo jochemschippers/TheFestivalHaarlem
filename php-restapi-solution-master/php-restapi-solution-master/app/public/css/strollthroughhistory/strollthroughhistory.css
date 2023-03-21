@@ -111,7 +111,7 @@ body{
     position: relative;
     width: 100%;
     background-color: #FEB548;
-    margin-bottom: 50rem;
+    margin-bottom: 2rem;
   }
 
   ol.nummeric-list{
@@ -133,20 +133,17 @@ body{
     width: 100%;
     background-color: #FEB548;
     color: #243459;
-    font-size: 1.8rem;
-    font-weight: 600;
     font-family: 'Open Sans',sans-serif;
     line-height: 2.4rem;
     text-align: left;
     text-decoration-line: underline;
-
   }
 
   #schedule{
     position: relative;
     width: 100%;
     background-color: #FEB548;
-    margin-bottom: 50rem;
+    margin-bottom: 2rem;
     color: #000;
     font-family: 'Open Sans',sans-serif;
   }
