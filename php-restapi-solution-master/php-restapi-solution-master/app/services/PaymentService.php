@@ -9,8 +9,7 @@ class PaymentService {
         $this->repository = new PaymentRepository();
     }
     public function GetJazzTickets() {
-        $JazzTickets = $this->repository->GetJazzTickets();
-        return $JazzTickets;
+        return $this->repository->GetJazzTickets();
     }
 }
 

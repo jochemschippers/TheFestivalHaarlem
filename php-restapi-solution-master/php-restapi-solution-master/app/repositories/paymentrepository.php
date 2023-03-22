@@ -14,9 +14,7 @@ class PaymentRepository extends Repository
         JOIN timeSlots ON eventTickets.timeSlotID = timeSlots.timeSlotID
         JOIN TimeSlotsJazz ON timeSlots.timeSlotID = TimeSlotsJazz.timeSlotID
         JOIN JazzArtists ON JazzArtists.artistID = TimeSlotsJazz.artistID
-        JOIN JazzLocations ON JazzLocations.locationID = TimeSlotsJazz.locationID
-        WHERE eventTickets.programID = 1;
-        ");
+        JOIN JazzLocations ON JazzLocations.locationID = TimeSlotsJazz.locationID");
 
         $stmt->setFetchMode(PDO::FETCH_ASSOC);
         $stmt->execute();
