@@ -18,7 +18,7 @@ class YummyController extends Controller
         $models = [
             "restaurants" => $this->yummyService->getAll(),
             "foodTypes" =>  $this->yummyService->getFoodTypes(),
-            "restaurantFoodTypes" => $this->yummyService->getRestaurantFoodTypes(),
+            "restaurantFoodTypes" => $this->yummyService->getAllRestaurantFoodTypes(),
         ];
 
         
@@ -33,7 +33,7 @@ class YummyController extends Controller
             "restaurant" => $this->yummyService->getOne($restaurantId),
             "menuItems" =>  $this->yummyService->getMenuItems($restaurantId),
             "images" => $this->yummyService->getImages($restaurantId),
-            "restaurantFoodTypes" => $this->yummyService->getRestaurantFoodTypes(),
+            "restaurantFoodTypes" => $this->yummyService->getAllRestaurantFoodTypes(),
         ];
 
        $this->displayView($models);
@@ -81,6 +81,6 @@ class YummyController extends Controller
     }
     public function getRestaurantFoodTypes(){
         // retrieve data
-        return $this->yummyService->getRestaurantFoodTypes();
+        return $this->yummyService->getAllRestaurantFoodTypes();
     }
 }
