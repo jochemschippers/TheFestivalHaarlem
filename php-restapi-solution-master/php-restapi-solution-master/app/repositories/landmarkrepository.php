@@ -23,28 +23,30 @@ class LandmarkRepository extends Repository
                 array_push($landmarks, $landmark);
             }
             return $landmarks;
+            
         } catch (PDOException $e) {
             echo $e;
         }
     }
 
     // Create a new landmark
-    function createLandmark($title, $description, $image)
+    function createLandmark($landmark)
     {
         try {
-          $stmt = $this->connection->prepare("INSERT INTO LandMarks ('title', 'description', 'image') VALUES (?,?,?)");
-          $stmt->execute([$title, $description, $image]);
+          $stmt = $this->connection->prepare("INSERT INTO `LandMarks` (`title`, `description`, `image`) VALUES (?,?,?)");
+          $stmt->execute([$landmark->getTitle(), $landmark->getDescription(), $landmark->getImage()]);
+
         } catch (PDOException $e) {
           echo $e;
         }
     }
 
     // Update a landmark
-    function updateLandmark($landmarkID, $title, $description, $image) 
+    function updateLandmark($landmark) 
     {
         try {
           $stmt = $this->connection->prepare("UPDATE LandMarks SET 'title' = ?, 'description' = ?, 'image' = ? WHERE landMarkID = ?");
-          $stmt->execute([$title, $description, $image, $landmarkID]);
+          $stmt->execute([$landmark->getTitle(), $landmark->getDescription(), $landmark->getImage(), $landmark->getLandmarkID()]);
         } catch (PDOException $e) {
           echo $e;
         }
@@ -69,6 +71,7 @@ class LandmarkRepository extends Repository
           $stmt->execute([$landmarkID]);
           $stmt->setFetchMode(PDO::FETCH_CLASS, 'Landmark');
           return $stmt->fetch();
+
         } catch (PDOException $e) {
           echo $e;
         }

@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/../repositories/historyrepository.php';
+require __DIR__ . '/../repositories/strollthroughhistoryrepository.php';
 
 
 class HistoryService 
@@ -25,11 +25,11 @@ class HistoryService
     }
 
     public function update($history) {
-        return $this->repository->update($history);
+        $this->repository->update($history);
     }
 
     public function delete($historyID) {
-        return $this->repository->delete($historyID);
+        $this->repository->delete($historyID);
     }
 }
 ?>
