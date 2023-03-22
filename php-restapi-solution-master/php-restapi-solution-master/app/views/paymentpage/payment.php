@@ -86,7 +86,7 @@ $grand_total = 0;
       </div>
     </div>
   </div>
-
+<div id="payContainer">
   <div class="container" id="smart-button-container">
     <div style="text-align: center;">
       <div id="paypal-button-container"></div>
@@ -178,4 +178,5 @@ $grand_total = 0;
       </tbody>
     </table>
   </div>
+        </div>
 </body>
