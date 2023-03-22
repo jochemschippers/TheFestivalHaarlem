@@ -100,21 +100,13 @@ $grand_total = 0;
                 </thead>
                 <!-- Create table body -->
                 <tbody>
-                    <?php foreach ($tickets as $ticket) { ?>
+                    <?php for ($i = 1; $i < count($jazzTickets); $i++) { ?>
                     <!-- Loop through each ticket and display its data in a row -->
                     <tr>
-                <td><?php echo $ticket["name"]; ?></td>
-                <td><?php echo $ticket["date"]; ?></td>
-                <td>$<?php echo number_format($ticket["price"],2); ?></td> 
-                <!-- Format price with two decimal places -->
-                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                <script>
-                    $("input[type='number']").keypress(function(evt) {
-                    evt.preventDefault();
-                });
-                </script>
-                
-                <td><input type="number" value=<?php echo $ticket["amount"]; ?> min="1"></td> 
+                <td><?php echo $jazzTickets[$i]->getArtistName(); ?></td>
+                <td>test</td>
+                <td>test</td> 
+                <td>test</td> 
                     </tr> 
                     <?php } ?>
                 </tbody> 

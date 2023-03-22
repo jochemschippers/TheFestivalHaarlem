@@ -1,17 +1,21 @@
 <?php
-require __DIR__ . '/../services/PaymentService.php';
+require_once __DIR__ . '/../services/PaymentService.php';
 require_once __DIR__ . '/controller.php';
 
 class paymentpageController extends Controller{
+    private $paymentService; 
     function __construct() {
         $this->paymentService = new PaymentService();
         parent::__construct();
-        $this->models = [];
+        
     }
-    private $models;
+    
   
     public function index() {
-        $this->displayView($this->models);
+        $models = [
+            "jazzTickets" => $this->paymentService->GetJazzTickets()
+        ];
+        $this->displayView($models);
         //require __DIR__ . '/../views/paymentpage/index.php';
     }
   
@@ -24,9 +28,9 @@ class paymentpageController extends Controller{
     public function recieve() {
         $this->displayView($this->models);
     }
-    private $paymentService; 
-    public function getEvents(){
-        return $this->paymentService->getAll();
-    }
+    
+    // public function getEvents(){
+    //     return $this->paymentService->getAll();
+    // }
 }
 ?>
