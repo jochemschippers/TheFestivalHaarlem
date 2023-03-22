@@ -6,14 +6,17 @@ class JazzTickets {
     private $artistName;
     private $locationName;
     private $hallID;
+	private $price;
+	
 
-    public function __construct($ticketID, $startTime, $endTime, $artistName, $locationName, $hallID) {
+    public function __construct($ticketID, $startTime, $endTime, $artistName, $locationName, $hallID, $price) {
         $this->ticketID = $ticketID;
         $this->startTime = $startTime;
         $this->endTime = $endTime;
         $this->artistName = $artistName;
         $this->locationName = $locationName;
         $this->hallID = $hallID;
+		$this->price = $price;
     }
 
 	/**
@@ -109,6 +112,22 @@ class JazzTickets {
 	 */
 	public function setHallID($hallID): self {
 		$this->hallID = $hallID;
+		return $this;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getPrice() {
+		return $this->price;
+	}
+	
+	/**
+	 * @param mixed $price 
+	 * @return self
+	 */
+	public function setPrice($price): self {
+		$this->price = $price;
 		return $this;
 	}
 }

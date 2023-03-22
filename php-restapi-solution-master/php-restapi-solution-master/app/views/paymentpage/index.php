@@ -105,13 +105,24 @@ $grand_total = 0;
                     <!-- Create table body -->
                     <tbody>
                         <?php
+                        $duplicateArtist = "";
+                        $duplicateDate = "";
+                        $amount = 1;
                         foreach ($JazzTickets as $jazzTicket) {
+                            $startTime = DateTime::createFromFormat('Y-m-d H:i:s', $jazzTicket->getStartTime());
+                            $endTime = DateTime::createFromFormat('Y-m-d H:i:s', $jazzTicket->getEndTime());
+                            $num = $jazzTicket->getPrice();
+                            $formattedNum = number_format($num, 2, '.', ',');
                             echo '<tr>';
-                            echo '<td>' . $jazzTicket->getTicketID() . '</td>';
+                            echo '<td> Id: ' . $jazzTicket->getTicketID() . '</td>';
                             echo '<td>' . $jazzTicket->getArtistName() . '</td>';
                             echo '<td>' . $jazzTicket->getLocationName() . '</td>';
-                            echo '<td>' . $jazzTicket->getTicketID() . '</td>';
-                            echo '<td>' . $jazzTicket->getHallID() . '</td>';
+                            echo '<td> Date: ' . $startTime->format('Y-m-d') . '</td>';
+                            echo '<td> Time: ' . $startTime->format('H:i') . '-' . $endTime->format('H:i') . '</td>';
+                            echo '<td> Hall: ' . $jazzTicket->getHallID() . '</td>';
+                            ?> <td>Price: &euro; <?php echo$formattedNum?></td>
+                            <td>Amount: <input type="number" value="<?php echo $amount; ?>" min="1"></td>
+                            <?php
                             echo '</tr>';
                         } ?>
                     </tbody>
