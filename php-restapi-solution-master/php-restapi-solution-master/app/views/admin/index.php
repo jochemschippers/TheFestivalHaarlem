@@ -50,19 +50,19 @@
         <form action="/admin/editLandmark" method="post" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="landmarkID">Landmark ID</label>
-                <input type="text" class="form-control" id="landmarkID" name="setLandmarkID" value="<?php echo $landmarkID->getLandmarkID(); ?>">
+                <input type="text" class="form-control" id="landmarkID" name="setLandmarkID">
             </div>
             <div class="mb-3">
                 <label for="title">Title</label>
-                <input type="text" class="form-control" id="landmark-title" name="setTitle" value="<?php echo $landmark->getTitle(); ?>">
+                <input type="text" class="form-control" id="landmark-title" name="setTitle" >
             </div>
             <div class="mb-3">
                 <label for="description">Description</label>
-                <input type="text" id="landmark-description" name="setDescription" value="<?php echo $landmark->getDescription(); ?>">
+                <input type="text" id="landmark-description" name="setDescription">
             </div>
             <div class="mb-3">
                 <label for="image">Image</label>
-                <input type="text" id="landmark-image" name="setImage" value="<?php echo $landmark->getImage(); ?>">
+                <input type="text" id="landmark-image" name="setImage">
             </div>
             <button type="submit" class="btn btn-primary">Edit</button>    
         </form>
@@ -74,7 +74,7 @@
         <form action="/admin/deleteLandmark" method="post" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="landmarkID">Landmark ID</label>
-                <input type="text" class="form-control" id="landmarkID" name="setLandmarkID" value="<?php echo $landmarkID->getLandmarkID(); ?>">
+                <input type="text" class="form-control" id="landmarkID" name="setLandmarkID">
             </div>
             <button type="submit" class="btn btn-primary">Delete</button>    
         </form>
