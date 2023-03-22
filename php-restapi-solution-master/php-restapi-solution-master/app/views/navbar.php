@@ -26,7 +26,8 @@
       }
       document.head.appendChild(style);
     }
-    setStyle(params[1], params[1]);
+    var parameter = params[1].replace("-", "");  
+    setStyle(parameter, parameter);
     if (params[2] != "") {
       setStyle(params[1], "detailPage")
     }
