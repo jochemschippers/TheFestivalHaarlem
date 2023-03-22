@@ -30,17 +30,17 @@ class AdminController extends Controller {
     }
 
     public function createLandmark() {
-        //$this->landmarkService->createLandmark($_POST['title'], $_POST['description'], $_POST['image']);
+        //$this->landmarkService->createLandmark(0, $_POST['setTitle'], $_POST['setDescription'], $_POST['setImage']);
         $landmark = new Landmark(0, $_POST['setTitle'], $_POST['setDescription'], $_POST['setImage']);
         $this->landmarkService->createLandmark($landmark);
     }
 
     public function updateLandmark() {
-        $this->landmarkService->updateLandmark($_POST['landmarkID'], $_POST['title'], $_POST['description'], $_POST['image']);
+        $this->landmarkService->updateLandmark($_POST['setLandmarkID'], $_POST['setTitle'], $_POST['setDescription'], $_POST['setImage']);
     }
 
     public function deleteLandmark() {
-        $this->landmarkService->deleteLandmark($_POST['landmarkID']);
+        $this->landmarkService->deleteLandmark($_POST['setLandmarkID']);
     }
 
 }

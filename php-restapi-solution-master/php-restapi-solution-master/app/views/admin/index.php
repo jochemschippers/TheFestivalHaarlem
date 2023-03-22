@@ -1,7 +1,4 @@
-<?php
-//include __DIR__ . '/../navbar.php';
 
-?>
  
 <body>
     <h1>Landmarks</h1>
@@ -24,13 +21,6 @@
         } else {
             echo '<p>No landmarks found.</p>';
         }
-        // foreach ($models as $landmark)
-        // {
-        //     echo "<h2>$landmark->title</h2>";
-        //     echo "<p>$landmark->description</p>";
-        //     echo "<p>$landmark->image</p>";
-        //     // echo "<img src='images/" . $landmark->getImage() . "' alt='Landmark image'>";
-        // }
         ?>
 
     </div>
@@ -41,15 +31,15 @@
         <form action="/admin/createLandmark" method="post" enctype="multipart/form-data">
         <div class="mb-3">
             <label for="title">Title</label>
-            <input type="text" class="form-control" id="landmark-title" name="setTitle" value="<?php echo $landmark->getTitle(); ?>">
+            <input type="text" class="form-control" id="landmark-title" name="setTitle">
         </div>
         <div class="mb-3">
             <label for="description">Description</label>
-            <input type="text" id="landmark-description" name="setDescription" value="<?php echo $landmark->getDescription(); ?>">
+            <input type="text" id="landmark-description" name="setDescription">
         </div>
         <div class="mb-3">
             <label for="image">Image</label>
-            <input type="text" id="landmark-image" name="setImage" value="<?php echo $landmark->getImage(); ?>">
+            <input type="text" id="landmark-image" name="setImage">
         </div>
             <button type="submit" class="btn btn-primary">Create</button>
     </div>
@@ -60,19 +50,19 @@
         <form action="/admin/editLandmark" method="post" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="landmarkID">Landmark ID</label>
-                <input type="text" class="form-control" id="landmarkID" name="landmarkID">
+                <input type="text" class="form-control" id="landmarkID" name="setLandmarkID">
             </div>
             <div class="mb-3">
                 <label for="title">Title</label>
-                <input type="text" class="form-control" id="landmark-title" name="title">
+                <input type="text" class="form-control" id="landmark-title" name="setTitle" >
             </div>
             <div class="mb-3">
                 <label for="description">Description</label>
-                <input type="text" id="landmark-description" name="description">
+                <input type="text" id="landmark-description" name="setDescription">
             </div>
             <div class="mb-3">
                 <label for="image">Image</label>
-                <input type="text" id="landmark-image" name="image">
+                <input type="text" id="landmark-image" name="setImage">
             </div>
             <button type="submit" class="btn btn-primary">Edit</button>    
         </form>
@@ -84,7 +74,7 @@
         <form action="/admin/deleteLandmark" method="post" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="landmarkID">Landmark ID</label>
-                <input type="text" class="form-control" id="landmarkID" name="landmarkID">
+                <input type="text" class="form-control" id="landmarkID" name="setLandmarkID">
             </div>
             <button type="submit" class="btn btn-primary">Delete</button>    
         </form>
