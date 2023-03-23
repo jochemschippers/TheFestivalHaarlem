@@ -51,6 +51,11 @@ class YummyService
         // retrieve data
         return $this->repository->getAllRestaurantFoodTypes();
     }
+    public function createReservation($reservation){
+
+        // creates a new restaurant
+        $this->repository->createReservation($reservation);
+    }
 
     // -------------------  Administrator  ----------------------
 

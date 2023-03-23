@@ -10,126 +10,212 @@
     <div class="title">
         <h1>Administrator Pannel</h1>
     </div>
-
-    <!-- ------------------ HIER LANDMARKS MENU ----------------------------- -->
-    <div class="landmarks"></div>
     <div class="card">
-        <div class="card-body">
-            <h2>Landmarks</h2>
+        <div class="row">
+            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                <button type="button" class="btn btn-secondary" id="users-btn">Users</button>
+                <button type="button" class="btn btn-info" id="festival-btn">Festival</button>
+                <button type="button" class="btn btn-warning" id="jazz-btn">Jazz</button>
+                <button type="button" class="btn btn-primary" id="history-btn">History</button>
+                <button type="button" class="btn btn-danger" id="yummy-btn">Yummy</button>
+            </div>
 
-            <div id="landmarks-table">
-                <?php
-                if (!is_null($landmarks) && count($landmarks) > 0) {
-                    echo '<table>';
-                    echo '<tr><th>ID</th><th>Title</th><th>Description</th><th>Image</th><th>Actions</th></tr>';
-                    foreach ($landmarks as $landmark) {
-                        echo '<tr>';
-                        echo '<td>' . $landmark->getLandmarkID() . '</td>';
-                        echo '<td>' . $landmark->getTitle() . '</td>';
-                        echo '<td>' . $landmark->getDescription() . '</td>';
-                        echo '<td>' . $landmark->getImage() . '</td>';
-                        echo '<td><a href="index.php?action=editLandmark&id=' . $landmark->getLandmarkID() . '">Edit</a> | <a href="index.php?action=deleteLandmark&id=' . $landmark->getLandmarkID() . '">Delete</a></td>';
-                        echo '</tr>';
+            <div id="content-container"></div>
+        </div>
+    </div>
+
+    <script>
+        // Get references to the buttons and the content container
+        const usersBtn = document.getElementById("users-btn");
+        const festivalBtn = document.getElementById("festival-btn");
+        const jazzBtn = document.getElementById("jazz-btn");
+        const historyBtn = document.getElementById("history-btn");
+        const yummyBtn = document.getElementById("yummy-btn");
+        const contentContainer = document.getElementById("content-container");
+
+        // Add click event listeners to the buttons
+        usersBtn.addEventListener("click", () => {
+            if (usersBtn === event.target) {
+                // Set the HTML content for usersBtn
+                const htmlContent = `
+                                    <h2>Users</h2>
+                                    <p>This is HTML content for Users button.</p>
+                                    `;
+                // Update the content container
+                contentContainer.innerHTML = htmlContent;
+            }
+        });
+
+        festivalBtn.addEventListener("click", () => {
+            if (festivalBtn === event.target) {
+                const htmlContent = `
+                                    <h2>Festival</h2>
+                                    <p>This is HTML content for Festival button.</p>
+                                    `;
+                contentContainer.innerHTML = htmlContent;
+            }
+        });
+
+        jazzBtn.addEventListener("click", () => {
+            if (jazzBtn === event.target) {
+                const htmlContent = `
+                                    <h2>Jazz</h2>
+                                    <p>This is HTML content for Jazz button.</p>
+                                    `;
+                contentContainer.innerHTML = htmlContent;
+            }
+        });
+
+        historyBtn.addEventListener("click", () => {
+            if (historyBtn === event.target) {
+                const htmlContent = `
+                                    <h2>History</h2>
+                                    <p>This is HTML content for History button.</p>
+                                    `;
+                contentContainer.innerHTML = htmlContent;
+            }
+        });
+
+        yummyBtn.addEventListener("click", () => {
+            if (yummyBtn === event.target) {
+                const htmlContent = `
+                                    <h2>Yummy</h2>
+                                    <p>This is HTML content for Yummy button.</p>
+                                    `;
+                contentContainer.innerHTML = htmlContent;
+            }
+        });
+    </script>
+
+    <!-- <button type="button" class="btn btn-danger">Danger</button>
+    <button type="button" class="btn btn-info">Info</button> -->
+
+    PAS DEZE NOG AAN EN IMPLEMENTEER BIJ DE NODIGE GROEP
+
+    <!-- ------------------ HIER History MENU ----------------------------- -->
+    <div class="history">
+
+        <div class="landmarks"></div>
+        <div class="card">
+            <div class="card-body">
+                <h2>Landmarks</h2>
+
+                <div id="landmarks-table">
+                    <?php
+                    if (!is_null($landmarks) && count($landmarks) > 0) {
+                        echo '<table>';
+                        echo '<tr><th>ID</th><th>Title</th><th>Description</th><th>Image</th><th>Actions</th></tr>';
+                        foreach ($landmarks as $landmark) {
+                            echo '<tr>';
+                            echo '<td>' . $landmark->getLandmarkID() . '</td>';
+                            echo '<td>' . $landmark->getTitle() . '</td>';
+                            echo '<td>' . $landmark->getDescription() . '</td>';
+                            echo '<td>' . $landmark->getImage() . '</td>';
+                            echo '<td>' ?> <a class="btn btn-primary"
+                                onclick="showEditRestaurant(<?php echo $landmark->getLandmarkID(); ?>)">Edit</a>
+                            <?php
+                            echo '<td>' ?> <a class="btn btn-danger"
+                                onclick="showDeleteButton(<?php echo $landmark->getLandmarkID(); ?>)">Delete</a>
+                            <?php
+                            echo '</tr>';
+                        }
+                        echo '</table>';
+                    } else {
+                        echo '<p>No landmarks found.</p>';
                     }
-                    echo '</table>';
-                } else {
-                    echo '<p>No landmarks found.</p>';
-                }
-                // foreach ($models as $landmark)
-                // {
-                //     echo "<h2>$landmark->title</h2>";
-                //     echo "<p>$landmark->description</p>";
-                //     echo "<p>$landmark->image</p>";
-                //     // echo "<img src='images/" . $landmark->getImage() . "' alt='Landmark image'>";
-                // }
-                ?>
-            </div>
-        </div>
-    </div>
-
-    <div class="card-group">
-        <div class="card">
-            <div class="card-body" id="cardBody">
-                <h4>Add Landmark</h4>
-
-                <div id="landmark-form">
-                    <form action="/admin/createLandmark" method="post" enctype="multipart/form-data">
-                        <div class="mb-3">
-                            <label for="title">Title</label>
-                            <input type="text" class="form-control" id="landmark-title" name="setTitle"
-                                placeholder="title">
-                        </div>
-                        <div class="mb-3">
-                            <label for="description">Description</label>
-                            <input type="text" class="form-control" id="landmark-description" name="setDescription"
-                                placeholder="description">
-                        </div>
-                        <div class="mb-3">
-                            <label for="image">Image</label>
-                            <input type="text" class="form-control" id="landmark-image" name="setImage"
-                                placeholder="image/link">
-                        </div>
-                        <div class="d-grid gap-2" id="buttons">
-                            <button type="submit" class="btn btn-primary btn-lg">Create</button>
-                        </div>
-                    </form>
+                    ?>
                 </div>
             </div>
         </div>
 
-        <div class="card">
-            <div class="card-body" id="cardBody">
+        <div class="card-group">
+            <div class="card">
+                <div class="card-body" id="cardBody">
+                    <h4>Add Landmark</h4>
 
-                <h4>Edit Landmark</h4>
-                <div id="edit-landmark-form">
-                    <form action="/admin/editLandmark" method="post" enctype="multipart/form-data">
-                        <div class="mb-3">
-                            <label for="landmarkID">Landmark ID</label>
-                            <input type="text" class="form-control" id="landmarkID" name="landmarkID">
-                        </div>
-                        <div class="mb-3">
-                            <label for="title">Title</label>
-                            <input type="text" class="form-control" id="landmark-title" name="title"
-                                placeholder="<?php echo $landmark->getTitle(); ?>">
-                        </div>
-                        <div class="mb-3">
-                            <label for="description">Description</label>
-                            <input type="text" class="form-control" id="landmark-description" name="description"
-                                placeholder="<?php echo $landmark->getDescription(); ?>">
-                        </div>
-                        <div class="mb-3">
-                            <label for="image">Image</label>
-                            <input type="text" class="form-control" id="landmark-image" name="image"
-                                placeholder="<?php echo $landmark->getImage(); ?>">
-                        </div>
-                        <div class="d-grid gap-2" id="buttons">
-                            <button type="submit" class="btn btn-primary btn-lg">Edit</button>
-                        </div>
-                    </form>
+                    <div id="landmark-form">
+                        <form action="/admin/createLandmark" method="post" enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <label for="title">Title</label>
+                                <input type="text" class="form-control" id="landmark-title" name="setTitle"
+                                    placeholder="title">
+                            </div>
+                            <div class="mb-3">
+                                <label for="description">Description</label>
+                                <input type="text" class="form-control" id="landmark-description" name="setDescription"
+                                    placeholder="description">
+                            </div>
+                            <div class="mb-3">
+                                <label for="image">Image</label>
+                                <input type="text" class="form-control" id="landmark-image" name="setImage"
+                                    placeholder="image/link">
+                            </div>
+                            <div class="d-grid gap-2" id="buttons">
+                                <button type="submit" class="btn btn-primary btn-lg">Create</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="card">
-            <div class="card-body" id="cardBody">
+            <div class="card">
+                <div class="card-body" id="cardBody">
 
-                <h4>Delete Landmark</h4>
+                    <h4>Edit Landmark</h4>
+                    <div id="edit-landmark-form">
+                        <form action="/admin/editLandmark" method="post" enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <label for="landmarkID">Landmark ID</label>
+                                <input type="text" class="form-control" id="landmarkID" name="landmarkID">
+                            </div>
+                            <div class="mb-3">
+                                <label for="title">Title</label>
+                                <input type="text" class="form-control" id="landmark-title" name="title"
+                                    placeholder="<?php echo $landmark->getTitle(); ?>">
+                            </div>
+                            <div class="mb-3">
+                                <label for="description">Description</label>
+                                <input type="text" class="form-control" id="landmark-description" name="description"
+                                    placeholder="<?php echo $landmark->getDescription(); ?>">
+                            </div>
+                            <div class="mb-3">
+                                <label for="image">Image</label>
+                                <input type="text" class="form-control" id="landmark-image" name="image"
+                                    placeholder="<?php echo $landmark->getImage(); ?>">
+                            </div>
+                            <div class="d-grid gap-2" id="buttons">
+                                <button type="submit" class="btn btn-primary btn-lg">Edit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
 
-                <div id="delete-landmark-form">
-                    <form action="/admin/deleteLandmark" method="post" enctype="multipart/form-data">
-                        <div class="mb-3">
-                            <label for="landmarkID">Landmark ID</label>
-                            <input type="text" class="form-control" id="landmarkID" name="landmarkID">
-                        </div>
-                        <div class="d-grid gap-2" id="buttons">
-                            <button type="submit" class="btn btn-primary btn-lg">Delete</button>
-                        </div>
-                    </form>
+            <div class="card">
+                <div class="card-body" id="cardBody">
+
+                    <h4>Delete Landmark</h4>
+
+                    <div id="delete-landmark-form">
+                        <form action="/admin/deleteLandmark" method="post" enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <label for="landmarkID">Landmark ID</label>
+                                <input type="text" class="form-control" id="landmarkID" name="landmarkID">
+                            </div>
+                            <div class="d-grid gap-2" id="buttons">
+                                <button type="submit" class="btn btn-primary btn-lg">Delete</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    </div>
+
+    <!-- ---------------------- HIER EINDE HISTORY ---------------------------- -->
+
+
+
 
     <!-- <form action="historycontroller.php" method="post"></form>
         <textarea name="historyeditor" id="historyeditor">
@@ -267,10 +353,14 @@
         </div>
     </div>
 
+    <!-- ----------------  YUMMY RESTAURANTS ----------------- -->
+
     <div class="restaurants"></div>
     <div class="card">
         <div class="card-body">
-            <h2>restaurants</h2>
+            <div class="row">
+                <h2>restaurants</h2>
+            </div>
 
             <div id="restaurants-table">
                 <?php
@@ -298,6 +388,13 @@
                         echo '<td>' . $restaurant->getChildPrice() . '</td>';
                         echo '<td>' . $restaurant->getStartTime()->format('Y-m-d H:i') . '</td>';
                         echo '<td>' . $restaurant->getDuration()->format('H:i') . '</td>';
+
+                        echo '<td>' ?> <a class="btn btn-primary"
+                            onclick="showEditRestaurant(<?php echo $restaurant->getRestaurantId(); ?>)">Edit</a>
+                        <?php
+                        echo '<td>' ?> <a class="btn btn-danger"
+                            onclick="showDeleteButton(<?php echo $restaurant->getRestaurantId(); ?>)">Delete</a>
+                        <?php
                         echo '</tr>';
                     }
                     echo '</table>';
@@ -306,8 +403,15 @@
                 }
                 ?>
             </div>
+            <div class="row">
+                <button type="button" class="btn btn-success" onclick="showAddRestaurant()">Add Restaurant</button>
+            </div>
         </div>
     </div>
+    <div id="restaurant-options"></div>
+
+
+
 
     <div class="card-group">
         <div class="card">
@@ -478,16 +582,22 @@
 
 
         <script>
+            var restaurants = <?= json_encode($restaurants); ?>;
+            console.log(restaurants);
+
+
+
             const editRestaurantId = document.getElementById("editRestaurantID");
 
             editRestaurantId.addEventListener("change", function (event) {
                 var enteredId = document.getElementById('editRestaurantID').value;
-                var restaurants = <?php echo json_encode($restaurants); ?>;
+
                 var restaurantFound = false;
 
                 restaurants.forEach(function (restaurant) {
-                    if (restaurant.getRestaurantID() === enteredId) {
-                        document.getElementById('editRestaurantName').value = restaurant.getName();
+                    console.log(restaurant);
+                    if (restaurant.getRestaurantID() == enteredId) {
+                        document.getElementById('editRestaurantName').value = restaurant.getRestaurantName();
                         document.getElementById('editRestaurantAddress').value = restaurant.getAddress();
                         document.getElementById('editRestaurantContact').value = restaurant.getContact();
                         document.getElementById('editRestaurantDescription').value = restaurant.getDescription();
@@ -517,6 +627,7 @@
                     // document.getElementById('editRestaurant-duration').value = '';
                 }
             });
+
 
                 // const editRestaurantId = document.getElementById("editRestaurantID");
 

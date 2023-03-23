@@ -293,6 +293,35 @@ class YummyRepository extends Repository
         }
     }
 
+    public function createReservation($reservation){
+        // creates a new reservation
+
+        //stap 1 werkend   >>>>>>> //INSERT INTO `timeSlots` (`timeSlotID`, `eventID`, `price`, `startTime`, `endTime`, `maximumAmountTickets`) VALUES ('5', '2', '10', '2023-07-26 17:00:00', '2023-07-26 18:30:00', '1');
+        //stap 2 werkend   >>>>>>> //INSERT INTO `RestaurantReservations` (`timeSlotID`, `restaurantID`, `customerName`, `phoneNumber`, `numberAdults`, `numberChildren`, `remark`) VALUES ('5', '2', 'mark', '85675654', '1', '3', 'ik wil graag in een hoekje zitten');
+        //stap 3 werkend  auto increment programID? of foreign key maken? >>>>>>> // INSERT INTO `eventTickets` (`ticketID`, `timeSlotID`, `programID`) VALUES ('6', '5', '2');
+        // personal program kan ik niks aan doen. heeft namelijk nog eeen klass nodig.
+
+
+        // gebruik restaurantReservation, Timeslots, eventTickets en personalProgram. gebruik join
+        try {
+            // query
+            $stmt = $this->connection->prepare("INSERT INTO `YummyReservations` (`restaurantName`, `address`, `contact`,
+            `adultPrice`, `childPrice`, `startTime`, `duration`) VALUES (?,?,?,?,?,?,?,?)");
+
+            $modelReservation = "'timeSlotID', 'restaurantID', 'customerName', 'phoneNumber', 'numberAdults', 'numberChildren', 'remark'";
+
+            // input
+            $stmt->execute([
+                $reservation->getTimeSlotID(), $reservation->getRestaurantID(), $reservation->getCustomerName(), $reservation->getPhoneNumber(),
+                $reservation->getNumberAdults(), $reservation->getNumberChildren(), $reservation->getRemark()
+            ]);
+
+
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+
     // ----------------------  ADMINISTRATOR -------------------------
 
     // ---------------------- YUMMYRESTAURANT ------------------------

@@ -3,12 +3,13 @@ require __DIR__ . '/../services/PaymentService.php';
 require_once __DIR__ . '/controller.php';
 
 class paymentpageController extends Controller{
+    private $models;
+    
     function __construct() {
         $this->paymentService = new PaymentService();
         parent::__construct();
         $this->models = [];
     }
-    private $models;
   
     public function index() {
         $this->displayView($this->models);
