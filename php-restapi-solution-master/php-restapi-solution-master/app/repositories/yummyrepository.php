@@ -8,7 +8,8 @@ require_once __DIR__ . '/../models/restaurantFoodType.php';
 
 class YummyRepository extends Repository
 {
-    function getAll() {
+    function getAll()
+    {
         try {
             $stmt = $this->connection->prepare("
             SELECT *
@@ -22,9 +23,9 @@ class YummyRepository extends Repository
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $stmt->execute();
             $results = $stmt->fetchAll();
-    
+
             $restaurants = [];
-            foreach($results as $row){
+            foreach ($results as $row) {
                 $restaurant = new YummyRestaurant(
 
                     $row["restaurantID"],
@@ -45,14 +46,14 @@ class YummyRepository extends Repository
                 array_push($restaurants, $restaurant);
             }
             return $restaurants;
-    
-        } catch (PDOException $e)
-        {
+
+        } catch (PDOException $e) {
             echo $e;
         }
     }
 
-    function getOne($restaurantId) {
+    function getOne($restaurantId)
+    {
         try {
             $stmt = $this->connection->prepare("
             SELECT *
@@ -66,13 +67,13 @@ class YummyRepository extends Repository
             // FROM yummyRestaurants r
             // JOIN restaurantMenuItems m ON r.restaurantId = m.restaurantId
 
-            
+
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $stmt->execute();
             $results = $stmt->fetchAll();
-    
+
             $restaurants = [];
-            foreach($results as $row){
+            foreach ($results as $row) {
                 $restaurant = new YummyRestaurant(
 
                     $row["restaurantID"],
@@ -91,24 +92,22 @@ class YummyRepository extends Repository
                     new DateTime($row['duration'])
                 );
                 array_push($restaurants, $restaurant);
-                
+
             }
             return $restaurants;
-    
-        } catch (PDOException $e)
-        {
+
+        } catch (PDOException $e) {
             echo $e;
         }
     }
 
-    function getMenuItems($restaurantId) {
+    function getAllMenuItems()
+    {
         try {
             $stmt = $this->connection->prepare("
-            SELECT * FROM `RestaurantMenuItems` WHERE restaurantId = :_restaurantId
+            SELECT * FROM `RestaurantMenuItems`
             ");
 
-            // Bind the parameter value to the placeholder
-            $stmt->bindParam(':_restaurantId', $restaurantId);
 
             // SELECT r.*, m.-----, m.----
             // FROM yummyRestaurants r
@@ -117,7 +116,7 @@ class YummyRepository extends Repository
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $stmt->execute();
             $results = $stmt->fetchAll();
-    
+
             $menus = [];
             foreach ($results as $row) {
                 $menu = new RestaurantMenuItem(
@@ -133,13 +132,52 @@ class YummyRepository extends Repository
                 array_push($menus, $menu);
             }
             return $menus;
-    
-        } catch (PDOException $e)
-        {
+
+        } catch (PDOException $e) {
             echo $e;
         }
     }
-    function getAllImages() {
+
+    function getMenuItems($restaurantId)
+    {
+        try {
+            $stmt = $this->connection->prepare("
+            SELECT * FROM `RestaurantMenuItems` WHERE restaurantId = :_restaurantId
+            ");
+
+            // Bind the parameter value to the placeholder
+            $stmt->bindParam(':_restaurantId', $restaurantId);
+
+            // SELECT r.*, m.-----, m.----
+            // FROM yummyRestaurants r
+            // JOIN restaurantMenuItems m ON r.restaurantId = m.restaurantId
+
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $stmt->execute();
+            $results = $stmt->fetchAll();
+
+            $menus = [];
+            foreach ($results as $row) {
+                $menu = new RestaurantMenuItem(
+
+                    $row["menuItemID"],
+                    $row["restaurantID"],
+                    $row['courseID'],
+                    $row['name'],
+                    $row['description'],
+                    $row['price'],
+                    $row['specialty']
+                );
+                array_push($menus, $menu);
+            }
+            return $menus;
+
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+    function getAllImages()
+    {
         try {
             $stmt = $this->connection->prepare("
             SELECT * FROM `RestaurantImages`
@@ -148,7 +186,7 @@ class YummyRepository extends Repository
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $stmt->execute();
             $results = $stmt->fetchAll();
-    
+
             $images = [];
             foreach ($results as $row) {
                 $image = new RestaurantImage(
@@ -161,13 +199,13 @@ class YummyRepository extends Repository
                 array_push($images, $image);
             }
             return $images;
-    
-        } catch (PDOException $e)
-        {
+
+        } catch (PDOException $e) {
             echo $e;
         }
     }
-    function getImages($restaurantId) {
+    function getImages($restaurantId)
+    {
         try {
             $stmt = $this->connection->prepare("
             SELECT * FROM `RestaurantImages` WHERE restaurantId = :_restaurantId
@@ -179,7 +217,7 @@ class YummyRepository extends Repository
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $stmt->execute();
             $results = $stmt->fetchAll();
-    
+
             $images = [];
             foreach ($results as $row) {
                 $image = new RestaurantImage(
@@ -192,23 +230,23 @@ class YummyRepository extends Repository
                 array_push($images, $image);
             }
             return $images;
-    
-        } catch (PDOException $e)
-        {
+
+        } catch (PDOException $e) {
             echo $e;
         }
     }
-    function getFoodTypes() {
+    function getAllFoodTypes()
+    {
         try {
             $stmt = $this->connection->prepare("
-            SELECT * 
+            SELECT *
             FROM `FoodTypes`
             ");
 
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $stmt->execute();
             $results = $stmt->fetchAll();
-    
+
             $types = [];
             foreach ($results as $row) {
                 $type = new FoodType(
@@ -218,13 +256,13 @@ class YummyRepository extends Repository
                 array_push($types, $type);
             }
             return $types;
-    
-        } catch (PDOException $e)
-        {
+
+        } catch (PDOException $e) {
             echo $e;
         }
     }
-    function getRestaurantFoodTypes() {
+    function getAllRestaurantFoodTypes()
+    {
         try {
             $stmt = $this->connection->prepare("
             SELECT r.*, f.foodTypeName
@@ -232,16 +270,12 @@ class YummyRepository extends Repository
             JOIN FoodTypes f ON r.foodType = f.foodTypeId
             ");
 
-            // SELECT r.*, m.-----, m.----
-            // FROM yummyRestaurants r
-            // JOIN restaurantMenuItems m ON r.restaurantId = m.restaurantId
-
             // Bind the parameter value to the placeholder
 
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $stmt->execute();
             $results = $stmt->fetchAll();
-    
+
             $types = [];
             foreach ($results as $row) {
                 $type = new RestaurantFoodType(
@@ -253,11 +287,103 @@ class YummyRepository extends Repository
                 array_push($types, $type);
             }
             return $types;
-    
-        } catch (PDOException $e)
-        {
+
+        } catch (PDOException $e) {
             echo $e;
         }
     }
+
+    public function createReservation($reservation){
+        // creates a new reservation
+
+        //stap 1 werkend   >>>>>>> //INSERT INTO `timeSlots` (`timeSlotID`, `eventID`, `price`, `startTime`, `endTime`, `maximumAmountTickets`) VALUES ('5', '2', '10', '2023-07-26 17:00:00', '2023-07-26 18:30:00', '1');
+        //stap 2 werkend   >>>>>>> //INSERT INTO `RestaurantReservations` (`timeSlotID`, `restaurantID`, `customerName`, `phoneNumber`, `numberAdults`, `numberChildren`, `remark`) VALUES ('5', '2', 'mark', '85675654', '1', '3', 'ik wil graag in een hoekje zitten');
+        //stap 3 werkend  auto increment programID? of foreign key maken? >>>>>>> // INSERT INTO `eventTickets` (`ticketID`, `timeSlotID`, `programID`) VALUES ('6', '5', '2');
+        // personal program kan ik niks aan doen. heeft namelijk nog eeen klass nodig.
+
+
+        // gebruik restaurantReservation, Timeslots, eventTickets en personalProgram. gebruik join
+        try {
+            // query
+            $stmt = $this->connection->prepare("INSERT INTO `YummyReservations` (`restaurantName`, `address`, `contact`,
+            `adultPrice`, `childPrice`, `startTime`, `duration`) VALUES (?,?,?,?,?,?,?,?)");
+
+            $modelReservation = "'timeSlotID', 'restaurantID', 'customerName', 'phoneNumber', 'numberAdults', 'numberChildren', 'remark'";
+
+            // input
+            $stmt->execute([
+                $reservation->getTimeSlotID(), $reservation->getRestaurantID(), $reservation->getCustomerName(), $reservation->getPhoneNumber(),
+                $reservation->getNumberAdults(), $reservation->getNumberChildren(), $reservation->getRemark()
+            ]);
+
+
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+
+    // ----------------------  ADMINISTRATOR -------------------------
+
+    // ---------------------- YUMMYRESTAURANT ------------------------
+
+    public function createRestaurant($restaurant)
+    {
+        // creates a new restaurant
+        try {
+            // query
+            $stmt = $this->connection->prepare("INSERT INTO `YummyRestaurants` (`restaurantName`, `address`, `contact`,
+            `cardDescription`, `description`, `amountOfStars`, `bannerImage`, `headChef`, `amountSessions`,
+            `adultPrice`, `childPrice`, `startTime`, `duration`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)");
+
+            // input
+            $stmt->execute([
+                $restaurant->getRestaurantName(), $restaurant->getAddress(), $restaurant->getContact(),
+                $restaurant->getCardDescription(), $restaurant->getDescription(), $restaurant->getAmountOfStars(),
+                $restaurant->getBannerImage(), $restaurant->getHeadChef(), $restaurant->getAmountSessions(),
+                $restaurant->getAdultPrice(), $restaurant->getChildPrice(), $restaurant->getStartTime()->format('Y-m-d H:i:s'), $restaurant->getDuration()->format('H:i:s')
+            ]);
+
+
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+
+    public function updateRestaurant($update)
+    {
+        // this updates a existing restaurant
+        try {
+            // query
+            $stmt = $this->connection->prepare("UPDATE `YummyRestaurants` SET 'restaurantName' = ?, 'address' = ?,
+            'contact' = ?, 'cardDescription' = ?, 'description' = ?, 'amountOfStars' = ?, 'bannerImage' = ?,
+            'headChef' = ?, 'amountSessions' = ?, 'adultPrice' = ?, 'childPrice' = ?, 'startTime' = ?,
+            'duration' = ? WHERE restaurantID = ?");
+
+
+            // input
+            $stmt->execute([
+                $update->getRestaurantName(), $update->getAddress(), $update->getContact(),
+                $update->getCardDescription(), $update->getDescription(), $update->getAmountOfStars(),
+                $update->getBannerImage(), $update->getHeadChef(), $update->getAmountSessions(),
+                $update->getAdultPrice(), $update->getChildPrice(), $update->getStartTime()->format('Y-m-d H:i:s'),
+                $update->getDuration()->format('H:i:s'), $update->getRestaurantID()
+            ]);
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+
+    public function deleteRestaurant($delete)
+    {
+        // this will delete a existing restaurant
+        try {
+            $stmt = $this->connection->prepare("DELETE FROM `YummyRestaurants` WHERE restaurantID = ?");
+            $stmt->execute([$delete]);
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+
+    
 }
 ?>

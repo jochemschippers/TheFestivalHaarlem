@@ -2,6 +2,8 @@
 require_once __DIR__ . '/../services/PaymentService.php';
 require_once __DIR__ . '/controller.php';
 
+
+
 class paymentpageController extends Controller
 {
     private $paymentService;
@@ -9,8 +11,10 @@ class paymentpageController extends Controller
     {
         parent::__construct();
         $this->paymentService = new PaymentService();
+        parent::__construct();
+        $this->paymentService = new PaymentService();
     }
-    private $models;
+
 
     public function index()
     {
@@ -18,8 +22,9 @@ class paymentpageController extends Controller
             "JazzTickets" => $this->paymentService->GetJazzTickets()
         ];
         $this->displayView($models);
-        //require __DIR__ . '/../views/paymentpage/index.php';
     }
+  
+    
 
     public function login()
     {

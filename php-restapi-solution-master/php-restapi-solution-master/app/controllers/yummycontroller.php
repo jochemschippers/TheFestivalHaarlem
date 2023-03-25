@@ -8,7 +8,8 @@ class YummyController extends Controller
     private $yummyService;
 
     // initialize services
-    function __construct() {
+    function __construct()
+    {
         parent::__construct();
         $this->yummyService = new YummyService();
     }
@@ -17,36 +18,38 @@ class YummyController extends Controller
     {
         $models = [
             "restaurants" => $this->yummyService->getAll(),
-            "foodTypes" =>  $this->yummyService->getFoodTypes(),
-            "restaurantFoodTypes" => $this->yummyService->getRestaurantFoodTypes(),
+            "foodTypes" => $this->yummyService->getFoodTypes(),
+            "restaurantFoodTypes" => $this->yummyService->getAllRestaurantFoodTypes(),
         ];
 
-        
+
 
         $this->displayView($models);
     }
-    public function restaurant() {
-        
+    public function restaurant()
+    {
+
         $restaurantId = $_GET['restaurantId'];
         $models = [
-            "restaurantId"=> $restaurantId,
+            "restaurantId" => $restaurantId,
             "restaurant" => $this->yummyService->getOne($restaurantId),
-            "menuItems" =>  $this->yummyService->getMenuItems($restaurantId),
+            "menuItems" => $this->yummyService->getMenuItems($restaurantId),
             "images" => $this->yummyService->getImages($restaurantId),
-            "restaurantFoodTypes" => $this->yummyService->getRestaurantFoodTypes(),
+            "restaurantFoodTypes" => $this->yummyService->getAllRestaurantFoodTypes(),
         ];
 
-       $this->displayView($models);
+        $this->displayView($models);
     }
-    public function YummyReservation() {
-        
+    public function YummyReservation()
+    {
+
         $restaurantId = $_GET['restaurantId'];
         $models = [
-            "restaurantId"=> $restaurantId,
+            "restaurantId" => $restaurantId,
             "restaurant" => $this->yummyService->getOne($restaurantId)
         ];
 
-       $this->displayView($models);
+        $this->displayView($models);
     }
     public function getAll()
     {
@@ -60,9 +63,10 @@ class YummyController extends Controller
         return $this->yummyService->getOne($restaurantId);
     }
 
-    public function getMenuItems($restaurantId){
-       // retrieve data
-       return $this->yummyService->getMenuItems($restaurantId);
+    public function getMenuItems($restaurantId)
+    {
+        // retrieve data
+        return $this->yummyService->getMenuItems($restaurantId);
     }
     public function getAllImages()
     {
@@ -79,8 +83,51 @@ class YummyController extends Controller
         // retrieve data
         return $this->yummyService->getFoodTypes();
     }
-    public function getRestaurantFoodTypes(){
+    public function getRestaurantFoodTypes()
+    {
         // retrieve data
-        return $this->yummyService->getRestaurantFoodTypes();
+        return $this->yummyService->getAllRestaurantFoodTypes();
+    }
+
+    public function createReservation()
+    {
+        // private int $timeSlotID; //key
+        // private int $restaurantID;
+        // private string $customerName;
+        // private string $phoneNumber;
+        // private int $numberAdults;
+        // private int $numberChildren;
+        // private string $remark;
+
+        // check if all the required POST parameters are set
+        if (
+            isset($_POST['timeSlotID'], $_POST['restaurantID'], $_POST['customerName'], $_POST['phoneNumber'],
+            $_POST['numberAdults'], $_POST['createRestaurantDescription'],
+            $_POST['createRestaurantAmountOfStars'], $_POST['numberChildren'], $_POST['remark'])
+        ) {
+
+            // create a DateTime object for the start time
+            // $timeSlot = new DateTime($_POST['timeSlotID']);
+
+            // create a new YummyRestaurant object with the required parameters
+            $reservation = new RestaurantReservation(
+                $_POST['timeSlotID'],
+                $_POST['restaurantID'],
+                $_POST['customerName'],
+                $_POST['phoneNumber'],
+                $_POST['numberAdults'],
+                $_POST['numberChildren'],
+                $_POST['remark'],
+            );
+
+            // create a new YummyService object
+            $yummyService = new YummyService();
+
+            // call the createRestaurant method of the YummyService object with the restaurant object as the parameter
+            $yummyService->createReservation($reservation);
+        } else {
+            // handle the case where one or more POST parameters are missing
+            echo "One or more required parameters are missing.";
+        }
     }
 }
