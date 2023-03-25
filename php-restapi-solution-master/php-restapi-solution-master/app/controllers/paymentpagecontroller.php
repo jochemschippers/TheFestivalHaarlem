@@ -1,25 +1,51 @@
 <?php
-require __DIR__ . '/../services/PaymentService.php';
+require_once __DIR__ . '/../services/PaymentService.php';
+require_once __DIR__ . '/controller.php';
 
-class paymentpageController {
-    public function index() {
-        require __DIR__ . '/../views/paymentpage/index.php';
-    }
-    public function login() {
-        require __DIR__ . '/../views/paymentpage/login.php';
-    }
-    public function payment() {
-        require __DIR__ . '/../views/paymentpage/payment.php';
-    }
-    public function recieve() {
-        require __DIR__ . '/../views/paymentpage/recieve.php';
-    }
-    private $paymentService; 
-    function __construct() {
+
+
+class paymentpageController extends Controller
+{
+    private $paymentService;
+    function __construct()
+    {
+        parent::__construct();
+        $this->paymentService = new PaymentService();
+        parent::__construct();
         $this->paymentService = new PaymentService();
     }
-    public function getEvents(){
-        return $this->paymentService->getAll();
+
+
+    public function index()
+    {
+        $models = [
+            "JazzTickets" => $this->paymentService->GetJazzTickets()
+        ];
+        $this->displayView($models);
+    }
+  
+    
+
+    public function login()
+    {
+        $models = [
+            "JazzTickets" => $this->paymentService->GetJazzTickets()
+        ];
+        $this->displayView($models);
+    }
+    public function payment()
+    {
+        $models = [
+            "JazzTickets" => $this->paymentService->GetJazzTickets()
+        ];
+        $this->displayView($models);
+    }
+    public function recieve()
+    {
+        $models = [
+            "JazzTickets" => $this->paymentService->GetJazzTickets()
+        ];
+        $this->displayView($models);
     }
 }
 ?>

@@ -9,7 +9,7 @@
   <link href="/css/navbar.css" rel="stylesheet">
   <link href="/css/footer.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-  <link href="../css/template.css" rel="stylesheet">
+  <link href="../css/main.css" rel="stylesheet">
 
   <script src="https://kit.fontawesome.com/384ef59d1a.js" crossorigin="anonymous"></script>
   <script>
@@ -26,7 +26,8 @@
       }
       document.head.appendChild(style);
     }
-    setStyle(params[1], params[1]);
+    var parameter = params[1].replace("-", "");  
+    setStyle(parameter, parameter);
     if (params[2] != "") {
       setStyle(params[1], "detailPage")
     }
@@ -56,7 +57,7 @@
 
   </nav>
   <div class="user-options">
-    <div class="option"><i class="fa fa-user fa-2x"></i></div>
+    <div class="option"><a href="/admin"><i class="fa fa-user fa-2x"></i></div>
     <div class="option"><a href="/paymentpage"><i class="fa fa-shopping-cart fa-2x"></i></a></div>
     <div class="option"><i class="fa fa-sharp fa-solid fa-screwdriver-wrench fa-2x"></i></div>
   </div>

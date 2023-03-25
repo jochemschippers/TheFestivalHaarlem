@@ -1,43 +1,81 @@
 <?php
 require_once __DIR__ . '/../repositories/yummyrepository.php';
 
-class YummyService {
-    public function getAll() {
-        // retrieve data
-        $repository = new YummyRepository();
-        return $repository->getAll();
+class YummyService
+{
+    private $repository;
+    function __construct()
+    {
+        $this->repository = new YummyRepository();
     }
 
-    public function getOne($restaurantId) {
+    public function getAll()
+    {
         // retrieve data
-        $repository = new YummyRepository();
-        return $repository->getOne($restaurantId);
+        return $this->repository->getAll();
     }
 
-    public function getMenuItems($restaurantId){
-       // retrieve data
-       $repository = new YummyRepository();
-       return $repository->getMenuItems($restaurantId);
-    }
-    public function getAllImages(){
+    public function getOne($restaurantId)
+    {
         // retrieve data
-        $repository = new YummyRepository();
-        return $repository->getAllImages();
+        return $this->repository->getOne($restaurantId);
     }
-    public function getImages($restaurantId){
+
+    public function getAllMenuItems()
+    {
         // retrieve data
-        $repository = new YummyRepository();
-        return $repository->getImages($restaurantId);
+        return $this->repository->getAllMenuItems();
     }
-    public function getFoodTypes(){
-        $repository = new YummyRepository();
-        return $repository->getFoodTypes();
-    }
-    public function getRestaurantFoodTypes(){
+
+    public function getMenuItems($restaurantId)
+    {
         // retrieve data
-        $repository = new YummyRepository();
-        return $repository->getRestaurantFoodTypes();
-    }    
+        return $this->repository->getMenuItems($restaurantId);
+    }
+    public function getAllImages()
+    {
+        // retrieve data
+        return $this->repository->getAllImages();
+    }
+    public function getImages($restaurantId)
+    {
+        // retrieve data
+        return $this->repository->getImages($restaurantId);
+    }
+    public function getFoodTypes()
+    {
+        return $this->repository->getAllFoodTypes();
+    }
+    public function getAllRestaurantFoodTypes()
+    {
+        // retrieve data
+        return $this->repository->getAllRestaurantFoodTypes();
+    }
+    public function createReservation($reservation){
+
+        // creates a new restaurant
+        $this->repository->createReservation($reservation);
+    }
+
+    // -------------------  Administrator  ----------------------
+
+    public function createRestaurant($restaurant)
+    {
+        // creates a new restaurant
+        $this->repository->createRestaurant($restaurant);
+    }
+
+    public function updateRestaurant($update)
+    {
+        // this updates a existing restaurant
+        $this->repository->updateRestaurant($update);
+    }
+
+    public function deleteRestaurant($delete)
+    {
+        // this will delete a existing restaurant
+        $this->repository->deleteRestaurant($delete);
+    }
 }
 
 ?>

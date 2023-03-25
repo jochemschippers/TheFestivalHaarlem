@@ -1,5 +1,5 @@
 <?php
-include __DIR__ . '/../navbar.php';
+
 // Create an array of test data for tickets
 $tickets = array(
     array(
@@ -150,6 +150,4 @@ $tickets = array(
 </body> 
 </html>
 
-<?php
-include __DIR__ . '/../footer.php';
-?>
+
