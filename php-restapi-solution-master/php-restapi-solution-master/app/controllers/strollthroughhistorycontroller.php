@@ -18,7 +18,6 @@ class StrollThroughHistoryController extends Controller {
         $models = [
             "landmarks" => $this->landmarkService->getAllLandmarks(),
         ];
-
         $this->displayView($models);
     }
 
