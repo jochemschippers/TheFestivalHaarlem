@@ -130,18 +130,24 @@ button:active {
   height: 45vw;
   padding-left:75px;
   padding-right: 75px;
+  width: 70vw;
 }
 .locationImage{
   width:30vw;
 }
-.text-center p{
-  margin-left: 10vw;
-  margin-right:10vw;
+.grid-item p{
     text-align: left !important;
     margin-bottom: 0.6rem;
+    margin-left: 2vw;
+    margin-right: 2vw;
+
 }
 p span{
   font-weight:550;
   font-style: italic;
-
+}
+.grid-Locations {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-content:center;
 }
