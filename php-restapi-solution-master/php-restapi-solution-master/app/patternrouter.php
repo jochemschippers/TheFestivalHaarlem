@@ -35,8 +35,9 @@ class PatternRouter
         if (!isset($explodedUri[0]) || empty($explodedUri[0])) {
             $explodedUri[0] = $defaultcontroller;
         }
-        $controllerName = $explodedUri[0] . "controller";
+        $controllerName = str_replace('-', '', $explodedUri[0]) . "controller";
 
+        
         if (!isset($explodedUri[1]) || empty($explodedUri[1])) {
             $explodedUri[1] = $defaultmethod;
         }
@@ -48,7 +49,7 @@ class PatternRouter
             $filename = __DIR__ . '/api/controllers/' . $controllerName . '.php';
         }
         if (file_exists($filename)) {
-            require $filename;
+            require_once $filename;
         } else {
             http_response_code(404);
             die();

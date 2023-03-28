@@ -1,0 +1,190 @@
+/* Global styles */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* HIER OVERLAY */
+
+/* body {
+  background-color: #F7F7F7;
+} */
+
+.overlay-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.overlay {
+  background-color: #fff;
+  padding: 50px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  width: 1300px;
+}
+
+#overlay {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+#textArea {
+  height: 283px;
+}
+
+#overview {
+  background-color: #FFF;
+}
+
+#phoneNr{
+  width: 160px;
+  margin-left: 0;
+}
+
+/* input buttons */
+.input-group-append {
+  display: flex;
+}
+
+
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+  padding: 5px;
+  text-align: center;
+  width: 50px;
+  border: 1px solid #ced4da;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+#nrAdult {
+  width: 100px;
+}
+
+#nrChild {
+  width: 100px;
+} */
+
+/* EINDE OVERLAY */
+#titleBorder {
+    height: 500px;
+    border: 2px solid #000;
+    padding: 10px;
+    background-color: darkgray; /* ------> KAN WEG ZODRA IMAGE IS TOEGEVOEGD <------ */
+    /* background-size: cover; */
+    position: relative; /* Set position to relative for absolute positioning of container */
+  }
+  #titleContainer {
+    position: absolute; /* Set position to absolute for positioning at the bottom of the border box */
+    bottom: 0; /* Set bottom to 0 to position container at the bottom */
+    left: 0;
+    text-align: center;
+    width: 1000px !important;
+    height: 130px;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center; /* horizontally center child elements */
+    align-items: center; /* vertically center child elements */
+  }
+  #titleContainer h1 {
+    font-size: 3.0rem;
+    color: #FFF;
+  }
+  #titleContainer h5 {
+    color: #FFF;
+    align-self: flex-end;
+    justify-content: center;
+  }
+  #titleText h2 {
+    font-size: 48px;
+    font-family: 'Martel', serif;
+  }
+  #titleText p {
+    font-size: 22px;
+    font-family: 'Open Sans', sans-serif;
+  }
+  #restaurantLogo{
+    height: 225px;
+    width: 550px;
+    background-size: cover;
+    border: 2px solid #000;
+    align-self: flex-end;
+    margin-top: 10px;
+    margin-right: 2rem;
+    margin-bottom: 50px;
+    margin-left: 212px;
+  }
+  #restaurantInfo{
+    margin-left: 50px;
+    height: 250px;
+    border: 2px solid #000;
+    padding: 2px;
+    background-color: #FFCC80; 
+    background-size: cover;
+  }
+  #restaurantLocation{
+    margin-left: 50px;
+  }
+  #restaurantMenu{
+    padding-top: 50px;
+    margin-left: 50px;
+    padding-left: 50px;
+    border: 2px solid #A7B45E;
+    padding: 3px;
+    background-color: #D9E1BA; 
+    background-size: cover;
+    display: inline-block;
+    width: 900px;
+    height: auto;
+  }
+  #restaurantMenu .h1{
+    text-align: center;
+  } 
+  #foodPictures{
+    margin-top: 50px;
+    margin-left: 65px;
+  }
+  #scedulePrice{
+    margin-left: 50px;
+    margin-top: 50px;
+  }
+  #guestPrices{
+    margin-top: 50px;
+  }
+  #reservation{
+    margin-left: 50px;
+    margin-top: 50px;
+  }
+  #sessionPrices{
+    margin-top: 50px;
+  }
+  #contactBottom{
+    margin-left: 50px;
+    margin-top: 150px;
+  }
+  #bottomPicture{
+    width: 700px;
+    height: 400px;
+    align-self: left;
+    background-size: cover;
+    background-position: left;
+    margin-left: 360px;
+  }
+  .container {
+    width: 100% !important;
+    max-width: 100vw !important;
+}

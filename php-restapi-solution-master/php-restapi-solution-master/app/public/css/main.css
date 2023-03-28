@@ -1,0 +1,110 @@
+.border-box {
+  height: 26.041666666vw;
+  padding: 10px;
+  /* background-image: url('/image/HIER-FOLDER/HIER-IMAGE.gif'); ------> DOE HIER EEN ANDERE IMAGE <------ */
+
+  background-size: cover;
+  position: relative;
+  /* Set position to relative for absolute positioning of container */
+}
+
+#titleContainer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 62.7vw;
+  height: 130px;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+p{
+  word-wrap: break-word;
+}
+
+#titleContainer h1 {
+  font-size: 73px !important;
+  color: white;
+  margin-left: 60px !important;
+}
+
+h2 {
+  font-size: 48px;
+  font-family: 'Martel', serif !important;
+  font-weight: 800;
+  color: #262626;
+}
+
+h3 {
+  color: #262626;
+  font-size: 37px;
+  font-family: ''
+}
+h4{
+  font-size: 25px;
+  font-weight: 400;
+}
+h4 span{
+  font-size: 30px;
+  font-weight: 600
+}
+p{
+  font-size: 15px;
+  font-weight: 400;
+}
+
+#titleText h2 strong {
+  font-weight: 900;
+  color: #FEB548;
+}
+
+#titleText p {
+  font-size: 22px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 500;
+}
+
+.landingPageContainer {
+  margin-left: 60px;
+  height: calc(23vw);
+}
+
+.background {
+  top: 0;
+  left: 0;
+  z-index: -1;
+
+  overflow: hidden; 
+}
+
+.background-Image{
+  /* background-image: url("/image/jazz/banner.png"); */
+  background-repeat: no-repeat;
+  position:sticky;
+  z-index: -1;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height:1000px;
+}
+.margin-top{
+  margin-top: 3vh;
+}
+.margin-bottom{
+  margin-bottom: 6vh;
+}
+.margin-left{
+  margin-left: 3.12vw;
+}
+.line-height{
+  line-height: 2.5vh !important;
+}
+.line-height-medium{
+  line-height: 2vh !important;
+}
+.center{
+  text-align:center;
+  justify-content: center;
+  display: flex;
+}

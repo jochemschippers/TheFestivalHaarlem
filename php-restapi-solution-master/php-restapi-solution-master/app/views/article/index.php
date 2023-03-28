@@ -1,6 +1,17 @@
-<h1>Articles!</h1>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Articles</title>
+    </head>
 
-<?php
+    <body>
+    </body>
+</html>
+
+<!-- <?php
 foreach($model as $article) {
     ?>
     <h4><?= ucfirst($article->getTitle())?></h4>
@@ -8,5 +19,4 @@ foreach($model as $article) {
     <p><?= $article->getContent()?></p>
     <?php
 }
-?>
-
+?> -->

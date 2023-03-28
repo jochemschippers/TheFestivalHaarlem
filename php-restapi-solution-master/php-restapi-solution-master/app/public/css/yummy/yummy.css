@@ -1,0 +1,89 @@
+/* Global styles */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+  z-index: -999;
+  position: relative;
+}
+
+.background-Image{
+  background-image: url("/image/yummy/home/YummyBanner.png");
+}
+#titleBorder {
+    height: 500px;
+    border: 2px solid #000;
+    padding: 10px;
+    background-image: url('/image/yummy/home/yummyImage.jpg'); 
+    background-color: darkgray; /* ------> KAN WEG ZODRA IMAGE IS TOEGEVOEGD <------ */
+    background-size: cover;
+    position: relative; /* Set position to relative for absolute positioning of container */
+  }
+  #titleContainer {
+    position: absolute; /* Set position to absolute for positioning at the bottom of the border box */
+    bottom: 0; /* Set bottom to 0 to position container at the bottom */
+    left: 0;
+    text-align: center;
+    width: 1000px;
+    height: 130px;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center; /* horizontally center child elements */
+    align-items: center; /* vertically center child elements */
+  }
+  #titleContainer h1 {
+    font-size: 3.0rem;
+    color: antiquewhite; 
+    /* love ya like a sister  ---FONT---*/
+  }
+  #titleText h2 {
+    font-size: 48px;
+    font-family: 'Martel', serif;
+  }
+  #titleText p {
+    font-size: 22px;
+    font-family: 'Open Sans', sans-serif;
+  }
+
+  #restaurantBorder {
+    background-color: #D9E1BA;
+    padding: 10px;
+    display: inline-block;
+    height: auto;
+  }
+  #otherEventInformation {
+    padding-top: 50px;
+  }
+  #otherEventInformation #oERow{
+    background-color: #961B1B; 
+    height: 50px;
+  }
+  .filtered-items{
+    display: none; /* Hidden by default */
+  }
+
+  #cardLogo{
+    height: 120px;
+  }
+  #cardBody{
+    height: 350px;
+  }
+  #cardBody #btn{
+    align-self: flex-end;
+  }
+  
+
+  /* DIT MOET ZO WEG */
+
+  .container {
+    overflow: hidden;
+  }
+  
+  .filterDiv {
+    display: none; /* Hidden by default */
+  }
+  
+  /* The "show" class is added to the filtered elements */
+  .show {
+    display: block;
+  }
+  

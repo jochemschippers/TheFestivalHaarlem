@@ -1,0 +1,153 @@
+body{
+  background-repeat: no-repeat;
+  background-size: 100vw;
+  position: relative;
+  z-index: -1;
+  overflow-x: hidden;
+}
+.banner{
+  background-repeat: no-repeat;
+  background-size: 100vw;
+  position: relative;
+  z-index: -1;
+}
+button {
+  background-color: #9B1C31;
+  border: 4px solid #262626;
+  border-radius: 20px !important;
+  font-size: 22px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  font-family: 'Open Sans',sans-serif;
+  font-weight: 500;
+  line-height: 20px;
+  margin: 0;
+  outline: none;
+  padding: 13px 23px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  touch-action: manipulation;
+  transition: background-color .2s, color .2s;
+  width: auto;
+  filter: drop-shadow(10px 10px 0px #FEB866);
+}
+#seeScheduleButton{
+  margin-bottom: 5vh;
+}
+button:hover {
+  color: #262626;
+  background-color: #FFD7A8;
+}
+
+button:active {
+  transform: scale(.96);
+}
+
+.carousel-item:before {
+  left: -1000%;
+}
+
+.carousel-item:after {
+  right: -1000%;
+}
+.carousel-item{
+   display: flex;
+   align-items: center;
+}
+.carousel-item {
+  display: none;
+}
+.carousel-item .active {
+  display: flex !important;
+  align-items: center;
+}
+
+.carousel-item img {
+  float: left;
+  margin: auto;
+  margin-left: 25%;
+}
+
+.carouselContainer {
+  float: left;
+  text-align: left;
+  margin-top: 80px;
+  width: 600px !important;
+}
+.carouselContainer button{
+  margin-top: 30px;
+}
+
+.textSmall{
+  all:inherit;
+  margin-top: auto;
+  padding-left: 0px;
+  font-weight: 200;
+}
+
+.layered{
+  position: relative;
+  padding: 0;
+  z-index: -99999;
+}
+.background-Image{
+  background-image: url("/image/jazz/banner.png");
+}
+.jazzContainer{
+    position: relative;
+    top: -50px;
+    z-index: -2;
+    height: 25vw;
+    background: linear-gradient(
+      160deg,
+      #F9D1D5 ,
+      #FAC088 120%
+    )
+}
+.underlined{
+  text-decoration:underline;
+  text-decoration-color: #FBE7D0;
+  text-decoration-thickness: 35%;
+  text-underline-position: under;
+  text-underline-offset: -40%;
+  text-decoration-skip-ink: none;
+}
+.textCenter{
+  text-align: center !important;
+}
+#location-information{
+  width: 13%;
+}
+.longTermTicketButton{
+  padding: 2px 23px;
+  margin-bottom: 2vh;
+}
+#locations{
+  position: relative;
+  top: -50px;
+  z-index: -2;
+  height: 45vw;
+  padding-left:75px;
+  padding-right: 75px;
+  width: 70vw;
+}
+.locationImage{
+  width:30vw;
+}
+.grid-item p{
+    text-align: left !important;
+    margin-bottom: 0.6rem;
+    margin-left: 2vw;
+    margin-right: 2vw;
+
+}
+p span{
+  font-weight:550;
+  font-style: italic;
+}
+.grid-Locations {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-content:center;
+}
