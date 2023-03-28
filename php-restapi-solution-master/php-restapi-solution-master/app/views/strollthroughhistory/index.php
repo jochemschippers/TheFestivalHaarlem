@@ -1,7 +1,3 @@
-
-  <head>
-      <link href="../css/strollthroughhistory/strollthroughhistory.css" rel="stylesheet">
-  </head>
   <body>
   <div class="layered">
     <div class="background-Image">
