@@ -23,7 +23,6 @@
         </div>
       </div>
     </div>
-    <div class="higher">
     <div id="myCarousel" class="carousel slide jazzContainer">
       <ol class="carousel-indicators">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -134,5 +133,4 @@
     const carousel = new bootstrap.Carousel(myCarousel);
   });
 </script>
-    </div>
     </div>
