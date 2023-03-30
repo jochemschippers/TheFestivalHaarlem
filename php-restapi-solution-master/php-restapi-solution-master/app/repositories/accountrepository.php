@@ -2,16 +2,14 @@
 require_once __DIR__ . '/repository.php';
 require __DIR__ . '/../models/user.php';
 
-class UserRepository extends Repository
+class AccountRepository extends Repository
 {
 
-    function checkEmailExists()
+    function checkEmailExists($email)
     {
         try {
-            $email = $_POST['email'] ?? '';
-            $stmt = $this->connection->prepare("SELECT ID FROM Users WHERE email = ?");
+            $stmt = $this->connection->prepare("SELECT userID FROM Users WHERE email = ?");
             $stmt->execute([$email]);
-
             $users = $stmt->fetchAll();
             if (empty($users)) {
                 return false;
@@ -19,22 +17,14 @@ class UserRepository extends Repository
                 return true;
             }
         } catch (PDOException $e) {
-            throw new ErrorException("Iets is fout gegaan, probeer het op een later punt nogmaals.");
+            throw new ErrorException("It seems something went wrong on our side! Please try again later.");
         }
     }
-    function registerAccount()
+    function register($fullname, $password, $email, $role, $phoneNumber)
     {
         try {
-            $firstname = $_POST['firstname'] ?? '';
-            $lastname = $_POST['lastname'] ?? '';
-            $email = $_POST['email'] ?? '';
-            $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-            $postalcode = $_POST['postalcode'] ?? '';
-            $housenumber = $_POST['housenumber'] ?? '';
-            $stmt = $this->connection->prepare("INSERT INTO `Users`(`firstname`, `lastname`, `email`, `password`, `postalcode`, `housenumber`) 
-            VALUES (?,?,?,?,?,?)");
-            $stmt->execute([$firstname, $lastname, $email, $password, $postalcode, $housenumber]);
-            return true;
+            $stmt = $this->connection->prepare("INSERT INTO `Users`(`email`, `userRole`, `fullName`, `phoneNumber`, `password`) VALUES (?,?,?,?,?)");
+            $stmt->execute([$email, $role, $fullname, $phoneNumber, $password]);
         } catch (Exception $e) {
             throw new ErrorException($e->getMessage());
         }
@@ -62,7 +52,7 @@ class UserRepository extends Repository
                     $_SESSION['user'] = $user;
                 }
                 else{
-                    throw new ErrorException("Iets lijkt fout te zijn gegaan. probeer het later nogmaals.");
+                    throw new ErrorException("It seems something went wrong on our side! Please try again later.");
                 }
             }
 

@@ -15,9 +15,6 @@ class JazzController extends Controller {
         ];
         $this->displayView($models);
     }
-    public function getAllArtists(){
-        return $this->JazzService->getAllArtists();
-    }
 
 }
 ?>

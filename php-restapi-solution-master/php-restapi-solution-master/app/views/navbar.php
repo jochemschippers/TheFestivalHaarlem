@@ -1,4 +1,3 @@
-
 <html lang="en">
 
 <head>
@@ -26,9 +25,9 @@
       }
       document.head.appendChild(style);
     }
-    var parameter = params[1].replace("-", "");  
+    var parameter = params[1].replace("-", "");
     setStyle(parameter, parameter);
-    if (params[2] != "") {
+    if (params[2] != null) {
       setStyle(params[1], "detailPage")
     }
   </script>
@@ -43,22 +42,17 @@
   </div>
   <nav class="navbar" id="navbar">
     <span class="nav-item"><a href="/">Home</a></span>
-    <?php
-    try {
-      foreach ($events as $event) {
-        echo '<span class="nav-item"><a href="/' . str_replace(' ', '-', $event->getEventName()) . '">' . $event->getEventName()  . '</a></span>';
-      }
-    } catch (error $e) {
-      echo "something went wrong while loading the navigation! Please try again later";
-      echo "<script>console.log('Debug Objects: " . $e->getMessage() . "' );</script>";
-    }
-
-    ?>
-
+    <?php try { ?>
+      <?php foreach ($events as $event) { ?>
+        <span class="nav-item"><a href="/<?= str_replace(' ', '-', $event->getEventName()) ?>"><?= $event->getEventName() ?></a></span>
+      <?php } ?>
+    <?php } catch (error $e) { ?>
+      something went wrong while loading the navigation! Please try again later
+    <?php } ?>
   </nav>
   <div class="user-options">
-    <div class="option"><a href="/admin"><i class="fa fa-user fa-2x"></i></div>
+    <div class="option"><a href="/account"><i class="fa fa-user fa-2x"></i></a></div>
     <div class="option"><a href="/paymentpage"><i class="fa fa-shopping-cart fa-2x"></i></a></div>
-    <div class="option"><i class="fa fa-sharp fa-solid fa-screwdriver-wrench fa-2x"></i></div>
+    <div class="option"><a href="/admin"><i class="fa fa-sharp fa-solid fa-screwdriver-wrench fa-2x"></i></a></div>
   </div>
 </header>

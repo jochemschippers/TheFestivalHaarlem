@@ -119,29 +119,26 @@
 
     <div class="center">
       <div class="margin-top center" id="locations">
-        <?php 
-        echo '<div class="grid-Locations" style ="grid-template-columns: repeat(' . count($locations) . ', 1fr)">';
-        for ($i = 1; $i <= count($locations); $i++)
-        {
-          echo '<div class="grid-item" style="grid-row: 1; grid-column: '.$i.'">'.
-          '<img src="'.$locations[$i - 1]->getLocationImage().'" class="locationImage" alt="patronaat">' .
-          '<h3><span><strong>'.$locations[$i - 1]->getLocationName().'</strong></span></h3>' .
-          '<img src="/image/jazz/ToAndFrom.png" alt="to and from illustration">'.
-          '<p>'.
-          '<strong>To & from</strong><br>' .
-          $locations[$i - 1]->getToAndFromText() .
-          '</p>'.
-          '<img src="/image/jazz/Accessibility.png" alt="Accessibility illustration">' .
-          '<p>'.
-          '<strong>Accessibility</strong><br>' .
-          $locations[$i - 1]->getAccesibillityText() .
-          '</p>'. 
-          '</div>';
-        }
-        echo '</div>';
-        ?>
+        <div class="grid-Locations" style="grid-template-columns: repeat(' . <?= count($locations) ?> . ', 1fr)">
+          <?php for ($i = 1; $i <= count($locations); $i++) { ?>
+            <div class="grid-item" style="grid-row: 1; grid-column: '<?= $i ?>'">
+              <img src="<?= $locations[$i - 1]->getLocationImage() ?>" class="locationImage" alt="<?= $locations[$i - 1]->getLocationName() ?>-image">
+              <h3><span><strong><?= $locations[$i - 1]->getLocationName()?></strong></span></h3>
+              <img src="/image/jazz/ToAndFrom.png" alt="to and from illustration">
+              <p><strong>To & from</strong><br>
+                <?= $locations[$i - 1]->getToAndFromText() ?>
+              </p>
+              <img src="/image/jazz/Accessibility.png" alt="Accessibility illustration">
+              <p><strong>Accessibility</strong><br>
+                <?= $locations[$i - 1]->getAccesibillityText() ?>()
+              </p>
+            </div>
+          <?php } ?>
+        </div>
+
+       
       </div>
     </div>
-       
+
 
   </div>
