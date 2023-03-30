@@ -5,11 +5,11 @@ class Controller
     private $eventService;
     function __construct()
     {
+        $this->eventService = new EventService();
     }
     function displayView($models)
     {
-        $eventService = new EventService();
-        $events = $eventService->getAll();
+        $events = $this->eventService->getAll();
         include __DIR__ . '/../views/navbar.php';
         foreach ($models as $key => $value) {
             ${$key} = $value;

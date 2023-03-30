@@ -26,39 +26,17 @@ class AccountRepository extends Repository
             $stmt = $this->connection->prepare("INSERT INTO `Users`(`email`, `userRole`, `fullName`, `phoneNumber`, `password`) VALUES (?,?,?,?,?)");
             $stmt->execute([$email, $role, $fullname, $phoneNumber, $password]);
         } catch (Exception $e) {
-            throw new ErrorException($e->getMessage());
+            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
         }
     }
-    function login()
-    {
+    function getPasswordByEmail($email){
         try {
-            $email = $_POST['email'] ?? '';
-            $password = $_POST['password'] ?? '';
-            $stmt = $this->connection->prepare("SELECT * FROM `Users` WHERE email = ?");
+            $stmt = $this->connection->prepare("SELECT `password` FROM `Users` WHERE email = ?");
             $stmt->execute([$email]);
-            $user = $stmt->fetch();
-            if (!$user) {
-                throw new ErrorException("foutieve email of wachtwoord");
-            }
-            if (!password_verify($password, $user['password'])) {
-                throw new ErrorException("foutieve email of wachtwoord");
-            }
-            
-            if (isset($_POST['remember_me'])) {
-                if (array_values($_POST)[2] === "true") {
-
-                    setcookie("user", $user, time() + 86400);
-                } else if (array_values($_POST)[2] === "false"){
-                    $_SESSION['user'] = $user;
-                }
-                else{
-                    throw new ErrorException("It seems something went wrong on our side! Please try again later.");
-                }
-            }
-
-            return true;
+            $password = $stmt->fetch();
+            return $password["password"];
         } catch (Exception $e) {
-            throw new ErrorException($e->getMessage());
+            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
         }
     }
 
@@ -73,22 +51,20 @@ class AccountRepository extends Repository
             }
             return true;
         } catch (Exception $e) {
-            throw new ErrorException($e->getMessage());
+            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
         }
     }
 
-    function getUser()
+    function getUser($email)
     {
         try {
-            if (isset($_SESSION['user'])) {
-                return $_SESSION['user'];
-            }
-            if (isset($_COOKIE['user'])) {
-                return $_COOKIE['user'];
-            }
-            return false;
+            $stmt = $this->connection->prepare("SELECT userID, userRole, fullName FROM `Users` WHERE email = ?");
+            $stmt->execute([$email]);
+            $userData = $stmt->fetch();
+            $user = new User($userData['userID'], $userData['userRole'], $userData['fullName']);            
+            return $user;
         } catch (Exception $e) {
-            throw new ErrorException($e->getMessage());
+            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
         }
     }
 
@@ -100,7 +76,7 @@ class AccountRepository extends Repository
             $user = $stmt->fetch();
             return $user;
         } catch (Exception $e) {
-            throw new ErrorException($e->getMessage());
+            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
         }
     }
 
@@ -112,7 +88,7 @@ class AccountRepository extends Repository
             $users = $stmt->fetchAll();
             return $users;
         } catch (Exception $e) {
-            throw new ErrorException($e->getMessage());
+            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
         }
     }
 
@@ -123,7 +99,7 @@ class AccountRepository extends Repository
             $stmt->execute([$firstname, $lastname, $email, $password, $postalcode, $housenumber, $id]);
             return true;
         } catch (Exception $e) {
-            throw new ErrorException($e->getMessage());
+            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
         }
     }
 
@@ -134,7 +110,7 @@ class AccountRepository extends Repository
             $stmt->execute([$id]);
             return true;
         } catch (Exception $e) {
-            throw new ErrorException($e->getMessage());
+            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
         }
     }
 
@@ -146,7 +122,7 @@ class AccountRepository extends Repository
             $orders = $stmt->fetchAll();
             return $orders;
         } catch (Exception $e) {
-            throw new ErrorException($e->getMessage());
+            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
         }
     }
 }
