@@ -13,6 +13,16 @@ class AccountController extends Controller
     }
     public function index()
     {
+        if(isset($_SESSION['userID'])){
+            $this->overview();
+        }
+        else{
+            $models = [];
+            $this->displayView($models);
+        }
+
+    }
+    public function overview(){
         $models = [];
         $this->displayView($models);
     }

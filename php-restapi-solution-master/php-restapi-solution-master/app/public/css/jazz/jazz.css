@@ -32,9 +32,7 @@ button {
   width: auto;
   filter: drop-shadow(10px 10px 0px #FEB866);
 }
-#seeScheduleButton{
-  margin-bottom: 5vh;
-}
+
 button:hover {
   color: #262626;
   background-color: #FFD7A8;

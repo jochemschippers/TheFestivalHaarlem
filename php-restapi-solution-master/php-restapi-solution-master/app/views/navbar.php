@@ -51,8 +51,9 @@
     <?php } ?>
   </nav>
   <div class="user-options">
-    <div class="option"><a href="/account"><i class="fa fa-user fa-2x"></i></a></div>
-    <div class="option"><a href="/paymentpage"><i class="fa fa-shopping-cart fa-2x"></i></a></div>
     <div class="option"><a href="/admin"><i class="fa fa-sharp fa-solid fa-screwdriver-wrench fa-2x"></i></a></div>
+    <div class="option"><a href="/paymentpage"><i class="fa fa-shopping-cart fa-2x"></i></a></div>
+    <?php if (!isset($_SESSION['userID'])) { ?><div class="option"><a href="/account"><i class="fa fa-user fa-2x"></i></a></div><?php } else { ?>
+      <div class="option"><a href="logout.php"><i class="fa fa-right-from-bracket fa-2x"></i></a></div><?php }  ?>
   </div>
 </header>

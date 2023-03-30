@@ -6,7 +6,6 @@
           <h1>Haarlem Jazz</h1>
         </div>
       </div>
-
       <div class="container landingPageContainer">
         <div class="row">
           <div class="col-md-7" id="titleText">
