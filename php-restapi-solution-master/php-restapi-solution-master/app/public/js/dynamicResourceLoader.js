@@ -14,6 +14,7 @@ function setStyle(foldername, styleName) {
 function setScript(scriptName) {
 var script = document.createElement("script");
 script.setAttribute("type", "text/javascript");
+// script.setAttribute("src", scriptName + ".js");
 script.setAttribute("src", "../js/" + scriptName + ".js");
 document.body.appendChild(script);
 }

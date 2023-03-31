@@ -24,7 +24,7 @@
     </div>
 
 
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-md-6" id="titleText"> <!-- PAS AAN NAAR EVENT PAGE OF DETAIL PAGE (AANTAL columns) -->
             </div>

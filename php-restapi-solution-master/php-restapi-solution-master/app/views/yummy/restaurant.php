@@ -1,6 +1,8 @@
 <body>
     <!-- UIT DB GEBRUIK JE (YUMMYRESTAURANTS, RESTAURANTRESERVATIONS, RestaurantMenuItems, RestaurantImages, RestaurantFoodTypes) -->
 
+    <!-- <link href="../css/yummy/detailPage.css" rel="stylesheet"> -->
+
     <?php
     foreach ($images as $image) {
         if ($image->GetImageIndex() == 1) {
@@ -549,6 +551,5 @@
         }
 
     </script>
-
 
 </body>
