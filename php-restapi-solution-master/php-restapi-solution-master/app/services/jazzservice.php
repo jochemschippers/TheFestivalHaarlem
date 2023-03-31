@@ -15,6 +15,10 @@ class JazzService {
         }
         return $artists;
     }
+    public function getAllLocations(){
+        $locations = $this->repository->getAllLocations();
+        return $locations;
+    }
 }
 
 ?>

@@ -10,19 +10,14 @@
 
 #titleContainer {
   position: absolute;
-  /* Set position to absolute for positioning at the bottom of the border box */
   bottom: 0;
-  /* Set bottom to 0 to position container at the bottom */
   left: 0;
-  text-align: left;
-  width: 1000px;
+  width: 62.7vw;
   height: 130px;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: left;
-  /* horizontally center child elements */
   align-items: center;
-  /* vertically center child elements */
 }
 p{
   word-wrap: break-word;
@@ -81,7 +76,6 @@ p{
   z-index: -1;
 
   overflow: hidden; 
-
 }
 
 .background-Image{
@@ -105,4 +99,12 @@ p{
 }
 .line-height{
   line-height: 2.5vh !important;
+}
+.line-height-medium{
+  line-height: 2vh !important;
+}
+.center{
+  text-align:center;
+  justify-content: center;
+  display: flex;
 }

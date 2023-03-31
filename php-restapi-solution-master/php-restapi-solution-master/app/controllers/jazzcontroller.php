@@ -10,13 +10,10 @@ class JazzController extends Controller {
     }
     public function index() {
         $models = [
-            "artists" => $this->JazzService->getAllArtists()
+            "artists" => $this->JazzService->getAllArtists(),
+            "locations" => $this->JazzService->getAllLocations(),
         ];
         $this->displayView($models);
-        // require __DIR__ . '/../views/jazz/index.php';
-    }
-    public function getAllArtists(){
-        return $this->JazzService->getAllArtists();
     }
 
 }
