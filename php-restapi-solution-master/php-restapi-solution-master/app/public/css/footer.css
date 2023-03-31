@@ -11,6 +11,8 @@
   line-height:27px;
   color:#FFFFFF;
   font-family: 'Open Sans', sans-serif;
+  z-index: 9999;
+  position: relative;
 }
 .site-footer .container{
   width: auto;

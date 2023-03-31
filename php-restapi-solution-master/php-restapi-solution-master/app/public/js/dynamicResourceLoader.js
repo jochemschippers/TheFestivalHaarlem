@@ -11,17 +11,18 @@ function setStyle(foldername, styleName) {
   }
   document.head.appendChild(style);
 }
-function setScript(scriptName) {
+function setScript(foldername, scriptName) {
 var script = document.createElement("script");
 script.setAttribute("type", "text/javascript");
-script.setAttribute("src", "../js/" + scriptName + ".js");
+script.setAttribute("src", "../js/" + foldername + "/"+ scriptName + ".js");
 document.body.appendChild(script);
 }
 
 var parameter = params[1].replace("-", "");
 setStyle(parameter, parameter);
-setScript(parameter);
+setScript(parameter, parameter);
 if (params[2] != null) {
   setStyle(params[1], "detailPage")
+  setStyle(params[1], params[2])
+  setScript(params[1], params[2])
 }
-
