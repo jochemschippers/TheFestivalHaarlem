@@ -18,7 +18,7 @@
                 <input type="password" class="form-control input-field" placeholder="name@example.com" id="passwordLogin" minlength="7" required>
                 <label for="floatingInput">password</label>
             </div>
-            <button type="sumbit" class="submit-btn btn-account">Log in</button>
+            <button type="submit" class="submit-btn btn-account">Log in</button>
         </form>
         <form id="register" class="input-group" method="POST" onSubmit="return false;">
             <div class="form-floating">
@@ -42,6 +42,6 @@
                 <input type="password" class="form-control input-field" placeholder="" id="passwordConfirm" minlength="7" required>
                 <label for="floatingInput">Confirm Password</label>
             </div>
-            <button type="sumbit" class="submit-btn btn-account" id="signUp">Register</button>
+            <button type="submit" class="submit-btn btn-account" id="signUp">Register</button>
         </form>
     </div>
