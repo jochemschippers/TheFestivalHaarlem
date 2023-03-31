@@ -47,32 +47,8 @@
     </div>
   </div>
   </div>
-  
-  <script>
-      const navbar = document.getElementById("navbar");
-      const links = navbar.getElementsByTagName("span");
-      document.title = "The Festival";
-      console.log(links);
-      console.log(params[1]);
-      if(params[1] === "" || params[1] === null){
-        links[0].classList.add("selected");
-      }
-      else{
-        for (let i = 0; i < links.length; i++) {
-        if (links[i].textContent.toLowerCase() === params[1].toLowerCase()) {
-          console.log(links[i].textContent)
-          links[i].classList.add("selected");
-          document.title += " - " + links[i].textContent;
-        }
-      }
-      }
-     
-    </script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-  <script src="js/dynamicResourceLoader.js"></script>
-  <script src="js/dynamicNavBarLoader.js"></script>
+  <script src="/js/dynamicResourceLoader.js"></script>
+  <script src="/js/dynamicNavBarLoader.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </footer>
 
