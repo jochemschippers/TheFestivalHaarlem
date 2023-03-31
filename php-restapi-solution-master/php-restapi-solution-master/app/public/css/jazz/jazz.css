@@ -32,7 +32,9 @@ button {
   width: auto;
   filter: drop-shadow(10px 10px 0px #FEB866);
 }
-
+#seeScheduleButton{
+  margin-bottom: 5vh;
+}
 button:hover {
   color: #262626;
   background-color: #FFD7A8;
@@ -131,7 +133,7 @@ button:active {
   width: 70vw;
 }
 .locationImage{
-  width:95%;
+  width:30vw;
 }
 .grid-item p{
     text-align: left !important;
