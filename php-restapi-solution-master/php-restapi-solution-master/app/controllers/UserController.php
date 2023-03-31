@@ -1,11 +1,11 @@
 <?php
 require __DIR__ . '/controller.php';
-require __DIR__ . '/../services/userservice.php';
+require __DIR__ . '/../services/accountservice.php';
 
 class UserController extends Controller {
-    private $userService; 
+    private $service; 
     function __construct() {
-        $this->userService = new UserService();
+        $this->service = new AccountService();
     }
     public function index() {
         require __DIR__ . '/../views/admin/login.php';
@@ -17,7 +17,7 @@ class UserController extends Controller {
         );
         try{ //geef variable door
             //session vanuit aparte controller
-            $this->userService->login();
+            $this->service->login();
         }catch(ErrorException $e){
             $response['message'] = $e->getMessage();
             $response['status'] = 0;
