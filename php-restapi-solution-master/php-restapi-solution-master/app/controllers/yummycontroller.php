@@ -101,9 +101,8 @@ class YummyController extends Controller
 
         // check if all the required POST parameters are set
         if (
-            isset($_POST['timeSlotID'], $_POST['restaurantID'], $_POST['customerName'], $_POST['phoneNumber'],
-            $_POST['numberAdults'], $_POST['createRestaurantDescription'],
-            $_POST['createRestaurantAmountOfStars'], $_POST['numberChildren'], $_POST['remark'])
+            isset($_POST['btnradio'], $_POST['restaurantID'], $_POST['customerName'], $_POST['phoneNr'],
+            $_POST['nrAdult'], $_POST['nrChild'], $_POST['remark'])
         ) {
 
             // create a DateTime object for the start time
@@ -111,12 +110,12 @@ class YummyController extends Controller
 
             // create a new YummyRestaurant object with the required parameters
             $reservation = new RestaurantReservation(
-                $_POST['timeSlotID'],
+                $_POST['btnradio'],
                 $_POST['restaurantID'],
                 $_POST['customerName'],
-                $_POST['phoneNumber'],
-                $_POST['numberAdults'],
-                $_POST['numberChildren'],
+                $_POST['phoneNr'],
+                $_POST['nrAdult'],
+                $_POST['nrChild'],
                 $_POST['remark'],
             );
 
