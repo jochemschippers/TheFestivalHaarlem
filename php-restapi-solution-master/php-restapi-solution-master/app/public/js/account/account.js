@@ -35,9 +35,11 @@ function checkPassword(password, confirmPassword) {
     return true;
 }
 document.addEventListener('DOMContentLoaded', function () {
+
     document.querySelector('#register').addEventListener('submit', function (e) {
         alertMessage.classList.remove('alert-success');
         alertMessage.classList.add('alert-danger');
+
         if (checkPassword(document.getElementById('passwordRegister').value, document.getElementById('passwordConfirm').value)) {
             fetch('account/createAccount', {
                 method: 'POST',
