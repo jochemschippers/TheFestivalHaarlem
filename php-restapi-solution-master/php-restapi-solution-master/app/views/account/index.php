@@ -45,5 +45,3 @@
             <button type="sumbit" class="submit-btn btn-account" id="signUp">Register</button>
         </form>
     </div>
-    <script src="/js/account.js"></script>
-

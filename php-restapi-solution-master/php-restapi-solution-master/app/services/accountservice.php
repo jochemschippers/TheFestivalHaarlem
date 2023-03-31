@@ -9,12 +9,11 @@ class AccountService {
         $this->repository = new AccountRepository();
     }
     public function login($email, $password) {
+        $current_time = date("H:i:s");
         $encryptedPassword = $this->repository->getPasswordByEmail($email);
-        if($encryptedPassword == null){
-            throw new ErrorException("incorrect email or password!");
-        }
-        else if(!password_verify($password, $encryptedPassword)){
-            throw new ErrorException("incorrect email or password!");
+        //checks if repository fetched something or checks if the password can be verified
+        if($encryptedPassword == false || !password_verify($password, $encryptedPassword["password"])){
+            throw new ErrorException("incorrect email or password! <br>Current time: {$current_time}");
         }
         else {
             $user = $this->repository->getUser($email);

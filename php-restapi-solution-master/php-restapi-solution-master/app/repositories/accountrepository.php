@@ -34,7 +34,7 @@ class AccountRepository extends Repository
             $stmt = $this->connection->prepare("SELECT `password` FROM `Users` WHERE email = ?");
             $stmt->execute([$email]);
             $password = $stmt->fetch();
-            return $password["password"];
+            return $password;
         } catch (Exception $e) {
             throw new ErrorException("It seems something went wrong with our database! Please try again later.");
         }

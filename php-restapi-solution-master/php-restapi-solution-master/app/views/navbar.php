@@ -9,31 +9,7 @@
   <link href="/css/footer.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
   <link href="../css/main.css" rel="stylesheet">
-
   <script src="https://kit.fontawesome.com/384ef59d1a.js" crossorigin="anonymous"></script>
-  <script>
-    const params = window.location.pathname.split("/");
-
-    function setStyle(foldername, styleName) {
-      var style = document.createElement('link');
-      style.setAttribute("rel", "stylesheet");
-      style.setAttribute("type", "text/css");
-      if (params[1] != "") {
-        style.setAttribute("href", "../css/" + foldername + "/" + styleName + ".css");
-      } else {
-        style.setAttribute("href", "../css/home.css");
-      }
-      document.head.appendChild(style);
-    }
-    var parameter = params[1].replace("-", "");
-    setStyle(parameter, parameter);
-    if (params[2] != null) {
-      setStyle(params[1], "detailPage")
-    }
-  </script>
-
-
-
 </head>
 
 <header class="header-container">
