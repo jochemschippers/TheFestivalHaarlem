@@ -270,11 +270,6 @@
                                                             <label for="editRestaurantName">Name</label>
                                                             <input type="text" class="form-control" id="editRestaurantName" name="editRestaurantName" form="editRestaurant-<?= $restaurant->getRestaurantID() ?>" value="<?= $restaurant->getRestaurantName() ?>" required>
                                                         </div>
-
-                                                        <div class="form-group">
-                                                            <label for="editRestaurantName">Name</label>
-                                                            <input type="text" class="form-control" id="editRestaurantName" name="editRestaurantName" form="editRestaurant-<?= $restaurant->getRestaurantID() ?>" value="<?= $restaurant->getRestaurantName() ?>" required>
-                                                        </div>
                                                         <div class="form-group">
                                                             <label for="editRestaurantPhoneNumber">Address</label>
                                                             <input type="text" class="form-control" id="editRestaurantPhoneNumber" name="editRestaurantPhoneNumber" form="editRestaurant-<?= $restaurant->getRestaurantID() ?>" value="<?= $restaurant->getAddress() ?>" required>
