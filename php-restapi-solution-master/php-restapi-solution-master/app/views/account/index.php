@@ -9,7 +9,7 @@
             <button type="button" class="sign-up btn-account" id="loginbtn" onclick="login()">Log in</button>
             <button type="button" class="sign-up btn-account" id="registerbtn" onclick="register()" style="color: rgb(38, 38, 38);">Sign in</button>
         </div>
-        <form id="login" class="form-group input-group" method="POST" onSubmit="return false;">
+        <form id="login" class="form-group input-group" method="POST">
             <div class="form-floating">
                 <input type="email" class="form-control input-field" placeholder="name@example.com" id="emailLogin" minlength="7" required>
                 <label for="floatingInput">Email address</label>
@@ -20,7 +20,7 @@
             </div>
             <button type="submit" class="submit-btn btn-account">Log in</button>
         </form>
-        <form id="register" class="input-group" method="POST" onSubmit="">
+        <form id="register" class="input-group" method="POST">
             <div class="form-floating">
                 <input type="email" class="form-control input-field" placeholder="name@example.com" id="emailRegister" minlength="7" required>
                 <label for="floatingInput">Email address</label>
@@ -45,3 +45,4 @@
             <button type="submit" class="submit-btn btn-account" id="signUp">Register</button>
         </form>
     </div>
+    <script src="../../js/account/account.js"></script>

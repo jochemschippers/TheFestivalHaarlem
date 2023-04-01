@@ -27,5 +27,3 @@ class TimeSlotsJazz extends TimeSlot{
             $this->hallID = $hallID;
         }
 }
-
-?>

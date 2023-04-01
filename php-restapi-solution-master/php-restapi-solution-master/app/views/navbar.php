@@ -8,7 +8,6 @@
   <link href="/css/footer.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
   <link href="../css/main.css" rel="stylesheet">
-  
   <script src="https://kit.fontawesome.com/384ef59d1a.js" crossorigin="anonymous"></script>
   <script src="/js/dynamicResourceLoader.js"></script>
 </head>
@@ -30,7 +29,9 @@
   <div class="user-options">
     <div class="option"><a href="/admin"><i class="fa fa-sharp fa-solid fa-screwdriver-wrench fa-2x"></i></a></div>
     <div class="option"><a href="/paymentpage"><i class="fa fa-shopping-cart fa-2x"></i></a></div>
-    <?php if (!isset($_SESSION['userID'])) { ?><div class="option"><a href="/account"><i class="fa fa-user fa-2x"></i></a></div><?php } else { ?>
+    <?php 
+    $uri = explode('/', trim($_SERVER['REQUEST_URI'], '/'));
+    if (!isset($_SESSION['userID'])) { ?><div class="option"><a href="/account"><i class="fa fa-user fa-2x"></i></a></div><?php } else if(isset($_SESSION['userID']) && $uri[0] != "test"){ ?>
       <div class="option"><a href="logout.php"><i class="fa fa-right-from-bracket fa-2x"></i></a></div><?php }  ?>
   </div>
 </header>

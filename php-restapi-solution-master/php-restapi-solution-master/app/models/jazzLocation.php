@@ -140,5 +140,3 @@ class JazzLocation{
                 return $this;
         }
 }
-
-?>

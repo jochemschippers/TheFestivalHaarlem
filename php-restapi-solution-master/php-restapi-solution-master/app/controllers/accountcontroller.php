@@ -68,4 +68,16 @@ class AccountController extends Controller
         }
         echo json_encode($response);
     }
+    public function logout() {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        if (session_status() == PHP_SESSION_ACTIVE) {
+            session_destroy();
+        }
+        $previousPage = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '/';
+        header('Location: ' . $previousPage);
+        exit;
+    }
 }

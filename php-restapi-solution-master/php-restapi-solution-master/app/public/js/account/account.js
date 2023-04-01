@@ -1,9 +1,9 @@
-var loginForm = document.getElementById("login");
-var registerForm = document.getElementById("register");
-var buttonStyle = document.getElementById("btn");
-var loginButton = document.getElementById("loginbtn");
-var registerButton = document.getElementById("registerbtn");
-var form = document.getElementById("form-box");
+const loginForm = document.getElementById("login");
+const registerForm = document.getElementById("register");
+const buttonStyle = document.getElementById("btn");
+const loginButton = document.getElementById("loginbtn");
+const registerButton = document.getElementById("registerbtn");
+const form = document.getElementById("form-box");
 const alertMessage = document.getElementById("alert");
 
 
@@ -34,7 +34,9 @@ function checkPassword(password, confirmPassword) {
     }
     return true;
 }
+
 document.addEventListener('DOMContentLoaded', function () {
+    console.log("wow");
     document.querySelector('#register').addEventListener('submit', function (e) {
         e.preventDefault(); 
         alertMessage.classList.remove('alert-success');
@@ -67,9 +69,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
         }
     });
-})
 
-document.addEventListener('DOMContentLoaded', function () {
     document.querySelector('#login').addEventListener('submit', function (e) {
         e.preventDefault(); 
         alertMessage.classList.remove('alert-success');

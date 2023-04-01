@@ -30,7 +30,7 @@ class JazzRepository extends Repository
             return $artists;
 
         } catch (PDOException $e) {
-            echo $e;
+            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
         }
     }
 
@@ -63,7 +63,7 @@ function getAllTimeSlots($artist)
         }
         return $timeSlots;
     } catch (PDOException $e) {
-        echo $e;
+        throw new ErrorException("It seems something went wrong with our database! Please try again later.");
     }
 }
 function getAllLocations()
@@ -90,7 +90,7 @@ function getAllLocations()
         return $locations;
 
     } catch (PDOException $e) {
-        echo $e;
+        throw new ErrorException("It seems something went wrong with our database! Please try again later.");
     }
 }
 }

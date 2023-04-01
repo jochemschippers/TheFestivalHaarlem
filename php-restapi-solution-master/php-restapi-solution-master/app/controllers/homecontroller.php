@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/controller.php';
+require_once __DIR__ . '/controller.php';
 
 class HomeController extends Controller {
 
@@ -8,10 +8,6 @@ class HomeController extends Controller {
             
         ];
         $this->displayView($models);
-    }
-
-    public function about() {
-        echo "you've reached the about method of the home controller";
     }
 }
 ?>
