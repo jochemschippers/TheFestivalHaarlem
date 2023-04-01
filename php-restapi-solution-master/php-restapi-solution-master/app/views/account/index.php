@@ -20,7 +20,7 @@
             </div>
             <button type="submit" class="submit-btn btn-account">Log in</button>
         </form>
-        <form id="register" class="input-group" method="POST" onSubmit="return false;">
+        <form id="register" class="input-group" method="POST" onSubmit="">
             <div class="form-floating">
                 <input type="email" class="form-control input-field" placeholder="name@example.com" id="emailRegister" minlength="7" required>
                 <label for="floatingInput">Email address</label>

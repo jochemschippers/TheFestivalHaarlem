@@ -36,6 +36,7 @@ function checkPassword(password, confirmPassword) {
 }
 document.addEventListener('DOMContentLoaded', function () {
     document.querySelector('#register').addEventListener('submit', function (e) {
+        e.preventDefault(); 
         alertMessage.classList.remove('alert-success');
         alertMessage.classList.add('alert-danger');
         if (checkPassword(document.getElementById('passwordRegister').value, document.getElementById('passwordConfirm').value)) {
@@ -70,6 +71,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 document.addEventListener('DOMContentLoaded', function () {
     document.querySelector('#login').addEventListener('submit', function (e) {
+        e.preventDefault(); 
         alertMessage.classList.remove('alert-success');
         alertMessage.classList.add('alert-danger');
 

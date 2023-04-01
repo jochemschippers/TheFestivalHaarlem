@@ -1,11 +1,9 @@
 <main role="main">
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
-    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <div class="card mb-3 panel important">
         <div class="card-header">
             <i class="fa fa-table"></i> Jazz Artist Edit
         </div>
+
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -32,19 +30,42 @@
                             <tr>
                                 <td><?= $artist->getArtistID() ?></td>
                                 <td><?= $artist->getName() ?></td>
-                                <td><?= substr($artist->getDescription(), 0, 100) ?>...</td>
+                                <td><?= substr($artist->getDescription(), 0, 80) ?>...</td>
                                 <td><?= $artist->getImage() ?></td>
-                                <td><button>edit</button><button>delete</button></td>
+                                <td>
+                                    <button class="btn btn-primary" style="margin-right:15px;" data-toggle="modal" data-target="#editModal" onclick="openEditModalArtists('<?= $artist->getArtistID() ?>', '<?= $artist->getName() ?>', 
+                                    '<?= $artist->getDescription() ?>', '<?= $artist->getImage() ?>')">edit</button>
+                                    <button class="btn btn-danger">delete</button>
+                                </td>
                             </tr>
                         <?php } ?>
-
                     </tbody>
                 </table>
+                <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="editModalLabel">Edit Artist</h5>
+                            </div>
+                            <div class="modal-body" id="dynamicForm">
+                                <!-- modal will be dynamically filled with js -->
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" id="updateButton">Update</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+
     </div>
     </div>
     <div id="paginationControls"></div>
 
 </main>
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

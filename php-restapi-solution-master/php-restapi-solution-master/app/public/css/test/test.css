@@ -394,6 +394,7 @@ td {
 
   main[role="main"] {
     margin: 75px 0 40px 200px;
+    min-height: 75vh;
   }
   main[role="main"]:after {
     content: "";
