@@ -32,6 +32,6 @@
     <?php 
     $uri = explode('/', trim($_SERVER['REQUEST_URI'], '/'));
     if (!isset($_SESSION['userID'])) { ?><div class="option"><a href="/account"><i class="fa fa-user fa-2x"></i></a></div><?php } else if(isset($_SESSION['userID']) && $uri[0] != "test"){ ?>
-      <div class="option"><a href="logout.php"><i class="fa fa-right-from-bracket fa-2x"></i></a></div><?php }  ?>
+      <div class="option"><a href="/account/logout"><i class="fa fa-right-from-bracket fa-2x"></i></a></div><?php }  ?>
   </div>
 </header>

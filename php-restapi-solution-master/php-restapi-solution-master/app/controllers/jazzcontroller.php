@@ -3,15 +3,15 @@ require_once __DIR__ . '/controller.php';
 require_once __DIR__ . '/../services/jazzservice.php';
 
 class JazzController extends Controller {
-    private $JazzService;
+    private $service;
     function __construct() {
         parent::__construct();
-        $this->JazzService = new JazzService();
+        $this->service = new JazzService();
     }
     public function index() {
         $models = [
-            "artists" => $this->JazzService->getAllArtists(),
-            "locations" => $this->JazzService->getAllLocations(),
+            "artists" => $this->service->getAllArtists(),
+            "locations" => $this->service->getAllLocations(),
         ];
         $this->displayView($models);
     }

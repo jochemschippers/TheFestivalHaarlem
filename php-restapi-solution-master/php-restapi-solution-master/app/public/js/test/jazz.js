@@ -28,14 +28,14 @@ $(document).ready(function() {
 
 
 function updateArtist(){
-  fetch('account/login', {
+  fetch('/test/updateArtist', {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json'
     },
     body: JSON.stringify({
         artistID: document.querySelector('#artistIDInput').value,
-        artistName: document.querySelector('#nameInput').value,
+        artistName: document.querySelector('#artistName').value,
         description: document.querySelector('#descriptionInput').value,
         imagePath: document.querySelector('#imagePathInput').value,
     })
@@ -52,7 +52,7 @@ function updateArtist(){
     })
     .catch(error => {
         alertMessage.classList.remove('d-none');
-        alertMessage.value = "Something went wrong! Please try again later";
+        alertMessage.innerHTML = error;
     });
 }
 
@@ -98,5 +98,8 @@ function createInput(field){
       }
 
       input.value = field.value;
+      if (field.readonly) {
+        input.readOnly = true;
+    }
       return input;
 }

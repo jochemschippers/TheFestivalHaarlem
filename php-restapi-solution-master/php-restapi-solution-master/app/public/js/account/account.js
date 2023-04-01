@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function () {
             })
             .catch(error => {
                 alertMessage.classList.remove('d-none');
-                alertMessage.value = "Something went wrong! Please try again later";
+                alertMessage.innerHTML = "Something went wrong! Please try again later";
             });
 
     });

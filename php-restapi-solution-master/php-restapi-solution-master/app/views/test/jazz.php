@@ -47,6 +47,9 @@
                             <div class="modal-header">
                                 <h5 class="modal-title" id="editModalLabel">Edit Artist</h5>
                             </div>
+                            <div class="alert alert-danger d-none margin-top" id="alert" role="alert">
+
+                            </div>
                             <div class="modal-body" id="dynamicForm">
                                 <!-- modal will be dynamically filled with js -->
                             </div>
