@@ -48,12 +48,13 @@ class AccountController extends Controller
     {
         $response = array(
             'status' => 1,
-            'message' => 'login successfull, redirecting to home page. If you are seeing this however, something is going wrong.'
+            'message' => "login successfull, redirecting to home page. Please wait... <br>if nothing happends; click <a href='/'>here</a>"
         );
         // Read the JSON data from the request body
         $json_data = file_get_contents("php://input");
         $data = json_decode($json_data, true);
         try{
+            if (isset($data["email"]) && isset($data["password"])) {
             $user = $this->service->login($data["email"], $data["password"]);
             if (session_status() == PHP_SESSION_NONE) {
                 session_start();
@@ -61,6 +62,9 @@ class AccountController extends Controller
             $_SESSION['userID'] = $user->getUserID();
             $_SESSION['userRole'] = $user->getUserRole();
             $_SESSION['fullName'] = $user->getFullName();
+        }else {
+                $response['status'] = 0;
+                $response['message'] = "Email or password is not provided.";}
         }
         catch(ErrorException $e){
             $response['status'] = 0;
@@ -69,15 +73,6 @@ class AccountController extends Controller
         echo json_encode($response);
     }
     public function logout() {
-        if (session_status() == PHP_SESSION_NONE) {
-            session_start();
-        }
-
-        if (session_status() == PHP_SESSION_ACTIVE) {
-            session_destroy();
-        }
-        $previousPage = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '/';
-        header('Location: ' . $previousPage);
-        exit;
+        $this->service->logout();
     }
 }

@@ -36,7 +36,6 @@ function checkPassword(password, confirmPassword) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    console.log("wow");
     document.querySelector('#register').addEventListener('submit', function (e) {
         e.preventDefault(); 
         alertMessage.classList.remove('alert-success');
