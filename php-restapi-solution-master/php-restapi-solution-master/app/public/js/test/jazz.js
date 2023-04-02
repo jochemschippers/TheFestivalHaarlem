@@ -21,7 +21,7 @@ $(document).ready(function() {
     dynamicForm.innerHTML = '';
     dynamicForm.appendChild(form);
     updateButton.setAttribute("onClick","updateArtist()");  
-
+//dit hoeft dus echt niet, kan blijkbaar zonder jquery
     $('#editModal').modal('show');
 }
 
