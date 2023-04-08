@@ -40,7 +40,7 @@ function getAllTimeSlots($artist)
         $stmt = $this->connection->prepare("
         SELECT J.timeSlotID , J.locationID, J.hallID, T.eventID, T.price, T.startTime, T.endTime, T.maximumAmountTickets 
         FROM TimeSlotsJazz J 
-        INNER JOIN timeSlots T ON J.timeSlotID = T.timeSlotID 
+        INNER JOIN TimeSlots T ON J.timeSlotID = T.timeSlotID 
         WHERE artistID =" . $artist->getArtistID());
         $stmt->setFetchMode(PDO::FETCH_ASSOC);
         $stmt->execute();
