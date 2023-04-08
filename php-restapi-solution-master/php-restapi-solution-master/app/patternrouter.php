@@ -24,7 +24,7 @@ class PatternRouter
 
         // set default controller/method
         $defaultcontroller = 'home';
-        $defaultmethod = 'index';
+        $defaultMethod = 'index';
 
         // ignore query parameters
         $uri = $this->stripParameters($uri);
@@ -34,14 +34,23 @@ class PatternRouter
 
         if (!isset($explodedUri[0]) || empty($explodedUri[0])) {
             $explodedUri[0] = $defaultcontroller;
-        }
-        $controllerName = str_replace('-', '', $explodedUri[0]) . "controller";
-
-        
+        }   
         if (!isset($explodedUri[1]) || empty($explodedUri[1])) {
-            $explodedUri[1] = $defaultmethod;
+            $explodedUri[1] = $defaultMethod;
         }
         $methodName = $explodedUri[1];
+        if ($explodedUri[0] === 'test') {
+            if (session_status() == PHP_SESSION_NONE) {
+                session_start();
+            }
+            
+            if (!isset($_SESSION['userRole']) || $_SESSION['userRole'] != 1) {
+                $explodedUri[0] = 'errormessage403';
+                $methodName = $defaultMethod;
+            }
+        }
+
+        $controllerName = str_replace('-', '', $explodedUri[0]) . "controller";
 
         // load the file with the controller class
         $filename = __DIR__ . '/controllers/' . $controllerName . '.php';

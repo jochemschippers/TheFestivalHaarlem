@@ -113,5 +113,3 @@ class JazzArtist{
                 return $this;
         }
 }
-
-?>
