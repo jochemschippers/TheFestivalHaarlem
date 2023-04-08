@@ -49,7 +49,6 @@ function getAllTimeSlots($artist)
         $timeSlots = [];
         foreach ($results as $row) {
             $timeSlotJazz = new TimeSlotsJazz(
-
                 $row["timeSlotID"],
                 $row['eventID'],
                 $row['price'],
