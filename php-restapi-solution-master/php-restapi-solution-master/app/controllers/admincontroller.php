@@ -79,12 +79,12 @@ class AdminController extends Controller
     // --------------------------  YUMMY  --------------------------------
     public function getAllRestaurants()
     {
-        return $this->yummyService->getAllRestaurants();
+        return $this->yummyService->getAll();
     }
 
     public function getRestaurant()
     {
-        return $this->yummyService->getRestaurant($_POST['restaurantID']);
+        return $this->yummyService->getOne($_POST['restaurantID']);
     }
 
     public function createRestaurant()

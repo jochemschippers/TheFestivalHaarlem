@@ -301,15 +301,13 @@ class YummyRepository extends Repository
         //stap 3 werkend  auto increment programID? of foreign key maken? >>>>>>> // INSERT INTO `eventTickets` (`ticketID`, `timeSlotID`, `programID`) VALUES ('6', '5', '2');
         // personal program kan ik niks aan doen. heeft namelijk nog eeen klass nodig.
 
+        $modelReservation = "'timeSlotID', 'restaurantID', 'customerName', 'phoneNumber', 'numberAdults', 'numberChildren', 'remark'";
 
         // gebruik restaurantReservation, Timeslots, eventTickets en personalProgram. gebruik join
         try {
             // query
             $stmt = $this->connection->prepare("INSERT INTO `YummyReservations` (`restaurantName`, `address`, `contact`,
             `adultPrice`, `childPrice`, `startTime`, `duration`) VALUES (?,?,?,?,?,?,?,?)");
-
-            $modelReservation = "'timeSlotID', 'restaurantID', 'customerName', 'phoneNumber', 'numberAdults', 'numberChildren', 'remark'";
-
             // input
             $stmt->execute([
                 $reservation->getTimeSlotID(), $reservation->getRestaurantID(), $reservation->getCustomerName(), $reservation->getPhoneNumber(),
