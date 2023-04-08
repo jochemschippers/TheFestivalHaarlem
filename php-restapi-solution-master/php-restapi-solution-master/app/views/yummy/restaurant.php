@@ -319,9 +319,10 @@
                                     autocomplete="off">
                                 <label class="btn btn-outline-primary w-100" for="btnradio<?= $numberButtons ?>"><?= "<b>Session $i: " . $time . "</b>" ?></label><br>
 
-                            <!-- Increase the start date and time by 1.5 hours for the next session -->
-                            <?php $numberButtons++;
-                        } ?>
+                                <!-- Increase the start date and time by 1.5 hours for the next session -->
+                                <?php $numberButtons++;
+                                $i++;
+                            } ?>
 
                         </div>
                         <div class="col-md-3">
@@ -384,12 +385,13 @@
                                     autocomplete="off">
                                 <label class="btn btn-outline-primary w-100" for="btnradio<?= $numberButtons ?>"><?= "<b>Session $i: " . $time . "</b>" ?></label><br>
 
-                            <!-- Increase the start date and time by 1.5 hours for the next session -->
-                            <?php $numberButtons++;
-                        } ?>
-                    </div>
-                    <div class="col-6">
-                        <h4>Number of adults</h4>
+                                <!-- Increase the start date and time by 1.5 hours for the next session -->
+                                <?php $numberButtons++;
+                                $i++;
+                            } ?>
+                        </div>
+                        <div class="col-6">
+                            <h4>Number of adults</h4>
 
                             <div class="input-group">
                                 <div class="input-group-append">
@@ -401,13 +403,8 @@
                                     <button class="btn btn-outline-secondary Aplus-btn" type="button">+</button>
                                 </div>
                             </div>
-                            <input type="number" id="nrAdult" value="1" min="1" max="20">
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-secondary Aplus-btn" type="button">+</button>
-                            </div>
-                        </div>
 
-                        <h4>Number of children (-12)</h4>
+                            <h4>Number of children (-12)</h4>
 
                             <div class="input-group">
                                 <div class="input-group-append">
@@ -421,21 +418,14 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <br><br>
-                        <h4>Any special requests or allergies? Enter them below.</h4>
-                    </div>
-                    <div class="col-md-6">
-                        <br><br>
-                        <h4>Details</h4>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <textarea class="form-control" id="textArea" rows="3"></textarea>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <br><br>
+                            <h4>Any special requests or allergies? Enter them below.</h4>
+                        </div>
+                        <div class="col-md-6">
+                            <br><br>
+                            <h4>Details</h4>
                         </div>
                     </div>
                     <div class="row">
@@ -459,13 +449,8 @@
                             <button class="btn btn-primary" type="submit">Continue</button>
                             <button type="button" onclick="hideOverlay();" class="btn btn-danger">Cancel</button>
                         </div>
-                        <p>*A reservation fee of €10,- pp. will be administerred.<br>
-                            This fee will be deducted from the final check on visiting the restaurant.
-                        </p>
-                        <input class="btn btn-primary" type="submit" value="Continue">
-                        <button type="button" onclick="hideOverlay();" class="btn btn-danger">Cancel</button>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
