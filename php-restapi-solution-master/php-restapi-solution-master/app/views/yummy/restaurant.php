@@ -1,7 +1,8 @@
 <body>
     <!-- UIT DB GEBRUIK JE (YUMMYRESTAURANTS, RESTAURANTRESERVATIONS, RestaurantMenuItems, RestaurantImages, RestaurantFoodTypes) -->
 
-    <!-- <link href="../css/yummy/detailPage.css" rel="stylesheet"> -->
+    <link href="../css/yummy/detailPage.css" rel="stylesheet">
+    <link href="../css/reservation.css" rel="stylesheet">
 
     <?php
     foreach ($images as $image) {
