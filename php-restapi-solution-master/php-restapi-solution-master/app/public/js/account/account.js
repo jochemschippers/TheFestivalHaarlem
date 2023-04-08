@@ -34,8 +34,6 @@ function checkPassword(password, confirmPassword) {
     }
     return true;
 }
-
-document.addEventListener('DOMContentLoaded', function () {
     document.querySelector('#register').addEventListener('submit', function (e) {
         e.preventDefault(); 
         alertMessage.classList.remove('alert-success');
@@ -100,4 +98,3 @@ document.addEventListener('DOMContentLoaded', function () {
             });
 
     });
-})
