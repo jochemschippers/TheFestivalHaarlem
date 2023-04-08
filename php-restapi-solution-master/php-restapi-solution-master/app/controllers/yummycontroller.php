@@ -28,17 +28,43 @@ class YummyController extends Controller
     }
     public function restaurant()
     {
+        if (isset($_POST['btnradio'], $_POST['customerName'], $_POST['phoneNr'], $_POST['nrAdult'], $_POST['nrChild'], $_POST['remark'])) { //if posts then
 
-        $restaurantId = $_GET['restaurantId'];
-        $models = [
-            "restaurantId" => $restaurantId,
-            "restaurant" => $this->yummyService->getOne($restaurantId),
-            "menuItems" => $this->yummyService->getMenuItems($restaurantId),
-            "images" => $this->yummyService->getImages($restaurantId),
-            "restaurantFoodTypes" => $this->yummyService->getAllRestaurantFoodTypes(),
-        ];
+            // create a DateTime object for the start time
+            $timeSlot = $_POST['btnradio'];
+            $customerName = $_POST['customerName'];
+            $phoneNr = $_POST['phoneNr'];
+            $nrAdult = $_POST['nrAdult'];
+            $nrChild = $_POST['nrChild'];
+            $remark = $_POST['remark'];
 
-        $this->displayView($models);
+            var_dump($_POST);
+            // if ($this->createReservation($restaurantId, $timeSlot, $customerName, $phoneNr, $nrAdult, $nrChild, $remark)) {
+            //     var_dump("werkt");
+            // } else {
+            //     var_dump("werkt niet");
+            // }
+        }
+
+        else if (isset($_GET['restaurantId'])) {
+            $restaurantId = $_GET['restaurantId'];
+            $models = [
+                "restaurantId" => $restaurantId,
+                "restaurant" => $this->yummyService->getOne($restaurantId),
+                "menuItems" => $this->yummyService->getMenuItems($restaurantId),
+                "images" => $this->yummyService->getImages($restaurantId),
+                "restaurantFoodTypes" => $this->yummyService->getAllRestaurantFoodTypes(),
+            ];
+
+            $this->displayView($models);
+        }
+        // btnradio
+        // customerName
+        // phoneNr
+        // nrAdult
+        // nrChild
+        // textArea
+        
     }
     public function YummyReservation()
     {
@@ -89,7 +115,7 @@ class YummyController extends Controller
         return $this->yummyService->getAllRestaurantFoodTypes();
     }
 
-    public function createReservation()
+    public function createReservation($restaurantId, $timeSlotId, $customerName, $phoneNr, $nrAdult, $nrChild, $remark)
     {
         // private int $timeSlotID; //key
         // private int $restaurantID;
@@ -101,32 +127,31 @@ class YummyController extends Controller
 
         // check if all the required POST parameters are set
         if (
-            isset($_POST['btnradio'], $_POST['restaurantID'], $_POST['customerName'], $_POST['phoneNr'],
-            $_POST['nrAdult'], $_POST['nrChild'], $_POST['remark'])
+            isset($restaurantId, $timeSlotId, $customerName, $phoneNr, $nrAdult, $nrChild, $remark)
         ) {
-
-            // create a DateTime object for the start time
-            // $timeSlot = new DateTime($_POST['timeSlotID']);
 
             // create a new YummyRestaurant object with the required parameters
             $reservation = new RestaurantReservation(
-                $_POST['btnradio'],
-                $_POST['restaurantID'],
-                $_POST['customerName'],
-                $_POST['phoneNr'],
-                $_POST['nrAdult'],
-                $_POST['nrChild'],
-                $_POST['remark'],
+                $restaurantId,
+                $timeSlotId,
+                $customerName,
+                $phoneNr,
+                $nrAdult,
+                $nrChild,
+                $remark
             );
 
-            // create a new YummyService object
-            $yummyService = new YummyService();
-
             // call the createRestaurant method of the YummyService object with the restaurant object as the parameter
-            $yummyService->createReservation($reservation);
+            if ($this->yummyService->createReservation($reservation)) {
+                echo "reservation made";
+                return true;
+            } else {
+                return false;
+            }
         } else {
             // handle the case where one or more POST parameters are missing
             echo "One or more required parameters are missing.";
+            return false;
         }
     }
 }

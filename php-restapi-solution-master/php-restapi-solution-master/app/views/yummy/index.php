@@ -49,17 +49,15 @@
                             // foodTypeId is not in the list, add it
                             array_push($foodTypeNames, $foodTypeName); // add the foodTypeId to the array
                             // display the label and input element for this type
-                            ?>
-                            <input type="radio" class="btn-check" name="btnradio" id="btnradio<?php echo $i ?>"
-                                onclick="filterSelection('<?php echo strtolower($type->getFoodTypeName()) ?> ')">
+                    ?>
+                            <input type="radio" class="btn-check" name="btnradio" id="btnradio<?php echo $i ?>" onclick="filterSelection('<?php echo strtolower($type->getFoodTypeName()) ?> ')">
                             <label class="btn btn-outline-primary" for="btnradio<?php echo $i ?>"><?php echo $type->getFoodTypeName() ?></label>
-                            <?php
+                    <?php
                             $i++; // increment $i after displaying the label and input element
                         }
                     }
                     ?>
-                    <input type="radio" class="btn-check" name="btnradio" id="btnradio6"
-                        onclick="filterSelection('all')" checked>
+                    <input type="radio" class="btn-check" name="btnradio" id="btnradio6" onclick="filterSelection('all')" checked>
                     <label class="btn btn-outline-primary" for="btnradio6">Clear selected</label>
                 </div>
             </div>
@@ -75,11 +73,10 @@
                                 $foodTypeNames .= $foodType->getFoodTypeName() . ' ';
                             }
                         }
-                        ?>
+                    ?>
                         <div class="filterDiv  <?php echo strtolower(trim($foodTypeNames)) ?> col-md-2 ">
-                            <div class="card" style="width: 18rem;">
-                                <img src="/image/<?php echo $restaurant->getBannerImage() ?>" class="card-img-top"
-                                    alt="Logo" id="cardLogo">
+                            <div class="card" id="card">
+                                <img src="/image/<?php echo $restaurant->getBannerImage() ?>" class="card-img-top" alt="Logo" id="cardLogo">
                                 <div class="card-body d-flex flex-column" id="cardBody">
                                     <h5 class="card-title"><i>
                                             <?= $restaurant->getRestaurantName() ?>
@@ -91,8 +88,7 @@
                                             <?= $restaurant->getCardDescription() ?>
                                         </i></p>
 
-                                    <a class="btn btn-primary mt-auto"
-                                        onclick="getRestaurantId(<?php echo $restaurant->getRestaurantId(); ?>)">Menu and
+                                    <a class="btn btn-primary mt-auto" onclick="getRestaurantId(<?php echo $restaurant->getRestaurantId(); ?>)">Menu and
                                         info</a>
 
                                     <script>
@@ -165,7 +161,7 @@
                 var btnContainer = document.getElementById("myBtnContainer");
                 var btns = btnContainer.getElementsByClassName("btn");
                 for (var i = 0; i < btns.length; i++) {
-                    btns[i].addEventListener("click", function () {
+                    btns[i].addEventListener("click", function() {
                         var current = document.getElementsByClassName("active");
                         current[0].className = current[0].className.replace(" active", "");
                         this.className += " active";
