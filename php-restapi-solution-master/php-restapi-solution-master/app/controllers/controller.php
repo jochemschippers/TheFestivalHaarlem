@@ -19,4 +19,10 @@ class Controller
         require __DIR__ . "/../views/$directory/$view.php";
         include __DIR__ . '/../views/footer.php';
     }
+    function displayHome(){
+        $events = $this->eventService->getAll();
+        include __DIR__ . '/../views/navbar.php';
+        require __DIR__ . "/../views/home/index.php";
+        include __DIR__ . '/../views/footer.php';
+    }
 }
