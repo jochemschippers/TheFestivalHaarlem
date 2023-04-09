@@ -341,16 +341,26 @@ class YummyRepository extends Repository
 
         // gebruik restaurantReservation, Timeslots, eventTickets en personalProgram. gebruik join
         try {
+            var_dump($reservation['isActive']);
             // query
             $stmt = $this->connection->prepare("
-            INSERT INTO TimeSlotsYummy (`timeSlotID`, `restaurantID`, `reservationName`, `phoneNumber`, `numberAdults`, `numberChildren`, `remark`, `isActive`)
-            VALUES (?,?,?,?,?,?,?,?)
+            INSERT INTO `RestaurantReservation`(`ticketID`, `timeSlotID`, `restaurantID`, `reservationName`, `phoneNumber`, `numberAdults`, `numberChildren`, `remark`, `isActive`) 
+            VALUES (?,?,?,?,?,?,?,?,?)
             ");
             // input
             // Bind the parameter value to the placeholder
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
-            $stmt->execute($reservation->getTimeSlotID(), $reservation->getRestaurantID(), $reservation->getCustomerName(),
-            $reservation->getPhoneNumber(), $reservation->getNumberAdults(), $reservation->getNumberChildren(), $reservation->getRemark(), 1);
+            $stmt->execute([
+                $reservation['ticketID'],
+                $reservation['timeSlotId'],
+                $reservation['restaurantId'],
+                $reservation['customerName'],
+                $reservation['phoneNr'],
+                $reservation['nrAdult'],
+                $reservation['nrChild'],
+                $reservation['remark'],
+                $reservation['isActive']
+            ]);
         } catch (PDOException $e) {
             echo $e;
         }

@@ -38,7 +38,6 @@ class YummyController extends Controller
                 "restaurantFoodTypes" => $this->yummyService->getAllRestaurantFoodTypes(),
                 "timeSlotsYummy" => $this->yummyService->getRestaurantReservationInfo($restaurantId),
             ];
-            var_dump($_POST);
             $this->displayView($models);
         }
         if ($_SERVER["REQUEST_METHOD"] === 'POST' && !empty($_POST)) {
@@ -150,8 +149,10 @@ class YummyController extends Controller
                 'nrAdult' => $nrAdult,
                 'nrChild' => $nrChild,
                 'remark' => $remark,
-                'isActive' => 1
+                'isActive' => true
             ];
+
+            var_dump($reservation);
 
             // call the createRestaurant method of the YummyService object with the restaurant object as the parameter
             if ($this->yummyService->createReservation($reservation)) {

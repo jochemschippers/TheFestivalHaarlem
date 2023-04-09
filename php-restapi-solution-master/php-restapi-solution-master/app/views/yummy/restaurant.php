@@ -381,25 +381,20 @@
                         </div>
                         <div class="col-6">
                             <h4>Number of adults</h4>
-
                             <div class="input-group">
                                 <div class="input-group-append">
                                     <button class="btn btn-outline-secondary Aminus-btn" type="button">-</button>
                                 </div>
-                                <!-- id = nrAdult -->
                                 <input type="number" id="nrAdult" name="nrAdult" value="1" min="1" max="20">
                                 <div class="input-group-append">
                                     <button class="btn btn-outline-secondary Aplus-btn" type="button">+</button>
                                 </div>
                             </div>
-
                             <h4>Number of children (-12)</h4>
-
                             <div class="input-group">
                                 <div class="input-group-append">
                                     <button class="btn btn-outline-secondary Cminus-btn" type="button">-</button>
                                 </div>
-                                <!-- id = nrChild -->
                                 <input type="number" id="nrChild" name="nrChild" value="0" min="0" max="20">
                                 <div class="input-group-append">
                                     <button class="btn btn-outline-secondary Cplus-btn" type="button">+</button>
@@ -420,7 +415,6 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <!-- id = textArea -->
                                 <textarea class="form-control" id="remark" name="remark" rows="3"></textarea>
                             </div>
                         </div>
@@ -435,10 +429,6 @@
                             <p>*A reservation fee of €10,- pp. will be administerred.<br>
                                 This fee will be deducted from the final check on visiting the restaurant.
                             </p>
-
-                            <input type="hidden" name="nrAdult" value="">
-                            <input type="hidden" name="nrChild" value="">
-                            <input type="hidden" name="remark" value="">
                             <button class="btn btn-primary" type="submit" for="form">Continue</button>
                             <button type="button" onclick="hideOverlay();" class="btn btn-danger">Cancel</button>
                         </div>
