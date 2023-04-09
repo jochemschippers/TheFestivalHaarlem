@@ -1,10 +1,13 @@
 <?php
 include_once __DIR__ . '/repository.php';
 require_once __DIR__ . '/../models/foodType.php';
+require_once __DIR__ . '/../models/timeSlot.php';
+require_once __DIR__ . '/../models/timeSlotsYummy.php';
 require_once __DIR__ . '/../models/yummyRestaurant.php';
 require_once __DIR__ . '/../models/restaurantImage.php';
 require_once __DIR__ . '/../models/restaurantMenuItem.php';
 require_once __DIR__ . '/../models/restaurantFoodType.php';
+require_once __DIR__ . '/../models/restaurantReservation.php';
 
 class YummyRepository extends Repository
 {
@@ -46,7 +49,6 @@ class YummyRepository extends Repository
                 array_push($restaurants, $restaurant);
             }
             return $restaurants;
-
         } catch (PDOException $e) {
             echo $e;
         }
@@ -92,10 +94,8 @@ class YummyRepository extends Repository
                     new DateTime($row['duration'])
                 );
                 array_push($restaurants, $restaurant);
-
             }
             return $restaurants;
-
         } catch (PDOException $e) {
             echo $e;
         }
@@ -132,7 +132,6 @@ class YummyRepository extends Repository
                 array_push($menus, $menu);
             }
             return $menus;
-
         } catch (PDOException $e) {
             echo $e;
         }
@@ -171,7 +170,6 @@ class YummyRepository extends Repository
                 array_push($menus, $menu);
             }
             return $menus;
-
         } catch (PDOException $e) {
             echo $e;
         }
@@ -199,7 +197,6 @@ class YummyRepository extends Repository
                 array_push($images, $image);
             }
             return $images;
-
         } catch (PDOException $e) {
             echo $e;
         }
@@ -230,7 +227,6 @@ class YummyRepository extends Repository
                 array_push($images, $image);
             }
             return $images;
-
         } catch (PDOException $e) {
             echo $e;
         }
@@ -256,7 +252,6 @@ class YummyRepository extends Repository
                 array_push($types, $type);
             }
             return $types;
-
         } catch (PDOException $e) {
             echo $e;
         }
@@ -287,13 +282,54 @@ class YummyRepository extends Repository
                 array_push($types, $type);
             }
             return $types;
-
         } catch (PDOException $e) {
             echo $e;
         }
     }
 
-    public function createReservation($reservation){
+    public function getRestaurantReservationInfo($restaurantId)
+    {
+        try {
+
+            /**ZO GAAT HET NU WERKEN
+             * 1. FILTER TIMESLOTS OP EVENT ID
+             * 2. TIMESLOTSRESTAURANT
+             * 3. WHERE EVENTID = 2
+             * 4. AND WHERE RESTAURANTID = ?
+             * 5. GEBRUIK DEZE ARRAY OM DE TIMESLOT EN SESSION TE FILTEREN.
+             */
+
+            // query
+            $stmt = $this->connection->prepare("
+            SELECT s.timeSlotID, s.eventID, s.price, s.startTime, s.endTime, s.maximumAmountTickets,
+            r.restaurantID FROM TimeSlots AS s JOIN TimeSlotsYummy AS r ON r.timeSlotID = s.timeSlotID
+            WHERE r.restaurantID = ?");
+
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $stmt->execute([$restaurantId]);
+            $results = $stmt->fetchAll();
+
+            $restaurantSlots = [];
+            foreach ($results as $row) {
+                $restaurantSlot = new TimeSlotsYummy(
+                    $row["timeSlotID"],
+                    $row['restaurantID'],
+                    $row['eventID'],
+                    $row['price'],
+                    $row['startTime'],
+                    $row['endTime'],
+                    $row['maximumAmountTickets'],
+                );
+                array_push($restaurantSlots, $restaurantSlot);
+            }
+            return $restaurantSlots;
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+
+    public function createReservation($reservation)
+    {
         // creates a new reservation
 
         //stap 1 werkend   >>>>>>> //INSERT INTO `timeSlots` (`timeSlotID`, `eventID`, `price`, `startTime`, `endTime`, `maximumAmountTickets`) VALUES ('5', '2', '10', '2023-07-26 17:00:00', '2023-07-26 18:30:00', '1');
@@ -301,20 +337,20 @@ class YummyRepository extends Repository
         //stap 3 werkend  auto increment programID? of foreign key maken? >>>>>>> // INSERT INTO `eventTickets` (`ticketID`, `timeSlotID`, `programID`) VALUES ('6', '5', '2');
         // personal program kan ik niks aan doen. heeft namelijk nog eeen klass nodig.
 
-        $modelReservation = "'timeSlotID', 'restaurantID', 'customerName', 'phoneNumber', 'numberAdults', 'numberChildren', 'remark'";
+        // $modelReservation = "'timeSlotID', 'restaurantID', 'customerName', 'phoneNumber', 'numberAdults', 'numberChildren', 'remark'";
 
         // gebruik restaurantReservation, Timeslots, eventTickets en personalProgram. gebruik join
         try {
             // query
-            $stmt = $this->connection->prepare("INSERT INTO `YummyReservations` (`restaurantName`, `address`, `contact`,
-            `adultPrice`, `childPrice`, `startTime`, `duration`) VALUES (?,?,?,?,?,?,?,?)");
+            $stmt = $this->connection->prepare("
+            INSERT INTO TimeSlotsYummy (`timeSlotID`, `restaurantID`, `reservationName`, `phoneNumber`, `numberAdults`, `numberChildren`, `remark`, `isActive`)
+            VALUES (?,?,?,?,?,?,?,?)
+            ");
             // input
-            $stmt->execute([
-                $reservation->getTimeSlotID(), $reservation->getRestaurantID(), $reservation->getCustomerName(), $reservation->getPhoneNumber(),
-                $reservation->getNumberAdults(), $reservation->getNumberChildren(), $reservation->getRemark()
-            ]);
-
-
+            // Bind the parameter value to the placeholder
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $stmt->execute($reservation->getTimeSlotID(), $reservation->getRestaurantID(), $reservation->getCustomerName(),
+            $reservation->getPhoneNumber(), $reservation->getNumberAdults(), $reservation->getNumberChildren(), $reservation->getRemark(), 1);
         } catch (PDOException $e) {
             echo $e;
         }
@@ -340,8 +376,6 @@ class YummyRepository extends Repository
                 $restaurant->getBannerImage(), $restaurant->getHeadChef(), $restaurant->getAmountSessions(),
                 $restaurant->getAdultPrice(), $restaurant->getChildPrice(), $restaurant->getStartTime()->format('Y-m-d H:i:s'), $restaurant->getDuration()->format('H:i:s')
             ]);
-
-
         } catch (PDOException $e) {
             echo $e;
         }
@@ -381,7 +415,4 @@ class YummyRepository extends Repository
             echo $e;
         }
     }
-
-    
 }
-?>

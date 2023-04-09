@@ -45,7 +45,7 @@ html, body {
 }
 
 #phoneNr{
-  width: 160px;
+  width: 160px !important;
   margin-left: 0;
 }
 

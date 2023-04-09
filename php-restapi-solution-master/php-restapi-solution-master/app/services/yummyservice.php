@@ -76,6 +76,11 @@ class YummyService
         // this will delete a existing restaurant
         $this->repository->deleteRestaurant($delete);
     }
+
+    public function getRestaurantReservationInfo($restaurantId){
+        // Retrieve data from both models
+        return $this->repository->getRestaurantReservationInfo($restaurantId);
+    }
 }
 
 ?>

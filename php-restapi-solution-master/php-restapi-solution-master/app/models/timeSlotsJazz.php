@@ -7,8 +7,8 @@ class TimeSlotsJazz extends TimeSlot{
         private int $hallID;
 
 
-        public function __construct(int $timeSlotID, int $eventID, float $price, string $startTime, string $endTime, int $maximmumAmountTickets, int $artistID, int $hallID) {
-            parent::__construct($timeSlotID, $eventID, $price,  DateTime::createFromFormat('Y-m-d H:i:s', $startTime), DateTime::createFromFormat('Y-m-d H:i:s', $endTime), $maximmumAmountTickets);
+        public function __construct(int $timeSlotID, int $eventID, float $price, string $startTime, string $endTime, int $maximumAmountTickets, int $artistID, int $hallID) {
+            parent::__construct($timeSlotID, $eventID, $price,  DateTime::createFromFormat('Y-m-d H:i:s', $startTime), DateTime::createFromFormat('Y-m-d H:i:s', $endTime), $maximumAmountTickets);
             $this->artistID = $artistID;
             $this->hallID = $hallID;
         }
