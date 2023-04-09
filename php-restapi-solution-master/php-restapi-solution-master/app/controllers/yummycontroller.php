@@ -41,21 +41,23 @@ class YummyController extends Controller
             var_dump($_POST);
             $this->displayView($models);
         }
-        if (isset($_POST['btnradio'])) { //if posts then
+        if ($_SERVER["REQUEST_METHOD"] === 'POST' && !empty($_POST)) {
+            var_dump($_POST);
+            if (isset($_POST['btnradio'], $_POST['customerName'], $_POST['phoneNr'], $_POST['nrAdult'], $_POST['nrChild'], $_POST['remark'])) { //if posts then
 
-            // create a DateTime object for the start time
-            $timeSlot = $_POST['btnradio'];
-            $customerName = $_POST['customerName'];
-            $phoneNr = $_POST['phoneNr'];
-            $nrAdult = $_POST['nrAdult'];
-            $nrChild = $_POST['nrChild'];
-            $remark = $_POST['remark'];
+                // create a DateTime object for the start time
+                $timeSlot = $_POST['btnradio'];
+                $customerName = $_POST['customerName'];
+                $phoneNr = $_POST['phoneNr'];
+                $nrAdult = $_POST['nrAdult'];
+                $nrChild = $_POST['nrChild'];
+                $remark = $_POST['remark'];
 
-
-            if ($this->createReservation($restaurantId, $timeSlot, $customerName, $phoneNr, $nrAdult, $nrChild, $remark)) {
-                var_dump("werkt");
-            } else {
-                var_dump("werkt niet");
+                if ($this->createReservation($restaurantId, $timeSlot, $customerName, $phoneNr, $nrAdult, $nrChild, $remark)) {
+                    var_dump("werkt");
+                } else {
+                    var_dump("werkt niet");
+                }
             }
         }
         // btnradio

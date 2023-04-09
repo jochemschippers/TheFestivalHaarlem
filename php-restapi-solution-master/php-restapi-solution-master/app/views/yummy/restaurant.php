@@ -306,7 +306,7 @@
                             <?php $i = 1;
                             for ($j = 0; $j < 3; $j++) { ?>
                                 <!-- Display the session date and time with the session number -->
-                                <input type="radio" class="btn-check" name="btnradio" id="btnradio<?= $numberButtons ?>" value="<?= $timeSlotsYummy[$arrayselector]->getTimeSlotID() ?>" autocomplete="off">
+                                <input type="radio" class="btn-check" name="btnradio" id="btnradio<?= $numberButtons ?>" value="<?= $timeSlotsYummy[$arrayselector]->getTimeSlotID() ?>">
                                 <label class="btn btn-outline-primary w-100" for="btnradio<?= $numberButtons ?>"><?= "<b>Session $i: " . $timeSlotsYummy[$arrayselector]->getStartTime()->format('H:i') . "</b>" ?></label><br>
                             <?php
                                 $numberButtons++;
@@ -320,7 +320,7 @@
                             <?php $i = 1;
                             for ($j = 0; $j < 3; $j++) { ?>
                                 <!-- Display the session date and time with the session number -->
-                                <input type="radio" class="btn-check" name="btnradio" id="btnradio<?= $numberButtons ?>" value="<?= $timeSlotsYummy[$arrayselector]->getTimeSlotID() ?>" autocomplete="off">
+                                <input type="radio" class="btn-check" name="btnradio" id="btnradio<?= $numberButtons ?>" value="<?= $timeSlotsYummy[$arrayselector]->getTimeSlotID() ?>">
                                 <label class="btn btn-outline-primary w-100" for="btnradio<?= $numberButtons ?>"><?= "<b>Session $i: " . $timeSlotsYummy[$arrayselector]->getStartTime()->format('H:i') . "</b>" ?></label><br>
                             <?php
                                 $numberButtons++;
@@ -330,13 +330,17 @@
                         </div>
                         <div class="col-md-4">
                             <!-- id = customerName -->
-                            <h4>Name on reservation</h4>
-                            <input class="form-control" id="customerName" type="text" placeholder="Enter name" aria-label="default input example">
+                            <label for="customerName">
+                                <h4>Name on reservation</h4>
+                            </label>
+                            <input class="form-control" id="customerName" name="customerName" type="text" placeholder="Enter name" required>
                         </div>
                         <div class="col-md-2">
                             <!-- id = phoneNr -->
-                            <h4>Phone number</h4>
-                            <input class="form-control" id="phoneNr" type="number" placeholder="00 123456789" aria-label="default input example">
+                            <label for="phoneNr">
+                                <h4>Phone number</h4>
+                            </label>
+                            <input class="form-control" id="phoneNr" name="phoneNr" type="tel" placeholder="00 123456789" required>
                         </div>
                     </div>
                     <div class="row">
@@ -354,7 +358,7 @@
                             <?php $i = 1;
                             for ($j = 0; $j < 3; $j++) { ?>
                                 <!-- Display the session date and time with the session number -->
-                                <input type="radio" class="btn-check" name="btnradio" id="btnradio<?= $numberButtons ?>" value="<?= $timeSlotsYummy[$arrayselector]->getTimeSlotID() ?>" autocomplete="off">
+                                <input type="radio" class="btn-check" name="btnradio" id="btnradio<?= $numberButtons ?>" value="<?= $timeSlotsYummy[$arrayselector]->getTimeSlotID() ?>">
                                 <label class="btn btn-outline-primary w-100" for="btnradio<?= $numberButtons ?>"><?= "<b>Session $i: " . $timeSlotsYummy[$arrayselector]->getStartTime()->format('H:i') . "</b>" ?></label><br>
                             <?php
                                 $numberButtons++;
@@ -367,7 +371,7 @@
                             <?php $i = 1;
                             for ($j = 0; $j < 3; $j++) { ?>
                                 <!-- Display the session date and time with the session number -->
-                                <input type="radio" class="btn-check" name="btnradio" id="btnradio<?= $numberButtons ?>" value="<?= $timeSlotsYummy[$arrayselector]->getTimeSlotID() ?>" autocomplete="off">
+                                <input type="radio" class="btn-check" name="btnradio" id="btnradio<?= $numberButtons ?>" value="<?= $timeSlotsYummy[$arrayselector]->getTimeSlotID() ?>">
                                 <label class="btn btn-outline-primary w-100" for="btnradio<?= $numberButtons ?>"><?= "<b>Session $i: " . $timeSlotsYummy[$arrayselector]->getStartTime()->format('H:i') . "</b>" ?></label><br>
                             <?php
                                 $numberButtons++;
@@ -383,7 +387,7 @@
                                     <button class="btn btn-outline-secondary Aminus-btn" type="button">-</button>
                                 </div>
                                 <!-- id = nrAdult -->
-                                <input type="number" id="nrAdult" value="1" min="1" max="20">
+                                <input type="number" id="nrAdult" name="nrAdult" value="1" min="1" max="20">
                                 <div class="input-group-append">
                                     <button class="btn btn-outline-secondary Aplus-btn" type="button">+</button>
                                 </div>
@@ -396,7 +400,7 @@
                                     <button class="btn btn-outline-secondary Cminus-btn" type="button">-</button>
                                 </div>
                                 <!-- id = nrChild -->
-                                <input type="number" id="nrChild" value="0" min="0" max="20">
+                                <input type="number" id="nrChild" name="nrChild" value="0" min="0" max="20">
                                 <div class="input-group-append">
                                     <button class="btn btn-outline-secondary Cplus-btn" type="button">+</button>
                                 </div>
@@ -417,7 +421,7 @@
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <!-- id = textArea -->
-                                <textarea class="form-control" id="remark" rows="3"></textarea>
+                                <textarea class="form-control" id="remark" name="remark" rows="3"></textarea>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -431,6 +435,10 @@
                             <p>*A reservation fee of €10,- pp. will be administerred.<br>
                                 This fee will be deducted from the final check on visiting the restaurant.
                             </p>
+
+                            <input type="hidden" name="nrAdult" value="">
+                            <input type="hidden" name="nrChild" value="">
+                            <input type="hidden" name="remark" value="">
                             <button class="btn btn-primary" type="submit" for="form">Continue</button>
                             <button type="button" onclick="hideOverlay();" class="btn btn-danger">Cancel</button>
                         </div>
