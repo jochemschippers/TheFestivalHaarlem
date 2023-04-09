@@ -8,7 +8,6 @@ class AccountController extends Controller
     private $service;
     function __construct()
     {
-        parent::__construct();
         $this->service = new AccountService();
     }
     public function index()

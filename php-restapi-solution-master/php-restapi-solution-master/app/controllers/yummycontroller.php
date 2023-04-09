@@ -10,7 +10,6 @@ class YummyController extends Controller
     // initialize services
     function __construct()
     {
-        parent::__construct();
         $this->yummyService = new YummyService();
     }
 

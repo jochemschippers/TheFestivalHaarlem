@@ -12,7 +12,6 @@ class AdminController extends Controller
     // initialize services
     function __construct()
     {
-        parent::__construct();
         $this->landmarkService = new LandmarkService();
         $this->yummyService = new YummyService();
     }

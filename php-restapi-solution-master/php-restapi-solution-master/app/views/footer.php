@@ -12,12 +12,12 @@
         <h6>Navigation:</h6>
         <ul class="footer-links">
           <li><a href="/">Home</a></li>
-          <?php try { ?>
+          <?php if (isset($events) && (is_array($events) || is_object($events))) { ?>
             <?php foreach ($events as $event) { ?>
               <li><a href="/<?= str_replace(' ', '-', $event->getEventName()) ?>"><?= $event->getEventName() ?></a></li>
             <?php } ?>
-          <?php } catch (error $e) { ?>
-            something went wrong while loading the navigation! Please try again later
+          <?php } else { ?>
+            <span class="nav-item"><a href="#">It seems our server is down. Please visit the website again later.</a></span>
           <?php } ?>
         </ul>
       </div>
@@ -47,7 +47,7 @@
     </div>
   </div>
   </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
 </footer>
 

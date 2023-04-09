@@ -9,9 +9,6 @@ class paymentpageController extends Controller
     private $paymentService;
     function __construct()
     {
-        parent::__construct();
-        $this->paymentService = new PaymentService();
-        parent::__construct();
         $this->paymentService = new PaymentService();
     }
 

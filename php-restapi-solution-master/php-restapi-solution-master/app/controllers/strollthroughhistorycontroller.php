@@ -8,7 +8,6 @@ class StrollThroughHistoryController extends Controller {
     private $historyService;
 
     function __construct() {
-        parent::__construct();
         $this->landmarkService = new LandmarkService();
         $this->historyService = new HistoryService();
     }

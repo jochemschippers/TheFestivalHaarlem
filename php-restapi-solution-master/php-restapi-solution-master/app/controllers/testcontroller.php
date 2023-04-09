@@ -6,10 +6,6 @@ require_once __DIR__ . '/../services/jazzservice.php';
 class TestController extends Controller
 {
     private $service;
-    function __construct()
-    {
-        parent::__construct();
-    }
     public function index()
     {
         $models = [];

@@ -18,20 +18,20 @@
   </div>
   <nav class="navbar" id="navbar">
     <span class="nav-item"><a href="/">Home</a></span>
-    <?php try { ?>
+    <?php if (isset($events) && (is_array($events) || is_object($events))) { ?>
       <?php foreach ($events as $event) { ?>
         <span class="nav-item"><a href="/<?= str_replace(' ', '-', $event->getEventName()) ?>"><?= $event->getEventName() ?></a></span>
       <?php } ?>
-    <?php } catch (error $e) { ?>
-      something went wrong while loading the navigation! Please try again later
+    <?php } else { ?>
+      <span class="nav-item"><a href="#">It seems our server is down. Please visit the website again later.</a></span>
     <?php } ?>
   </nav>
   <div class="user-options">
     <div class="option"><a href="/admin"><i class="fa fa-sharp fa-solid fa-screwdriver-wrench fa-2x"></i></a></div>
     <div class="option"><a href="/paymentpage"><i class="fa fa-shopping-cart fa-2x"></i></a></div>
-    <?php 
+    <?php
     $uri = explode('/', trim($_SERVER['REQUEST_URI'], '/'));
-    if (!isset($_SESSION['userID'])) { ?><div class="option"><a href="/account"><i class="fa fa-user fa-2x"></i></a></div><?php } else if(isset($_SESSION['userID']) && $uri[0] != "test"){ ?>
+    if (!isset($_SESSION['userID'])) { ?><div class="option"><a href="/account"><i class="fa fa-user fa-2x"></i></a></div><?php } else if (isset($_SESSION['userID']) && $uri[0] != "test") { ?>
       <div class="option"><a href="/account/logout"><i class="fa fa-right-from-bracket fa-2x"></i></a></div><?php }  ?>
   </div>
 </header>
