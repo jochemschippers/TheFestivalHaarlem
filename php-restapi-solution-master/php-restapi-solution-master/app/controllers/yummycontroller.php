@@ -38,10 +38,10 @@ class YummyController extends Controller
                 "restaurantFoodTypes" => $this->yummyService->getAllRestaurantFoodTypes(),
                 "timeSlotsYummy" => $this->yummyService->getRestaurantReservationInfo($restaurantId),
             ];
-
+            var_dump($_POST);
             $this->displayView($models);
         }
-        if (isset($_POST['btnradio'], $_POST['customerName'], $_POST['phoneNr'], $_POST['nrAdult'], $_POST['nrChild'], $_POST['remark'])) { //if posts then
+        if (isset($_POST['btnradio'])) { //if posts then
 
             // create a DateTime object for the start time
             $timeSlot = $_POST['btnradio'];
@@ -51,7 +51,7 @@ class YummyController extends Controller
             $nrChild = $_POST['nrChild'];
             $remark = $_POST['remark'];
 
-            var_dump($_POST);
+
             if ($this->createReservation($restaurantId, $timeSlot, $customerName, $phoneNr, $nrAdult, $nrChild, $remark)) {
                 var_dump("werkt");
             } else {
