@@ -30,7 +30,7 @@
         <li data-bs-target="#myCarousel" data-bs-slide-to="2"></li>
       </ol>
       <div class="carousel-inner">
-        <?php for ($i = 0; $i < count($artists); $i++) : ?>
+        <?php for ($i = 0; $i < count($artists); $i++) { ?>
           <?php if($i == 0){ ?>
           <div class="carousel-item active">
           <?php } else { ?>
@@ -44,7 +44,7 @@
               <button class="buttonJazz"> Learn More About artist</button>
             </div>
           </div>
-        <?php endfor; ?>
+        <?php } ?>
       </div>
       <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -87,7 +87,7 @@
               </th>
             </tr>
             <tr>
-
+            <td>aaa</td>
             </tr>
             <tr>
 
