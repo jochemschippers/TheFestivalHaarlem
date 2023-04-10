@@ -81,6 +81,12 @@ class YummyService
         $this->repository->deleteRestaurant($delete);
     }
 
+    // --------------- TimeSlotsYummy ------------
+
+    public function getAllTimeSlotsYummy(){
+        return $this->repository->getAllTimeSlotsYummy();
+    }
+
 }
 
 ?>

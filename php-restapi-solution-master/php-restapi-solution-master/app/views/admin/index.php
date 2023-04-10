@@ -578,34 +578,37 @@
         <div class="card-body">
             <h2>TimeSlotsYummy</h2>
             <div id="restaurants-table">
-                <?php if (!is_null($TimeSlotsYummy) && count($TimeSlotsYummy) > 0) { ?>
+                <?php if (!is_null($timeSlotsYummy) && count($timeSlotsYummy) > 0) { ?>
                     <table>
                         <thead>
                             <tr>
                                 <th>TicketID</th>
                                 <th>RestaurantID</th>
-                                <th></th>
-                                <th></th>
+                                <th>Edit</th>
+                                <th>Delete</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($TimeSlotsYummy as $TimeSlotYummy) { ?>
+                            <?php foreach ($timeSlotsYummy as $timeSlotYummy) { ?>
                                 <tr>
-                                    <td><?= $TimeSlotYummy->getRestaurantID() ?></td>
-                                    <td><?= $TimeSlotYummy->getRestaurantName() ?></td>
+                                    <td><?= $timeSlotYummy->getTimeSlotID() ?></td>
+                                    <td><?= $timeSlotYummy->getRestaurantID() ?></td>
                                     <td>
-                                        <button class="btn btn-primary edit-btn" data-id="<?= $restaurant->getRestaurantID() ?>" data-bs-toggle="modal" data-bs-target="#staticBackdrop-<?= $restaurant->getRestaurantID() ?>">
+                                        <button class="btn btn-primary editTimeSlotsYummy-btn" data-id="<?= $timeSlotYummy->getTimeSlotID() ?>">
+                                        <!-- data-bs-toggle="modal" data-bs-target="#editTimeSlotsYummy-" -->
                                             Edit
                                         </button>
                                     </td>
                                     <td>
-                                        <button class="btn btn-danger delete-btn" data-id="<?= $restaurant->getRestaurantId() ?>">
+                                        <button class="btn btn-danger deleteTimeSlotsYummy-btn" data-id="<?= $timeSlotYummy->getTimeSlotID() ?>">
                                             Delete
                                         </button>
                                     </td>
 
                                     <!-- HIER KOMEN MODALS VOOR ADD EN EDIT TIMESLOTSYUMMY -->
 
+
+                                    
                                     <!-- HIER EINDE MODALS VOOR ADD EN EDIT TIMESLOTSYUMMY -->
                                 </tr>
                             <?php } ?>
