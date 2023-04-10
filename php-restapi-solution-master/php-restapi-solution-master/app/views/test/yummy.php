@@ -1,3 +1,4 @@
+<!-- <link href="../css/test/yummy.css" rel="stylesheet"> -->
 <main role="main">
     <div class="card mb-3 panel important">
         <div class="card-header">
@@ -25,8 +26,7 @@
                                 <th>Child Price</th>
                                 <th>Start Time</th>
                                 <th>Duration</th>
-                                <th></th>
-                                <th></th>
+                                <th>Edit/Add</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -47,6 +47,15 @@
                                     <td><?= $restaurant->getStartTime()->format('Y-m-d H:i') ?></td>
                                     <td><?= $restaurant->getDuration()->format('H:i') ?></td>
                                     <td>
+                                        <!-- edit -->
+                                        <button class="btn btn-primary edit-btn" data-id="<?= $restaurant->getRestaurantID() ?>" data-bs-toggle="modal" data-bs-target="#staticBackdrop-<?= $restaurant->getRestaurantID() ?>">
+                                            Edit
+                                        </button>
+                                        <!-- delete -->
+                                        <button class="btn btn-danger delete-btn" data-id="<?= $restaurant->getRestaurantId() ?>">
+                                            Delete
+                                        </button>
+                                    </td>
                                 </tr>
                         <?php } ?>
                     </tbody>
