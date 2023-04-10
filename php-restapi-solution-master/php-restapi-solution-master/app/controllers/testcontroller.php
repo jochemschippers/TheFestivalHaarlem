@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/controller.php';
-require_once __DIR__ . '/../services/jazzservice.php';
 require_once __DIR__ . '/../services/yummyservice.php';
+require_once __DIR__ . '/../services/jazzservice.php';
 
 class TestController extends Controller
 {
