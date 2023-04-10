@@ -31,102 +31,200 @@
       </ol>
       <div class="carousel-inner">
         <?php for ($i = 0; $i < count($artists); $i++) { ?>
-          <?php if($i == 0){ ?>
-          <div class="carousel-item active">
-          <?php } else { ?>
-          <div class="carousel-item">
+          <?php if ($i == 0) { ?>
+            <div class="carousel-item active">
+            <?php } else { ?>
+              <div class="carousel-item">
+              <?php } ?>
+              <img src="<?= $artists[$i]->getImage() ?>">
+              <div class="container carouselContainer">
+                <h3><?= $artists[$i]->getName() ?></h3>
+                <p><?= $artists[$i]->getDescription() ?></p>
+                <hr><span class="textSmall">Plays the <?= $artists[$i]->getTimeSlots()[0]->getStartTime()->format('dS') ?>!</span>
+                <button class="buttonJazz"> Learn More About artist</button>
+              </div>
+              </div>
             <?php } ?>
-            <img src="<?= $artists[$i]->getImage() ?>">
-            <div class="container carouselContainer">
-              <h3><?= $artists[$i]->getName() ?></h3>
-              <p><?= $artists[$i]->getDescription() ?></p>
-              <hr><span class="textSmall">Plays the <?= $artists[$i]->getTimeSlots()[0]->getStartTime()->format('dS') ?>!</span>
-              <button class="buttonJazz"> Learn More About artist</button>
             </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+      </div>
+
+      <h2 class="margin-bottom underlined textCenter">Schedule:</h2>
+
+      <div class="margin-top jazzContainer schedule">
+        <div class="row m-2 mt-5">
+          <div class="col-md-3  mt-4" id="location-information">
+            <h4 class="location-text ">Location: <br>
+              <span>The Patronaat </span>
+            </h4>
+            <p class="long-term-ticket-text">
+              Would you rather have <strong>access</strong> to the <strong>whole day?</strong> Get your day ticket for only <strong>€35</strong>!
+            </p>
+            <button class="line-height longTermTicketButton buttonJazz"><strong>get a day ticket</strong><br> €35</button>
+            <p class="long-term-ticket-text">
+              Can’t choose? You can purchase a week ticket and get <strong>access</strong> to the <strong>whole week</strong>! Get a week ticket for only <strong>€80</strong>!
+            </p>
+            <button class="line-height longTermTicketButton buttonJazz"><strong>get a week ticket</strong><br> €85</button>
           </div>
-        <?php } ?>
-      </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
-    </div>
 
-    <h2 class="margin-bottom underlined textCenter">Schedule:</h2>
+          <div class="col-md-9 mt-4">
+            <table class="jazz-schedule">
+              <tr>
+                <th class="text-center first-th">
+                  Main Hall
+                </th>
+                <td style="width: 65px;"></td>
+                <th class="text-center">
+                  Second Hall
+                </th>
+              </tr>
+              <tr>
+                <td style="height: 25px;"></td>
+              </tr>
+              <tr>
+                <td class="schedule-button first-schedule-button ">
+                  <img src="image/jazz/artist3.png"> </img>
+                  <div class="container">
+                    <div class='row'>
+                      <p>Gumbo Kings</p>
+                    </div>
+                    <div class='row'>
+                      <p class="time-text">18:00 - 19:00</p>
+                      <p class="time-text price text-end">€15</p>
+                    </div>
+                  </div>
+                  <div class="container add-button"> <p> add </p> </div>
+                </td>
 
-    <div class="margin-top jazzContainer ">
-      <div class="row m-2 mt-5">
-        <div class="col-md-3  mt-4" id="location-information">
-          <h4 class="location-text ">Location: <br>
-            <span>The Patronaat </span>
-          </h4>
-          <p class="long-term-ticket-text">
-            Would you rather have <strong>access</strong> to the <strong>whole day?</strong> Get your day ticket for only <strong>€35</strong>!
-          </p>
-          <button class="line-height longTermTicketButton buttonJazz"><strong>get a day ticket</strong><br> €35</button>
-          <p class="long-term-ticket-text">
-            Can’t choose? You can purchase a week ticket and get <strong>access</strong> to the <strong>whole week</strong>! Get a week ticket for only <strong>€80</strong>!
-          </p>
-          <button class="line-height longTermTicketButton buttonJazz"><strong>get a week ticket</strong><br> €85</button>
+                <td style="width: 65px;"></td>
+
+                <td class="schedule-button">
+                  <img src="image/jazz/artist3.png"> </img>
+                  <div class="container">
+                    <div class='row'>
+                      <p>Gumbo Kings</p>
+                    </div>
+                    <div class='row'>
+                      <p class="time-text">18:00 - 19:00</p>
+                      <p class="time-text price text-end">€15</p>
+                    </div>
+                  </div>
+                  <div class="container add-button"> <p> add </p> </div>
+                </td>
+              </tr>
+              <tr>
+                <td style="height: 25px;"></td>
+              </tr>
+              <tr>
+                <td class="schedule-button">
+                  <img src="image/jazz/artist3.png"> </img>
+                  <div class="container">
+                    <div class='row'>
+                      <p>Gumbo Kings</p>
+                    </div>
+                    <div class='row'>
+                      <p class="time-text">18:00 - 19:00</p>
+                      <p class="time-text price text-end">€15</p>
+                    </div>
+                  </div>
+                  <div class="container add-button"> <p> add </p> </div>
+                </td>
+
+                <td style="width: 65px;"></td>
+
+                <td class="schedule-button">
+                  <img src="image/jazz/artist3.png"> </img>
+                  <div class="container">
+                    <div class='row'>
+                      <p>Gumbo Kings</p>
+                    </div>
+                    <div class='row'>
+                      <p class="time-text">18:00 - 19:00</p>
+                      <p class="time-text price text-end">€15</p>
+                    </div>
+                  </div>
+                  <div class="container add-button"> <p> add </p> </div>
+                </td>
+              </tr>
+              <tr>
+                <td style="height: 25px;"></td>
+              </tr>
+              <tr>
+                <td class="schedule-button">
+                  <img src="image/jazz/artist3.png"> </img>
+                  <div class="container">
+                    <div class='row'>
+                      <p>Gumbo Kings</p>
+                    </div>
+                    <div class='row'>
+                      <p class="time-text">18:00 - 19:00</p>
+                      <p class="time-text price text-end">€15</p>
+                    </div>
+                  </div>
+                  <div class="container add-button"> <p> add </p> </div>
+                </td>
+
+                <td style="width: 65px;"></td>
+
+                <td class="schedule-button">
+                  <img src="image/jazz/artist3.png"> </img>
+                  <div class="container">
+                    <div class='row'>
+                      <p>Gumbo Kings</p>
+                    </div>
+                    <div class='row'>
+                      <p class="time-text">18:00 - 19:00</p>
+                      <p class="time-text price text-end">€15</p>
+                    </div>
+                  </div>
+                  <div class="container add-button"> <p> add </p> </div>
+                </td>
+              </tr>
+              <tr>
+                <td style="height: 25px;"></td>
+              </tr>
+
+            </table>
+
+          </div>
+
         </div>
+      </div>
 
-        <div class="col-md-9 mt-4">
-          <table class="jazz-schedule">
-            <tr>
-            <td style="width: 65px;"></td>
-              <th class="text-center first-th">
-                Main Hall
-              </th>
-              <td style="width: 65px;"></td>
-              <th class="text-center">
-                Second Hall
-              </th>
-            </tr>
-            <tr>
-            <td>aaa</td>
-            </tr>
-            <tr>
 
-            </tr>
+      <h2 class="margin-bottom underlined textCenter">locations:</h2>
 
-          </table>
-
+      <div class="center">
+        <div class="margin-top center" id="locations">
+          <?php
+          echo '<div class="grid-Locations" style ="grid-template-columns: repeat(' . count($locations) . ', 1fr)">';
+          for ($i = 1; $i <= count($locations); $i++) {
+            echo '<div class="grid-item" style="grid-row: 1; grid-column: ' . $i . '">' .
+              '<img src="' . $locations[$i - 1]->getLocationImage() . '" class="locationImage" alt="patronaat">' .
+              '<h3><span><strong>' . $locations[$i - 1]->getLocationName() . '</strong></span></h3>' .
+              '<img src="/image/jazz/ToAndFrom.png" alt="to and from illustration">' .
+              '<p>' .
+              '<strong>To & from</strong><br>' .
+              $locations[$i - 1]->getToAndFromText() .
+              '</p>' .
+              '<img src="/image/jazz/Accessibility.png" alt="Accessibility illustration">' .
+              '<p>' .
+              '<strong>Accessibility</strong><br>' .
+              $locations[$i - 1]->getAccesibillityText() .
+              '</p>' .
+              '</div>';
+          }
+          echo '</div>';
+          ?>
         </div>
-
       </div>
+
+
     </div>
-
-
-    <h2 class="margin-bottom underlined textCenter">locations:</h2>
-
-    <div class="center">
-      <div class="margin-top center" id="locations">
-        <?php
-        echo '<div class="grid-Locations" style ="grid-template-columns: repeat(' . count($locations) . ', 1fr)">';
-        for ($i = 1; $i <= count($locations); $i++) {
-          echo '<div class="grid-item" style="grid-row: 1; grid-column: ' . $i . '">' .
-            '<img src="' . $locations[$i - 1]->getLocationImage() . '" class="locationImage" alt="patronaat">' .
-            '<h3><span><strong>' . $locations[$i - 1]->getLocationName() . '</strong></span></h3>' .
-            '<img src="/image/jazz/ToAndFrom.png" alt="to and from illustration">' .
-            '<p>' .
-            '<strong>To & from</strong><br>' .
-            $locations[$i - 1]->getToAndFromText() .
-            '</p>' .
-            '<img src="/image/jazz/Accessibility.png" alt="Accessibility illustration">' .
-            '<p>' .
-            '<strong>Accessibility</strong><br>' .
-            $locations[$i - 1]->getAccesibillityText() .
-            '</p>' .
-            '</div>';
-        }
-        echo '</div>';
-        ?>
-      </div>
-    </div>
-
-
-  </div>

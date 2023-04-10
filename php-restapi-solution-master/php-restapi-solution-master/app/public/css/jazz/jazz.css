@@ -51,7 +51,7 @@ body {
   left: -1000%
 }
 .schedule{
-  height: 688px;
+  height: auto !important;
 }
 .location-text span{
   font-family: 'Open Sans';
@@ -218,4 +218,77 @@ p span {
 }
 .carousel-control-prev-icon:hover{
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%333'%3e%3cpath d='M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z'/%3e%3c/svg%3e")
+}
+
+.schedule-button {
+  background-color: #FEB548;
+    height: 116px;
+    border-radius: 5px;
+    display: flex;
+    padding: 0;
+}
+.first-schedule-button{
+  background-color: #9B1C31;;
+}
+.schedule-button p{
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 33px;
+  padding: 0;
+  text-align: center;
+  width:100%;
+  color:transparent;
+  background-image: linear-gradient(180deg, #262626 16.67%, #9B1C31 39.19%);
+  -webkit-background-clip: text;
+  overflow: hidden;
+    white-space: nowrap;
+}
+.first-schedule-button p{
+  background-image: linear-gradient(180deg, #FFFFFF 0%, #FEB548 42.79%);;;
+}
+.time-text{
+  font-weight: 300 !important;
+    font-size: 22px;
+    line-height: 30px;
+    text-align: center;
+    color: #262626 !important;
+    margin-bottom: 10;
+}
+.first-schedule-button .container .time-text{
+  color: #FFFF !important;
+}
+.price{
+  height: 20px;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  font-size: 16px !important;
+  line-height: 22px !important;
+  text-align: right !important;
+}
+.add-button{
+  align-items: center;
+  display: flex;
+  padding-left: 0px;
+  padding-right: 0px;
+  width: 245.5px;
+  background: #FCBF7F;
+  /*#FEB548;*/
+  margin-left: 5px;
+}
+.first-schedule-button .add-button{
+  background: #FEB548 ;
+}
+.add-button p{
+  margin-bottom: 0px;
+  font-weight: 400;
+  font-style: normal;
+font-size: 35px;
+line-height: 50px;
+color: #262626;
+background-image: none;
+}
+.add-button:hover{
+  background: #FFD7A8;
 }
