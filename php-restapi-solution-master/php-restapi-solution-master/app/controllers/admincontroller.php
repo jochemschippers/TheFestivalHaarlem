@@ -32,6 +32,7 @@ class AdminController extends Controller
             "menuItems" => $this->yummyService->getAllMenuItems(),
             "images" => $this->yummyService->getAllImages(),
             "restaurantFoodTypes" => $this->yummyService->getAllRestaurantFoodTypes(),
+            "timeSlotsYummy" => $this->yummyService->getAllTimeSlotsYummy(),
         ];
 
         $this->displayView($models);

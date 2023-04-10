@@ -256,7 +256,7 @@
                                             Delete
                                         </button>
                                     </td>
-                                        <div class="modal fade" tabindex="-1" id="staticBackdrop-<?= $restaurant->getRestaurantID() ?>" aria-hidden="true">
+                                    <div class="modal fade" tabindex="-1" id="staticBackdrop-<?= $restaurant->getRestaurantID() ?>" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -330,7 +330,7 @@
                                         </div>
                                     </div>
                                 </tr>
-                                
+
                             <?php } ?>
                         </tbody>
                     </table>
@@ -553,53 +553,6 @@
                 </div>
             </div>
 
-            <script>
-                var restaurants = <?= json_encode($restaurants); ?>;
-                console.log(restaurants);
-
-                const editRestaurantId = document.getElementById("editRestaurantID");
-
-                editRestaurantId.addEventListener("change", function(event) {
-                    var enteredId = document.getElementById('editRestaurantID').value;
-
-                    var restaurantFound = false;
-
-                    restaurants.forEach(function(restaurant) {
-                        console.log(restaurant);
-                        if (restaurant.getRestaurantID() == enteredId) {
-                            document.getElementById('editRestaurantName').value = restaurant.getRestaurantName();
-                            document.getElementById('editRestaurantAddress').value = restaurant.getAddress();
-                            document.getElementById('editRestaurantContact').value = restaurant.getContact();
-                            document.getElementById('editRestaurantDescription').value = restaurant.getDescription();
-                            document.getElementById('editRestaurantAmountOfStars').value = restaurant.getAmountOfStars();
-                            document.getElementById('editRestaurantBannerImage').value = restaurant.getBannerImage();
-                            document.getElementById('editRestaurantHeadChef').value = restaurant.getHeadChef();
-                            document.getElementById('editRestaurantAmountSessions').value = restaurant.getAmountSessions();
-                            document.getElementById('editRestaurantAdultPrice').value = restaurant.getAdultPrice();
-                            document.getElementById('editRestaurantChildPrice').value = restaurant.getChildPrice();
-                            // document.getElementById('editRestaurant-startTime').value = restaurant.getStartTime().format('Y-m-d\\TH:i');
-                            // document.getElementById('editRestaurant-duration').value = restaurant.getDuration().format('H:i:s');
-                            restaurantFound = true;
-                        }
-                    });
-
-                    if (!restaurantFound) {
-                        document.getElementById('editRestaurantName').value = '';
-                        document.getElementById('editRestaurantAddress').value = '';
-                        document.getElementById('editRestaurantContact').value = '';
-                        document.getElementById('editRestaurantDescription').value = '';
-                        document.getElementById('editRestaurantAmountOfStars').value = '';
-                        document.getElementById('editRestaurantBannerImage').value = '';
-                        document.getElementById('editRestaurantHeadChef').value = '';
-                        document.getElementById('editRestaurantAmountSessions').value = '';
-                        document.getElementById('editRestaurantAdultPrice').value = '';
-                        document.getElementById('editRestaurantChildPrice').value = '';
-                        // document.getElementById('editRestaurant-startTime').value = '';
-                        // document.getElementById('editRestaurant-duration').value = '';
-                    }
-                });
-            </script>
-
             <div class="card">
                 <div class="card-body" id="cardBody">
 
@@ -619,47 +572,100 @@
                 </div>
             </div>
         </div>
+    </div>
 
-        <div id="artist">
+    <div class="card">
+        <div class="card-body">
+            <h2>TimeSlotsYummy</h2>
+            <div id="restaurants-table">
+                <?php if (!is_null($timeSlotsYummy) && count($timeSlotsYummy) > 0) { ?>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>TicketID</th>
+                                <th>RestaurantID</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($timeSlotsYummy as $timeSlotYummy) { ?>
+                                <tr>
+                                    <td><?= $timeSlotYummy->getTimeSlotID() ?></td>
+                                    <td><?= $timeSlotYummy->getRestaurantID() ?></td>
+                                    <td>
+                                        <button class="btn btn-primary editTimeSlotsYummy-btn" data-id="<?= $timeSlotYummy->getTimeSlotID() ?>">
+                                        <!-- data-bs-toggle="modal" data-bs-target="#editTimeSlotsYummy-" -->
+                                            Edit
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-danger deleteTimeSlotsYummy-btn" data-id="<?= $timeSlotYummy->getTimeSlotID() ?>">
+                                            Delete
+                                        </button>
+                                    </td>
 
-            <div class="card">
-                <div class="card-body">
-                    <h2>Jazz</h2>
+                                    <!-- HIER KOMEN MODALS VOOR ADD EN EDIT TIMESLOTSYUMMY -->
 
-                    <div id="artist-table">
-                        <?php
-                        // if (!is_null($artist) && count($artist) > 0) {
-                        //     echo '<table>';
-                        //     echo '<tr><th>ID</th><th>Title</th><th>Description</th><th>Image</th><th>Actions</th></tr>';
-                        //     foreach ($artists as $artist) {
-                        //         echo '<tr>';
-                        //         echo '<td>' . $artist->getLandmarkID() . '</td>';
-                        //         echo '<td>' . $artist->getTitle() . '</td>';
-                        //         echo '<td>' . $artist->getDescription() . '</td>';
-                        //         echo '<td>' . $artist->getImage() . '</td>';
-                        //         echo '<td><a href="index.php?action=editLandmark&id=' . $artist->getLandmarkID() . '">Edit</a> | <a href="index.php?action=deleteLandmark&id=' . $artist->getLandmarkID() . '">Delete</a></td>';
-                        //         echo '</tr>';
-                        //     }
-                        //     echo '</table>';
-                        // } else {
-                        //     echo '<p>No landmarks found.</p>';
-                        // }
-                        // foreach ($models as $landmark)
-                        // {
-                        //     echo "<h2>$landmark->title</h2>";
-                        //     echo "<p>$landmark->description</p>";
-                        //     echo "<p>$landmark->image</p>";
-                        //     // echo "<img src='images/" . $landmark->getImage() . "' alt='Landmark image'>";
-                        // }
-                        ?>
-                    </div>
+
+                                    
+                                    <!-- HIER EINDE MODALS VOOR ADD EN EDIT TIMESLOTSYUMMY -->
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                <?php } else { ?>
+                    <p>No timeslots for yummy found.</p>
+                <?php } ?>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- ---------------------------------------------------------------------------- -->
+
+    <div id="artist">
+
+        <div class="card">
+            <div class="card-body">
+                <h2>Jazz</h2>
+
+                <div id="artist-table">
+                    <?php
+                    // if (!is_null($artist) && count($artist) > 0) {
+                    //     echo '<table>';
+                    //     echo '<tr><th>ID</th><th>Title</th><th>Description</th><th>Image</th><th>Actions</th></tr>';
+                    //     foreach ($artists as $artist) {
+                    //         echo '<tr>';
+                    //         echo '<td>' . $artist->getLandmarkID() . '</td>';
+                    //         echo '<td>' . $artist->getTitle() . '</td>';
+                    //         echo '<td>' . $artist->getDescription() . '</td>';
+                    //         echo '<td>' . $artist->getImage() . '</td>';
+                    //         echo '<td><a href="index.php?action=editLandmark&id=' . $artist->getLandmarkID() . '">Edit</a> | <a href="index.php?action=deleteLandmark&id=' . $artist->getLandmarkID() . '">Delete</a></td>';
+                    //         echo '</tr>';
+                    //     }
+                    //     echo '</table>';
+                    // } else {
+                    //     echo '<p>No landmarks found.</p>';
+                    // }
+                    // foreach ($models as $landmark)
+                    // {
+                    //     echo "<h2>$landmark->title</h2>";
+                    //     echo "<p>$landmark->description</p>";
+                    //     echo "<p>$landmark->image</p>";
+                    //     // echo "<img src='images/" . $landmark->getImage() . "' alt='Landmark image'>";
+                    // }
+                    ?>
                 </div>
             </div>
+        </div>
 
-            <div class="card-group">
-                <div class="card">
-                    <!-- <div class="card-body" id="cardBody"> -->
-                    <!-- <h4>Add Artist</h4>
+        <div class="card-group">
+            <div class="card">
+                <!-- <div class="card-body" id="cardBody"> -->
+                <!-- <h4>Add Artist</h4>
 
                     <div id="artist-form">
                         <form action="/admin/createArtist" method="post" enctype="multipart/form-data">
@@ -681,13 +687,13 @@
                         </form>
                     </div>
                 </div> -->
-                </div>
+            </div>
 
-                <div class="card">
-                    <div class="card-body" id="cardBody">
+            <div class="card">
+                <div class="card-body" id="cardBody">
 
-                        <h4>Edit Artist</h4>
-                        <!-- <div id="edit-artist-form">
+                    <h4>Edit Artist</h4>
+                    <!-- <div id="edit-artist-form">
                         <form action="/admin/editArtist" method="post" enctype="multipart/form-data">
                             <div class="mb-3">
                                 <label for="landmarkID">Artist ID</label>
@@ -716,15 +722,15 @@
                             </div>
                         </form>
                     </div> -->
-                    </div>
                 </div>
+            </div>
 
-                <div class="card">
-                    <div class="card-body" id="cardBody">
+            <div class="card">
+                <div class="card-body" id="cardBody">
 
-                        <h4>Delete Artist</h4>
+                    <h4>Delete Artist</h4>
 
-                        <!-- <div id="delete-artist-form">
+                    <!-- <div id="delete-artist-form">
                         <form action="/admin/deleteArtist" method="post" enctype="multipart/form-data">
                             <div class="mb-3">
                                 <label for="artistID">Artist ID</label>
@@ -735,11 +741,11 @@
                             </div>
                         </form>
                     </div> -->
-                    </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <script src="/js/admin.js"></script>
+    <script src="/js/admin.js"></script>
 
 </body>

@@ -45,4 +45,3 @@
             <button type="submit" class="submit-btn btn-account" id="signUp">Register</button>
         </form>
     </div>
-    <script src="../../js/account/account.js"></script>
