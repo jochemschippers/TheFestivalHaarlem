@@ -272,9 +272,8 @@ p span {
   display: flex;
   padding-left: 0px;
   padding-right: 0px;
-  width: 245.5px;
+  width: 227.5px;
   background: #FCBF7F;
-  /*#FEB548;*/
   margin-left: 5px;
 }
 .first-schedule-button .add-button{
@@ -289,6 +288,12 @@ line-height: 50px;
 color: #262626;
 background-image: none;
 }
-.add-button:hover{
+.add-ticket:hover,
+.add-ticket:hover ~ .add-button {
+  cursor: pointer;
+}
+
+.add-button:hover,
+.add-ticket:hover ~ .add-button {
   background: #FFD7A8;
 }

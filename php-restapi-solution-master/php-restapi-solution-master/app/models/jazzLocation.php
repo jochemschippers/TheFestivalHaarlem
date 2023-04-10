@@ -11,7 +11,7 @@ class JazzLocation{
         private string $accesibillityText;
 
 
-        public function __construct(int $locationID, string $locationName, string $address, string $locationImage, string $toAndFromText, string $accesibillityText){
+        public function __construct(int $locationID = 0, string $locationName = '', string $address = '', string $locationImage = '', string $toAndFromText ='', string $accesibillityText = ''){
             $this->locationID = $locationID;
             $this->locationName = $locationName;
             $this->address = $address;

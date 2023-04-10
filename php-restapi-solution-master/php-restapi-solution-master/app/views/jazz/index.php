@@ -77,13 +77,29 @@
           <div class="col-md-9 mt-4">
             <table class="jazz-schedule">
               <tr>
-                <th class="text-center first-th">
-                  Main Hall
-                </th>
-                <td style="width: 65px;"></td>
-                <th class="text-center">
-                  Second Hall
-                </th>
+                <?php
+                $targetDate = new DateTime('2023-07-27');
+                $halls = [];
+
+                foreach ($timeSlots as $timeSlot) {
+                  $startTime = $timeSlot->getStartTime();
+                  $hallName = $timeSlot->getHall()->getHallName();
+
+                  if ($startTime->format('Y-m-d') == $targetDate->format('Y-m-d')) {
+                    if (!isset($halls[$hallName])) {
+                      $halls[$hallName] = $hallName;
+                    }
+                  }
+                }
+                ?>
+                <?php var_dump($halls) ?>
+                <?php for ($i = 0; $i < count($halls); $i++) {
+                ?>
+                  <th class="text-center <?php if($i == 0) {?>first-th <?php } ?>">
+                    <?= $hall ?>
+                  </th>
+                  <?php if($i == 0) {?><td style="width: 65px;"></td> <?php } ?>
+                <?php } ?>
               </tr>
               <tr>
                 <td style="height: 25px;"></td>
@@ -91,7 +107,7 @@
               <tr>
                 <td class="schedule-button first-schedule-button ">
                   <img src="image/jazz/artist3.png"> </img>
-                  <div class="container">
+                  <div class="container add-ticket">
                     <div class='row'>
                       <p>Gumbo Kings</p>
                     </div>
@@ -100,14 +116,14 @@
                       <p class="time-text price text-end">€15</p>
                     </div>
                   </div>
-                  <div class="container add-button"> <p> add </p> </div>
+                  <div class="container add-button">
+                    <p> add </p>
+                  </div>
                 </td>
-              <?php var_dump($artists[0]->getTimeSlots()) ?>
                 <td style="width: 65px;"></td>
-
                 <td class="schedule-button">
                   <img src="image/jazz/artist3.png"> </img>
-                  <div class="container">
+                  <div class="container add-ticket">
                     <div class='row'>
                       <p>Gumbo Kings</p>
                     </div>
@@ -116,7 +132,9 @@
                       <p class="time-text price text-end">€15</p>
                     </div>
                   </div>
-                  <div class="container add-button"> <p> add </p> </div>
+                  <div class="container add-button">
+                    <p> add </p>
+                  </div>
                 </td>
               </tr>
               <tr>
@@ -134,7 +152,9 @@
                       <p class="time-text price text-end">€15</p>
                     </div>
                   </div>
-                  <div class="container add-button"> <p> add </p> </div>
+                  <div class="container add-button">
+                    <p> add </p>
+                  </div>
                 </td>
 
                 <td style="width: 65px;"></td>
@@ -150,47 +170,11 @@
                       <p class="time-text price text-end">€15</p>
                     </div>
                   </div>
-                  <div class="container add-button"> <p> add </p> </div>
-                </td>
-              </tr>
-              <tr>
-                <td style="height: 25px;"></td>
-              </tr>
-              <tr>
-                <td class="schedule-button">
-                  <img src="image/jazz/artist3.png"> </img>
-                  <div class="container">
-                    <div class='row'>
-                      <p>Gumbo Kings</p>
-                    </div>
-                    <div class='row'>
-                      <p class="time-text">18:00 - 19:00</p>
-                      <p class="time-text price text-end">€15</p>
-                    </div>
+                  <div class="container add-button">
+                    <p> add </p>
                   </div>
-                  <div class="container add-button"> <p> add </p> </div>
-                </td>
-
-                <td style="width: 65px;"></td>
-
-                <td class="schedule-button">
-                  <img src="image/jazz/artist3.png"> </img>
-                  <div class="container">
-                    <div class='row'>
-                      <p>Gumbo Kings</p>
-                    </div>
-                    <div class='row'>
-                      <p class="time-text">18:00 - 19:00</p>
-                      <p class="time-text price text-end">€15</p>
-                    </div>
-                  </div>
-                  <div class="container add-button"> <p> add </p> </div>
                 </td>
               </tr>
-              <tr>
-                <td style="height: 25px;"></td>
-              </tr>
-
             </table>
 
           </div>

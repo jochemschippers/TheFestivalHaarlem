@@ -16,6 +16,15 @@ class JazzService {
         }
         return $artists;
     }
+    public function getAllTimeSlots() {
+        try{
+            $timeSlots = $this->repository->getAllJazzTimeSlots();
+            return $timeSlots;
+        }catch(error $e){
+            throw $e;
+        }
+
+    }
     public function getAllLocations(){
         $locations = $this->repository->getAllLocations();
         return $locations;

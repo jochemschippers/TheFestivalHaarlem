@@ -9,7 +9,7 @@ class JazzArtist{
         private array $timeSlots;
         
 
-        public function __construct(int $artistID, string $description, string $image, string $name){
+        public function __construct(int $artistID = 0, string $description = '', string $image = '', string $name = ''){
             $this->artistID = $artistID;
             $this->description = $description;
             $this->image = $image;
