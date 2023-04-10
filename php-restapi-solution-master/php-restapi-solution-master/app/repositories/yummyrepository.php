@@ -1,13 +1,13 @@
 <?php
 include_once __DIR__ . '/repository.php';
-require_once __DIR__ . '/../models/foodType.php';
-require_once __DIR__ . '/../models/timeSlot.php';
 require_once __DIR__ . '/../models/timeSlotsYummy.php';
+require_once __DIR__ . '/../models/foodType.php';
 require_once __DIR__ . '/../models/yummyRestaurant.php';
 require_once __DIR__ . '/../models/restaurantImage.php';
 require_once __DIR__ . '/../models/restaurantMenuItem.php';
 require_once __DIR__ . '/../models/restaurantFoodType.php';
 require_once __DIR__ . '/../models/restaurantReservation.php';
+// require_once __DIR__ . '/../models/timeSlot.php';
 
 class YummyRepository extends Repository
 {

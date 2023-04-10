@@ -9,10 +9,10 @@ class TestController extends Controller
     private $yummyService;
 
     // initialize services
-    function __construct()
-    {
-        $this->yummyService = new YummyService();
-    }
+    // function __construct()
+    // {
+    //     $this->yummyService = new YummyService();
+    // }
 
     public function index()
     {
@@ -67,16 +67,19 @@ class TestController extends Controller
 
     public function getAllRestaurants()
     {
+        $this->yummyService = new YummyService();
         return $this->yummyService->getAll();
     }
 
     public function getRestaurant()
     {
+        $this->yummyService = new YummyService();
         return $this->yummyService->getOne($_POST['restaurantID']);
     }
 
     public function createRestaurant()
     {
+        $this->yummyService = new YummyService();
         // check if all the required POST parameters are set
         if (
             isset($_POST['createRestaurantName'], $_POST['createRestaurantAddress'], $_POST['createRestaurantContact'],
@@ -121,6 +124,8 @@ class TestController extends Controller
 
     public function updateRestaurant()
     {
+        $this->yummyService = new YummyService();
+        
         $this->yummyService->updateRestaurant(
             $_POST['editRestaurantID'], $_POST['editRestaurantName'], $_POST['editRestaurantAddress'],
             $_POST['editRestaurantContact'], $_POST['editRestaurantCardDescription'], $_POST['editRestaurantDescription'],

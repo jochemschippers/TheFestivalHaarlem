@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../models/timeSlot.php';
+// require_once __DIR__ . '/../models/timeSlot.php';
 
 class TimeSlotsYummy extends TimeSlot
 {
