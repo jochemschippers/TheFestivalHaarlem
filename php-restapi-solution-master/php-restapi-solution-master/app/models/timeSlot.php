@@ -70,6 +70,38 @@ class TimeSlot{
 		$this->eventID = $eventID;
 		return $this;
 	}
+
+	/**
+	 * @return int
+	 */
+	public function getMaximumAmountTickets(): int {
+		return $this->maximumAmountTickets;
+	}
+	
+	/**
+	 * @param int $maximumAmountTickets 
+	 * @return self
+	 */
+	public function setMaximumAmountTickets(int $maximumAmountTickets): self {
+		$this->maximumAmountTickets = $maximumAmountTickets;
+		return $this;
+	}
+
+	/**
+	 * @return float
+	 */
+	public function getPrice(): float {
+		return $this->price;
+	}
+	
+	/**
+	 * @param float $price 
+	 * @return self
+	 */
+	public function setPrice(float $price): self {
+		$this->price = $price;
+		return $this;
+	}
 }
 
 ?>
