@@ -39,16 +39,17 @@ class PatternRouter
             $explodedUri[1] = $defaultMethod;
         }
         $methodName = $explodedUri[1];
-        if ($explodedUri[0] === 'test') {
-            if (session_status() == PHP_SESSION_NONE) {
-                session_start();
-            }
+        //check if user logged in
+        // if ($explodedUri[0] === 'test') {
+        //     if (session_status() == PHP_SESSION_NONE) {
+        //         session_start();
+        //     }
             
-            if (!isset($_SESSION['userRole']) || $_SESSION['userRole'] != 1) {
-                $explodedUri[0] = 'errormessage403';
-                $methodName = $defaultMethod;
-            }
-        }
+        //     if (!isset($_SESSION['userRole']) || $_SESSION['userRole'] != 1) {
+        //         $explodedUri[0] = 'errormessage403';
+        //         $methodName = $defaultMethod;
+        //     }
+        // }
 
         $controllerName = str_replace('-', '', $explodedUri[0]) . "controller";
 
