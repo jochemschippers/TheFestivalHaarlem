@@ -102,7 +102,7 @@
                   </div>
                   <div class="container add-button"> <p> add </p> </div>
                 </td>
-
+              <?php var_dump($artists[0]->getTimeSlots()) ?>
                 <td style="width: 65px;"></td>
 
                 <td class="schedule-button">
