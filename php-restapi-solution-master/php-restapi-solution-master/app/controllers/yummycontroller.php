@@ -41,7 +41,7 @@ class YummyController extends Controller
             $this->displayView($models);
         }
         if ($_SERVER["REQUEST_METHOD"] === 'POST' && !empty($_POST)) {
-            var_dump($_POST);
+            // var_dump($_POST);
             if (isset($_POST['btnradio'], $_POST['customerName'], $_POST['phoneNr'], $_POST['nrAdult'], $_POST['nrChild'], $_POST['remark'])) { //if posts then
 
                 // create a DateTime object for the start time
@@ -53,19 +53,16 @@ class YummyController extends Controller
                 $remark = $_POST['remark'];
 
                 if ($this->createReservation($restaurantId, $timeSlot, $customerName, $phoneNr, $nrAdult, $nrChild, $remark)) {
-                    var_dump("werkt");
+                    // HIER EEN POPUP MELDING TONEN IS GESLAAGD
+                    // if reservation is created successfully
+                    echo "<script>alert('Reservation created successfully!')</script>";
                 } else {
-                    var_dump("werkt niet");
+                    // HIER MELDEN DAT EEN WAARDE VERKEERD INGEVULD IS. OF DAT ER EEN ERROR IS
+                    // if reservation creation fails
+                    echo "<script>alert('Failed to create reservation. Please check your inputs and try again.')</script>";
                 }
             }
         }
-        // btnradio
-        // customerName
-        // phoneNr
-        // nrAdult
-        // nrChild
-        // textArea
-
     }
     public function YummyReservation()
     {
@@ -125,45 +122,23 @@ class YummyController extends Controller
 
     public function createReservation($restaurantId, $timeSlotId, $customerName, $phoneNr, $nrAdult, $nrChild, $remark)
     {
-        // private int $timeSlotID; //key
-        // private int $restaurantID;
-        // private string $customerName;
-        // private string $phoneNumber;
-        // private int $numberAdults;
-        // private int $numberChildren;
-        // private string $remark;
 
-        // check if all the required POST parameters are set
-        if (
+        $reservation = [
+            'ticketID' => 0,
+            'timeSlotId' => $timeSlotId,
+            'restaurantId' => $restaurantId,
+            'customerName' => $customerName,
+            'phoneNr' => $phoneNr,
+            'nrAdult' => $nrAdult,
+            'nrChild' => $nrChild,
+            'remark' => $remark,
+            'isActive' => true
+        ];
 
-            isset($restaurantId, $timeSlotId, $customerName, $phoneNr, $nrAdult, $nrChild, $remark)
-
-        ) {
-
-            $reservation = [
-                'ticketID' => 0,
-                'timeSlotId' => $timeSlotId,
-                'restaurantId' => $restaurantId,
-                'customerName' => $customerName,
-                'phoneNr' => $phoneNr,
-                'nrAdult' => $nrAdult,
-                'nrChild' => $nrChild,
-                'remark' => $remark,
-                'isActive' => true
-            ];
-
-            var_dump($reservation);
-
-            // call the createRestaurant method of the YummyService object with the restaurant object as the parameter
-            if ($this->yummyService->createReservation($reservation)) {
-                echo "reservation made";
-                return true;
-            } else {
-                return false;
-            }
+        // call the createRestaurant method of the YummyService object with the restaurant object as the parameter
+        if ($this->yummyService->createReservation($reservation)) {
+            return true;
         } else {
-            // handle the case where one or more POST parameters are missing
-            echo "One or more required parameters are missing.";
             return false;
         }
     }

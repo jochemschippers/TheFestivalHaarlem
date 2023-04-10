@@ -51,10 +51,14 @@ class YummyService
         // retrieve data
         return $this->repository->getAllRestaurantFoodTypes();
     }
+    public function getRestaurantReservationInfo($restaurantId){
+        // Retrieve data from both models
+        return $this->repository->getRestaurantReservationInfo($restaurantId);
+    }
     public function createReservation($reservation){
 
         // creates a new restaurant
-        $this->repository->createReservation($reservation);
+        return $this->repository->createReservation($reservation);
     }
 
     // -------------------  Administrator  ----------------------
@@ -77,10 +81,6 @@ class YummyService
         $this->repository->deleteRestaurant($delete);
     }
 
-    public function getRestaurantReservationInfo($restaurantId){
-        // Retrieve data from both models
-        return $this->repository->getRestaurantReservationInfo($restaurantId);
-    }
 }
 
 ?>
