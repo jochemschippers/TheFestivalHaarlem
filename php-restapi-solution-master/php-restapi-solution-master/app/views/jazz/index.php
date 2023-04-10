@@ -77,30 +77,37 @@
           <div class="col-md-9 mt-4">
             <table class="jazz-schedule">
               <tr>
-                <?php
+                <?php // get required informations
                 $targetDate = new DateTime('2023-07-27');
-                $halls = [];
+                $uniqueHalls = [];
+                $artistsAndHalls = [];
 
-                foreach ($timeSlots as $timeSlot) {
+                for ($i = 0; $i < count($timeSlots); $i++) {
+                  $timeSlot = $timeSlots[$i];
                   $startTime = $timeSlot->getStartTime();
-                  $hallName = $timeSlot->getHall()->getHallName();
+                  $hall = $timeSlot->getHall();
 
                   if ($startTime->format('Y-m-d') == $targetDate->format('Y-m-d')) {
-                    if (!isset($halls[$hallName])) {
-                      $halls[$hallName] = $hallName;
+                    if (!in_array($hall, $uniqueHalls)) {
+                      $uniqueHalls[] = $hall;
                     }
+                    $artistsAndHalls[] = [
+                      'artist' => $timeSlot->getArtist(),
+                      'hall_id' => $timeSlot->getHall(),
+                  ];
                   }
                 }
                 ?>
-                <?php var_dump($halls) ?>
-                <?php for ($i = 0; $i < count($halls); $i++) {
-                ?>
-                  <th class="text-center <?php if($i == 0) {?>first-th <?php } ?>">
-                    <?= $hall ?>
+                <?php var_dump($artistsAndHalls) ?>
+                <?php //dynamic load table headers here
+                for ($i = 0; $i < count($uniqueHalls); $i++) {?>
+                  <th class="text-center <?php if ($i == 0) { ?>first-th <?php } ?>">
+                    <?= $uniqueHalls[$i]->getHallName() ?>
                   </th>
-                  <?php if($i == 0) {?><td style="width: 65px;"></td> <?php } ?>
+                  <?php if ($i == 0) { ?><td style="width: 65px;"></td> <?php } ?>
                 <?php } ?>
               </tr>
+              <?php for($i = 0; $i< ceil(count($artistsAndHalls) / count($uniqueHalls)); $i++) {}?>
               <tr>
                 <td style="height: 25px;"></td>
               </tr>
