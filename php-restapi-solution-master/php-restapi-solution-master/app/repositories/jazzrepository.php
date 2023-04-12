@@ -69,7 +69,7 @@ class JazzRepository extends Repository
               SELECT 
                 ts.timeSlotID, ts.eventID, ts.price, ts.startTime, ts.endTime, ts.maximumAmountTickets,
                 ja.artistID,
-                ja.image,
+                ja.imageSmall,
                 ja.name,
                 jl.locationID,
                 jl.locationName,
@@ -100,7 +100,7 @@ class JazzRepository extends Repository
                     $row['startTime'],
                     $row['endTime'],
                     $row['maximumAmountTickets'],
-                    new JazzArtist($row['artistID'], '',$row['image'], $row['name']),
+                    new JazzArtist($row['artistID'], '',$row['imageSmall'], $row['name']),
                     new JazzLocation($row['locationID'], $row['locationName']),
                     new Hall($row['hallID'], $row['locationID'], $row['hallName'])
                 );
