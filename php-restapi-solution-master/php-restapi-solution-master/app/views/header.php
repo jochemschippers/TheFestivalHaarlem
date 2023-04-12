@@ -9,7 +9,27 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
   <link href="../css/main.css" rel="stylesheet">
   <script src="https://kit.fontawesome.com/384ef59d1a.js" crossorigin="anonymous"></script>
-  <script src="/js/dynamicResourceLoader.js"></script>
+
+  <?php
+
+  $currentUri = $_SERVER['REQUEST_URI'];
+  $segmentsOfUrl = explode('/', trim($currentUri, '/'));
+  $cssFiles = [];
+
+  for ($i = 0; $i < count($segmentsOfUrl); $i++) {
+    if (!empty($segmentsOfUrl[$i])) {
+      $cssFiles[] = "/css/{$segmentsOfUrl[$i]}/{$segmentsOfUrl[$i]}.css";
+    }
+  }
+
+  if (empty($segmentsOfUrl[0])) {
+    $cssFiles[] = "/css/home.css";
+}
+
+foreach ($cssFiles as $cssFile): ?>
+    <link rel="stylesheet" type="text/css" href="<?= $cssFile ?>">
+<?php endforeach; ?>
+
 </head>
 
 <header class="header-container">

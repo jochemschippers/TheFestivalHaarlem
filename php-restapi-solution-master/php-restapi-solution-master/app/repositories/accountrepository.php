@@ -20,11 +20,16 @@ class AccountRepository extends Repository
             throw new ErrorException("It seems something went wrong on our side! Please try again later.");
         }
     }
-    function register($fullname, $password, $email, $role, $phoneNumber)
+    function register($user)
     {
         try {
             $stmt = $this->connection->prepare("INSERT INTO `Users`(`email`, `userRole`, `fullName`, `phoneNumber`, `password`) VALUES (?,?,?,?,?)");
-            $stmt->execute([$email, $role, $fullname, $phoneNumber, $password]);
+            $stmt->execute([
+                $user->getEmail(), 
+                $user->getUserRole(), 
+                $user->getFullName(), 
+                $user->getPhoneNumber(), 
+                $user->getPassword()]);
         } catch (Exception $e) {
             throw new ErrorException("It seems something went wrong with our database! Please try again later.");
         }
@@ -61,7 +66,7 @@ class AccountRepository extends Repository
             $stmt = $this->connection->prepare("SELECT userID, userRole, fullName FROM `Users` WHERE email = ?");
             $stmt->execute([$email]);
             $userData = $stmt->fetch();
-            $user = new User($userData['userID'], $userData['userRole'], $userData['fullName']);            
+            $user = new User($userData['fullName'], $userData['userRole'],'', '', '', $userData['userID'], );            
             return $user;
         } catch (Exception $e) {
             throw new ErrorException("It seems something went wrong with our database! Please try again later.");
