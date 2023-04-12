@@ -202,7 +202,6 @@
     </div>
     <div class="container">
         <div class="row">
-
             <div class="col-md-8" id="scedulePrice">
                 <h3>Our schedule and prices </h3>
                 <p>We have planned 3 sessions the first of which will start at <?= $timeSlotsYummy[0]->getStartTime()->format("H:i") ?>.
@@ -306,7 +305,7 @@
                             <?php $i = 1;
                             for ($j = 0; $j < 3; $j++) { ?>
                                 <!-- Display the session date and time with the session number -->
-                                <input type="radio" class="btn-check" name="btnradio" id="btnradio<?= $numberButtons ?>" value="<?= $timeSlotsYummy[$arrayselector]->getTimeSlotID() ?>" onclick="updateSeats(<?= $timeSlotsYummy[$arrayselector]->getTimeSlotID() ?>)">
+                                <input type="radio" class="btn-check" name="btnradio" id="btnradio<?= $numberButtons ?>" value="<?= $timeSlotsYummy[$arrayselector]->getTimeSlotID() ?>" onclick="updateSeats(<?= $timeSlots[$arrayselector]->getMaximumAmountTickets() ?>, <?= $timeSlotsYummy[$arrayselector]->getTimeSlotID() ?>)">
                                 <label class="btn btn-outline-primary w-100" for="btnradio<?= $numberButtons ?>"><?= "<b>Session $i: " . $timeSlotsYummy[$arrayselector]->getStartTime()->format('H:i') . "</b>" ?></label><br>
                             <?php
                                 $numberButtons++;
@@ -320,7 +319,7 @@
                             <?php $i = 1;
                             for ($j = 0; $j < 3; $j++) { ?>
                                 <!-- Display the session date and time with the session number -->
-                                <input type="radio" class="btn-check" name="btnradio" id="btnradio<?= $numberButtons ?>" value="<?= $timeSlotsYummy[$arrayselector]->getTimeSlotID() ?>" onclick="updateSeats(<?= $timeSlotsYummy[$arrayselector]->getTimeSlotID() ?>)">
+                                <input type="radio" class="btn-check" name="btnradio" id="btnradio<?= $numberButtons ?>" value="<?= $timeSlotsYummy[$arrayselector]->getTimeSlotID() ?>" onclick="updateSeats(<?= $timeSlots[$arrayselector]->getMaximumAmountTickets() ?>, <?= $timeSlotsYummy[$arrayselector]->getTimeSlotID() ?>)">
                                 <label class="btn btn-outline-primary w-100" for="btnradio<?= $numberButtons ?>"><?= "<b>Session $i: " . $timeSlotsYummy[$arrayselector]->getStartTime()->format('H:i') . "</b>" ?></label><br>
                             <?php
                                 $numberButtons++;
@@ -346,7 +345,10 @@
                     <div class="row">
                         <div class="col-md-6">
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-3">
+                            <h3>Available seats</h3>
+                        </div>
+                        <div class="col-md-3">
                             <h3>Group size</h3>
                         </div>
                     </div>
@@ -358,7 +360,7 @@
                             <?php $i = 1;
                             for ($j = 0; $j < 3; $j++) { ?>
                                 <!-- Display the session date and time with the session number -->
-                                <input type="radio" class="btn-check" name="btnradio" id="btnradio<?= $numberButtons ?>" value="<?= $timeSlotsYummy[$arrayselector]->getTimeSlotID() ?>" onclick="updateSeats(<?= $timeSlotsYummy[$arrayselector]->getTimeSlotID() ?>)">
+                                <input type="radio" class="btn-check" name="btnradio" id="btnradio<?= $numberButtons ?>" value="<?= $timeSlotsYummy[$arrayselector]->getTimeSlotID() ?>" onclick="updateSeats(<?= $timeSlots[$arrayselector]->getMaximumAmountTickets() ?>, <?= $timeSlotsYummy[$arrayselector]->getTimeSlotID() ?>)">
                                 <label class="btn btn-outline-primary w-100" for="btnradio<?= $numberButtons ?>"><?= "<b>Session $i: " . $timeSlotsYummy[$arrayselector]->getStartTime()->format('H:i') . "</b>" ?></label><br>
                             <?php
                                 $numberButtons++;
@@ -371,7 +373,7 @@
                             <?php $i = 1;
                             for ($j = 0; $j < 3; $j++) { ?>
                                 <!-- Display the session date and time with the session number -->
-                                <input type="radio" class="btn-check" name="btnradio" id="btnradio<?= $numberButtons ?>" value="<?= $timeSlotsYummy[$arrayselector]->getTimeSlotID() ?>" onclick="updateSeats(<?= $timeSlotsYummy[$arrayselector]->getTimeSlotID() ?>)">
+                                <input type="radio" class="btn-check" name="btnradio" id="btnradio<?= $numberButtons ?>" value="<?= $timeSlotsYummy[$arrayselector]->getTimeSlotID() ?>" onclick="updateSeats(<?= $timeSlots[$arrayselector]->getMaximumAmountTickets() ?>, <?= $timeSlotsYummy[$arrayselector]->getTimeSlotID() ?>)">
                                 <label class="btn btn-outline-primary w-100" for="btnradio<?= $numberButtons ?>"><?= "<b>Session $i: " . $timeSlotsYummy[$arrayselector]->getStartTime()->format('H:i') . "</b>" ?></label><br>
                             <?php
                                 $numberButtons++;
@@ -379,7 +381,10 @@
                                 $i++;
                             } ?>
                         </div>
-                        <div class="col-6">
+                        <div class="col-3">
+                            <p class="fs-3"><strong><span id="seats">No timeslot selected</span></strong></p>
+                        </div>
+                        <div class="col-3">
                             <h4>Number of adults</h4>
                             <div class="input-group">
                                 <div class="input-group-append">
@@ -418,27 +423,21 @@
                                 <textarea class="form-control" id="remark" name="remark" rows="3"></textarea>
                             </div>
                         </div>
-                        <div class="col-md-3">
-                            <div class="mb-3">
-                                make the seats addaptable on the id of the buttonradio clicked
-
-                                <p>Number of seats: <span id="seats">1</span></p>
+                        <div class="col-md-6">
+                            <div class="border" id="overview">
+                                <p>Number of adults: <span id="adults">1</span></p>
+                                <p>Number Children: <span id="children">0</span></p>
+                                <p>Reservation fee* (<span id="group">1</span>): </p>
+                                <hr>
+                                <p>Total price: </p>
                             </div>
-                            <div class="col-md-3">
-                                <div class="border" id="overview">
-                                    <p>Number of adults: <span id="adults">1</span></p>
-                                    <p>Number Children: <span id="children">0</span></p>
-                                    <p>Reservation fee* (<span id="group">1</span>): </p>
-                                    <hr>
-                                    <p>Total price: </p>
-                                </div>
-                                <p>*A reservation fee of €10,- pp. will be administerred.<br>
-                                    This fee will be deducted from the final check on visiting the restaurant.
-                                </p>
-                                <button class="btn btn-primary" type="submit" for="form">Continue</button>
-                                <button type="button" onclick="hideOverlay();" class="btn btn-danger">Cancel</button>
-                            </div>
+                            <p>*A reservation fee of €10,- pp. will be administerred.<br>
+                                This fee will be deducted from the final check on visiting the restaurant.
+                            </p>
+                            <button class="btn btn-primary" type="submit" for="form">Continue</button>
+                            <button type="button" onclick="hideOverlay();" class="btn btn-danger">Cancel</button>
                         </div>
+                    </div>
                 </form>
             </div>
         </div>
@@ -446,10 +445,23 @@
     <script>
         // <<<<<<<<<<-------------- HIER OVERLAY ---------------->>>>>>>>>>>>
 
-        function updateSeats($availableSeats) {
-            // $seatsAvailable = $timeSlotsYummy[$arrayselector] -> getSeatsAvailable();
-            const seats = document.getElementById('seats');
-            seats.textContent = selectedValue;
+        function updateSeats(availableSeats, timeSlotID) {
+            seats = document.getElementById("seats");
+            seats.textContent = availableSeats;
+            $.ajax({
+                url: 'update_seats.php',
+                type: 'POST',
+                data: {
+                    timeSlotID: timeSlotID,
+                    availableSeats: availableSeats
+                },
+                success: function(response) {
+                    // handle success response
+                },
+                error: function(xhr, status, error) {
+                    // handle error response
+                }
+            });
         }
 
         const overlayContainer = document.querySelector('.overlay-container');

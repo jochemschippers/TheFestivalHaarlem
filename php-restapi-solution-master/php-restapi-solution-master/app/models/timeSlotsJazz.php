@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../models/TimeSlot.php';
+require_once __DIR__ . '/../models/timeSlot.php';
 
 class TimeSlotsJazz extends TimeSlot{
     

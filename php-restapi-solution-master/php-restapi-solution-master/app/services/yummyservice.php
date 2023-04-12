@@ -51,6 +51,14 @@ class YummyService
         // retrieve data
         return $this->repository->getAllRestaurantFoodTypes();
     }
+    public function getAllRestaurantReservations()
+    {
+        // retrieve data
+        return $this->repository->getAllRestaurantReservations();
+    }
+    public function getAllTimeSlots(){
+        return $this->repository->getAllTimeSlots();
+    }
     public function getRestaurantReservationInfo($restaurantId){
         // Retrieve data from both models
         return $this->repository->getRestaurantReservationInfo($restaurantId);
@@ -72,13 +80,13 @@ class YummyService
     public function updateRestaurant($update)
     {
         // this updates a existing restaurant
-        $this->repository->updateRestaurant($update);
+        return $this->repository->updateRestaurant($update);
     }
 
     public function deleteRestaurant($delete)
     {
         // this will delete a existing restaurant
-        $this->repository->deleteRestaurant($delete);
+        return $this->repository->deleteRestaurant($delete);
     }
 
     // --------------- TimeSlotsYummy ------------

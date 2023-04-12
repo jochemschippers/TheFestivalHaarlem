@@ -61,7 +61,7 @@ class AccountRepository extends Repository
             $stmt = $this->connection->prepare("SELECT userID, userRole, fullName FROM `Users` WHERE email = ?");
             $stmt->execute([$email]);
             $userData = $stmt->fetch();
-            $user = new User($userData['userID'], $userData['userRole'], $userData['fullName']);            
+            $user = new User($userData['userID'], $userData['userRole'], $userData['fullName']);
             return $user;
         } catch (Exception $e) {
             throw new ErrorException("It seems something went wrong with our database! Please try again later.");

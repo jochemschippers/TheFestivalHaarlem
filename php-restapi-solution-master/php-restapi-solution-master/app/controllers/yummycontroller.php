@@ -31,11 +31,13 @@ class YummyController extends Controller
             $restaurantId = $_GET['restaurantId'];
             $models = [
                 "restaurantId" => $restaurantId,
+                "timeSlots" => $this->yummyService->getAllTimeSlots(),
                 "images" => $this->yummyService->getImages($restaurantId),
                 "restaurant" => $this->yummyService->getOne($restaurantId),
                 "menuItems" => $this->yummyService->getMenuItems($restaurantId),
                 "restaurantFoodTypes" => $this->yummyService->getAllRestaurantFoodTypes(),
                 "timeSlotsYummy" => $this->yummyService->getRestaurantReservationInfo($restaurantId),
+                "restaurantReservations" => $this->yummyService->getAllRestaurantReservations(),
             ];
             $this->displayView($models);
         }
@@ -110,6 +112,11 @@ class YummyController extends Controller
     {
         // retrieve data
         return $this->yummyService->getAllRestaurantFoodTypes();
+    }
+    public function getAllTimeSlots()
+    {
+        // retrieve data
+        return $this->yummyService->getAllTimeSlots();
     }
 
     public function getRestaurantReservationInfo()

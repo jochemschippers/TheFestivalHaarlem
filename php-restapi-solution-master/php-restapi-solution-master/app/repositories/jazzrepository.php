@@ -1,8 +1,8 @@
 <?php
 require_once __DIR__ . '/repository.php';
+require_once __DIR__ . '/../models/timeSlot.php';
 require_once __DIR__ . '/../models/JazzArtist.php';
 require_once __DIR__ . '/../models/TimeSlotsJazz.php';
-require_once __DIR__ . '/../models/TimeSlot.php';
 require_once __DIR__ . '/../models/JazzLocation.php';
 
 

@@ -14,9 +14,22 @@ class Restaurantreservation extends TimeSlotsYummy
     private bool $isActive;
 
     // constructor method
-    public function __construct(int $timeSlotID, int $ticketID, int $restaurantID, string $reservationName, int $phoneNumber, int $numberAdults, int $numberChildren, string $remark, bool $isActive, int $eventID, float $price, string $startTime, string $endTime, int $maximumAmountTickets)
+    public function __construct(int $timeSlotID = null, int $ticketID, int $restaurantID = null,
+    string $reservationName, int $phoneNumber, int $numberAdults, int $numberChildren,
+    string $remark, bool $isActive, int $eventID = null, float $price = null, string $startTime = null,
+    string $endTime = null, int $maximumAmountTickets = null)
     {
-        parent::__construct($timeSlotID, $restaurantID, $eventID, $price, DateTime::createFromFormat('Y-m-d H:i:s', $startTime), DateTime::createFromFormat('Y-m-d H:i:s', $endTime), $maximumAmountTickets);
+        if ($timeSlotID !== null && $restaurantID !== null && $eventID !== null && $price !== null && $startTime !== null && $endTime !== null && $maximumAmountTickets !== null) {
+			parent::__construct(
+				$timeSlotID,
+                $restaurantID,
+                $eventID,
+                $price,
+                DateTime::createFromFormat('Y-m-d H:i:s', $startTime),
+                DateTime::createFromFormat('Y-m-d H:i:s', $endTime),
+                $maximumAmountTickets
+            );
+		}        
         $this->ticketID = $ticketID;
         // $this->timeSlotID = $timeSlotID;
         // $this->restaurantID = $restaurantID;
