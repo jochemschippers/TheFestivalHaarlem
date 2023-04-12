@@ -278,7 +278,6 @@ p span {
   width: 227.5px;
   background: #FCBF7F;
   margin-left: 5px;
-  max-width: 77.891;
 }
 .first-schedule-button .add-button{
   background: #FEB548 ;
@@ -292,13 +291,16 @@ line-height: 50px;
 color: #262626;
 background-image: none;
 }
+.schedule-button:hover{
+  cursor: pointer;
+}
 .add-ticket:hover,
-.add-ticket:hover ~ .add-button {
+.add-ticket .add-button:hover {
   cursor: pointer;
 }
 
 .add-button:hover,
-.add-ticket:hover ~ .add-button {
+.add-ticket .add-button:hover {
   background: #FFD7A8;
   cursor: pointer;
 }
@@ -312,4 +314,20 @@ background-image: none;
 #scheduleCarousel .carousel-control-next{
   height: 73px;
   opacity: 1;
+}
+#scheduleCarousel{
+  pointer-events: none;
+}
+.carousel-item {
+  pointer-events: none;
+}
+.carousel-inner {
+  pointer-events: none;
+}
+.carousel-item > * {
+  pointer-events: auto;
+}
+.grote-Markt-Item{
+  max-width:100%;
+  width: 1307px;
 }

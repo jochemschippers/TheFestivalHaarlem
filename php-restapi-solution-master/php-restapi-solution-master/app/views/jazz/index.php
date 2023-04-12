@@ -56,11 +56,14 @@
             </button>
       </div>
 
+
+
+
       <h2 class="margin-bottom underlined textCenter">Schedule:</h2>
-      <div id="scheduleCarousel" data-bs-ride="carousel" class="carousel slide"  data-bs-interval="false">
+      <div id="scheduleCarousel" data-bs-ride="carousel" class="carousel slide">
         <div class="carousel-inner">
           <?php
-          $dateList = ['2023-07-27', '2023-07-28', '2023-07-29'];
+          $dateList = ['2023-07-27', '2023-07-28', '2023-07-29', '2023-07-30'];
 
           for ($dateIndex = 0; $dateIndex < count($dateList); $dateIndex++) {
             $targetDate = new DateTime($dateList[$dateIndex]);
@@ -83,8 +86,9 @@
                 $timeSlotByHall[$hallID][] = $timeSlot;
               }
             }
+
           ?>
-            <div class="carousel-item <?php if ($dateIndex === 0) echo 'active'; ?>">
+            <div class="carousel-item <?php if ($dateIndex == 0) { ?>active <?php } ?>">
               <div class="margin-top jazzContainer schedule">
                 <div class="d-flex justify-content-center align-items-center">
                   <button class="carousel-control-prev" type="button" data-bs-target="#scheduleCarousel" data-bs-slide="prev">
@@ -100,7 +104,6 @@
                 <div class="row m-2 mt-5">
                   <div class="col-md-3  mt-4" id="location-information">
                     <h4 class="location-text ">Location: <br>
-
                       <span><?= $timeSlotByHall[0][0]->getJazzLocation()->getLocationName() ?> </span>
                     </h4>
                     <p class="long-term-ticket-text">
@@ -116,7 +119,7 @@
                   <div class="col-md-9 mt-4">
                     <table class="jazz-schedule">
                       <tr>
-                        <?php //dynamic load table headers here
+                        <?php //dynamically loads table headers
                         for ($i = 0; $i < count($uniqueHalls); $i++) { ?>
                           <th class="text-center <?php if ($i == 0) { ?>first-th <?php } ?>">
                             <?= $uniqueHalls[$i]->getHallName() ?>
@@ -134,24 +137,36 @@
                           <td style="height: 25px;"></td>
                         </tr>
                         <tr>
-                          <?php for ($j = 0; $j < count($uniqueHalls); $j++) {
+                          <?php //dynamically loads clickable buttons
+                          for ($j = 0; $j < count($uniqueHalls); $j++) {
+                            $currentHallID = $uniqueHalls[$j]->getHallID();
                             //checks if there is an artist assigned to one of the halls on the location
-                            if (isset($timeSlotByHall[$j][$i])) {
+                            if (isset($timeSlotByHall[$currentHallID][$i])) {
                           ?>
 
-                              <td class="schedule-button <?php if ($j == 0) { ?>first-schedule-button <?php } ?> ">
-                                <img src="<?= $timeSlotByHall[$j][$i]->getArtist()->getImage() ?>"> </img>
+                              <td class="schedule-button 
+                              
+                              <?php //checks if it is first and location isn't groteMarkt
+                              $isGroteMarkt = $timeSlotByHall[$currentHallID][$i]->getJazzLocation()->getLocationID() == 2;
+                              if ($j == 0 && !$isGroteMarkt) { ?>first-schedule-button <?php } ?> 
+                              <?php //checks if location is GroteMarkt, if so, change style
+                              if ($isGroteMarkt) { ?>
+                              <?php //give each even number a first-schedule-button style
+                              if ($i % 2 == 0) { ?>first-schedule-button<?php } ?> 
+                              grote-Markt-Item<?php } ?>">
+                                <img src="<?= $timeSlotByHall[$currentHallID][$i]->getArtist()->getImage() ?>"> </img>
                                 <div class="container add-ticket">
                                   <div class='row'>
-                                    <p> <?= $timeSlotByHall[$j][$i]->getArtist()->getName() ?> </p>
+                                    <p> <?= $timeSlotByHall[$currentHallID][$i]->getArtist()->getName() ?> </p>
                                   </div>
                                   <div class='row'>
-                                    <p class="time-text"><?= DATE_FORMAT($timeSlotByHall[$j][$i]->getStartTime(), 'H:i') ?> - <?= DATE_FORMAT($timeSlotByHall[$j][$i]->getEndTime(), 'H:i') ?></p>
-                                    <p class="time-text price text-end">€<?= $timeSlotByHall[$j][$i]->getPrice() ?></p>
+                                    <p class="time-text"><?= DATE_FORMAT($timeSlotByHall[$currentHallID][$i]->getStartTime(), 'H:i') ?> - <?= DATE_FORMAT($timeSlotByHall[$currentHallID][$i]->getEndTime(), 'H:i') ?></p>
+                                    <p class="time-text price text-end">
+                                      €<?= $timeSlotByHall[$currentHallID][$i]->getPrice() ?></p>
                                   </div>
                                 </div>
                                 <div class="container add-button">
-                                  <p> add </p>
+                                  <p> <?php if(!$isGroteMarkt) { ?>add<?php } else if($isGroteMarkt) { ?>FREE<?php } ?> </p>
                                 </div>
                               </td>
                               <?php if ($j == 0) { ?><td style="width: 65px;"></td> <?php } ?>
@@ -177,25 +192,34 @@
       <div class="center">
         <div class="margin-top center" id="locations">
           <?php
-          echo '<div class="grid-Locations" style ="grid-template-columns: repeat(' . count($locations) . ', 1fr)">';
-          for ($i = 1; $i <= count($locations); $i++) {
-            echo '<div class="grid-item" style="grid-row: 1; grid-column: ' . $i . '">' .
-              '<img src="' . $locations[$i - 1]->getLocationImage() . '" class="locationImage" alt="patronaat">' .
-              '<h3><span><strong>' . $locations[$i - 1]->getLocationName() . '</strong></span></h3>' .
-              '<img src="/image/jazz/ToAndFrom.png" alt="to and from illustration">' .
-              '<p>' .
-              '<strong>To & from</strong><br>' .
-              $locations[$i - 1]->getToAndFromText() .
-              '</p>' .
-              '<img src="/image/jazz/Accessibility.png" alt="Accessibility illustration">' .
-              '<p>' .
-              '<strong>Accessibility</strong><br>' .
-              $locations[$i - 1]->getAccesibillityText() .
-              '</p>' .
-              '</div>';
-          }
-          echo '</div>';
+          $gridStyle = 'grid-template-columns: repeat(' . count($locations) . ', 1fr)';
           ?>
+          <div class="grid-Locations" style="<?= $gridStyle ?>">
+            <?php for ($i = 1; $i <= count($locations); $i++) : ?>
+              <?php
+              $gridItemStyle = 'grid-row: 1; grid-column: ' . $i;
+              $location = $locations[$i - 1];
+              $locationImage = $location->getLocationImage();
+              $locationName = $location->getLocationName();
+              $toAndFromText = $location->getToAndFromText();
+              $accessibilityText = $location->getAccesibillityText();
+              ?>
+              <div class="grid-item" style="<?= $gridItemStyle ?>">
+                <img src="<?= $locationImage ?>" class="locationImage" alt="patronaat">
+                <h3><span><strong><?= $locationName ?></strong></span></h3>
+                <img src="/image/jazz/ToAndFrom.png" alt="to and from illustration">
+                <p>
+                  <strong>To &amp; from</strong><br>
+                  <?= $toAndFromText ?>
+                </p>
+                <img src="/image/jazz/Accessibility.png" alt="Accessibility illustration">
+                <p>
+                  <strong>Accessibility</strong><br>
+                  <?= $accessibilityText ?>
+                </p>
+              </div>
+            <?php endfor; ?>
+          </div>
         </div>
       </div>
 
