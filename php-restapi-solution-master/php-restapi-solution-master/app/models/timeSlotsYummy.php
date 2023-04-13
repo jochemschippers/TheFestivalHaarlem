@@ -7,8 +7,8 @@ class TimeSlotsYummy extends TimeSlot
 	private int $restaurantID;
 	
 	public function __construct(
-		int $timeSlotID,
-		int $restaurantID,
+		int $timeSlotID = null,
+		int $restaurantID = null,
 		int $eventID = null,
 		float $price = null,
 		string $startTime = null,
@@ -25,8 +25,8 @@ class TimeSlotsYummy extends TimeSlot
 				$maximumAmountTickets
 			);
 		}
-		$this->restaurantID = $restaurantID;
 		$this->timeSlotID = $timeSlotID;
+		$this->restaurantID = $restaurantID;
 	}
 
 	/**

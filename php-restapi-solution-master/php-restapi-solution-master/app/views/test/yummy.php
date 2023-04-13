@@ -234,17 +234,38 @@
                                 <?php foreach ($restaurantReservations as $reservation) { ?>
                                     <tr>
                                         <td title="<?= $reservation->getTicketID() ?>"><?= $reservation->getTicketID() ?></td>
-                                        
+                                        <td title="<?= $reservation->getTimeSlotID() ?>"><?= $reservation->getTimeSlotID() ?></td>
+                                        <td title="<?= $reservation->getRestaurantID() ?>"><?= $reservation->getRestaurantID() ?></td>
+                                        <td title="<?= $reservation->getReservationName() ?>"><?= $reservation->getReservationName() ?></td>
+                                        <td title="<?= $reservation->getPhoneNumber() ?>"><?= $reservation->getPhoneNumber() ?></td>
+                                        <td title="<?= $reservation->getNumberAdults() ?>"><?= $reservation->getNumberAdults() ?></td>
+                                        <td title="<?= $reservation->getNumberChildren() ?>"><?= $reservation->getNumberChildren() ?></td>
+                                        <td title="<?= $reservation->getRemark() ?>"><?= $reservation->getRemark() ?></td>
+                                        <?php if ($reservation->getIsActive()) { ?>
+                                            <td title="Yes">Yes</td>
+                                        <?php } else { ?>
+                                            <td title="No">No</td>
+                                        <?php } ?>
+
                                         <td>
                                             <button class="btn btn-primary edit-btn" data-id="<?= $reservation->getTicketID() ?>" data-bs-toggle="modal" data-bs-target="#editReservation-<?= $reservation->getTicketID() ?>">
                                                 Edit
                                             </button>
                                         </td>
                                         <td>
-                                            <form method="post" id="delete-<?= $reservation->getTicketID() ?>" onsubmit="return confirm('Are you sure you want to delete reservation: <?= $reservation->getTicketID() ?>?')">
-                                                <input type="hidden" id="deleteRestaurantID" name="deleteRestaurantID" value="<?= $reservation->getTicketID() ?>">
-                                                <button type="submit" class="btn btn-danger delete-btn" form="delete-<?= $reservation->getTicketID() ?>">Delete</button>
-                                            </form>
+                                            <!-- ----------------------- DIT NOG BIJWERKEN. VEEL NAMEN MOETEN WORDEN VERANDERD ------------------------- -->
+
+                                            <?php if ($reservation->getIsActive()) { ?>
+                                                <form method="post" id="deactivateReservation-<?= $reservation->getTicketID() ?>" onsubmit="return confirm('Are you sure you want to deactivate reservation: <?= $reservation->getTicketID() ?>?')">
+                                                    <input type="hidden" id="deactivateReservationTicketID" name="deactivateReservationTicketID" value="<?= $reservation->getTicketID() ?>">
+                                                    <button type="submit" class="btn btn-danger deactivate-btn" form="deactivateReservation-<?= $reservation->getTicketID() ?>">Deactivate</button>
+                                                </form>
+                                            <?php } else { ?>
+                                                <form method="post" id="activateReservation-<?= $reservation->getTicketID() ?>" onsubmit="return confirm('Are you sure you want to activate reservation: <?= $reservation->getTicketID() ?>?')">
+                                                    <input type="hidden" id="activateReservationTicketID" name="activateReservationTicketID" value="<?= $reservation->getTicketID() ?>">
+                                                    <button type="submit" class="btn btn-success activate-btn" form="activateReservation-<?= $reservation->getTicketID() ?>">Activate</button>
+                                                </form>
+                                            <?php } ?>
                                         </td>
                                     </tr>
                                     <div class="modal fade" tabindex="-1" id="editReservation-<?= $reservation->getTicketID() ?>" aria-hidden="true">
@@ -258,16 +279,37 @@
                                                     <form method="POST" role="form" id="editReservationForm-<?= $reservation->getTicketID() ?>">
 
                                                         <div class="form-group">
-                                                            <label for="editRestaurantName">Name</label>
-                                                            <input type="text" class="form-control" id="editRestaurantName" name="editRestaurantName" form="editReservationForm-<?= $reservation->getTicketID() ?>" value="<?= $reservation->getTimeSlotID() ?>" required>
+                                                            <label for="editReservationTimeSlotID">TimeSlotId</label>
+                                                            <input type="text" class="form-control" id="editReservationTimeSlotID" name="editReservationTimeSlotID" form="editReservationForm-<?= $reservation->getTicketID() ?>" value="<?= $reservation->getTimeSlotID() ?>" required>
                                                         </div>
                                                         <div class="form-group">
-                                                            <label for="editRestaurantAddress">Address</label>
-                                                            <input type="text" class="form-control" id="editRestaurantAddress" name="editRestaurantAddress" form="editReservationForm-<?= $reservation->getTicketID() ?>" value="<?= $reservation->getRestaurantID() ?>" required>
+                                                            <label for="editReservationRestaurantID">RestaurantID</label>
+                                                            <input type="text" class="form-control" id="editReservationRestaurantID" name="editReservationRestaurantID" form="editReservationForm-<?= $reservation->getTicketID() ?>" value="<?= $reservation->getRestaurantID() ?>" required>
                                                         </div>
-                                                        
+                                                        <div class="form-group">
+                                                            <label for="editReservationName">ReservationName</label>
+                                                            <input type="text" class="form-control" id="editReservationName" name="editReservationName" form="editReservationForm-<?= $reservation->getTicketID() ?>" value="<?= $reservation->getReservationName() ?>" required>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="editReservationPhoneNumber">PhoneNumber</label>
+                                                            <input type="text" class="form-control" id="editReservationPhoneNumber" name="editReservationPhoneNumber" form="editReservationForm-<?= $reservation->getTicketID() ?>" value="<?= $reservation->getPhoneNumber() ?>" required>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="editReservationNumberAdults">NumberAdults</label>
+                                                            <input type="text" class="form-control" id="numberAdults" name="numberAdults" form="editReservationForm-<?= $reservation->getTicketID() ?>" value="<?= $reservation->getNumberAdults() ?>" required>
+                                                        </div>
 
-                                                        <input type="hidden" name="editReservationId" form="editReservationForm-<?= $reservation->getTicketID() ?>" value="<?= $reservation->getTicketID() ?>">
+                                                        <div class="form-group">
+                                                            <label for="editReservationNumberChildren">NumberChildren</label>
+                                                            <input type="text" class="form-control" id="editReservationNumberChildren" name="editReservationNumberChildren" form="editReservationForm-<?= $reservation->getTicketID() ?>" value="<?= $reservation->getNumberChildren() ?>" required>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="editReservationRemark">Remark</label>
+                                                            <input type="text" class="form-control" id="editReservationRemark" name="editReservationRemark" form="editReservationForm-<?= $reservation->getTicketID() ?>" value="<?= $reservation->getRemark() ?>" required>
+                                                        </div>
+
+                                                        <input type="hidden" name="editReservationTicketID" form="editReservationForm-<?= $reservation->getTicketID() ?>" value="<?= $reservation->getTicketID() ?>">
                                                         <button type="submit" class="btn btn-primary" id="confirmEditbutton" form="editReservationForm-<?= $reservation->getTicketID() ?>">reservation aanpassen</button>
                                                     </form>
                                                 </div>
@@ -286,25 +328,45 @@
                     <?php }
                     ?>
                     <div class="row">
-                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addRestaurantModal">Add reservation</button>
-                        <div class="modal fade" tabindex="-1" id="addRestaurantModal" aria-hidden="true">
+                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addReservationModal">Add reservation</button>
+                        <div class="modal fade" tabindex="-1" id="addReservationModal" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title">Add reservation</h5>
+                                        <h5 class="modal-title">Add Reservation</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
                                         <form role="form" method="post" id="addReservationForm" enctype="multipart/form-data">
+
                                             <div class="mb-3">
-                                                <label for="createReservationTimeSlotID">reservation TimeSlotID</label>
+                                                <label for="createReservationTimeSlotID">TimeSlotID</label>
                                                 <input type="text" class="form-control" form="addReservationForm" id="createReservationTimeSlotID" name="createReservationTimeSlotID" placeholder="TimeSlotID">
                                             </div>
                                             <div class="mb-3">
-                                                <label for="createRestaurantAddress">reservation Address</label>
-                                                <input type="text" class="form-control" form="addReservationForm" id="createRestaurant-address" name="createRestaurantAddress" placeholder="Address">
+                                                <label for="createReservationRestaurantID">RestaurantID</label>
+                                                <input type="text" class="form-control" form="addReservationForm" id="createReservationRestaurantID" name="createReservationRestaurantID" placeholder="RestaurantID">
                                             </div>
-                                            
+                                            <div class="mb-3">
+                                                <label for="createReservationName">ReservationName</label>
+                                                <input type="text" class="form-control" form="addReservationForm" id="createReservationName" name="createReservationName" placeholder="Name of reservation">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="createReservationPhoneNumber">PhoneNumber</label>
+                                                <input type="text" class="form-control" form="addReservationForm" id="createReservationPhoneNumber" name="createReservationPhoneNumber" placeholder="PhoneNumber">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="createReservationNumberAdults">NumberAdults</label>
+                                                <input type="text" class="form-control" form="addReservationForm" id="createReservationNumberAdults" name="createReservationNumberAdults" placeholder="Number adults">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="createReservationNumberChildren">NumberChildren</label>
+                                                <input type="text" class="form-control" form="addReservationForm" id="createReservationNumberChildren" name="createReservationNumberChildren" placeholder="Number of children">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="createReservationRemark">Remark</label>
+                                                <input type="text" class="form-control" form="addReservationForm" id="createReservationRemark" name="createReservationRemark" placeholder="Remark">
+                                            </div>
 
                                             <div class="d-grid gap-2" id="createButtons">
                                                 <button type="submit" class="btn btn-primary btn-lg" form="addReservationForm">Create</button>
