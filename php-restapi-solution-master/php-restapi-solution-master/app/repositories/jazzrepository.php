@@ -171,7 +171,7 @@ class JazzRepository extends Repository
             $stmt = $this->connection->prepare("DELETE FROM `JazzArtists` WHERE artistID = ?");
             $stmt->execute([$artist->getArtistID()]);
         } catch (PDOException $e) {
-            echo $e;
+            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
         }
     }
     function createArtist($artist)

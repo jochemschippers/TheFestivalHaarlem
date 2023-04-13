@@ -36,11 +36,11 @@
             $button_link = "/" . $event->getEventName();
         ?>
 
-        <div class="card <?php echo $alignment ?>" style="background-image: url('<?php echo $background_image ?>'">
-            <div class="container" style="<?php echo $position ?>">
-                <h2><ins><?php echo $title ?></ins></h2>
-                <p><?php echo $description ?></p>
-                <a class="btn btn-primary" href="<?php echo $button_link ?>" role="button">Learn More</a>
+        <div class="card <?= $alignment ?>" style="background-image: url('<?= $background_image ?>'">
+            <div class="container" style="<?= $position ?>">
+                <h2><ins><?= $title ?></ins></h2>
+                <p><?= $description ?></p>
+                <a class="btn btn-primary" href="<?= $button_link ?>" role="button">Learn More</a>
             </div>
         </div>
 

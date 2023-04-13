@@ -48,7 +48,7 @@ foreach ($cssFiles as $cssFile): ?>
     <?php } ?>
   </nav>
   <div class="user-options">
-    <div class="option"><a href="/admin"><i class="fa fa-sharp fa-solid fa-screwdriver-wrench fa-2x"></i></a></div>
+    <div class="option"><a href="/test"><i class="fa fa-sharp fa-solid fa-screwdriver-wrench fa-2x"></i></a></div>
     <div class="option"><a href="/paymentpage"><i class="fa fa-shopping-cart fa-2x"></i></a></div>
     <?php
     $uri = explode('/', trim($_SERVER['REQUEST_URI'], '/'));

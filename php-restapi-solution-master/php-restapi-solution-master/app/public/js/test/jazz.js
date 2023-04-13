@@ -224,3 +224,83 @@ function createInput(field){
     }
       return input;
 }
+
+
+// code for locations table: 
+
+const dataTableLocations = new DataTable("#dataTableLocations", {
+    searchable: true,
+    perPage: 10,
+    perPageSelect: [10, 25, 50, 100],
+    fixedHeight: true
+});
+
+function openEditModalLocations(button) {
+    const row = button.closest("tr");
+    const locationID = row.dataset.locationId;
+    const locationName = row.dataset.locationName;
+    const address = row.dataset.address;
+    const imagePath = row.dataset.image;
+    const toAndFromText = row.dataset.toAndFromText;
+    const accessibilityText = row.dataset.accessibilityText;
+    const fields = [
+        { id: 'locationIDInput', label: 'Location ID', value: locationID, type: 'text', readonly: true },
+        { id: 'locationNameInput', label: 'Location Name', value: locationName, type: 'text' },
+        { id: 'addressInput', label: 'Address', value: address, type: 'text' },
+        { id: 'imagePathInput', label: 'Image Path', value: imagePath, type: 'text' },
+        { id: 'toAndFromText', label: 'To And From Text', value: toAndFromText, type: 'textarea', rows: 5},
+        { id: 'toAndFromText', label: 'To And From Text', value: toAndFromText, type: 'textarea', rows:5 }
+    ];
+    
+    const form = generateForm(fields);
+    dynamicForm.innerHTML = '';
+    dynamicForm.appendChild(form);
+
+    const saveButton = document.createElement('button');
+    saveButton.className = 'btn btn-primary';
+    saveButton.textContent = 'Save Changes';
+    saveButton.onclick = () => updateLocation(locationID);
+
+    const cancelButton = document.createElement('button');
+    cancelButton.className = 'btn btn-secondary';
+    cancelButton.textContent = 'Cancel';
+    cancelButton.setAttribute('data-bs-dismiss', 'modal');
+
+    form.appendChild(saveButton);
+    form.appendChild(cancelButton);
+
+    const editModal = new bootstrap.Modal(document.getElementById('editModal'));
+    editModal.show();
+}
+
+
+
+function updateLocation(locationID) {
+    fetch('/test/updateLocation', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            locationID: locationID,
+            locationName: document.querySelector('#locationNameInput').value,
+            address: document.querySelector('#addressInput').value,
+            imagePath: document.querySelector('#imagePathInput').value,
+            toAndFromText: document.querySelector('#toAndFromTextInput').value,
+            accessibilityText: document.querySelector('#accessibilityTextInput').value,
+        })
+    }).then(response => response.json())
+    .then(data => {
+        if (data.status === 1) {
+            alertMessage.classList.remove('alert-danger');
+            alertMessage.classList.add('alert-success');
+        }
+        alertMessage.classList.remove('d-none');
+        alertMessage.innerHTML = data.message;
+        window.location.reload();
+    })
+    .catch(error => {
+        alertMessage.classList.remove('d-none');
+        alertMessage.value = "Something went wrong! Please try again later";
+    });
+}

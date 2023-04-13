@@ -37,7 +37,7 @@ class YummyController extends Controller
             $nrChild = $_POST['nrChild'];
             $remark = $_POST['remark'];
 
-            var_dump($_POST);
+            //var_dump($_POST);
             // if ($this->createReservation($restaurantId, $timeSlot, $customerName, $phoneNr, $nrAdult, $nrChild, $remark)) {
             //     var_dump("werkt");
             // } else {
