@@ -14,16 +14,14 @@ class TimeSlotsYummy extends TimeSlot
 		string $endTime = null,
 		int $maximumAmountTickets = null
 	) {
-		if ($eventID !== null && $price !== null && $startTime !== null && $endTime !== null && $maximumAmountTickets !== null) {
-			parent::__construct(
-				$timeSlotID,
-				$eventID,
-				$price,
-				DateTime::createFromFormat('Y-m-d H:i:s', $startTime),
-				DateTime::createFromFormat('Y-m-d H:i:s', $endTime),
-				$maximumAmountTickets
-			);
-		}
+		parent::__construct(
+			$timeSlotID,
+			$eventID,
+			$price,
+			$startTime ? DateTime::createFromFormat('Y-m-d H:i:s', $startTime) : null,
+			$endTime ? DateTime::createFromFormat('Y-m-d H:i:s', $endTime) : null,
+			$maximumAmountTickets
+		);
 		$this->restaurantID = $restaurantID;
 	}
 
