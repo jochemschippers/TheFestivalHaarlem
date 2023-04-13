@@ -42,7 +42,7 @@ class YummyController extends Controller
             $this->displayView($models);
         }
         if ($_SERVER["REQUEST_METHOD"] === 'POST' && !empty($_POST)) {
-            // var_dump($_POST);
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             if (isset($_POST['btnradio'], $_POST['customerName'], $_POST['phoneNr'], $_POST['nrAdult'], $_POST['nrChild'], $_POST['remark'])) { //if posts then
 
                 // create a DateTime object for the start time
