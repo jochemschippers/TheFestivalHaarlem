@@ -79,7 +79,7 @@ class TimeSlot{
 	}
 	
 	/**
-	 * @param int $maximumAmountTickets 
+	 * @param int $maximumAmountTickets
 	 * @return self
 	 */
 	public function setMaximumAmountTickets(int $maximumAmountTickets): self {
