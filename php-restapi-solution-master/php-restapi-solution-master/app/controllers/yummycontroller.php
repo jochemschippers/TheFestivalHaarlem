@@ -129,17 +129,17 @@ class YummyController extends Controller
     public function createReservation($restaurantId, $timeSlotId, $customerName, $phoneNr, $nrAdult, $nrChild, $remark)
     {
 
-        $reservation = [
-            'ticketID' => 0,
-            'timeSlotId' => $timeSlotId,
-            'restaurantId' => $restaurantId,
-            'customerName' => $customerName,
-            'phoneNr' => $phoneNr,
-            'nrAdult' => $nrAdult,
-            'nrChild' => $nrChild,
-            'remark' => $remark,
-            'isActive' => true
-        ];
+        $reservation = new Restaurantreservation(
+            0, // use 0 as the ID for a new reservation
+            $timeSlotId,
+            $restaurantId,
+            $customerName,
+            $phoneNr,
+            $nrAdult,
+            $nrChild,
+            $remark,
+            1
+        );
 
         // call the createRestaurant method of the YummyService object with the restaurant object as the parameter
         if ($this->yummyService->createReservation($reservation)) {

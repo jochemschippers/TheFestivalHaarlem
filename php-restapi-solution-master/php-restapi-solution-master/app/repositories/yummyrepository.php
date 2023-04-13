@@ -440,6 +440,7 @@ class YummyRepository extends Repository
 
     public function createReservation($reservation)
     {
+        // var_dump($reservation);
         // creates a new reservation
         try {
             // query
