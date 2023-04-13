@@ -23,15 +23,14 @@ class AccountRepository extends Repository
     function register($user)
     {
         try {
-            $stmt = $this->connection->prepare("INSERT INTO `Users`(`email`, `userRole`, `fullName`, `phoneNumber`, `password`) VALUES (?,?,?,?,?)");
+            $stmt = $this->connection->prepare("INSERT INTO `Users`(`email`, `userRole`, `fullName`, `phoneNumber`, `password`) VALUES (?,0,?,?,?)");
             $stmt->execute([
                 $user->getEmail(), 
-                $user->getUserRole(), 
                 $user->getFullName(), 
                 $user->getPhoneNumber(), 
                 $user->getPassword()]);
         } catch (Exception $e) {
-            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
+            throw new ErrorException("It seems something went wrong with our database! Please try again later." . $e->getMessage());
         }
     }
     function getPasswordByEmail($email){

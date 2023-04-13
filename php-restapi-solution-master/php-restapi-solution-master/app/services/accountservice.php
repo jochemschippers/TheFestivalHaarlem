@@ -27,7 +27,7 @@ class AccountService {
     }
     public function register($user) {
         try{
-        $inputStrings = [$user->getFullName(), $user->getEmail(), $user->getPassword()];
+        $inputStrings = [$user->getFullName(), $user->getEmail(), $user->getPassword(), $user->getPhoneNumber()];
         $this->validateUserInputs($inputStrings);
         if($this->repository->checkEmailExists($user->getEmail()))
         {
@@ -57,6 +57,7 @@ class AccountService {
         header('Location: ' . $previousPage);
         exit();
     }
+    // validate user inputs made in another method because the overview page of the user should use this method
     private function validateUserInputs($inputStrings)
     {
         //0 = fullname, 1 = email, 2 = password
@@ -68,6 +69,9 @@ class AccountService {
         }
         if ($inputStrings[2] !== null && $inputStrings[0] !== null && !$this->isPasswordDistinct($inputStrings[2], $inputStrings[0], $inputStrings[1])) {
             throw new ErrorException("Password is too similar to email, fullname! Please choose a more secure password");
+        }
+        if($this->isValidPhoneNumber($inputStrings[3])){
+            throw new ErrorException("Phone number is invalid!");
         }
     }
     public function validateStringLength($strings)
@@ -95,7 +99,7 @@ class AccountService {
         //Then, there may be a hyphen, dot, or open parenthesis followed by 1 to 4 digits, and a possible closing parenthesis, hyphen, or dot. this repeats for up to four times
         //Finally, there may be a hyphen, dot, or open parenthesis followed by 1 to 9 digits.
         $pattern = '/^(?:\+\d{1,3}\s?)?[-. (]?\d{1,4}[-. )]?[-. (]?\d{1,4}[-. )]?[-. (]?\d{1,4}[-. )]?[-. (]?\d{1,4}[-. )]?[-. (]?\d{1,9}$/';
-        return preg_match($pattern, $phoneNumber) === 1;
+        return preg_match($pattern, $phoneNumber) !== 1;
     }
     private function isPasswordDistinct($password, $fullName, $email) {
         $similarityThreshold = 70;
