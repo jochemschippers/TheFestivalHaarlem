@@ -52,7 +52,8 @@ foreach ($cssFiles as $cssFile): ?>
     <div class="option"><a href="/paymentpage"><i class="fa fa-shopping-cart fa-2x"></i></a></div>
     <?php
     $uri = explode('/', trim($_SERVER['REQUEST_URI'], '/'));
-    if (!isset($_SESSION['userID'])) { ?><div class="option"><a href="/account"><i class="fa fa-user fa-2x"></i></a></div><?php } else if (isset($_SESSION['userID']) && $uri[0] != "test") { ?>
+    // if user not logged in, login option, otherwise logout option
+    if (!isset($_SESSION['userID'])) { ?><div class="option"><a href="/account"><i class="fa fa-user fa-2x"></i></a></div><?php } else { ?>
       <div class="option"><a href="/account/logout"><i class="fa fa-right-from-bracket fa-2x"></i></a></div><?php }  ?>
   </div>
 </header>
