@@ -242,12 +242,12 @@ $grand_total = 0;
                                     <?= $restaurantReservation->getTimeSlotID() ?>
                                 </td>
                                 <td>
-                                    <?php $totalGuests = $restaurantReservation->getNumberAdults() + $restaurantReservation->getNumberChildren();
-                                    echo $totalGuests; ?>
+                                    <?php $totalGuests = $restaurantReservation->getNumberAdults() + $restaurantReservation->getNumberChildren(); ?>
+                                    <?= $totalGuests; ?>
                                 </td>
                                 <td>$ 
-                                    <?php $totalPrice = $totalGuests * 10;
-                                    echo $totalPrice; ?>
+                                    <?php $totalPrice = $totalGuests * 10; ?>
+                                    <?= $totalPrice; ?>
                                 <!-- Format price with two decimal places -->
                                 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                                 <script>
