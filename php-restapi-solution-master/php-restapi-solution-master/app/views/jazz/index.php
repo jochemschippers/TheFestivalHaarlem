@@ -40,7 +40,10 @@
               <div class="container carouselContainer">
                 <h3><?= $artists[$i]->getName() ?></h3>
                 <p><?= $artists[$i]->getDescription() ?></p>
-                <hr><span class="textSmall">Plays the <?= $artists[$i]->getTimeSlots()[0]->getStartTime()->format('dS') ?>!</span>
+                <?php if(isset($artists[$i]->getTimeSlots()[0])){ ?>
+                <hr><span class="textSmall">Plays the <?= //gets first time this artist will show up
+                $artists[$i]->getTimeSlots()[0]->getStartTime()->format('dS') ?>!</span>
+                <?php } ?>
                 <button class="buttonJazz"> Learn More About artist</button>
               </div>
               </div>
