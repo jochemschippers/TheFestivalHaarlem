@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/../services/PaymentService.php';
+require_once __DIR__ . '/../services/yummyservice.php';
 require_once __DIR__ . '/controller.php';
 
 
@@ -7,16 +8,19 @@ require_once __DIR__ . '/controller.php';
 class paymentpageController extends Controller
 {
     private $paymentService;
+    private $yummyService;
     function __construct()
     {
         $this->paymentService = new PaymentService();
+        $this->yummyService = new YummyService();
     }
 
 
     public function index()
     {
         $models = [
-            "JazzTickets" => $this->paymentService->GetJazzTickets()
+            "JazzTickets" => $this->paymentService->GetJazzTickets(),
+            "restaurantReservations" => $this->yummyService->getAllRestaurantReservations(),
         ];
         $this->displayView($models);
     }
@@ -33,7 +37,8 @@ class paymentpageController extends Controller
     public function payment()
     {
         $models = [
-            "JazzTickets" => $this->paymentService->GetJazzTickets()
+            "JazzTickets" => $this->paymentService->GetJazzTickets(),
+            "restaurantReservations" => $this->yummyService->getAllRestaurantReservations(),
         ];
         $this->displayView($models);
     }

@@ -70,15 +70,13 @@ $grand_total = 0;
                     </div>
                 </div>
                 <div class="row d-flex icon-content" id="flex">
-                    <img class="icon"
-                        src="https://cdn3.iconfinder.com/data/icons/online-shopping-line-flash-deals/512/Cash_on_delivery-512.png">
+                    <img class="icon" src="https://cdn3.iconfinder.com/data/icons/online-shopping-line-flash-deals/512/Cash_on_delivery-512.png">
                     <div class="d-flex flex-column">
                         <p class="font-weight-bold">Payment<br>Information</p>
                     </div>
                 </div>
                 <div class="row d-flex icon-content" id="flex">
-                    <img class="icon"
-                        src="https://th.bing.com/th/id/R.c4f226e94861c395866a9b2c3bacb482?rik=aIhV%2fV8GkQcsFw&riu=http%3a%2f%2fcdn.onlinewebfonts.com%2fsvg%2fimg_432058.png&ehk=1NipJCsVQFhbh12bsO25ElaQQJYGZRsglyiHmv4%2bXjE%3d&risl=&pid=ImgRaw&r=0">
+                    <img class="icon" src="https://th.bing.com/th/id/R.c4f226e94861c395866a9b2c3bacb482?rik=aIhV%2fV8GkQcsFw&riu=http%3a%2f%2fcdn.onlinewebfonts.com%2fsvg%2fimg_432058.png&ehk=1NipJCsVQFhbh12bsO25ElaQQJYGZRsglyiHmv4%2bXjE%3d&risl=&pid=ImgRaw&r=0">
                     <div class="d-flex flex-column">
                         <p class="font-weight-bold">Recieve<br>Tickets</p>
                     </div>
@@ -120,9 +118,9 @@ $grand_total = 0;
                             echo '<td> Date: ' . $startTime->format('Y-m-d') . '</td>';
                             echo '<td> Time: ' . $startTime->format('H:i') . '-' . $endTime->format('H:i') . '</td>';
                             echo '<td> Hall: ' . $jazzTicket->getHallID() . '</td>';
-                            ?> <td>Price: &euro; <?php echo$formattedNum?></td>
+                        ?> <td>Price: &euro; <?php echo $formattedNum ?></td>
                             <td>Amount: <input type="number" value="<?php echo $amount; ?>" min="1"></td>
-                            <?php
+                        <?php
                             echo '</tr>';
                         } ?>
                     </tbody>
@@ -206,7 +204,7 @@ $grand_total = 0;
                                 <!-- Format price with two decimal places -->
                                 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                                 <script>
-                                    $("input[type='number']").keypress(function (evt) {
+                                    $("input[type='number']").keypress(function(evt) {
                                         evt.preventDefault();
                                     });
                                 </script>
@@ -225,33 +223,38 @@ $grand_total = 0;
                     <!-- Create table header -->
                     <thead class="thead">
                         <tr>
-                            <th>Yummy</th>
+                            <th>TicketID</th>
+                            <th>TimeSlotID</th>
+                            <th>Number of Guests</th>
+                            <th>Total Price</th>
 
                         </tr>
                     </thead>
                     <!-- Create table body -->
                     <tbody>
-                        <?php foreach ($tickets as $ticket) { ?>
+                        <?php foreach ($restaurantReservations as $restaurantReservation) { ?>
                             <!-- Loop through each ticket and display its data in a row -->
                             <tr>
                                 <td>
-                                    <?php echo $ticket["name"]; ?>
+                                    <?= $restaurantReservation->getTicketID() ?>
                                 </td>
                                 <td>
-                                    <?php echo $ticket["date"]; ?>
+                                    <?= $restaurantReservation->getTimeSlotID() ?>
                                 </td>
-                                <td>$
-                                    <?php echo number_format($ticket["price"], 2); ?>
+                                <td>
+                                    <?php $totalGuests = $restaurantReservation->getNumberAdults() + $restaurantReservation->getNumberChildren();
+                                    echo $totalGuests; ?>
                                 </td>
+                                <td>$ 
+                                    <?php $totalPrice = $totalGuests * 10;
+                                    echo $totalPrice; ?>
                                 <!-- Format price with two decimal places -->
                                 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                                 <script>
-                                    $("input[type='number']").keypress(function (evt) {
+                                    $("input[type='number']").keypress(function(evt) {
                                         evt.preventDefault();
                                     });
                                 </script>
-
-                                <td><input type="number" value=<?php echo $ticket["amount"]; ?> min="1"></td>
                             </tr>
                         <?php } ?>
                     </tbody>
