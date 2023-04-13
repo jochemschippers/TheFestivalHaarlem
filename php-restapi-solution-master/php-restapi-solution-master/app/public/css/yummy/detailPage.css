@@ -45,7 +45,7 @@ html, body {
 }
 
 #phoneNr{
-  width: 160px;
+  width: 160px !important;
   margin-left: 0;
 }
 
@@ -179,10 +179,10 @@ input[type="number"]::-webkit-outer-spin-button {
   #bottomPicture{
     width: 700px;
     height: 400px;
-    align-self: left;
+    align-self: flex-end;
     background-size: cover;
     background-position: left;
-    margin-left: 360px;
+    /* margin-left: 360px; */
   }
   .container {
     width: 100% !important;

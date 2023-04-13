@@ -51,31 +51,69 @@ class YummyService
         // retrieve data
         return $this->repository->getAllRestaurantFoodTypes();
     }
-    public function createReservation($reservation){
-
-        // creates a new restaurant
-        $this->repository->createReservation($reservation);
+    public function getAllRestaurantReservations()
+    {
+        // retrieve data
+        return $this->repository->getAllRestaurantReservations();
     }
+    public function getAllTimeSlots()
+    {
+        return $this->repository->getAllTimeSlots();
+    }
+    public function getRestaurantReservationInfo($restaurantId)
+    {
+        // Retrieve data from both models
+        return $this->repository->getRestaurantReservationInfo($restaurantId);
+    }
+    
 
     // -------------------  Administrator  ----------------------
 
+    // CRUD YUMMY RESTAURANTS
     public function createRestaurant($restaurant)
     {
         // creates a new restaurant
         $this->repository->createRestaurant($restaurant);
     }
-
     public function updateRestaurant($update)
     {
         // this updates a existing restaurant
-        $this->repository->updateRestaurant($update);
+        return $this->repository->updateRestaurant($update);
     }
-
     public function deleteRestaurant($delete)
     {
         // this will delete a existing restaurant
-        $this->repository->deleteRestaurant($delete);
+        return $this->repository->deleteRestaurant($delete);
+    }
+    // END CRUD YUMMY RESTAURANTS
+
+    // CRUD YUMMY RESERVATIONS
+    public function createReservation($reservation)
+    {
+        // creates a new restaurant
+        return $this->repository->createReservation($reservation);
+    }
+    public function editReservation($update)
+    {
+        // this updates a existing reservation
+        return $this->repository->editReservation($update);
+    }
+    public function activateReservation($activate)
+    {
+        // this will activate a existing reservation
+        return $this->repository->activateReservation($activate);
+    }
+    public function deactivateReservation($deactivate)
+    {
+        // this will deactivate a existing reservation
+        return $this->repository->deactivateReservation($deactivate);
+    }
+    // END CRUD YUMMY RESERVATIONS
+
+    // --------------- TimeSlotsYummy ------------
+
+    public function getAllTimeSlotsYummy()
+    {
+        return $this->repository->getAllTimeSlotsYummy();
     }
 }
-
-?>

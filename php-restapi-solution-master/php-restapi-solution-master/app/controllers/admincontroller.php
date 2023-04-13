@@ -18,6 +18,53 @@ class AdminController extends Controller
 
     public function index()
     {
+        if ($_SERVER["REQUEST_METHOD"] === 'POST' && !empty($_POST)) {
+            // var_dump($_POST);
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            if (
+                isset(
+                    $_POST['createRestaurantName'],
+                    $_POST['createRestaurantAddress'],
+                    $_POST['createRestaurantContact'],
+                    $_POST['createRestaurantCardDescription'],
+                    $_POST['createRestaurantDescription'],
+                    $_POST['createRestaurantAmountOfStars'],
+                    $_POST['createRestaurantBannerImage'],
+                    $_POST['createRestaurantHeadChef'],
+                    $_POST['createRestaurantAmountSessions'],
+                    $_POST['createRestaurantAdultPrice'],
+                    $_POST['createRestaurantChildPrice']
+                )
+            ) {
+                $this->createRestaurant();
+            }
+
+            if (isset(
+                $_POST['editRestaurantId'],
+                $_POST['editRestaurantName'],
+                $_POST['editRestaurantAddress'],
+                $_POST['editRestaurantContact'],
+                $_POST['editRestaurantCardDescription'],
+                $_POST['editRestaurantDescription'],
+                $_POST['editRestaurantAmountOfStars'],
+                $_POST['editRestaurantBannerImage'],
+                $_POST['editRestaurantHeadChef'],
+                $_POST['editRestaurantAmountSessions'],
+                $_POST['editRestaurantAdultPrice'],
+                $_POST['editRestaurantChildPrice']
+            )) {
+                if (!$this->updateRestaurant()) {
+                    echo "Something went wrong while updating the restaurant";
+                }
+            }
+            if (isset(
+                $_POST['deleteRestaurantID']
+            )) {
+                if (!$this->deleteRestaurant()) {
+                    echo "Something went wrong while deleting the restaurant";
+                }
+            }
+        }
 
         //$restaurantId = $_GET['restaurantId']; //DEZE ZAL VERVANGEN MOETEN WORDEN WANT HIER WERKT HET ANDERS
         $models = [
@@ -32,6 +79,7 @@ class AdminController extends Controller
             "menuItems" => $this->yummyService->getAllMenuItems(),
             "images" => $this->yummyService->getAllImages(),
             "restaurantFoodTypes" => $this->yummyService->getAllRestaurantFoodTypes(),
+            "timeSlotsYummy" => $this->yummyService->getAllTimeSlotsYummy(),
         ];
 
         $this->displayView($models);
@@ -50,22 +98,22 @@ class AdminController extends Controller
     }
 
 
-    public function createLandmark() {
-       
+    public function createLandmark()
+    {
+
         $landmark = new Landmark(0, $_POST['setTitle'], $_POST['setDescription'], $_POST['setImage']);
         $this->landmarkService->createLandmark($landmark);
     }
 
 
-    public function updateLandmark() {
+    public function updateLandmark()
+    {
         $this->landmarkService->updateLandmark($_POST['setLandmarkID'], $_POST['setTitle'], $_POST['setDescription'], $_POST['setImage']);
     }
 
-    public function deleteLandmark() {
+    public function deleteLandmark()
+    {
         $this->landmarkService->deleteLandmark($_POST['setLandmarkID']);
-
-    
-
     }
 
     // --------------------------  JAZZ  ---------------------------------
@@ -88,24 +136,21 @@ class AdminController extends Controller
 
     public function createRestaurant()
     {
-        //$this->landmarkService->createLandmark($_POST['title'], $_POST['description'], $_POST['image']);
-        // $start_time = DateTime::createFromFormat('Y-m-d H:i:s', $_POST['editRestaurantStartTime']);
-        // $duration = DateTime::createFromFormat('H:i:s', $_POST['editRestaurantDuration']);
 
         // check if all the required POST parameters are set
-        if (
-            isset($_POST['createRestaurantName'], $_POST['createRestaurantAddress'], $_POST['createRestaurantContact'],
-            $_POST['createRestaurantCardDescription'], $_POST['createRestaurantDescription'],
-            $_POST['createRestaurantAmountOfStars'], $_POST['createRestaurantBannerImage'], $_POST['createRestaurantHeadChef'],
-            $_POST['createRestaurantAmountSessions'], $_POST['createRestaurantAdultPrice'], $_POST['createRestaurantChildPrice'],
-            $_POST['createRestaurantStartTime'], $_POST['createRestaurantDuration'])
-        ) {
-
-            // create a DateTime object for the start time
-            $startTime = new DateTime($_POST['createRestaurantStartTime']);
-
-            // create a DateInterval object for the duration
-            $duration = new DateTime($_POST['createRestaurantDuration']);
+        if (isset(
+            $_POST['createRestaurantName'],
+            $_POST['createRestaurantAddress'],
+            $_POST['createRestaurantContact'],
+            $_POST['createRestaurantCardDescription'],
+            $_POST['createRestaurantDescription'],
+            $_POST['createRestaurantAmountOfStars'],
+            $_POST['createRestaurantBannerImage'],
+            $_POST['createRestaurantHeadChef'],
+            $_POST['createRestaurantAmountSessions'],
+            $_POST['createRestaurantAdultPrice'],
+            $_POST['createRestaurantChildPrice'],
+        )) {
 
             // create a new YummyRestaurant object with the required parameters
             $restaurant = new YummyRestaurant(
@@ -121,44 +166,68 @@ class AdminController extends Controller
                 $_POST['createRestaurantAmountSessions'],
                 $_POST['createRestaurantAdultPrice'],
                 $_POST['createRestaurantChildPrice'],
-                $startTime,
-                $duration
             );
 
-            // create a new YummyService object
-            $yummyService = new YummyService();
-
             // call the createRestaurant method of the YummyService object with the restaurant object as the parameter
-            $yummyService->createRestaurant($restaurant);
+            $this->yummyService->createRestaurant($restaurant);
         } else {
             // handle the case where one or more POST parameters are missing
             echo "One or more required parameters are missing.";
         }
-
-        // $restaurant = new YummyRestaurant(0, $_POST['createRestaurantName'], $_POST['createRestaurantAddress'],
-        // $_POST['createRestaurantContact'], $_POST['createRestaurantCardDescription'], $_POST['createRestaurantDescription'],
-        // $_POST['createRestaurantAmountOfStars'], $_POST['createRestaurantBannerImage'], $_POST['createRestaurantHeadChef'],
-        // $_POST['createRestaurantAmountSessions'], $_POST['createRestaurantAdultPrice'], $_POST['createRestaurantChildPrice'],
-        // $_POST['createRestaurantStartTime'], $_POST['createRestaurantDuration']);
-        // $this->yummyService->createRestaurant($restaurant);
     }
 
     public function updateRestaurant()
     {
-        $this->yummyService->updateRestaurant(
-            $_POST['editRestaurantID'], $_POST['editRestaurantName'], $_POST['editRestaurantAddress'],
-            $_POST['editRestaurantContact'], $_POST['editRestaurantCardDescription'], $_POST['editRestaurantDescription'],
-            $_POST['editRestaurantAmountOfStars'], $_POST['editRestaurantBannerImage'], $_POST['editRestaurantHeadChef'],
-            $_POST['editRestaurantAmountSessions'], $_POST['editRestaurantAdultPrice'], $_POST['editRestaurantChildPrice'],
-            $_POST['editRestaurantStartTime'], $_POST['editRestaurantDuration']
-        );
+        // var_dump($_POST);
+        if (isset(
+            $_POST['editRestaurantId'],
+            $_POST['editRestaurantName'],
+            $_POST['editRestaurantAddress'],
+            $_POST['editRestaurantContact'],
+            $_POST['editRestaurantCardDescription'],
+            $_POST['editRestaurantDescription'],
+            $_POST['editRestaurantAmountOfStars'],
+            $_POST['editRestaurantBannerImage'],
+            $_POST['editRestaurantHeadChef'],
+            $_POST['editRestaurantAmountSessions'],
+            $_POST['editRestaurantAdultPrice'],
+            $_POST['editRestaurantChildPrice']
+        )) {
+            $restaurant = new YummyRestaurant(
+                $_POST['editRestaurantId'],
+                $_POST['editRestaurantName'],
+                $_POST['editRestaurantAddress'],
+                $_POST['editRestaurantContact'],
+                $_POST['editRestaurantCardDescription'],
+                $_POST['editRestaurantDescription'],
+                $_POST['editRestaurantAmountOfStars'],
+                $_POST['editRestaurantBannerImage'],
+                $_POST['editRestaurantHeadChef'],
+                $_POST['editRestaurantAmountSessions'],
+                $_POST['editRestaurantAdultPrice'],
+                $_POST['editRestaurantChildPrice'],
+            );
+            if ($this->yummyService->updateRestaurant($restaurant)) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            echo "One or more required parameters are missing.";
+        }
     }
 
     public function deleteRestaurant()
     {
-        $this->yummyService->deleteRestaurant($_POST['deleteRestaurantID']);
+        if (isset($_POST['deleteRestaurantID'])) { {
+                if ($this->yummyService->deleteRestaurant($_POST['deleteRestaurantID'])) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        } else {
+            return false;
+        }
     }
-
 }
-
-?>

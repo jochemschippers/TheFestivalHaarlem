@@ -1,0 +1,12 @@
+.timeSlotsYummy-table td {
+    width: 100px !important;
+    white-space: nowrap;
+  }
+td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 50px;
+    max-width: 150px;
+    min-width: auto;
+}

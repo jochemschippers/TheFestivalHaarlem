@@ -1,6 +1,7 @@
 @charset "UTF-8";
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,400italic);
 @import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css);
+
 html {
   box-sizing: border-box;
 }
@@ -26,6 +27,7 @@ body.login {
 .warn {
   color: red;
 }
+
 /* header */
 .utilities a:before {
   content: "\f248";
@@ -46,50 +48,63 @@ nav[role="navigation"] {
   color: #ddd;
   /* icons */
 }
+
 nav[role="navigation"] li {
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
+
 nav[role="navigation"] li a {
   color: #ddd;
   text-decoration: none;
   display: block;
   padding: 0.7em;
 }
+
 nav[role="navigation"] li a:hover {
   background-color: rgba(255, 255, 255, 0.05);
 }
+
 nav[role="navigation"] li a:before {
   content: "\f248";
   font-family: FontAwesome;
   padding-right: 0.6em;
 }
+
 nav[role="navigation"] .dashboard a:before {
   content: "";
 }
+
 nav[role="navigation"] .edit a:before {
   content: "";
 }
+
 nav[role="navigation"] .comments a:before {
   content: "";
 }
+
 nav[role="navigation"] .users a:before {
-    content: "";
-  }
-  nav[role="navigation"] .yummy a:before {
-      content: "\f805";
-  }
-  nav[role="navigation"] .music a:before {
-      content: "\f001";
-  }
-  nav[role="navigation"] .landmark a:before {
-      content: "\f66f";
-  }
-  nav[role="navigation"] .key a:before {
-      content: "\f084";
-  }
+  content: "";
+}
+
+nav[role="navigation"] .yummy a:before {
+  content: "\f805";
+}
+
+nav[role="navigation"] .music a:before {
+  content: "\f001";
+}
+
+nav[role="navigation"] .landmark a:before {
+  content: "\f66f";
+}
+
+nav[role="navigation"] .key a:before {
+  content: "\f084";
+}
 
 /* current nav item */
-.current, .dashboard .dashboard a,
+.current,
+.dashboard .dashboard a,
 .write .write a,
 .edit .edit a,
 .comments .comments a,
@@ -115,7 +130,9 @@ footer[role="contentinfo"] {
   border-radius: 0.3rem;
   margin: 1%;
 }
-.panel > h2, .panel > ul {
+
+.panel>h2,
+.panel>ul {
   margin: 1rem;
 }
 
@@ -152,6 +169,7 @@ main li {
   padding-left: 1.2em;
   margin: 0.5em 0;
 }
+
 main li:before {
   content: "";
   position: absolute;
@@ -173,6 +191,7 @@ form select {
   border: solid 1px #dde;
   padding: 0.5em;
 }
+
 form input:after,
 form textarea:after,
 form select:after {
@@ -180,16 +199,19 @@ form select:after {
   display: table;
   clear: both;
 }
+
 form input[type="checkbox"],
 form input[type="radio"] {
   display: inline;
   width: auto;
 }
+
 form label,
 form legend {
   display: block;
   margin: 1em 0 0.5em;
 }
+
 form input[type="submit"] {
   background: #ff1a1a;
   border: none;
@@ -207,6 +229,7 @@ form input[type="submit"] {
   -ms-border-radius: 0.5em;
   border-radius: 0.5em;
 }
+
 form input[type="submit"]:hover {
   background: turquoise;
   border: none;
@@ -242,6 +265,7 @@ label.error {
   padding: 0.5em 0.5em 0.5em 2em;
   border: solid 1px khaki;
 }
+
 .feedback:before {
   content: "";
   font-family: fontawesome;
@@ -249,9 +273,11 @@ label.error {
   margin-left: -1.5em;
   margin-right: 0.5em;
 }
+
 .feedback li:before {
   border-left-color: #f6f0b9;
 }
+
 .feedback.error {
   background: #ffe9e0;
   color: #942a00;
@@ -259,6 +285,7 @@ label.error {
   padding: 0.5em 0.5em 0.5em 2em;
   border: solid 1px lightsalmon;
 }
+
 .feedback.error:before {
   content: "";
   font-family: fontawesome;
@@ -266,9 +293,11 @@ label.error {
   margin-left: -1.5em;
   margin-right: 0.5em;
 }
+
 .feedback.error li:before {
   border-left-color: #ffc4ad;
 }
+
 .feedback.success {
   background: #98eee6;
   color: #08322e;
@@ -276,6 +305,7 @@ label.error {
   padding: 0.5em 0.5em 0.5em 2em;
   border: solid 1px turquoise;
 }
+
 .feedback.success:before {
   content: "";
   font-family: fontawesome;
@@ -283,6 +313,7 @@ label.error {
   margin-left: -1.5em;
   margin-right: 0.5em;
 }
+
 .feedback.success li:before {
   border-left-color: #6ce7db;
 }
@@ -309,51 +340,57 @@ tr:not(:first-child):hover {
 }
 
 td {
-  line-height: 40px;
+  /* line-height: 40px; */
   font-weight: 300;
-  padding: 0 10px;
+  padding: 0 10px;  
 }
-.card{
-    overflow: hidden;
+
+.card {
+  overflow: hidden;
 }
-.vh15{
-    height: 15vh;
+
+.vh15 {
+  height: 15vh;
 }
+
 .card-body-icon {
-    position: absolute;
-    z-index: 0;
-    top: -10px;
-    right: -25px;
-    font-size: 10rem;
-    -webkit-transform: rotate(15deg);
-    -ms-transform: rotate(15deg);
-    transform: rotate(15deg);
-  }
-.explainationText{
-    z-index:999;
-    position: relative;
-    font-weight: 510;
+  position: absolute;
+  z-index: 0;
+  top: -10px;
+  right: -25px;
+  font-size: 10rem;
+  -webkit-transform: rotate(15deg);
+  -ms-transform: rotate(15deg);
+  transform: rotate(15deg);
 }
+
+.explainationText {
+  z-index: 999;
+  position: relative;
+  font-weight: 510;
+}
+
 @media (min-width: 576px) {
-    .card-columns {
-      column-count: 1;
-    }
+  .card-columns {
+    column-count: 1;
   }
-  
-  @media (min-width: 768px) {
-    .card-columns {
-      column-count: 2;
-    }
+}
+
+@media (min-width: 768px) {
+  .card-columns {
+    column-count: 2;
   }
-  
-  @media (min-width: 1200px) {
-    .card-columns {
-      column-count: 2;
-    }
+}
+
+@media (min-width: 1200px) {
+  .card-columns {
+    column-count: 2;
   }
-  
+}
+
 
 @media screen and (min-width: 600px) {
+
   html,
   body {
     height: 100%;
@@ -367,6 +404,7 @@ td {
     z-index: 99;
     height: 75px;
   }
+
   header[role="banner"] .utilities {
     position: absolute;
     top: 0;
@@ -375,9 +413,11 @@ td {
     color: darkslategray;
     width: auto;
   }
+
   header[role="banner"] .utilities li {
     display: inline-block;
   }
+
   header[role="banner"] .utilities li a {
     padding: 0.5em 1em;
   }
@@ -394,6 +434,7 @@ td {
     margin: 75px 0 40px 200px;
     min-height: 75vh;
   }
+
   main[role="main"]:after {
     content: "";
     display: table;
@@ -405,13 +446,16 @@ td {
     float: left;
     width: 96%;
   }
+
   .panel:after {
     content: "";
     display: table;
     clear: both;
   }
 
-  .box, .onethird, .twothirds {
+  .box,
+  .onethird,
+  .twothirds {
     padding: 1rem;
   }
 
@@ -430,6 +474,7 @@ td {
     margin-left: 200px;
   }
 }
+
 @media screen and (min-width: 900px) {
   footer[role="contentinfo"] {
     position: fixed;
@@ -443,9 +488,11 @@ td {
     width: 47%;
     clear: none;
   }
+
   .panel.important {
     width: 96%;
   }
+
   .panel.secondary {
     width: 23%;
   }

@@ -140,6 +140,7 @@ function createArtist() {
         alertMessage.classList.remove('d-none');
         alertMessage.value = "Something went wrong! Please try again later";
     });
+    return form;
 }
 let selectedRow;
 
@@ -206,20 +207,15 @@ function createInput(field){
           if (field.rows) {
             input.rows = field.rows;
         }
-      } else {
-          input = document.createElement('input');
-          input.type = field.type;
-      }
+    } else {
+        input = document.createElement('input');
+        input.type = field.type;
+    }
 
-      input.id = field.id;
-      input.className = 'form-control';
+    input.id = field.id;
+    input.className = 'form-control';
 
-      if (field.readonly) {
-          input.readOnly = true;
-      }
-
-      input.value = field.value;
-      if (field.readonly) {
+    if (field.readonly) {
         input.readOnly = true;
     }
       return input;

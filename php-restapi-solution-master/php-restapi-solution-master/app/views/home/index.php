@@ -46,6 +46,28 @@
 
     <?php
     }
+
+
+    // <!-- INSTAGRAM FEED CODE --> SHOULD HAVE
+
+    // set Instagram API endpoint
+    // $apiEndpoint = 'https://api.instagram.com/v1/users/self/media/recent/?access_token=ACCESS_TOKEN';
+
+    // // fetch Instagram feed data
+    // $ch = curl_init();
+    // curl_setopt($ch, CURLOPT_URL, $apiEndpoint);
+    // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    // $response = curl_exec($ch);
+    // curl_close($ch);
+
+    // // decode the JSON response
+    // $data = json_decode($response);
+
+    // // display the Instagram feed
+    // foreach ($data->data as $post) {
+    //   echo '<img src="' . $post->images->standard_resolution->url . '" alt="' . $post->caption->text . '">';
+    // }
     ?>
+    <!-- INSTAGRAM FEED COMPLETED -->
 
 </body>
