@@ -24,7 +24,7 @@
               <div class="card-body-icon">
                 <i class="fa fa-fw fa-hamburger"></i>
               </div>
-              <div class="mr-5 text-black explainationText">Manage the restaurants, restaurantFoodTypes, restaurantImages, restaurantMenuItems and restaurantReservations</div>
+              <div class="mr-5 text-black explainationText">Manage the restaurants, restaurantImages, restaurantMenuItems and restaurantReservations</div>
             </div>
             <a class="card-footer text-black explainationText clearfix small z-1" href="/test/yummy">
               <span class="float-left">Edit Yummy</span>

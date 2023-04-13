@@ -276,10 +276,12 @@ class YummyRepository extends Repository
         }
     }
 
-    public function getAllRestaurantReservations(){
+    public function getAllRestaurantReservations()
+    {
         try {
             $stmt = $this->connection->prepare("
-            SELECT `timeSlotID`, `eventID`, `price`, `startTime`, `endTime`, `maximumAmountTickets` FROM `TimeSlots`
+            SELECT `ticketID`, `timeSlotID`, `restaurantID`, `reservationName`, `phoneNumber`, `numberAdults`,
+            `numberChildren`, `remark`, `isActive` FROM `RestaurantReservation`
             ");
 
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
@@ -289,13 +291,13 @@ class YummyRepository extends Repository
             $reservations = [];
             foreach ($results as $row) {
                 $reservation = new Restaurantreservation(
-                    $row["timeSlotId"],
                     $row["ticketID"],
-                    $row["restaurantId"],
-                    $row["customerName"],
-                    $row["phoneNr"],
-                    $row["nrAdult"],
-                    $row["nrChild"],
+                    $row["timeSlotID"],
+                    $row["restaurantID"],
+                    $row["reservationName"],
+                    $row["phoneNumber"],
+                    $row["numberAdults"],
+                    $row["numberChildren"],
                     $row["remark"],
                     $row["isActive"],
                 );
@@ -369,35 +371,6 @@ class YummyRepository extends Repository
         }
     }
 
-    public function createReservation($reservation)
-    {
-        // creates a new reservation
-        try {
-            // query
-            $stmt = $this->connection->prepare("
-            INSERT INTO `RestaurantReservation`(`ticketID`, `timeSlotID`, `restaurantID`, `reservationName`, `phoneNumber`, `numberAdults`, `numberChildren`, `remark`, `isActive`) 
-            VALUES (?,?,?,?,?,?,?,?,1)
-            ");
-            // input
-            // Bind the parameter value to the placeholder
-            $stmt->setFetchMode(PDO::FETCH_ASSOC);
-            $stmt->execute([
-                $reservation['ticketID'],
-                $reservation['timeSlotId'],
-                $reservation['restaurantId'],
-                $reservation['customerName'],
-                $reservation['phoneNr'],
-                $reservation['nrAdult'],
-                $reservation['nrChild'],
-                $reservation['remark'],
-                // Making a reservations is always active(in het begin). So we put bit 1
-            ]);
-            return true;
-        } catch (PDOException $e) {
-            echo $e;
-            return false;
-        }
-    }
 
     // --------------- C.R.U.D ADMINISTRATOR C.R.U.D.-----------------
 
@@ -462,6 +435,89 @@ class YummyRepository extends Repository
         }
     }
     // ---------------------- END YUMMYRESTAURANT ------------------------
+
+    // ---------------------- Reservations ------------------------
+
+    public function createReservation($reservation)
+    {
+        // creates a new reservation
+        try {
+            // query
+            $stmt = $this->connection->prepare("
+            INSERT INTO `RestaurantReservation`(`ticketID`, `timeSlotID`, `restaurantID`, `reservationName`, `phoneNumber`, `numberAdults`, `numberChildren`, `remark`, `isActive`) 
+            VALUES (?,?,?,?,?,?,?,?,1)
+            ");
+            // input
+            // Bind the parameter value to the placeholder
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $stmt->execute([
+                $reservation['ticketID'],
+                $reservation['timeSlotId'],
+                $reservation['restaurantId'],
+                $reservation['customerName'],
+                $reservation['phoneNr'],
+                $reservation['nrAdult'],
+                $reservation['nrChild'],
+                $reservation['remark'],
+                // Making a reservations is always active(in het begin). So we put bit 1
+            ]);
+            return true;
+        } catch (PDOException $e) {
+            echo $e;
+            return false;
+        }
+    }
+
+    public function editReservation($update)
+    {
+        // this updates a existing reservation
+        try {
+            // query
+            $stmt = $this->connection->prepare("UPDATE `RestaurantReservation` SET
+            `timeSlotID`=?, `restaurantID`=?, `reservationName`=?, `phoneNumber`=?,
+            `numberAdults`=?, `numberChildren`=?, `remark`=?, `isActive`=1 WHERE `ticketID`=?");
+
+            // input
+            $stmt->execute([
+                $update->getTimeSlotID(), $update->getRestaurantID(), $update->getReservationName(), $update->getPhoneNumber(),
+                $update->getNumberAdults(), $update->getNumberChildren(), $update->getRemark(), $update->getTicketID()
+            ]);
+            return true;
+        } catch (PDOException $e) {
+            echo $e;
+            return false;
+        }
+    }
+
+
+    public function activateReservation($activate)
+    {
+        // this will activate a existing reservation
+        try {
+            $stmt = $this->connection->prepare("UPDATE `RestaurantReservation` SET `isActive` = 1 WHERE `ticketID` = ?");
+            $stmt->execute([$activate]);
+
+            return true;
+        } catch (PDOException $e) {
+            echo $e;
+            return false;
+        }
+    }
+
+    public function deactivateReservation($deactivate)
+    {
+        // this will deactivate a existing reservation
+        try {
+            $stmt = $this->connection->prepare("UPDATE `RestaurantReservation` SET `isActive` = 0 WHERE `ticketID` = ?");
+            $stmt->execute([$deactivate]);
+
+            return true;
+        } catch (PDOException $e) {
+            echo $e;
+            return false;
+        }
+    }
+    // ---------------------- END Reservations ------------------------
 
     // ---------------------- TimeSlotsYummy------------------------
 
