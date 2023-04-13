@@ -40,7 +40,8 @@
               <div class="container carouselContainer">
                 <h3><?= $artists[$i]->getName() ?></h3>
                 <p><?= $artists[$i]->getDescription() ?></p>
-                <?php if(isset($artists[$i]->getTimeSlots()[0])){ ?>
+                <?php //check if artist plays at any point of time during the festival 
+                if(isset($artists[$i]->getTimeSlots()[0])){ ?>
                 <hr><span class="textSmall">Plays the <?= //gets first time this artist will show up
                 $artists[$i]->getTimeSlots()[0]->getStartTime()->format('dS') ?>!</span>
                 <?php } ?>
