@@ -9,14 +9,15 @@ class TimeSlot{
         private DateTime $endTime;
         private int $maximmumAmountTickets;
 
-
-        public function __construct(int $timeSlotID, int $eventID, float $price, DateTime $startTime, DateTime $endTime, int $maximmumAmountTickets){
-            $this->timeSlotID = $timeSlotID;
-            $this->eventID = $eventID;
-            $this->price = $price;
-            $this->startTime = $startTime;
-            $this->endTime = $endTime;
-            $this->maximmumAmountTickets = $maximmumAmountTickets;
+        //made all options possible to be null. This is done so the Yummy page doesn't crash. The yummy admin page requires a timeslot that has different variables that are null
+        public function __construct(?int $timeSlotID = null, ?int $eventID = null, ?float $price = null, ?DateTime $startTime = null, ?DateTime $endTime = null, ?int $maximumAmountTickets = null)
+        {
+            $this->timeSlotID = $timeSlotID ?? 0;
+            $this->eventID = $eventID ?? 0;
+            $this->price = $price ?? 0.0;
+            $this->startTime = $startTime ?? new DateTime();
+            $this->endTime = $endTime ?? new DateTime();
+            $this->maximmumAmountTickets = $maximumAmountTickets ?? 0;
         }
 
         /**
