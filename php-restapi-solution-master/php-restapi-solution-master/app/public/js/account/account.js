@@ -12,7 +12,7 @@ function register() {
     registerForm.style.left = "50px";
     buttonStyle.style.left = "110px";
     loginButton.style.color = "#262626";
-    registerButton.style.color = "rgb(214,199,39)";
+    registerButton.style.color = "white";
     form.style.height = "80vh";
     loginForm.reset;
     alertMessage.classList.add("d-none")
@@ -23,7 +23,7 @@ function login() {
     registerForm.style.left = "550px";
     buttonStyle.style.left = "0";
     registerButton.style.color = "#262626";
-    loginButton.style.color = "rgb(214,199,39)";
+    loginButton.style.color = "white";
     form.style.height = "50vh";
     alertMessage.classList.add("d-none")
     registerForm.reset;
