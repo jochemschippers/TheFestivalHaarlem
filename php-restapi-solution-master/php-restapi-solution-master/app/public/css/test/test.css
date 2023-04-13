@@ -4,7 +4,6 @@
 html {
   box-sizing: border-box;
 }
-
 *,
 *:before,
 *:after {
@@ -24,7 +23,6 @@ body.login {
   padding: 1em;
   height: auto;
 }
-
 .warn {
   color: red;
 }

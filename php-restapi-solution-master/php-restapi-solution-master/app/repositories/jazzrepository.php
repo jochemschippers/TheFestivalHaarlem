@@ -11,7 +11,7 @@ class JazzRepository extends Repository
     function getAllArtists()
     {
         try {
-            $stmt = $this->connection->prepare("SELECT artistID,`description`,`image`,`name` FROM JazzArtists");
+            $stmt = $this->connection->prepare("SELECT artistID,`description`,`image`,`imageSmall`,`name` FROM JazzArtists");
 
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $stmt->execute();
@@ -23,7 +23,8 @@ class JazzRepository extends Repository
                     $row["artistID"],
                     $row['description'],
                     $row['image'],
-                    $row['name']
+                    $row['name'],
+                    $row['imageSmall']
                 );
                 array_push($artists, $artist);
             }
@@ -100,7 +101,7 @@ class JazzRepository extends Repository
                     $row['startTime'],
                     $row['endTime'],
                     $row['maximumAmountTickets'],
-                    new JazzArtist($row['artistID'], '',$row['imageSmall'], $row['name']),
+                    new JazzArtist($row['artistID'], '', $row['imageSmall'], $row['name']),
                     new JazzLocation($row['locationID'], $row['locationName']),
                     new Hall($row['hallID'], $row['locationID'], $row['hallName'])
                 );
@@ -133,6 +134,56 @@ class JazzRepository extends Repository
                 array_push($locations, $jazzLocation);
             }
             return $locations;
+        } catch (PDOException $e) {
+            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
+        }
+    }
+    function checkArtistIDExists($artistID)
+    {
+        try {
+            $stmt = $this->connection->prepare("SELECT artistID FROM JazzArtists WHERE artistID = ?");
+            $stmt->execute([$artistID]);
+            $result = $stmt->fetch();
+
+            return $result !== false;
+        } catch (PDOException $e) {
+            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
+        }
+    }
+    function updateArtist($artist)
+    {
+        try {
+            $stmt = $this->connection->prepare("UPDATE JazzArtists SET `name` = ?, `description` = ?, `image` = ?, `imageSmall` = ? WHERE artistID = ?");
+            $stmt->execute([
+                $artist->getName(),
+                $artist->getDescription(),
+                $artist->getImage(),
+                $artist->getImageSmall(),
+                $artist->getArtistID()
+            ]);
+        } catch (PDOException $e) {
+            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
+        }
+    }
+    function deleteArtist($artist)
+    {
+        try {
+            $stmt = $this->connection->prepare("DELETE FROM `JazzArtists` WHERE artistID = ?");
+            $stmt->execute([$artist->getArtistID()]);
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+    function createArtist($artist)
+    {
+        try {
+            $stmt = $this->connection->prepare("INSERT INTO JazzArtists (`name`, `description`, `image`, `imageSmall`) VALUES (?, ?, ?, ?)");
+            $stmt->execute([
+                $artist->getName(),
+                $artist->getDescription(),
+                $artist->getImage(),
+                $artist->getImageSmall()
+            ]);
         } catch (PDOException $e) {
             throw new ErrorException("It seems something went wrong with our database! Please try again later.");
         }

@@ -7,14 +7,15 @@ class JazzArtist{
         private string $image;
         private string $name;
         private array $timeSlots;
-        
+        private string $imageSmall;
 
-        public function __construct(int $artistID = 0, string $description = '', string $image = '', string $name = ''){
+        public function __construct(int $artistID = 0, string $description = '', string $image = '', string $name = '',string $imageSmall = ''){
             $this->artistID = $artistID;
             $this->description = $description;
             $this->image = $image;
             $this->name = $name;
             $this->timeSlots = array();
+            $this->imageSmall = $imageSmall;
         }
 
 	/**
@@ -109,6 +110,26 @@ class JazzArtist{
         public function setName($name)
         {
                 $this->name = $name;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of imageSmall
+         */ 
+        public function getImageSmall()
+        {
+                return $this->imageSmall;
+        }
+
+        /**
+         * Set the value of imageSmall
+         *
+         * @return  self
+         */ 
+        public function setImageSmall($imageSmall)
+        {
+                $this->imageSmall = $imageSmall;
 
                 return $this;
         }

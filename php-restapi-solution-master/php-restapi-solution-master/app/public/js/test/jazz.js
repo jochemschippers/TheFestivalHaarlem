@@ -1,33 +1,90 @@
 const dynamicForm = document.getElementById('dynamicForm');
-const updateButton = document.getElementById('updateButton');
+const confirmButton = document.getElementById('updateButton');
 const alertMessage = document.getElementById("alert");
+var isUpdate;
 
-$(document).ready(function() {
-    $('#dataTable').DataTable({
-      pageLength: 10
-    });
-  });
+const dataTable = new DataTable("#dataTableArtists", {
+    searchable: true,
+    perPage: 10,
+    perPageSelect: [10, 25, 50, 100],
+    fixedHeight: true
+});
 
-  function openEditModalArtists(artistID, name, description, imagePath) {
-    // Define the form fields and labels
+
+function openEditModalArtists(button) {
+    const row = button.closest("tr");
+    const artistID = row.dataset.artistId;
+    const name = row.dataset.name;
+    const description = row.dataset.description;
+    const imagePath = row.dataset.image;
+    const imageSmallPath = row.dataset.imageSmall;
+
+    
     const fields = [
         { id: 'artistIDInput', label: 'Artist ID', value: artistID, type: 'text', readonly: true },
         { id: 'artistName', label: 'Artist Name', value: name, type: 'text' },
         { id: 'descriptionInput', label: 'Description', value: description, type: 'textarea', rows: 5 },
-        { id: 'imagePathInput', label: 'Image Path', value: imagePath, type: 'text' }
+        { id: 'imagePathInput', label: 'Image Path', value: imagePath, type: 'text' },
+        { id: 'imageSmallPathInput', label: 'Image Small Path', value: imageSmallPath, type: 'text' }
+    ];
+    isUpdate = true;
+    confirmButton.textContent = 'Update';
+    const form = generateForm(fields);
+    dynamicForm.innerHTML = '';
+    dynamicForm.appendChild(form);
+    var editModal = new bootstrap.Modal(document.getElementById('editModal'));
+    editModal.show();
+}
+function openAddModalArtists(button) {
+    confirmButton.textContent = "Create";
+    const fields = [
+        { id: 'artistName', label: 'Artist Name', value: '', type: 'text' },
+        { id: 'descriptionInput', label: 'Description', value: '', type: 'textarea', rows: 5 },
+        { id: 'imagePathInput', label: 'Image Path', value: '', type: 'text' },
+        { id: 'imageSmallPathInput', label: 'Image Small Path', value: '', type: 'text' }
+    ];
+    isUpdate = false;
+    const form = generateForm(fields);
+    dynamicForm.innerHTML = '';
+    dynamicForm.appendChild(form);
+    var editModal = new bootstrap.Modal(document.getElementById('editModal'));
+    editModal.show();
+}
+
+dynamicForm.addEventListener('submit', function (e) {
+    e.preventDefault
+});
+//add artist code
+document.getElementById('add-user-button').addEventListener('click', openAddModalArtists);
+function openAddModalArtists() {
+    const fields = [
+        { id: 'artistName', label: 'Artist Name', value: '', type: 'text' },
+        { id: 'descriptionInput', label: 'Description', value: '', type: 'textarea', rows: 5 },
+        { id: 'imagePathInput', label: 'Image Path', value: '', type: 'text' },
+        { id: 'imageSmallPathInput', label: 'Image Small Path', value: '', type: 'text' }
     ];
 
     const form = generateForm(fields);
     dynamicForm.innerHTML = '';
     dynamicForm.appendChild(form);
-    updateButton.setAttribute("onClick","updateArtist()");  
-//dit hoeft dus echt niet, kan blijkbaar zonder jquery
-    $('#editModal').modal('show');
+    var editModal = new bootstrap.Modal(document.getElementById('editModal'));
+    editModal.show();
 }
 
+confirmButton.addEventListener("click", function (event) {
+    console.log("isUpdate:", isUpdate);
+
+    event.preventDefault();
+    if (isUpdate) {
+        updateArtist();
+    } else {
+        createArtist();
+    }
+});
 
 
-function updateArtist(){
+//update artist code
+function updateArtist() {
   fetch('/test/updateArtist', {
     method: 'POST',
     headers: {
@@ -38,23 +95,87 @@ function updateArtist(){
         artistName: document.querySelector('#artistName').value,
         description: document.querySelector('#descriptionInput').value,
         imagePath: document.querySelector('#imagePathInput').value,
+        imageSmallPath: document.querySelector('#imageSmallPathInput').value,
     })
 }).then(response => response.json())
+.then(data => {
+    if (data.status === 1) {
+        alertMessage.classList.remove('alert-danger');
+        alertMessage.classList.add('alert-success');
+    }
+    alertMessage.classList.remove('d-none');
+    alertMessage.innerHTML = data.message;
+    window.location.reload();
+})
+.catch(error => {
+    alertMessage.classList.remove('d-none');
+    alertMessage.value = "Something went wrong! Please try again later";
+});
+}
+
+//create artist code
+function createArtist() {
+    fetch('/test/createArtist', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            artistName: document.querySelector('#artistName').value,
+            description: document.querySelector('#descriptionInput').value,
+            imagePath: document.querySelector('#imagePathInput').value,
+            imageSmallPath: document.querySelector('#imageSmallPathInput').value,
+        })
+    }).then(response => response.json())
     .then(data => {
         if (data.status === 1) {
-            document.location.href="/";
+            alertMessage.classList.remove('alert-danger');
+            alertMessage.classList.add('alert-success');
         }
-        else{
-            alertMessage.classList.remove('d-none');
-            alertMessage.innerHTML = data.message;
-        }
-
+        alertMessage.classList.remove('d-none');
+        alertMessage.innerHTML = data.message;
+        window.location.reload();
     })
     .catch(error => {
         alertMessage.classList.remove('d-none');
-        alertMessage.innerHTML = error;
+        alertMessage.value = "Something went wrong! Please try again later";
     });
 }
+let selectedRow;
+
+function deleteArtist(button) {
+    selectedRow = button.closest("tr");
+    const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+    deleteModal.show();
+}
+
+function confirmDeleteArtist() {
+    const artistID = selectedRow.dataset.artistId;
+    fetch('/test/deleteArtist', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            artistID: artistID
+        })
+    }).then(response => response.json())
+    .then(data => {
+        if (data.status === 1) {
+            alertMessage.classList.remove('alert-danger');
+            alertMessage.classList.add('alert-success');
+            selectedRow.remove();
+        } 
+        alertMessage.classList.remove('d-none');
+        alertMessage.innerHTML = data.message;
+    })
+    .catch(error => {
+        alertMessage.classList.remove('d-none');
+        alertMessage.value = "Something went wrong! Please try again later";
+    });
+}
+
+document.getElementById('confirmDelete').addEventListener('click', confirmDeleteArtist);
 
 
 
