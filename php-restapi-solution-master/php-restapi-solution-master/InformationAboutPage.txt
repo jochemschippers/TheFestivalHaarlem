@@ -1,0 +1,8 @@
+Login gegevens:
+
+- Normale gebruiker login gegevens
+	email: regularUser@gmail.com
+	wachtwoord: Wachtwoord123
+- Admin gebruiker login gegevens
+	email: adminUser@gmail.com
+	wachtwoord: Wachtwoord123
