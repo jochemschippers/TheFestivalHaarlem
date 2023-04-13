@@ -27,7 +27,6 @@ class YummyController extends Controller
     }
     public function restaurant()
     {
-
         if (isset($_GET['restaurantId'])) {
             $restaurantId = $_GET['restaurantId'];
             $models = [
@@ -37,8 +36,8 @@ class YummyController extends Controller
                 "restaurant" => $this->yummyService->getOne($restaurantId),
                 "menuItems" => $this->yummyService->getMenuItems($restaurantId),
                 "restaurantFoodTypes" => $this->yummyService->getAllRestaurantFoodTypes(),
-                "timeSlotsYummy" => $this->yummyService->getRestaurantReservationInfo($restaurantId),
                 "restaurantReservations" => $this->yummyService->getAllRestaurantReservations(),
+                "timeSlotsYummy" => $this->yummyService->getRestaurantReservationInfo($restaurantId),
             ];
             $this->displayView($models);
         }
@@ -56,11 +55,9 @@ class YummyController extends Controller
 
                 if ($this->createReservation($restaurantId, $timeSlot, $customerName, $phoneNr, $nrAdult, $nrChild, $remark)) {
                     // HIER EEN POPUP MELDING TONEN IS GESLAAGD
-                    // if reservation is created successfully
                     echo "<script>alert('Reservation created successfully!')</script>";
                 } else {
                     // HIER MELDEN DAT EEN WAARDE VERKEERD INGEVULD IS. OF DAT ER EEN ERROR IS
-                    // if reservation creation fails
                     echo "<script>alert('Failed to create reservation. Please check your inputs and try again.')</script>";
                 }
             }
@@ -141,6 +138,7 @@ class YummyController extends Controller
             $remark,
             1
         );
+        var_dump($reservation);
 
         // call the createRestaurant method of the YummyService object with the restaurant object as the parameter
         if ($this->yummyService->createReservation($reservation)) {
