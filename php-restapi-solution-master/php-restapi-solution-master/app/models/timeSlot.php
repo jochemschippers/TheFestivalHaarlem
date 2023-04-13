@@ -7,16 +7,16 @@ class TimeSlot{
         private float $price;
         private DateTime $startTime;
         private DateTime $endTime;
-        private int $maximumAmountTickets;
+        private int $maximmumAmountTickets;
 
 
-        public function __construct(int $timeSlotID, int $eventID, float $price, DateTime $startTime, DateTime $endTime, int $maximumAmountTickets){
+        public function __construct(int $timeSlotID, int $eventID, float $price, DateTime $startTime, DateTime $endTime, int $maximmumAmountTickets){
             $this->timeSlotID = $timeSlotID;
             $this->eventID = $eventID;
             $this->price = $price;
             $this->startTime = $startTime;
             $this->endTime = $endTime;
-            $this->maximumAmountTickets = $maximumAmountTickets;
+            $this->maximmumAmountTickets = $maximmumAmountTickets;
         }
 
         /**
@@ -38,6 +38,7 @@ class TimeSlot{
 
                 return $this;
         }
+
         /**
          * Get the value of endTime
          */ 
@@ -137,7 +138,6 @@ class TimeSlot{
 
                 return $this;
         }
-\
 }
 
 ?>
