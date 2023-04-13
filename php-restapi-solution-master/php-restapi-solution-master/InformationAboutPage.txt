@@ -1,8 +1,24 @@
-Login gegevens:
+Login information:
 
-- Normale gebruiker login gegevens
+- Normal user login information
 	email: regularUser@gmail.com
 	wachtwoord: Wachtwoord123
-- Admin gebruiker login gegevens
+
+- Admin user login information
 	email: adminUser@gmail.com
-	wachtwoord: Wachtwoord123
+	password: Wachtwoord123
+
+Functionaliteiten van Tayam:
+Visitor can Login
+Visitor can Register
+Customer Logout
+Administrator can Login
+Administrator can Manage artists (CRUD)
+Administrator can read locations 
+General information and overview of music events. (Jazz)
+View individual event information (Includes artist, venue, description (HTML), images, times & dates, ticket prices) (Jazz)
+
+Other things I named during the assesment that i was responsible for: 
+Fixing bugs other group members couldn't fix, resolving merge errors, creating footer, creating header, dynamically loading CSS and JS codes, building database and modifying database on wishes of other group parties.
+
+Administrator delete and edit locations (only backend code exists)
