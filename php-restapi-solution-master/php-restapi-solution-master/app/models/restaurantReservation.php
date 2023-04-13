@@ -17,15 +17,15 @@ class Restaurantreservation extends TimeSlotsYummy
     string $remark, bool $isActive, int $eventID = null, float $price = null, string $startTime = null,
     string $endTime = null, int $maximumAmountTickets = null)
     {
-        if ($eventID !== null && $price !== null && $startTime !== null && $endTime !== null && $maximumAmountTickets !== null) {
-			parent::__construct(				
-                $eventID,
-                $price,
-                DateTime::createFromFormat('Y-m-d H:i:s', $startTime),
-                DateTime::createFromFormat('Y-m-d H:i:s', $endTime),
-                $maximumAmountTickets
-            );
-		}        
+        parent::__construct(
+            $timeSlotID,
+            $restaurantID,
+            $eventID,
+            $price,
+            $startTime ? DateTime::createFromFormat('Y-m-d H:i:s', $startTime) : null,
+            $endTime ? DateTime::createFromFormat('Y-m-d H:i:s', $endTime) : null,
+            $maximumAmountTickets
+        );
         $this->ticketID = $ticketID;
         $this->reservationName = $reservationName;
         $this->phoneNumber = $phoneNumber;

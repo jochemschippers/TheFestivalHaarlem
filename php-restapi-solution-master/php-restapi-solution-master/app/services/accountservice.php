@@ -53,8 +53,7 @@ class AccountService {
         if (session_status() == PHP_SESSION_ACTIVE) {
             session_destroy();
         }
-        $previousPage = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '/';
-        header('Location: ' . $previousPage);
+        header('Location: /');
         exit();
     }
     // validate user inputs made in another method because the overview page of the user should use this method

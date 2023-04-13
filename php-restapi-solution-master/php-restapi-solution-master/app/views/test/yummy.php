@@ -1,4 +1,4 @@
-<!-- <link href="../css/test/yummy.css" rel="stylesheet"> -->
+<link href="../css/test/yummy.css" rel="stylesheet">
 <main role="main">
     <div class="card mb-3 panel important">
         <div class="card-header">
@@ -209,7 +209,7 @@
     <!-- HIER CRUD RESERVATIONS -->
     <div class="card mb-3 panel important">
         <div class="card-header">
-            <i class="fa fa-table"></i> RestaurantReservation Edit
+            <i class="fa fa-table"></i> Reservation Edit
         </div>
 
         <div class="card-body">
