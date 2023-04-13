@@ -17,7 +17,7 @@ class AccountService {
                 throw new ErrorException("incorrect email or password! <br>Current time: {$current_time}");
             }
             else {
-                $user = $this->repository->getUser($email);
+                $user = $this->repository->getUser($email); //this causes error (i know why! chackek de model)
                 return $user;
             }
         }catch(Exception $e){
@@ -25,22 +25,19 @@ class AccountService {
         }
         
     }
-    public function register($fullname, $password, $email, $role, $phoneNumber) {
+    public function register($user) {
         try{
-        if($this->repository->checkEmailExists($email))
+        $inputStrings = [$user->getFullName(), $user->getEmail(), $user->getPassword()];
+        $this->validateUserInputs($inputStrings);
+        if($this->repository->checkEmailExists($user->getEmail()))
         {
             throw new ErrorException("This email is already linked to an account! Please try to log in.");
         }
-        else if(!$this->isPasswordDistinct($password,$fullname,$email))
-        {
-            throw new ErrorException("Password is too similair to email or fullname! Please choose a more secure password.");
-        }
-        else if (!$this->isValidPhoneNumber($phoneNumber)){
-            throw new ErrorException("The phone format does not seem correct. Please try to adjust.");
-        }
-        else{
-            $this->repository->register($fullname, password_hash($password, PASSWORD_DEFAULT), $email, $role, $phoneNumber);
-        }
+        //encrypt user password
+        $user->setPassword(password_hash($user->getPassword(), PASSWORD_DEFAULT));
+
+        $this->repository->register($user);
+
     }catch(Exception $e){
         throw $e;
     }
@@ -60,6 +57,39 @@ class AccountService {
         header('Location: ' . $previousPage);
         exit();
     }
+    private function validateUserInputs($inputStrings)
+    {
+        //0 = fullname, 1 = email, 2 = password
+        if (!$this->validateStringLength($inputStrings)) {
+            throw new ErrorException("One or more inputs have more than 100 characters. Please provide shorter input values.");
+        }
+        if (!$this->verifyEmail($inputStrings[1])) {
+            throw new ErrorException("The email is in an incorrect format!");
+        }
+        if ($inputStrings[2] !== null && $inputStrings[0] !== null && !$this->isPasswordDistinct($inputStrings[2], $inputStrings[0], $inputStrings[1])) {
+            throw new ErrorException("Password is too similar to email, fullname! Please choose a more secure password");
+        }
+    }
+    public function validateStringLength($strings)
+    {
+        foreach ($strings as $string) {
+            if (strlen($string) >= 100) {
+                return false;
+            }
+        }
+        return true;
+    }
+    public function verifyEmail($email)
+    {
+        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+
     private function isValidPhoneNumber($phoneNumber) {
         //Optionally starts with a '+' then 1 to 3 digits with possible space after it. 
         //Then, there may be a hyphen, dot, or open parenthesis followed by 1 to 4 digits, and a possible closing parenthesis, hyphen, or dot. this repeats for up to four times

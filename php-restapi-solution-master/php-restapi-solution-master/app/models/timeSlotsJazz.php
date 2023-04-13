@@ -1,29 +1,78 @@
 <?php
-require_once __DIR__ . '/../models/timeSlot.php';
+require_once __DIR__ . '/../models/hall.php';
 
 class TimeSlotsJazz extends TimeSlot{
     
-        private int $artistID;
-        private int $hallID;
+        private JazzArtist $artist;
+        private JazzLocation $jazzLocation;
+        private hall $hall;
+
+        public function __construct(int $timeSlotID, int $eventID, float $price, string $startTime, string $endTime, int $maximmumAmountTickets, $artist = new JazzArtist(), $jazzLocation = new JazzLocation(), $hall = new Hall(1,1,'')) {
+            parent::__construct($timeSlotID, $eventID, $price,  DateTime::createFromFormat('Y-m-d H:i:s', $startTime), DateTime::createFromFormat('Y-m-d H:i:s', $endTime), $maximmumAmountTickets);
+            $this->artist = $artist;
+            $this->jazzLocation = $jazzLocation;
+            $this->hall = $hall;
+
+        }
 
 
-        public function __construct(int $timeSlotID, int $eventID, float $price, string $startTime, string $endTime, int $maximumAmountTickets, int $artistID, int $hallID) {
-            parent::__construct($timeSlotID, $eventID, $price,  DateTime::createFromFormat('Y-m-d H:i:s', $startTime), DateTime::createFromFormat('Y-m-d H:i:s', $endTime), $maximumAmountTickets);
-            $this->artistID = $artistID;
-            $this->hallID = $hallID;
+        /**
+         * Get the value of artist
+         */ 
+        public function getArtist()
+        {
+                return $this->artist;
         }
-        public function getArtistID(): int {
-            return $this->artistID;
+
+        /**
+         * Set the value of artist
+         *
+         * @return  self
+         */ 
+        public function setArtist($artist)
+        {
+                $this->artist = $artist;
+
+                return $this;
         }
-        public function setArtistID(int $artistID): void {
-            $this->artistID = $artistID;
+
+        /**
+         * Get the value of jazzLocation
+         */ 
+        public function getJazzLocation()
+        {
+                return $this->jazzLocation;
         }
-    
-        public function getHallID(): int {
-            return $this->hallID;
+
+        /**
+         * Set the value of jazzLocation
+         *
+         * @return  self
+         */ 
+        public function setJazzLocation($jazzLocation)
+        {
+                $this->jazzLocation = $jazzLocation;
+
+                return $this;
         }
-    
-        public function setHallID(int $hallID): void {
-            $this->hallID = $hallID;
+
+        /**
+         * Get the value of hall
+         */ 
+        public function getHall()
+        {
+                return $this->hall;
+        }
+
+        /**
+         * Set the value of hall
+         *
+         * @return  self
+         */ 
+        public function setHall($hall)
+        {
+                $this->hall = $hall;
+
+                return $this;
         }
 }

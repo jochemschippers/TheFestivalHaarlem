@@ -12,8 +12,9 @@ function register() {
     registerForm.style.left = "50px";
     buttonStyle.style.left = "110px";
     loginButton.style.color = "#262626";
-    registerButton.style.color = "white";
-    form.style.height = "65vh";
+    registerButton.style.color = "rgb(214,199,39)";
+    form.style.height = "80vh";
+    loginForm.reset;
     alertMessage.classList.add("d-none")
 };
 
@@ -22,10 +23,13 @@ function login() {
     registerForm.style.left = "550px";
     buttonStyle.style.left = "0";
     registerButton.style.color = "#262626";
-    loginButton.style.color = "white";
+    loginButton.style.color = "rgb(214,199,39)";
     form.style.height = "50vh";
     alertMessage.classList.add("d-none")
+    registerForm.reset;
 };
+
+
 function checkPassword(password, confirmPassword) {
     if (password != confirmPassword) {
         alertMessage.classList.remove('d-none');
@@ -34,67 +38,68 @@ function checkPassword(password, confirmPassword) {
     }
     return true;
 }
-    document.querySelector('#register').addEventListener('submit', function (e) {
-        e.preventDefault(); 
-        alertMessage.classList.remove('alert-success');
-        alertMessage.classList.add('alert-danger');
-        if (checkPassword(document.getElementById('passwordRegister').value, document.getElementById('passwordConfirm').value)) {
-            fetch('account/createAccount', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    email: document.querySelector('#emailRegister').value,
-                    fullname: document.querySelector('#fullName').value,
-                    phoneNumber: document.querySelector('#phoneNumber').value,
-                    password: document.querySelector('#passwordRegister').value,
-                })
-            }).then(response => response.json())
-                .then(data => {
-                    if (data.status === 1) {
-                        document.querySelector('#register').reset();
-                        alertMessage.classList.remove('alert-danger');
-                        alertMessage.classList.add('alert-success');
-                    }
-                    alertMessage.classList.remove('d-none');
-                    alertMessage.innerHTML = data.message;
-                })
-                .catch(error => {
-                    alertMessage.classList.remove('d-none');
-                    alertMessage.value = "Something went wrong! Please try again later";
-                });
-        }
-    });
 
-    document.querySelector('#login').addEventListener('submit', function (e) {
-        e.preventDefault(); 
-        alertMessage.classList.remove('alert-success');
-        alertMessage.classList.add('alert-danger');
 
-        fetch('account/login', {
+registerForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    alertMessage.classList.remove('alert-success');
+    alertMessage.classList.add('alert-danger');
+    if (checkPassword(document.getElementById('passwordRegister').value, document.getElementById('passwordConfirm').value)) {
+        fetch('account/createAccount', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                email: document.querySelector('#emailLogin').value,
-                password: document.querySelector('#passwordLogin').value,
+                email: document.querySelector('#emailRegister').value,
+                fullname: document.querySelector('#fullName').value,
+                phoneNumber: document.querySelector('#phoneNumber').value,
+                password: document.querySelector('#passwordRegister').value,
             })
         }).then(response => response.json())
             .then(data => {
                 if (data.status === 1) {
-                    document.location.href="/";
+                    registerForm.reset();
+                    alertMessage.classList.remove('alert-danger');
+                    alertMessage.classList.add('alert-success');
                 }
-                else{
-                    alertMessage.classList.remove('d-none');
-                    alertMessage.innerHTML = data.message;
-                }
-
+                alertMessage.classList.remove('d-none');
+                alertMessage.innerHTML = data.message;
             })
             .catch(error => {
                 alertMessage.classList.remove('d-none');
-                alertMessage.innerHTML = "Something went wrong! Please try again later";
+                alertMessage.value = "Something went wrong! Please try again later";
             });
+    }
+});
+loginForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    alertMessage.classList.remove('alert-success');
+    alertMessage.classList.add('alert-danger');
 
-    });
+    fetch('account/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            email: document.querySelector('#emailLogin').value,
+            password: document.querySelector('#passwordLogin').value,
+        })
+    }).then(response => response.json())
+        .then(data => {
+            if (data.status === 1) {
+                document.location.href = "/";
+            }
+            else {
+                alertMessage.classList.remove('d-none');
+                alertMessage.innerHTML = data.message;
+            }
+
+        })
+        .catch(error => {
+            alertMessage.classList.remove('d-none');
+            alertMessage.innerHTML = "Something went wrong! Please try again later" + error.message;
+        });
+
+});

@@ -28,6 +28,7 @@ class YummyController extends Controller
     public function restaurant()
     {
         if (isset($_GET['restaurantId'])) {
+
             $restaurantId = $_GET['restaurantId'];
             $models = [
                 "restaurantId" => $restaurantId,

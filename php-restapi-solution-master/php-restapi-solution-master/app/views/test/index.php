@@ -10,7 +10,7 @@
               </div>
               <div class="mr-5 text-black explainationText">Manage the Artists, jazz location details, halls of the patronaat and timeslots jazz</div>
             </div>
-            <a class="card-footer text-black explainationText clearfix small z-1" href="#">
+            <a class="card-footer text-black explainationText clearfix small z-1" href="/test/jazz">
               <span class="float-left">Edit Jazz</span>
               <span class="float-right">
                 <i class="fa fa-angle-right"></i>

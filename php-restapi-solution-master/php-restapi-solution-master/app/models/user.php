@@ -3,7 +3,6 @@
 class User{
     
         private int $userID;
-        private string $userName;
         private string $email;
         private int $userRole;
         private string $fullName;
@@ -11,9 +10,8 @@ class User{
         private string $password;
 
 
-        public function __construct(int $userID, string $userName, string $email, int $userRole, string $fullName, string $phoneNumber, string $password){
-            $this->userID = $userID;
-            $this->userName = $userName;
+        public function __construct(string $fullName, int $userRole, string $email = '', string $phoneNumber = '', string $password = '', int $userID = 0) {
+                $this->userID = $userID;
             $this->email = $email;
             $this->userRole = $userRole;
             $this->fullName = $fullName;
@@ -37,26 +35,6 @@ class User{
         public function setUserID($userID)
         {
                 $this->userID = $userID;
-
-                return $this;
-        }
-
-        /**
-         * Get the value of userName
-         */ 
-        public function getUserName()
-        {
-                return $this->userName;
-        }
-
-        /**
-         * Set the value of userName
-         *
-         * @return  self
-         */ 
-        public function setUserName($userName)
-        {
-                $this->userName = $userName;
 
                 return $this;
         }

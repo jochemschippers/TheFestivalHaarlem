@@ -38,70 +38,106 @@ class TimeSlot{
 
                 return $this;
         }
+        /**
+         * Get the value of endTime
+         */ 
+        public function getEndTime()
+        {
+                return $this->endTime;
+        }
 
-	/**
-	 * @return DateTime
-	 */
-	public function getEndTime(): DateTime {
-		return $this->endTime;
-	}
-	
-	/**
-	 * @param DateTime $endTime 
-	 * @return self
-	 */
-	public function setEndTime(DateTime $endTime): self {
-		$this->endTime = $endTime;
-		return $this;
-	}
+        /**
+         * Set the value of endTime
+         *
+         * @return  self
+         */ 
+        public function setEndTime($endTime)
+        {
+                $this->endTime = $endTime;
 
-	/**
-	 * @return int
-	 */
-	public function getEventID(): int {
-		return $this->eventID;
-	}
-	
-	/**
-	 * @param int $eventID 
-	 * @return self
-	 */
-	public function setEventID(int $eventID): self {
-		$this->eventID = $eventID;
-		return $this;
-	}
+                return $this;
+        }
 
-	/**
-	 * @return int
-	 */
-	public function getMaximumAmountTickets(): int {
-		return $this->maximumAmountTickets;
-	}
-	
-	/**
-	 * @param int $maximumAmountTickets 
-	 * @return self
-	 */
-	public function setMaximumAmountTickets(int $maximumAmountTickets): self {
-		$this->maximumAmountTickets = $maximumAmountTickets;
-		return $this;
-	}
+        /**
+         * Get the value of maximmumAmountTickets
+         */ 
+        public function getMaximmumAmountTickets()
+        {
+                return $this->maximmumAmountTickets;
+        }
 
-	/**
-	 * @return float
-	 */
-	public function getPrice(): float {
-		return $this->price;
-	}
-	
-	/**
-	 * @param float $price 
-	 * @return self
-	 */
-	public function setPrice(float $price): self {
-		$this->price = $price;
-		return $this;
-	}
+        /**
+         * Set the value of maximmumAmountTickets
+         *
+         * @return  self
+         */ 
+        public function setMaximmumAmountTickets($maximmumAmountTickets)
+        {
+                $this->maximmumAmountTickets = $maximmumAmountTickets;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of price
+         */ 
+        public function getPrice()
+        {
+                return $this->price;
+        }
+
+        /**
+         * Set the value of price
+         *
+         * @return  self
+         */ 
+        public function setPrice($price)
+        {
+                $this->price = $price;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of eventID
+         */ 
+        public function getEventID()
+        {
+                return $this->eventID;
+        }
+
+        /**
+         * Set the value of eventID
+         *
+         * @return  self
+         */ 
+        public function setEventID($eventID)
+        {
+                $this->eventID = $eventID;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of timeSlotID
+         */ 
+        public function getTimeSlotID()
+        {
+                return $this->timeSlotID;
+        }
+
+        /**
+         * Set the value of timeSlotID
+         *
+         * @return  self
+         */ 
+        public function setTimeSlotID($timeSlotID)
+        {
+                $this->timeSlotID = $timeSlotID;
+
+                return $this;
+        }
+\
 }
 
 ?>
