@@ -3,14 +3,15 @@ require_once __DIR__ . '/../models/timeSlot.php';
 require_once __DIR__ . '/../models/hall.php';
 
 
+
 class TimeSlotsJazz extends TimeSlot{
     
         private JazzArtist $artist;
         private JazzLocation $jazzLocation;
         private hall $hall;
 
-
         public function __construct(int $timeSlotID, int $eventID, float $price, string $startTime, string $endTime, int $maximmumAmountTickets, $artist = new JazzArtist(), $jazzLocation = new JazzLocation(), $hall = new Hall()) {
+
             parent::__construct($timeSlotID, $eventID, $price,  DateTime::createFromFormat('Y-m-d H:i:s', $startTime), DateTime::createFromFormat('Y-m-d H:i:s', $endTime), $maximmumAmountTickets);
             $this->artist = $artist;
             $this->jazzLocation = $jazzLocation;

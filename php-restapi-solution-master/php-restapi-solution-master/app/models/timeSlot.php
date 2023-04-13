@@ -7,16 +7,17 @@ class TimeSlot{
         private float $price;
         private DateTime $startTime;
         private DateTime $endTime;
-        private int $maximumAmountTickets;
+        private int $maximmumAmountTickets;
 
-
-        public function __construct(int $timeSlotID, int $eventID, float $price, DateTime $startTime, DateTime $endTime, int $maximumAmountTickets){
-            $this->timeSlotID = $timeSlotID;
-            $this->eventID = $eventID;
-            $this->price = $price;
-            $this->startTime = $startTime;
-            $this->endTime = $endTime;
-            $this->maximumAmountTickets = $maximumAmountTickets;
+        //made all options possible to be null. This is done so the Yummy page doesn't crash. The yummy admin page requires a timeslot that has different variables that are null
+        public function __construct(?int $timeSlotID = null, ?int $eventID = null, ?float $price = null, ?DateTime $startTime = null, ?DateTime $endTime = null, ?int $maximumAmountTickets = null)
+        {
+            $this->timeSlotID = $timeSlotID ?? 0;
+            $this->eventID = $eventID ?? 0;
+            $this->price = $price ?? 0.0;
+            $this->startTime = $startTime ?? new DateTime();
+            $this->endTime = $endTime ?? new DateTime();
+            $this->maximmumAmountTickets = $maximumAmountTickets ?? 0;
         }
 
         /**
@@ -119,21 +120,21 @@ class TimeSlot{
         }
 
         /**
-         * Get the value of maximumAmountTickets
+         * Get the value of maximmumAmountTickets
          */ 
-        public function getMaximumAmountTickets()
+        public function getMaximmumAmountTickets()
         {
-                return $this->maximumAmountTickets;
+                return $this->maximmumAmountTickets;
         }
 
         /**
-         * Set the value of maximumAmountTickets
+         * Set the value of maximmumAmountTickets
          *
          * @return  self
          */ 
-        public function setMaximumAmountTickets($maximumAmountTickets)
+        public function setMaximmumAmountTickets($maximmumAmountTickets)
         {
-                $this->maximumAmountTickets = $maximumAmountTickets;
+                $this->maximmumAmountTickets = $maximmumAmountTickets;
 
                 return $this;
         }
