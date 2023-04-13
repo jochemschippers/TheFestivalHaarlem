@@ -138,7 +138,6 @@ class YummyController extends Controller
             $remark,
             1
         );
-        var_dump($reservation);
 
         // call the createRestaurant method of the YummyService object with the restaurant object as the parameter
         if ($this->yummyService->createReservation($reservation)) {
