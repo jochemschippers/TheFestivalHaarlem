@@ -224,6 +224,7 @@ $grand_total = 0;
                     <thead class="thead">
                         <tr>
                             <th>TicketID</th>
+                            <th>Reservation Name</th>
                             <th>TimeSlotID</th>
                             <th>Number of Guests</th>
                             <th>Total Price</th>
@@ -237,6 +238,9 @@ $grand_total = 0;
                             <tr>
                                 <td>
                                     <?= $restaurantReservation->getTicketID() ?>
+                                </td>
+                                <td>
+                                    <?= $restaurantReservation->getReservationName() ?>
                                 </td>
                                 <td>
                                     <?= $restaurantReservation->getTimeSlotID() ?>
