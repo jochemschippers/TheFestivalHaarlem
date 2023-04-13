@@ -3,7 +3,6 @@ require_once __DIR__ . '/../models/timeSlot.php';
 
 class TimeSlotsYummy extends TimeSlot
 {
-	private int $timeSlotID;
 	private int $restaurantID;
 	
 	public function __construct(
@@ -25,7 +24,6 @@ class TimeSlotsYummy extends TimeSlot
 				$maximumAmountTickets
 			);
 		}
-		$this->timeSlotID = $timeSlotID;
 		$this->restaurantID = $restaurantID;
 	}
 
@@ -46,22 +44,7 @@ class TimeSlotsYummy extends TimeSlot
 		$this->restaurantID = $restaurantID;
 		return $this;
 	}
-
-	/**
-	 * @return int
-	 */
-	public function getTimeSlotID(): int {
-		return $this->timeSlotID;
-	}
 	
-	/**
-	 * @param int $timeSlotID 
-	 * @return self
-	 */
-	public function setTimeSlotID(int $timeSlotID): self {
-		$this->timeSlotID = $timeSlotID;
-		return $this;
-	}
 }
 
 ?>

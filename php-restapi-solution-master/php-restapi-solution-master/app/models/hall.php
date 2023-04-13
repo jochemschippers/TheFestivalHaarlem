@@ -7,7 +7,7 @@ class Hall{
         private string $hallName;
 
 
-        public function __construct(int $hallID, int $locationID, string $hallName){
+        public function __construct(int $hallID = 0, int $locationID = 0, string $hallName = ''){
             $this->hallID = $hallID;
             $this->locationID = $locationID;
             $this->hallName = $hallName;

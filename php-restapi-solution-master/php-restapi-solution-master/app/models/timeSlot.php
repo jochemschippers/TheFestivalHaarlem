@@ -59,26 +59,6 @@ class TimeSlot{
         }
 
         /**
-         * Get the value of maximmumAmountTickets
-         */ 
-        public function getMaximmumAmountTickets()
-        {
-                return $this->maximumAmountTickets;
-        }
-
-        /**
-         * Set the value of maximmumAmountTickets
-         *
-         * @return  self
-         */ 
-        public function setMaximmumAmountTickets($maximmumAmountTickets)
-        {
-                $this->maximumAmountTickets = $maximmumAmountTickets;
-
-                return $this;
-        }
-
-        /**
          * Get the value of price
          */ 
         public function getPrice()
@@ -134,6 +114,26 @@ class TimeSlot{
         public function setTimeSlotID($timeSlotID)
         {
                 $this->timeSlotID = $timeSlotID;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of maximumAmountTickets
+         */ 
+        public function getMaximumAmountTickets()
+        {
+                return $this->maximumAmountTickets;
+        }
+
+        /**
+         * Set the value of maximumAmountTickets
+         *
+         * @return  self
+         */ 
+        public function setMaximumAmountTickets($maximumAmountTickets)
+        {
+                $this->maximumAmountTickets = $maximumAmountTickets;
 
                 return $this;
         }

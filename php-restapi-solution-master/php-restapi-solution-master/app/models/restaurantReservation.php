@@ -4,8 +4,6 @@ require_once __DIR__ . '/../models/timeSlotsYummy.php';
 class Restaurantreservation extends TimeSlotsYummy
 {
     private int $ticketID;
-    private int $timeSlotID;
-    private int $restaurantID;
     private string $reservationName;
     private int $phoneNumber;
     private int $numberAdults;
@@ -29,8 +27,6 @@ class Restaurantreservation extends TimeSlotsYummy
             );
 		}        
         $this->ticketID = $ticketID;
-        $this->timeSlotID = $timeSlotID;
-        $this->restaurantID = $restaurantID;
         $this->reservationName = $reservationName;
         $this->phoneNumber = $phoneNumber;
         $this->numberAdults = $numberAdults;
@@ -164,35 +160,4 @@ class Restaurantreservation extends TimeSlotsYummy
 		return $this;
 	}
 
-	/**
-	 * @return int
-	 */
-	public function getRestaurantID(): int {
-		return $this->restaurantID;
-	}
-	
-	/**
-	 * @param int $restaurantID 
-	 * @return self
-	 */
-	public function setRestaurantID(int $restaurantID): self {
-		$this->restaurantID = $restaurantID;
-		return $this;
-	}
-
-	/**
-	 * @return int
-	 */
-	public function getTimeSlotID(): int {
-		return $this->timeSlotID;
-	}
-	
-	/**
-	 * @param int $timeSlotID 
-	 * @return self
-	 */
-	public function setTimeSlotID(int $timeSlotID): self {
-		$this->timeSlotID = $timeSlotID;
-		return $this;
-	}
 }
