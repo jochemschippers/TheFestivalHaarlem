@@ -105,17 +105,15 @@ class TestController extends Controller
             // END OF YUMMY RESTAURANT CRUD
 
             // YUMMY RESERVATION CRUD
-            if (isset( // pas nog aan
-
+            if (isset(
                 $_POST['createReservationTimeSlotID'],
                 $_POST['createReservationRestaurantID'],
                 $_POST['createReservationName'],
                 $_POST['createReservationPhoneNumber'],
                 $_POST['createReservationNumberAdults'],
                 $_POST['createReservationNumberChildren'],
-                $_POST['createReservationRemark'],
+                $_POST['createReservationRemark']
             )) {
-                var_dump($_POST);
                 if (!$this->createReservation()) {
                     echo "Something went wrong while creating the reservation";
                 }
@@ -282,7 +280,6 @@ class TestController extends Controller
     public function createReservation()
     {
         // check if all the required POST parameters are set
-        var_dump($_POST);
         if (isset(
             $_POST['createReservationTimeSlotID'],
             $_POST['createReservationRestaurantID'],
@@ -316,7 +313,6 @@ class TestController extends Controller
 
     public function editReservation()
     {
-        // var_dump($_POST);
         if (isset(
             $_POST['editReservationTimeSlotID'],
             $_POST['editReservationRestaurantID'],

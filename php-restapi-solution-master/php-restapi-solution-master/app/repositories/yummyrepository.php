@@ -444,21 +444,20 @@ class YummyRepository extends Repository
         try {
             // query
             $stmt = $this->connection->prepare("
-            INSERT INTO `RestaurantReservation`(`ticketID`, `timeSlotID`, `restaurantID`, `reservationName`, `phoneNumber`, `numberAdults`, `numberChildren`, `remark`, `isActive`) 
-            VALUES (?,?,?,?,?,?,?,?,1)
+            INSERT INTO `RestaurantReservation`(`timeSlotID`, `restaurantID`, `reservationName`, `phoneNumber`, `numberAdults`, `numberChildren`, `remark`, `isActive`) 
+            VALUES (?,?,?,?,?,?,?,1)
             ");
             // input
             // Bind the parameter value to the placeholder
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $stmt->execute([
-                $reservation['ticketID'],
-                $reservation['timeSlotId'],
-                $reservation['restaurantId'],
-                $reservation['customerName'],
-                $reservation['phoneNr'],
-                $reservation['nrAdult'],
-                $reservation['nrChild'],
-                $reservation['remark'],
+                $reservation->getTimeSlotID(),
+                $reservation->getRestaurantID(),
+                $reservation->getReservationName(),
+                $reservation->getPhoneNumber(),
+                $reservation->getNumberAdults(),
+                $reservation->getNumberChildren(),
+                $reservation->getRemark(),
                 // Making a reservations is always active(in het begin). So we put bit 1
             ]);
             return true;
