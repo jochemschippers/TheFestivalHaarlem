@@ -8,3 +8,5 @@
     <li class="key"><a href="#">Manage API</a></li>
   </ul>
 </nav>
+<link href="https://unpkg.com/vanilla-datatables@latest/dist/vanilla-dataTables.min.css" rel="stylesheet" type="text/css">
+<script src="https://unpkg.com/vanilla-datatables@latest/dist/vanilla-dataTables.min.js" type="text/javascript"></script>

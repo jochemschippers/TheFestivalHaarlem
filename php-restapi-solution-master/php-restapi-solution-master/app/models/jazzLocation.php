@@ -1,6 +1,6 @@
 <?php
 
-class JazzLocation{
+class JazzLocation implements JsonSerializable{
     
         private int $locationID;
         private string $locationName;
@@ -139,4 +139,14 @@ class JazzLocation{
 
                 return $this;
         }
+        public function jsonSerialize(): array {
+                return [
+                    'locationID' => $this->locationID,
+                    'locationName' => $this->locationName,
+                    'address' => $this->address,
+                    'locationImage' => $this->locationImage,
+                    'toAndFromText' => $this->toAndFromText,
+                    'accesibillityText' => $this->accesibillityText,
+                ];
+            }
 }

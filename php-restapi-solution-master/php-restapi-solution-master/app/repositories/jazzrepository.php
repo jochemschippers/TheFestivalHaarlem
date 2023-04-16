@@ -184,6 +184,37 @@ class JazzRepository extends Repository
                 $artist->getImage(),
                 $artist->getImageSmall()
             ]);
+            $artist->setArtistID($this->connection->lastInsertId());
+            return $artist;
+        } catch (PDOException $e) {
+            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
+        }
+    }
+
+    function checkLocationIDExists($locationID)
+    {
+        try {
+            $stmt = $this->connection->prepare("SELECT locationID FROM JazzLocations WHERE locationID = ?");
+            $stmt->execute([$locationID]);
+            $result = $stmt->fetch();
+
+            return $result !== false;
+        } catch (PDOException $e) {
+            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
+        }
+    }
+    function updateLocation($location)
+    {
+        try {
+            $stmt = $this->connection->prepare("UPDATE JazzLocations SET `locationName` = ?, `address` = ?, `locationImage` = ?, `toAndFromText` = ?, `accessibillityText` = ? WHERE locationID = ?");
+            $stmt->execute([
+                $location->getLocationName(),
+                $location->getAddress(),
+                $location->getLocationImage(),
+                $location->getToAndFromText(),
+                $location->getAccesibillityText(),
+                $location->getLocationID()
+            ]);
         } catch (PDOException $e) {
             throw new ErrorException("It seems something went wrong with our database! Please try again later.");
         }

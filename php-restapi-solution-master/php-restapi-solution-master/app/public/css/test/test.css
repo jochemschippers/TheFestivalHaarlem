@@ -69,7 +69,6 @@ nav[role="navigation"] li a:before {
   font-family: FontAwesome;
   padding-right: 0.6em;
 }
-
 nav[role="navigation"] .dashboard a:before {
   content: "";
 }
@@ -111,7 +110,9 @@ nav[role="navigation"] .key a:before {
 .users .users a {
   background-color: rgba(255, 255, 255, 0.1);
 }
-
+.dataTable-container{
+  max-width: 98%;
+}
 footer[role="contentinfo"] {
   background: slategray;
   color: #ddd;
@@ -170,17 +171,6 @@ main li {
   margin: 0.5em 0;
 }
 
-main li:before {
-  content: "";
-  position: absolute;
-  width: 0;
-  height: 0;
-  left: 0;
-  top: 0.3em;
-  border-left: solid 10px #dde;
-  border-top: solid 5px transparent;
-  border-bottom: solid 5px transparent;
-}
 
 /* forms */
 form input,

@@ -5,13 +5,16 @@
     justify-content: space-between;
     position: sticky;
     background-color: rgba(0, 0, 0, 0.5);
-    z-index: 99999999;
+    z-index: 999;
     width: 100%;
     top: 0;
     left: 0;
     position: fixed;
   }
-
+  .modal-dialog {
+    max-width:50vw !important
+    ;
+  }
   .selected {
     background-color: #ffffff;
     padding: 3px;

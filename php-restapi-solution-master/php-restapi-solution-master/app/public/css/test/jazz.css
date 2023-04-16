@@ -1,8 +1,9 @@
-.table{
-    width: 100%;
-    margin-left: 0px;
-    margin-right: 0px;
+.bg{
+    opacity: 0.05;
+    position: absolute;
+    height: 100%;
+    pointer-events:none;
 }
-.modal{
-    z-index:109999999;
-}
+  .modal-content{
+    overflow: hidden;
+  }

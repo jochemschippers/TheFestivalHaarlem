@@ -1,6 +1,6 @@
 <?php
 
-class Hall{
+class Hall implements JsonSerializable{
     
         private int $hallID;
         private int $locationID;
@@ -72,6 +72,11 @@ class Hall{
 
                 return $this;
         }
+        public function jsonSerialize(): array {
+                return [
+                    'hallID' => $this->hallID,
+                    'locationID' => $this->locationID,
+                    'hallName' => $this->hallName,
+                ];
+            }
 }
-
-?>

@@ -19,7 +19,7 @@
 
   for ($i = 0; $i < count($segmentsOfUrl); $i++) {
     if (!empty($segmentsOfUrl[$i])) {
-      $cssFiles[] = "/css/{$segmentsOfUrl[$i]}/{$segmentsOfUrl[$i]}.css";
+      $cssFiles[] = "/css/{$segmentsOfUrl[0]}/{$segmentsOfUrl[$i]}.css";
     }
   }
 
