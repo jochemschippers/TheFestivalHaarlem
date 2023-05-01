@@ -104,6 +104,17 @@ class JazzService
         }
     }
 
+    public function updateTimeslotJazz($timeSlotJazz)
+    {
+        try {
+            $this->validateTimeSlotData($timeSlotJazz);
+            $this->checkTimeSlotIDExists($timeSlotJazz);
+            return $this->repository->updateTimeSlotJazz($timeSlotJazz);
+        } catch (error $e) {
+            throw $e;
+        }
+    }
+
     private function validateArtistData($artist)
     {
         $this->allowed_extensions = ['png', 'jpg', 'jpeg', 'gif'];
@@ -131,6 +142,13 @@ class JazzService
             throw new ErrorException("The provided artistID does not exist.");
         }
     }
+    private function checkTimeSlotIDExists($timeslot)
+    {
+        if (!$this->repository->checkTimeSlotIDExists($timeslot->getTimeSlotID())) {
+            throw new ErrorException("The provided timeslotID does not exist.");
+        }
+    }
+
 
     private function validateImage($path, $allowed_extensions)
     {
@@ -160,4 +178,28 @@ class JazzService
             throw new ErrorException("Address name must be under 90 characters.");
         }
     }
+    private function checkHallIDExists($hall)
+    {
+        if (!$this->repository->checkHallIDExists($hall->getHallID())) {
+            throw new ErrorException("The provided hallID does not exist.");
+        }
+    }
+    private function validateTimeslotData($timeslot)
+    {
+        $this->checkArtistIDExists($timeslot->getArtist());
+        $this->checkLocationIDExists($timeslot->getJazzLocation());
+        $this->checkHallIDExists($timeslot->getHall());
+
+        if (strlen($timeslot->getPrice()) > 3) {
+            throw new ErrorException("Price must be under 3 characters.");
+        }
+
+        if ($timeslot->getStartTime() >= $timeslot->getEndTime()) {
+            throw new ErrorException("Start time must be earlier than end time.");
+        }
+
+        // Add any additional necessary checks here.
+    }
+
+
 }

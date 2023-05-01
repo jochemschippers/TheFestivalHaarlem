@@ -235,6 +235,34 @@ class JazzRepository extends Repository
             throw new ErrorException("It seems something went wrong with our database! Please try again later.");
         }
     }
+    function checkTimeSlotIDExists($timeSlotID)
+    {
+        try {
+            $stmt = $this->connection->prepare("SELECT J.timeSlotID, eventID 
+            FROM TimeSlotsJazz AS J 
+            INNER JOIN TimeSlots T ON J.timeSlotID = T.timeSlotID 
+            WHERE J.timeSlotID = ? 
+            AND eventID = 1;");
+            $stmt->execute([$timeSlotID]);
+            $result = $stmt->fetch();
+
+            return $result !== false;
+        } catch (PDOException $e) {
+            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
+        }
+    }
+    function checkHallIDExists($hallID)
+    {
+        try {
+            $stmt = $this->connection->prepare("SELECT hallID FROM Halls WHERE hallID = ?");
+            $stmt->execute([$hallID]);
+            $result = $stmt->fetch();
+
+            return $result !== false;
+        } catch (PDOException $e) {
+            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
+        }
+    }
     function updateLocation($location)
     {
         try {
@@ -264,6 +292,31 @@ class JazzRepository extends Repository
             ]);
             $location->setLocationID($this->connection->lastInsertId());
             return $location;
+        } catch (PDOException $e) {
+            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
+        }
+    }
+    function updateTimeSlotJazz($timeslot)
+    {
+        try {
+            // Update TimeSlots table
+            $stmt1 = $this->connection->prepare("UPDATE TimeSlots SET `price` = ?, `startTime` = ?, `endTime` = ?, `maximumAmountTickets` = ? WHERE timeSlotID = ?");
+            $stmt1->execute([
+                $timeslot->getPrice(),
+                $timeslot->getStartTime()->format('Y-m-d H:i:s'),
+                $timeslot->getEndTime()->format('Y-m-d H:i:s'),
+                $timeslot->getMaximumAmountTickets(),
+                $timeslot->getTimeSlotID()
+            ]);
+
+            // Update TimeSlotsJazz table
+            $stmt2 = $this->connection->prepare("UPDATE TimeSlotsJazz SET `artistID` = ?, `locationID` = ?, `hallID` = ? WHERE timeSlotID = ?");
+            $stmt2->execute([
+                $timeslot->getArtist()->getArtistID(),
+                $timeslot->getJazzLocation()->getLocationID(),
+                $timeslot->getHall()->getHallID(),
+                $timeslot->getTimeSlotID()
+            ]);
         } catch (PDOException $e) {
             throw new ErrorException("It seems something went wrong with our database! Please try again later.");
         }

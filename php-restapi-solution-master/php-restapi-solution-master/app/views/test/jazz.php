@@ -199,7 +199,14 @@
                         </tfoot>
                         <tbody>
                             <?php foreach ($timeSlotsJazz as $timeslot) { ?>
-                                <tr data-timeslot-id="<?= htmlspecialchars($timeslot->getTimeSlotID()) ?>" data-artist-name="<?= htmlspecialchars($timeslot->getArtist()->getName()) ?>" data-location-name="<?= htmlspecialchars($timeslot->getJazzLocation()->getLocationName()) ?>" data-hall-name="<?= htmlspecialchars($timeslot->getHall()->getHallName()) ?>" data-price="<?= htmlspecialchars($timeslot->getPrice()) ?>" data-start-time="<?= htmlspecialchars($timeslot->getStartTime()->format('Y-m-d H:i:s')) ?>" data-end-time="<?= htmlspecialchars($timeslot->getEndTime()->format('Y-m-d H:i:s')) ?>" data-max-tickets="<?= htmlspecialchars($timeslot->getMaximumAmountTickets()) ?>">
+                                <tr data-timeslot-id="<?= htmlspecialchars($timeslot->getTimeSlotID()) ?>" 
+                                data-artist-id="<?= htmlspecialchars($timeslot->getArtist()->getArtistID()) ?>" 
+                                data-location-id="<?= htmlspecialchars($timeslot->getJazzLocation()->getLocationID()) ?>" 
+                                data-hall-id="<?= htmlspecialchars($timeslot->getHall()->getHallID()) ?>" 
+                                data-price="<?= htmlspecialchars($timeslot->getPrice()) ?>" 
+                                data-start-time="<?= htmlspecialchars($timeslot->getStartTime()->format('Y-m-d H:i:s')) ?>" 
+                                data-end-time="<?= htmlspecialchars($timeslot->getEndTime()->format('Y-m-d H:i:s')) ?>" 
+                                data-max-tickets="<?= htmlspecialchars($timeslot->getMaximumAmountTickets()) ?>">
                                     <td><?= htmlspecialchars($timeslot->getTimeSlotID()) ?></td>
                                     <td><?= htmlspecialchars($timeslot->getArtist()->getName()) ?></td>
                                     <td><?= htmlspecialchars($timeslot->getJazzLocation()->getLocationName()) ?></td>

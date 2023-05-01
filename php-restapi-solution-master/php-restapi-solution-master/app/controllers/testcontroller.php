@@ -97,6 +97,25 @@ class TestController extends Controller
             $response['message'] = 'Location is successfully created!';
         });
     }
+    public function updateTimeslot() {
+        $this->handleRequest(function($data, &$response) {
+            $timeslot = new timeSlotsJazz(
+                $data["timeslotID"],
+                1, //eventID
+                $data["price"],
+                $data["startTime"],
+                $data["endTime"],
+                $data["maxTickets"],
+                new JazzArtist($data["artistID"]),
+                new JazzLocation($data["locationID"]),
+                new Hall($data["hallID"]),
+
+            );
+            $this->jazzService->updateTimeslotJazz($timeslot);
+            $response['message'] = 'Timeslot is successfully updated!';
+        });
+    }
+
 
     // Yummy -------------------------------------
     // Call yummy info
