@@ -117,7 +117,7 @@
                     <p class="long-term-ticket-text">
                       Can’t choose? You can purchase a week ticket and get <strong>access</strong> to the <strong>whole week</strong>! Get a week ticket for only <strong>€80</strong>!
                     </p>
-                    <button class="line-height longTermTicketButton buttonJazz"><strong>get a week ticket</strong><br> €85</button>
+                    <button class="line-height longTermTicketButton buttonJazz"><strong>get a week ticket</strong><br> €80</button>
                   </div>
 
                   <div class="col-md-9 mt-4">

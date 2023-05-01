@@ -38,6 +38,15 @@ class JazzService
             throw $e;
         }
     }
+    public function getAllHalls()
+    {
+        try {
+            $halls = $this->repository->getAllHalls();
+            return $halls;
+        } catch (error $e) {
+            throw $e;
+        }
+    }
     public function updateArtist($artist)
     {
         try {
@@ -57,6 +66,15 @@ class JazzService
             throw $e;
         }
     }
+    public function deleteLocation($location)
+    {
+        try {
+            $this->checkLocationIDExists($location);
+            $this->repository->deleteLocation($location);
+        } catch (error $e) {
+            throw $e;
+        }
+    }
     public function createArtist($artist)
     {
         try {
@@ -72,6 +90,15 @@ class JazzService
             $this->validateLocationData($location);
             $this->checkLocationIDExists($location);
             return $this->repository->updateLocation($location);
+        } catch (error $e) {
+            throw $e;
+        }
+    }
+    public function createLocation($location)
+    {
+        try {
+            $this->validateLocationData($location);
+            return $this->repository->createLocation($location);
         } catch (error $e) {
             throw $e;
         }

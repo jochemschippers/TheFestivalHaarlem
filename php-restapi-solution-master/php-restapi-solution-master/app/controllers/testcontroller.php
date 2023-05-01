@@ -25,69 +25,23 @@ class TestController extends Controller
         $models = [
             "artists" => $this->jazzService->getAllArtists(),
             "locations" => $this->jazzService->getAllLocations(),
+            "halls" => $this->jazzService->getAllHalls(),
+            "timeSlotsJazz" => $this->jazzService->getAllTimeSlots(),
         ];
         $this->displayView($models);
         include __DIR__ . '/../views/test/adminnav.php';
     }
-    public function updateArtist(){
-        // Read the JSON data from the request body
+    private function handleRequest($action) {
         $json_data = file_get_contents("php://input");
         $data = json_decode($json_data, true);
         $response = array(
             'status' => 1,
-            'message' => 'Artist is successfully updated!'
+            'message' => ''
         );
+    
         if ($data !== null) {
             try {
-                $artist = new JazzArtist($data["artistID"], $data["description"], $data["imagePath"], $data["artistName"], $data["imageSmallPath"]);
-                $this->jazzService->updateArtist($artist);
-            }catch (ErrorException $e) {
-                $response['status'] = 0;
-                $response['message'] = $e->getMessage();
-            }
-        } else {
-            $response['status'] = 0;
-            $response['message'] = "Invalid input data format. Please check the provided data.";
-        }
-
-        echo json_encode($response);
-    }
-    public function deleteArtist(){
-        // Read the JSON data from the request body
-        $json_data = file_get_contents("php://input");
-        $data = json_decode($json_data, true);
-        $response = array(
-            'status' => 1,
-            'message' => 'Artist is successfully deleted!'
-        );
-        if ($data !== null) {
-            try {
-                $artist = new JazzArtist($data["artistID"]);
-                $this->jazzService->DeleteArtist($artist);
-            }catch (ErrorException $e) {
-                $response['status'] = 0;
-                $response['message'] = $e->getMessage();
-            }
-        } else {
-            $response['status'] = 0;
-            $response['message'] = "Invalid input data format. Please check the provided data.";
-        }
-
-        echo json_encode($response);
-    }
-    public function createArtist() {
-        $json_data = file_get_contents("php://input");
-        $data = json_decode($json_data, true);
-        $response = array(
-            'status' => 1,
-            'message' => 'Artist is successfully created!',
-            'artist' => ''
-        );
-        if ($data !== null) {
-            try {
-                //artistID wont be used, so it's 0 for now
-                $artist = new JazzArtist(0, $data["description"], $data["imagePath"], $data["artistName"], $data["imageSmallPath"]);
-                $response['artist'] = $this->jazzService->createArtist($artist);
+                $action($data, $response);
             } catch (ErrorException $e) {
                 $response['status'] = 0;
                 $response['message'] = $e->getMessage();
@@ -99,29 +53,51 @@ class TestController extends Controller
     
         echo json_encode($response);
     }
-    public function updateLocation(){
-        // Read the JSON data from the request body
-        $json_data = file_get_contents("php://input");
-        $data = json_decode($json_data, true);
-        $response = array(
-            'status' => 1,
-            'message' => 'Location is successfully updated!'
-        );
-        if ($data !== null) {
-            try {
-                $location = new JazzLocation($data["locationID"], $data["locationName"], $data["address"], $data["imagePath"], $data["toAndFromText"], $data["accessibilityText"]);
-                $this->jazzService->updateLocation($location);
-            }catch (ErrorException $e) {
-                $response['status'] = 0;
-                $response['message'] = $e->getMessage();
-            }
-        } else {
-            $response['status'] = 0;
-            $response['message'] = "Invalid input data format. Please check the provided data.";
-        }
-
-        echo json_encode($response);
+    public function updateArtist() {
+        $this->handleRequest(function($data, &$response) {
+            $artist = new JazzArtist($data["artistID"], $data["description"], $data["imagePath"], $data["artistName"], $data["imageSmallPath"]);
+            $this->jazzService->updateArtist($artist);
+            $response['message'] = 'Artist is successfully updated!';
+        });
     }
+    public function deleteArtist() {
+        $this->handleRequest(function($data, &$response) {
+            $artist = new JazzArtist($data["artistID"]);
+            $this->jazzService->deleteArtist($artist);
+            $response['message'] = 'Artist is successfully deleted!';
+        });
+    }
+    public function createArtist() {
+        $this->handleRequest(function($data, &$response) {
+            //artistID won't be used, so it's 0 for now
+            $artist = new JazzArtist(0, $data["description"], $data["imagePath"], $data["artistName"], $data["imageSmallPath"]);
+            $response['artist'] = $this->jazzService->createArtist($artist);
+            $response['message'] = 'Artist is successfully created!';
+        });
+    }
+    public function updateLocation() {
+        $this->handleRequest(function($data, &$response) {
+            $location = new JazzLocation($data["locationID"], $data["locationName"], $data["address"], $data["imagePath"], $data["toAndFromText"], $data["accessibilityText"]);
+            $this->jazzService->updateLocation($location);
+            $response['message'] = 'Location is successfully updated!';
+        });
+    }
+    public function deleteLocation() {
+        $this->handleRequest(function($data, &$response) {
+            $location = new JazzLocation($data["locationID"]);
+            $this->jazzService->deleteLocation($location);
+            $response['message'] = 'Location is successfully deleted!';
+        });
+    }
+    public function createLocation() {
+        $this->handleRequest(function($data, &$response) {
+            //artistID won't be used, so it's 0 for now
+            $location = new JazzLocation(0, $data["locationName"], $data["address"], $data["imagePath"], $data["toAndFromText"], $data["accesibillityText"]);
+            $response['location'] = $this->jazzService->createLocation($location);
+            $response['message'] = 'Location is successfully created!';
+        });
+    }
+
     // Yummy -------------------------------------
     // Call yummy info
     public function yummy()

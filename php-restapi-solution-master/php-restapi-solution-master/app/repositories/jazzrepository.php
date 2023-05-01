@@ -138,6 +138,29 @@ class JazzRepository extends Repository
             throw new ErrorException("It seems something went wrong with our database! Please try again later.");
         }
     }
+    function getAllHalls()
+    {
+        try {
+            $stmt = $this->connection->prepare("SELECT hallID,`locationID`,`hallName` FROM Halls");
+
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $stmt->execute();
+            $results = $stmt->fetchAll();
+
+            $halls = [];
+            foreach ($results as $row) {
+                $hall = new Hall(
+                    $row["hallID"],
+                    $row['locationID'],
+                    $row['hallName']
+                );
+                array_push($halls, $hall);
+            }
+            return $halls;
+        } catch (PDOException $e) {
+            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
+        }
+    }
     function checkArtistIDExists($artistID)
     {
         try {
@@ -170,6 +193,15 @@ class JazzRepository extends Repository
         try {
             $stmt = $this->connection->prepare("DELETE FROM `JazzArtists` WHERE artistID = ?");
             $stmt->execute([$artist->getArtistID()]);
+        } catch (PDOException $e) {
+            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
+        }
+    }
+    function deleteLocation($location)
+    {
+        try {
+            $stmt = $this->connection->prepare("DELETE FROM `JazzLocations` WHERE locationID = ?");
+            $stmt->execute([$location->getLocationID()]);
         } catch (PDOException $e) {
             throw new ErrorException("It seems something went wrong with our database! Please try again later.");
         }
@@ -215,6 +247,23 @@ class JazzRepository extends Repository
                 $location->getAccesibillityText(),
                 $location->getLocationID()
             ]);
+        } catch (PDOException $e) {
+            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
+        }
+    }
+    function createLocation($location)
+    {
+        try {
+            $stmt = $this->connection->prepare("INSERT INTO JazzLocations (`locationName`, `address`, `locationImage`, `toAndFromText`, `accessibillityText`) VALUES (?,?,?,?,?)");
+            $stmt->execute([
+                $location->getLocationName(),
+                $location->getAddress(),
+                $location->getLocationImage(),
+                $location->getToAndFromText(),
+                $location->getAccesibillityText(),
+            ]);
+            $location->setLocationID($this->connection->lastInsertId());
+            return $location;
         } catch (PDOException $e) {
             throw new ErrorException("It seems something went wrong with our database! Please try again later.");
         }

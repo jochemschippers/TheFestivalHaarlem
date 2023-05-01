@@ -16,5 +16,5 @@ class Repository {
           } catch(PDOException $e) {
             throw new ErrorException("Wow! something went wrong on our side! please try again later");
           }
-    }       
+    }
 }
