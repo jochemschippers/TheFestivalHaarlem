@@ -1,22 +1,21 @@
 // <<<<<<<<<<-------------- HIER OVERLAY ---------------->>>>>>>>>>>>
 
-function updateSeats(availableSeats, timeSlotID) {
+const radioButtons = document.querySelectorAll('input[type="radio"]');
+radioButtons.forEach(radioButton => {
+    radioButton.addEventListener('click', () => {
+        const maxSeats = radioButton.dataset.maxTickets;
+        updateSeats(maxSeats);
+
+        // Add checked property to selected radio button
+        radioButtons.forEach(rb => {
+            rb.checked = (rb === radioButton);
+        });
+    });
+});
+
+function updateSeats(availableSeats) {
     const seats = document.getElementById("seats");
     seats.textContent = availableSeats;
-    $.ajax({
-        url: 'update_seats.php',
-        type: 'POST',
-        data: {
-            timeSlotID: timeSlotID,
-            availableSeats: availableSeats
-        },
-        success: function(response) {
-            // handle success response
-        },
-        error: function(xhr, status, error) {
-            // handle error response
-        }
-    });
 }
 
 const overlayContainer = document.querySelector('.overlay-container');
@@ -44,7 +43,7 @@ document.addEventListener('mousedown', (event) => {
 const adultInput = document.getElementById("nrAdult");
 const childInput = document.getElementById("nrChild");
 
-adultInput.addEventListener("change", function(event) {
+adultInput.addEventListener("change", function (event) {
     // If the input value is above the max value, set it to the max value
     if (adultInput.value > parseInt(adultInput.max)) {
         adultInput.value = adultInput.max;
@@ -56,7 +55,7 @@ adultInput.addEventListener("change", function(event) {
     updateGroupNr();
 });
 
-childInput.addEventListener("change", function(event) {
+childInput.addEventListener("change", function (event) {
     // If the input value is above the max value, set it to the max value
     if (childInput.value > parseInt(childInput.max)) {
         childInput.value = childInput.max;
@@ -122,3 +121,28 @@ function updatePrice() {
     document.getElementById("price").textContent = totalPrice.toFixed(2);
     document.getElementById("total-price").textContent = totalPrice.toFixed(2);
 }
+
+// Get the success and error message elements
+const successMessage = document.getElementById("successMessage");
+const errorMessage = document.getElementById("errorMessage");
+const errorMsg = document.getElementById("errorMsg");
+
+// Set a timer to hide the success message after 3 seconds
+setTimeout(function() {
+    if (successMessage) {
+        successMessage.style.display = 'none';
+    }
+}, 3000);
+
+// Set a timer to hide the error messages after 5 seconds
+setTimeout(function() {
+    if (errorMessage) {
+        errorMessage.style.display = 'none';
+    }
+    if (errorMsg) {
+        errorMsg.style.display = 'none';
+    }
+}, 5000);
+
+// Display the message
+document.write('<?php echo $message; ?>');

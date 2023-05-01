@@ -21,7 +21,8 @@ class TestController extends Controller
         $this->displayView($models);
         include __DIR__ . '/../views/test/adminnav.php';
     }
-    public function jazz(){
+    public function jazz()
+    {
         $models = [
             "artists" => $this->jazzService->getAllArtists(),
             "locations" => $this->jazzService->getAllLocations(),
@@ -29,7 +30,8 @@ class TestController extends Controller
         $this->displayView($models);
         include __DIR__ . '/../views/test/adminnav.php';
     }
-    public function updateArtist(){
+    public function updateArtist()
+    {
         // Read the JSON data from the request body
         $json_data = file_get_contents("php://input");
         $data = json_decode($json_data, true);
@@ -41,7 +43,7 @@ class TestController extends Controller
             try {
                 $artist = new JazzArtist($data["artistID"], $data["description"], $data["imagePath"], $data["artistName"], $data["imageSmallPath"]);
                 $this->jazzService->updateArtist($artist);
-            }catch (ErrorException $e) {
+            } catch (ErrorException $e) {
                 $response['status'] = 0;
                 $response['message'] = $e->getMessage();
             }
@@ -52,7 +54,8 @@ class TestController extends Controller
 
         echo json_encode($response);
     }
-    public function deleteArtist(){
+    public function deleteArtist()
+    {
         // Read the JSON data from the request body
         $json_data = file_get_contents("php://input");
         $data = json_decode($json_data, true);
@@ -64,7 +67,7 @@ class TestController extends Controller
             try {
                 $artist = new JazzArtist($data["artistID"]);
                 $this->jazzService->DeleteArtist($artist);
-            }catch (ErrorException $e) {
+            } catch (ErrorException $e) {
                 $response['status'] = 0;
                 $response['message'] = $e->getMessage();
             }
@@ -75,7 +78,8 @@ class TestController extends Controller
 
         echo json_encode($response);
     }
-    public function createArtist() {
+    public function createArtist()
+    {
         $json_data = file_get_contents("php://input");
         $data = json_decode($json_data, true);
         $response = array(
@@ -96,10 +100,11 @@ class TestController extends Controller
             $response['status'] = 0;
             $response['message'] = "Invalid input data format. Please check the provided data.";
         }
-    
+
         echo json_encode($response);
     }
-    public function updateLocation(){
+    public function updateLocation()
+    {
         // Read the JSON data from the request body
         $json_data = file_get_contents("php://input");
         $data = json_decode($json_data, true);
@@ -111,7 +116,7 @@ class TestController extends Controller
             try {
                 $location = new JazzLocation($data["locationID"], $data["locationName"], $data["address"], $data["imagePath"], $data["toAndFromText"], $data["accessibilityText"]);
                 $this->jazzService->updateLocation($location);
-            }catch (ErrorException $e) {
+            } catch (ErrorException $e) {
                 $response['status'] = 0;
                 $response['message'] = $e->getMessage();
             }
@@ -126,26 +131,41 @@ class TestController extends Controller
     // Call yummy info
     public function yummy()
     {
+        $this->checkPosts();
+        $models = [
+            "restaurants" => $this->yummyService->getAll(),
+            "images" => $this->yummyService->getAllImages(),
+            "menuItems" => $this->yummyService->getAllMenuItems(),
+            "timeSlotsYummy" => $this->yummyService->getAllTimeSlotsYummy(),
+            "restaurantFoodTypes" => $this->yummyService->getAllRestaurantFoodTypes(),
+            "restaurantReservations" => $this->yummyService->getAllRestaurantReservations(),
 
+        ];
+        $this->displayView($models);
+
+        include __DIR__ . '/../views/test/adminnav.php';
+    }
+    // Yummy Functions
+    private function checkPosts()
+    {
+        // var_dump("checkPosts");
+        // var_dump($_POST);
         if ($_SERVER["REQUEST_METHOD"] === 'POST' && !empty($_POST)) {
-            // var_dump($_POST);
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             // YUMMY RESTAURANT CRUD
-            if (
-                isset(
-                    $_POST['createRestaurantName'],
-                    $_POST['createRestaurantAddress'],
-                    $_POST['createRestaurantContact'],
-                    $_POST['createRestaurantCardDescription'],
-                    $_POST['createRestaurantDescription'],
-                    $_POST['createRestaurantAmountOfStars'],
-                    $_POST['createRestaurantBannerImage'],
-                    $_POST['createRestaurantHeadChef'],
-                    $_POST['createRestaurantAmountSessions'],
-                    $_POST['createRestaurantAdultPrice'],
-                    $_POST['createRestaurantChildPrice']
-                )
-            ) {
+            if (isset(
+                $_POST['createRestaurantName'],
+                $_POST['createRestaurantAddress'],
+                $_POST['createRestaurantContact'],
+                $_POST['createRestaurantCardDescription'],
+                $_POST['createRestaurantDescription'],
+                $_POST['createRestaurantAmountOfStars'],
+                $_POST['createRestaurantBannerImage'],
+                $_POST['createRestaurantHeadChef'],
+                $_POST['createRestaurantAmountSessions'],
+                $_POST['createRestaurantAdultPrice'],
+                $_POST['createRestaurantChildPrice']
+            )) {
                 $this->createRestaurant();
             }
 
@@ -195,7 +215,7 @@ class TestController extends Controller
                 $_POST['editReservationRestaurantID'],
                 $_POST['editReservationName'],
                 $_POST['editReservationPhoneNumber'],
-                $_POST['numberAdults'],
+                $_POST['editReservationNumberAdults'],
                 $_POST['editReservationNumberChildren'],
                 $_POST['editReservationRemark'],
                 $_POST['editReservationTicketID']
@@ -225,20 +245,7 @@ class TestController extends Controller
             // YUMMY MENU ITEM CRUD
             // END OF YUMMY MENU ITEM CRUD
         }
-
-        $models = [
-            "restaurants" => $this->yummyService->getAll(),
-            "images" => $this->yummyService->getAllImages(),
-            "menuItems" => $this->yummyService->getAllMenuItems(),
-            "timeSlotsYummy" => $this->yummyService->getAllTimeSlotsYummy(),
-            "restaurantFoodTypes" => $this->yummyService->getAllRestaurantFoodTypes(),
-            "restaurantReservations" => $this->yummyService->getAllRestaurantReservations(),
-
-        ];
-        $this->displayView($models);
-        include __DIR__ . '/../views/test/adminnav.php';
     }
-    // Yummy Functions
 
     public function getAllRestaurants()
     {
@@ -253,20 +260,20 @@ class TestController extends Controller
     // Yummy Restaurant CRUD
     public function createRestaurant()
     {
-        // check if all the required POST parameters are set
-        if (isset(
-            $_POST['createRestaurantName'],
-            $_POST['createRestaurantAddress'],
-            $_POST['createRestaurantContact'],
-            $_POST['createRestaurantCardDescription'],
-            $_POST['createRestaurantDescription'],
-            $_POST['createRestaurantAmountOfStars'],
-            $_POST['createRestaurantBannerImage'],
-            $_POST['createRestaurantHeadChef'],
-            $_POST['createRestaurantAmountSessions'],
-            $_POST['createRestaurantAdultPrice'],
-            $_POST['createRestaurantChildPrice'],
-        )) {
+        // check if all the required POST parameters are of the same type
+        if (
+            strval($_POST['createRestaurantName']) &&
+            strval($_POST['createRestaurantAddress']) &&
+            strval($_POST['createRestaurantContact']) &&
+            strval($_POST['createRestaurantCardDescription']) &&
+            strval($_POST['createRestaurantDescription']) &&
+            intval($_POST['createRestaurantAmountOfStars']) &&
+            strval($_POST['createRestaurantBannerImage']) &&
+            strval($_POST['createRestaurantHeadChef']) &&
+            strval($_POST['createRestaurantAmountSessions']) &&
+            floatval($_POST['createRestaurantAdultPrice']) &&
+            floatval($_POST['createRestaurantChildPrice'])
+        ) {
 
             // create a new YummyRestaurant object with the required parameters
             $restaurant = new YummyRestaurant(
@@ -294,21 +301,21 @@ class TestController extends Controller
 
     public function updateRestaurant()
     {
-
-        if (isset(
-            $_POST['editRestaurantId'],
-            $_POST['editRestaurantName'],
-            $_POST['editRestaurantAddress'],
-            $_POST['editRestaurantContact'],
-            $_POST['editRestaurantCardDescription'],
-            $_POST['editRestaurantDescription'],
-            $_POST['editRestaurantAmountOfStars'],
-            $_POST['editRestaurantBannerImage'],
-            $_POST['editRestaurantHeadChef'],
-            $_POST['editRestaurantAmountSessions'],
-            $_POST['editRestaurantAdultPrice'],
-            $_POST['editRestaurantChildPrice']
-        )) {
+        // check if all the required POST parameters are of the same type
+        if (
+            intval($_POST['editRestaurantId']) &&
+            strval($_POST['editRestaurantName']) &&
+            strval($_POST['editRestaurantAddress']) &&
+            strval($_POST['editRestaurantContact']) &&
+            strval($_POST['editRestaurantCardDescription']) &&
+            strval($_POST['editRestaurantDescription']) &&
+            intval($_POST['editRestaurantAmountOfStars']) &&
+            strval($_POST['editRestaurantBannerImage']) &&
+            strval($_POST['editRestaurantHeadChef']) &&
+            strval($_POST['editRestaurantAmountSessions']) &&
+            floatval($_POST['editRestaurantAdultPrice']) &&
+            floatval($_POST['editRestaurantChildPrice'])
+        ) {
             $restaurant = new YummyRestaurant(
                 $_POST['editRestaurantId'],
                 $_POST['editRestaurantName'],
@@ -352,15 +359,14 @@ class TestController extends Controller
     public function createReservation()
     {
         // check if all the required POST parameters are set
-        if (isset(
-            $_POST['createReservationTimeSlotID'],
-            $_POST['createReservationRestaurantID'],
-            $_POST['createReservationName'],
-            $_POST['createReservationPhoneNumber'],
-            $_POST['createReservationNumberAdults'],
-            $_POST['createReservationNumberChildren'],
-            $_POST['createReservationRemark'],
-        )) {
+        if (intval($_POST['createReservationTimeSlotID']) &&
+        intval($_POST['createReservationRestaurantID']) &&
+        strval($_POST['createReservationName']) &&
+        intval($_POST['createReservationPhoneNumber']) &&
+        intval($_POST['createReservationNumberAdults']) &&
+        intval($_POST['createReservationNumberChildren']) &&
+        strval($_POST['createReservationRemark']) && $this->checkPhoneNumber($_POST['createReservationPhoneNumber'])
+        ) {
 
             // create a new YummyReservation object with the required parameters
             $reservation = new Restaurantreservation(
@@ -383,25 +389,36 @@ class TestController extends Controller
         }
     }
 
+    private function checkPhoneNumber($phoneNr)
+    {
+        if (preg_match('/^((\+31|0)6[-\s]?[1-9](\d[-\s]?){7})$/', $phoneNr)) {
+            // The input is a valid phone number
+            return true;
+        } else {
+            // The input is not a valid phone number
+            return false;
+        }
+    }
+
     public function editReservation()
     {
-        if (isset(
-            $_POST['editReservationTimeSlotID'],
-            $_POST['editReservationRestaurantID'],
-            $_POST['editReservationName'],
-            $_POST['editReservationPhoneNumber'],
-            $_POST['numberAdults'],
-            $_POST['editReservationNumberChildren'],
-            $_POST['editReservationRemark'],
-            $_POST['editReservationTicketID']
-        )) {
+        if (
+            intval($_POST['editReservationTimeSlotID']) &&
+            intval($_POST['editReservationRestaurantID']) &&
+            strval($_POST['editReservationName']) &&
+            intval($_POST['editReservationPhoneNumber']) &&
+            intval($_POST['editReservationNumberAdults']) &&
+            intval($_POST['editReservationNumberChildren']) &&
+            strval($_POST['editReservationRemark']) &&
+            intval($_POST['editReservationTicketID'])
+        ) {
             $reservation = new Restaurantreservation(
                 $_POST['editReservationTicketID'],
                 $_POST['editReservationTimeSlotID'],
                 $_POST['editReservationRestaurantID'],
                 $_POST['editReservationName'],
                 $_POST['editReservationPhoneNumber'],
-                $_POST['numberAdults'],
+                $_POST['editReservationNumberAdults'],
                 $_POST['editReservationNumberChildren'],
                 $_POST['editReservationRemark'],
                 1
@@ -418,9 +435,9 @@ class TestController extends Controller
 
     private function activateReservation()
     {
-        if (isset(
-            $_POST['activateReservationTicketID']
-        )) {
+        if (
+            intval($_POST['activateReservationTicketID'])
+        ) {
             if ($this->yummyService->activateReservation($_POST['activateReservationTicketID'])) {
                 return true;
             } else {
@@ -432,10 +449,10 @@ class TestController extends Controller
     }
     private function deactivateReservation()
     {
-        if (isset(
-            $_POST['deactivateReservationTicketID']
-        )) {
-            if ($this->yummyService->deactivateReservation($_POST['deactivateReservationTicketID'])) {
+        if (
+            $ticketID = intval($_POST['deactivateReservationTicketID'])
+        ) {
+            if ($this->yummyService->deactivateReservation($ticketID)) {
                 return true;
             } else {
                 return false;

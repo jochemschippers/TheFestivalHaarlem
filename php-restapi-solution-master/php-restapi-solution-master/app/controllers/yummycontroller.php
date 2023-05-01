@@ -19,57 +19,98 @@ class YummyController extends Controller
             "foodTypes" => $this->yummyService->getFoodTypes(),
             "restaurantFoodTypes" => $this->yummyService->getAllRestaurantFoodTypes(),
         ];
-
         $this->displayView($models);
     }
 
     public function restaurant()
-{
-    if ($_SERVER["REQUEST_METHOD"] === 'POST' && !empty($_POST)) {
-        // Sanitize all input fields
-        $inputFields = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-    
-        // Sanitize and validate specific input fields
-        $customerName = filter_var($inputFields['customerName'], FILTER_SANITIZE_SPECIAL_CHARS);
-        $phoneNr = filter_var($inputFields['phoneNr'], FILTER_SANITIZE_SPECIAL_CHARS);
-        $nrAdult = filter_var($inputFields['nrAdult'], FILTER_SANITIZE_NUMBER_INT);
-        $nrChild = filter_var($inputFields['nrChild'], FILTER_SANITIZE_NUMBER_INT);
-        $remark = filter_var($inputFields['remark'], FILTER_SANITIZE_SPECIAL_CHARS);
-        $timeSlot = filter_var($inputFields['btnradio'], FILTER_SANITIZE_NUMBER_INT);
-        $restaurantId = filter_input(INPUT_GET, 'restaurantId', FILTER_SANITIZE_NUMBER_INT);
-        
-        // Check if all required fields are present and valid
-        if ($customerName && $phoneNr && $nrAdult && $nrChild && $remark && $timeSlot && $restaurantId) {
-            // Inputs are valid, create reservation
-            if ($this->createReservation($restaurantId, $timeSlot, $customerName, $phoneNr, $nrAdult, $nrChild, $remark)) {
-                echo "<script>alert('Reservation created successfully!')</script>";
-            } else {
-                echo "<script>alert('Failed to create reservation. Please check your inputs and try again.')</script>";
-            }
+    {
+        if (isset($_GET['restaurantId'])) {
+            // Sanitize the restaurant ID
+            $restaurantId = filter_input(INPUT_GET, 'restaurantId', FILTER_SANITIZE_NUMBER_INT);
+
+            // Get all necessary data for the view
+            $models = [
+                "restaurantId" => $restaurantId,
+                "timeSlots" => $this->yummyService->getAllTimeSlots(),
+                "images" => $this->yummyService->getImages($restaurantId),
+                "restaurant" => $this->yummyService->getOne($restaurantId),
+                "menuItems" => $this->yummyService->getMenuItems($restaurantId),
+                "restaurantFoodTypes" => $this->yummyService->getAllRestaurantFoodTypes(),
+                "restaurantReservations" => $this->yummyService->getAllRestaurantReservations(),
+                "timeSlotsYummy" => $this->yummyService->getRestaurantReservationInfo($restaurantId),
+            ];
+            // Display the view
+            $this->displayView($models);
         } else {
-            // Inputs are not valid, show error message
-            echo "<script>alert('Invalid input fields. Please check your inputs and try again.')</script>";
+            header("Location: /Yummy");
+            exit();
         }
-    } else if (isset($_GET['restaurantId'])) {
-        // Sanitize the restaurant ID
-        $restaurantId = filter_input(INPUT_GET, 'restaurantId', FILTER_SANITIZE_NUMBER_INT);
-        
-        // Get all necessary data for the view
-        $models = [
-            "restaurantId" => $restaurantId,
-            "timeSlots" => $this->yummyService->getAllTimeSlots(),
-            "images" => $this->yummyService->getImages($restaurantId),
-            "restaurant" => $this->yummyService->getOne($restaurantId),
-            "menuItems" => $this->yummyService->getMenuItems($restaurantId),
-            "restaurantFoodTypes" => $this->yummyService->getAllRestaurantFoodTypes(),
-            "restaurantReservations" => $this->yummyService->getAllRestaurantReservations(),
-            "timeSlotsYummy" => $this->yummyService->getRestaurantReservationInfo($restaurantId),
-        ];
-        
-        // Display the view
-        $this->displayView($models);
+        $this->checkPosts();
     }
-}
+
+    private function checkPosts()
+    {
+        if ($_SERVER["REQUEST_METHOD"] === 'POST' && !empty($_POST)) {
+            // Set flag to indicate form submission
+
+            $inputFields = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+            // Sanitize and validate specific input fields
+            $customerName = filter_var($inputFields['customerName'], FILTER_SANITIZE_SPECIAL_CHARS);
+            $phoneNr = filter_var($inputFields['phoneNr'], FILTER_SANITIZE_SPECIAL_CHARS);
+            $nrAdult = filter_var($inputFields['nrAdult'], FILTER_SANITIZE_NUMBER_INT);
+            $nrChild = filter_var($inputFields['nrChild'], FILTER_SANITIZE_NUMBER_INT);
+            $remark = filter_var($inputFields['remark'], FILTER_SANITIZE_SPECIAL_CHARS);
+            $timeSlot = filter_var($inputFields['btnradio'], FILTER_SANITIZE_NUMBER_INT);
+            $restaurantId = filter_input(INPUT_GET, 'restaurantId', FILTER_SANITIZE_NUMBER_INT);
+
+            // Check if all required fields are present and valid
+            if ($customerName && $this->checkPhoneNumber($phoneNr) && $nrAdult && isset($nrChild) && $remark && $timeSlot && $restaurantId) {
+                // Inputs are valid, create reservation
+                if ($this->createReservation($restaurantId, $timeSlot, $customerName, $phoneNr, $nrAdult, $nrChild, $remark)) {
+                    $message = "<h2 class='fixed-bottom text-light bg-success rounded-2 text-center' id='successMessage'>Reservation created successfully!</h2>";
+                } else {
+                    $message = "<h2 class='fixed-bottom text-light bg-danger rounded-2 text-center' id='errorMessage'>Failed to create reservation. Please check your inputs and try again.</h2>";
+                }    
+            } else {
+                // Inputs are not valid, show error message
+                $errorMsg = "Invalid input fields. Please check the following fields:";
+                if (!$customerName) {
+                    $errorMsg .= "- Customer name is invalid";
+                }
+                if (!$this->checkPhoneNumber($phoneNr)) {
+                    $errorMsg .= "- Phone number is invalid";
+                }
+                if (!$nrAdult & $nrAdult > 20) {
+                    $errorMsg .= "- Number of adults is invalid";
+                }
+                if ($nrChild > 20) {
+                    $errorMsg .= "- Number of children is invalid";
+                }
+                if (!$remark) {
+                    $errorMsg .= "- Remark is invalid";
+                }
+                if (!$timeSlot) {
+                    $errorMsg .= "- Time slot is invalid";
+                }
+                if (!$restaurantId) {
+                    $errorMsg .= "- Restaurant ID is invalid";
+                }
+                $message = "<h2 class='fixed-bottom text-light bg-danger rounded-2 text-center' id='errorMsg'>$errorMsg</h2>";
+            }
+        }
+    }
+
+    private function checkPhoneNumber($phoneNr)
+    {
+        if (preg_match('/^((\+31|0)6[-\s]?[1-9](\d[-\s]?){7})$/', $phoneNr)) {
+            // The input is a valid phone number
+            return true;
+        } else {
+            // The input is not a valid phone number
+            return false;
+        }
+    }
 
     public function YummyReservation()
     {
@@ -122,10 +163,8 @@ class YummyController extends Controller
         return $this->yummyService->getAllTimeSlots();
     }
 
-    public function getRestaurantReservationInfo()
+    public function getRestaurantReservationInfo($restaurantId)
     {
-        $restaurantId = $_GET['restaurantId'];
-
         return $this->yummyService->getRestaurantReservationInfo($restaurantId);
     }
 

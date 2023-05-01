@@ -296,7 +296,7 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="editReservationNumberAdults">NumberAdults</label>
-                                                            <input type="text" class="form-control" id="numberAdults" name="numberAdults" form="editReservationForm-<?= $reservation->getTicketID() ?>" value="<?= $reservation->getNumberAdults() ?>" required>
+                                                            <input type="text" class="form-control" id="editReservationNumberAdults" name="editReservationNumberAdults" form="editReservationForm-<?= $reservation->getTicketID() ?>" value="<?= $reservation->getNumberAdults() ?>" required>
                                                         </div>
 
                                                         <div class="form-group">

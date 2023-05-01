@@ -300,32 +300,42 @@
                     <div class="row">
                         <!-- buttons thursday and friday -- for form use btnradio -->
                         <div class="col-md-3">
-
                             <h4><ins>Thursday 26 July</ins></h4>
-                            <?php $i = 1;
-                            for ($j = 0; $j < 3; $j++) { ?>
+                            <?php
+                            $i = 1;
+                            for ($j = 0; $j < 3; $j++) {
+                                $maxSeats = $timeSlotsYummy[$arrayselector]->getMaximumAmountTickets();
+                            ?>
                                 <!-- Display the session date and time with the session number -->
-                                <input type="radio" class="btn-check" name="btnradio" id="btnradio<?= $numberButtons ?>" value="<?= $timeSlotsYummy[$arrayselector]->getTimeSlotID() ?>" onclick="updateSeats(<?= $timeSlots[$arrayselector]->getMaximumAmountTickets() ?>, <?= $timeSlotsYummy[$arrayselector]->getTimeSlotID() ?>)">
-                                <label class="btn btn-outline-primary w-100" for="btnradio<?= $numberButtons ?>"><?= "<b>Session $i: " . $timeSlotsYummy[$arrayselector]->getStartTime()->format('H:i') . "</b>" ?></label><br>
+                                <label class="btn btn-outline-primary w-100">
+                                    <input type="radio" class="btn-check" name="btnradio" value="<?= $timeSlotsYummy[$arrayselector]->getTimeSlotID() ?>" data-max-tickets="<?= $maxSeats ?>">
+                                    <?= "<b>Session $i: " . $timeSlotsYummy[$arrayselector]->getStartTime()->format('H:i') . "</b>" ?>
+                                </label><br>
                             <?php
                                 $numberButtons++;
                                 $arrayselector++;
                                 $i++;
-                            } ?>
-
+                            }
+                            ?>
                         </div>
                         <div class="col-md-3">
                             <h4><ins>Friday 27 July</ins></h4>
-                            <?php $i = 1;
-                            for ($j = 0; $j < 3; $j++) { ?>
+                            <?php
+                            $i = 1;
+                            for ($j = 0; $j < 3; $j++) {
+                                $maxSeats = $timeSlotsYummy[$arrayselector]->getMaximumAmountTickets();
+                            ?>
                                 <!-- Display the session date and time with the session number -->
-                                <input type="radio" class="btn-check" name="btnradio" id="btnradio<?= $numberButtons ?>" value="<?= $timeSlotsYummy[$arrayselector]->getTimeSlotID() ?>" onclick="updateSeats(<?= $timeSlots[$arrayselector]->getMaximumAmountTickets() ?>, <?= $timeSlotsYummy[$arrayselector]->getTimeSlotID() ?>)">
-                                <label class="btn btn-outline-primary w-100" for="btnradio<?= $numberButtons ?>"><?= "<b>Session $i: " . $timeSlotsYummy[$arrayselector]->getStartTime()->format('H:i') . "</b>" ?></label><br>
+                                <label class="btn btn-outline-primary w-100">
+                                    <input type="radio" class="btn-check" name="btnradio" value="<?= $timeSlotsYummy[$arrayselector]->getTimeSlotID() ?>" data-max-tickets="<?= $maxSeats ?>">
+                                    <?= "<b>Session $i: " . $timeSlotsYummy[$arrayselector]->getStartTime()->format('H:i') . "</b>" ?>
+                                </label><br>
                             <?php
                                 $numberButtons++;
                                 $arrayselector++;
                                 $i++;
-                            } ?>
+                            }
+                            ?>
                         </div>
                         <div class="col-md-4">
                             <!-- id = customerName -->
@@ -354,32 +364,42 @@
                     </div>
                     <div class="row">
                         <div class="col-md-3">
-
-                            <!-- buttons saturday and sunday -- id = btnradio...... -- use for form = btnradio -->
                             <h4><ins>Saturday 28 July</ins></h4>
-                            <?php $i = 1;
-                            for ($j = 0; $j < 3; $j++) { ?>
+                            <?php
+                            $i = 1;
+                            for ($j = 0; $j < 3; $j++) {
+                                $maxSeats = $timeSlotsYummy[$arrayselector]->getMaximumAmountTickets();
+                            ?>
                                 <!-- Display the session date and time with the session number -->
-                                <input type="radio" class="btn-check" name="btnradio" id="btnradio<?= $numberButtons ?>" value="<?= $timeSlotsYummy[$arrayselector]->getTimeSlotID() ?>" onclick="updateSeats(<?= $timeSlots[$arrayselector]->getMaximumAmountTickets() ?>, <?= $timeSlotsYummy[$arrayselector]->getTimeSlotID() ?>)">
-                                <label class="btn btn-outline-primary w-100" for="btnradio<?= $numberButtons ?>"><?= "<b>Session $i: " . $timeSlotsYummy[$arrayselector]->getStartTime()->format('H:i') . "</b>" ?></label><br>
+                                <label class="btn btn-outline-primary w-100">
+                                    <input type="radio" class="btn-check" name="btnradio" value="<?= $timeSlotsYummy[$arrayselector]->getTimeSlotID() ?>" data-max-tickets="<?= $maxSeats ?>">
+                                    <?= "<b>Session $i: " . $timeSlotsYummy[$arrayselector]->getStartTime()->format('H:i') . "</b>" ?>
+                                </label><br>
                             <?php
                                 $numberButtons++;
                                 $arrayselector++;
                                 $i++;
-                            } ?>
+                            }
+                            ?>
                         </div>
                         <div class="col-md-3">
                             <h4><ins>Sunday 29 July</ins></h4>
-                            <?php $i = 1;
-                            for ($j = 0; $j < 3; $j++) { ?>
+                            <?php
+                            $i = 1;
+                            for ($j = 0; $j < 3; $j++) {
+                                $maxSeats = $timeSlotsYummy[$arrayselector]->getMaximumAmountTickets();
+                            ?>
                                 <!-- Display the session date and time with the session number -->
-                                <input type="radio" class="btn-check" name="btnradio" id="btnradio<?= $numberButtons ?>" value="<?= $timeSlotsYummy[$arrayselector]->getTimeSlotID() ?>" onclick="updateSeats(<?= $timeSlots[$arrayselector]->getMaximumAmountTickets() ?>, <?= $timeSlotsYummy[$arrayselector]->getTimeSlotID() ?>)">
-                                <label class="btn btn-outline-primary w-100" for="btnradio<?= $numberButtons ?>"><?= "<b>Session $i: " . $timeSlotsYummy[$arrayselector]->getStartTime()->format('H:i') . "</b>" ?></label><br>
+                                <label class="btn btn-outline-primary w-100">
+                                    <input type="radio" class="btn-check" name="btnradio" value="<?= $timeSlotsYummy[$arrayselector]->getTimeSlotID() ?>" data-max-tickets="<?= $maxSeats ?>">
+                                    <?= "<b>Session $i: " . $timeSlotsYummy[$arrayselector]->getStartTime()->format('H:i') . "</b>" ?>
+                                </label><br>
                             <?php
                                 $numberButtons++;
                                 $arrayselector++;
                                 $i++;
-                            } ?>
+                            }
+                            ?>
                         </div>
                         <div class="col-3">
                             <p class="fs-3"><strong><span id="seats">No timeslot selected</span></strong></p>
@@ -442,6 +462,33 @@
             </div>
         </div>
     </div>
-    
+
+    <script>
+    $(document).ready(function() {
+        $("#form").submit(function(event) {
+            // Stop form from submitting normally
+            event.preventDefault();
+
+            // Get form data
+            var formData = $(this).serialize();
+
+            // Send AJAX request
+            $.ajax({
+                url: "reservation.php",
+                type: "POST",
+                data: formData,
+                success: function(data) {
+                    // Display success message
+                    alert("Reservation submitted successfully!");
+                },
+                error: function(xhr, status, error) {
+                    // Display error message
+                    alert("Error: " + error);
+                }
+            });
+        });
+    });
+</script>
+
     <script src="../js/yummy/restaurant.js"></script>
 </body>
