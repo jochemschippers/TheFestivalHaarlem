@@ -464,30 +464,7 @@
     </div>
 
     <script>
-    $(document).ready(function() {
-        $("#form").submit(function(event) {
-            // Stop form from submitting normally
-            event.preventDefault();
-
-            // Get form data
-            var formData = $(this).serialize();
-
-            // Send AJAX request
-            $.ajax({
-                url: "reservation.php",
-                type: "POST",
-                data: formData,
-                success: function(data) {
-                    // Display success message
-                    alert("Reservation submitted successfully!");
-                },
-                error: function(xhr, status, error) {
-                    // Display error message
-                    alert("Error: " + error);
-                }
-            });
-        });
-    });
+    
 </script>
 
     <script src="../js/yummy/restaurant.js"></script>

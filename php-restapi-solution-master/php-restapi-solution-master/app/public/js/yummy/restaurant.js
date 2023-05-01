@@ -108,6 +108,7 @@ cPlusBtn.addEventListener("click", () => {
 });
 // <<<<<<<<---------------- EINDE KNOPPEN ------------------>>>>>>>>>
 
+// <<<<<<<<---------------- HIER PRIJS BEREKENEN -------------->>>>>>>>>
 function updateGroupNr() {
     groupNr = parseInt(adultInput.value) + parseInt(childInput.value);
     document.getElementById("group").textContent = groupNr;
@@ -121,7 +122,36 @@ function updatePrice() {
     document.getElementById("price").textContent = totalPrice.toFixed(2);
     document.getElementById("total-price").textContent = totalPrice.toFixed(2);
 }
+// -------------- EINDE PRIJS BEREKENEN ----------------
 
+// -------------- HIER FORMULIER VALIDATIE -------------
+$(document).ready(function() {
+    $("#form").submit(function(event) {
+        // Stop form from submitting normally
+        event.preventDefault();
+
+        // Get form data
+        var formData = $(this).serialize();
+
+        // Send AJAX request
+        $.ajax({
+            url: "reservation.php",
+            type: "POST",
+            data: formData,
+            success: function(data) {
+                // Display success message
+                alert("Reservation submitted successfully!");
+            },
+            error: function(xhr, status, error) {
+                // Display error message
+                alert("Error: " + error);
+            }
+        });
+    });
+});
+// -------------- EINDE FORMULIER VALIDATIE -------------
+
+// ----------------- HIER DE BERICHTEN ------------------
 // Get the success and error message elements
 const successMessage = document.getElementById("successMessage");
 const errorMessage = document.getElementById("errorMessage");
@@ -146,3 +176,5 @@ setTimeout(function() {
 
 // Display the message
 document.write('<?php echo $message; ?>');
+// ----------------- EINDE BERICHTEN ------------------
+

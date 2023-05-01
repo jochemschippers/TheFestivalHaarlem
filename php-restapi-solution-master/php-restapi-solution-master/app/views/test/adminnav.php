@@ -1,3 +1,10 @@
+<head>
+  <style>
+    nav[role="navigation"] {
+      z-index: -1;
+    }
+  </style>
+</head>
 <nav role='navigation'>
   <ul class="main">
     <li class="dashboard"><a href="/test">Dashboard</a></li>
