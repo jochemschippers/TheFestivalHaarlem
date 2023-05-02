@@ -36,7 +36,11 @@ class TimeSlot implements JsonSerializable
          */
         public function setStartTime($startTime)
         {
-                $this->startTime = $startTime;
+                if(getType($startTime) === 'string'){
+                        $this->startTime = DateTime::createFromFormat('Y-m-d H:i:s', $startTime);
+                }else{
+                        $this->startTime = $startTime;
+                }
 
                 return $this;
         }
@@ -55,8 +59,11 @@ class TimeSlot implements JsonSerializable
          */
         public function setEndTime($endTime)
         {
-                $this->endTime = $endTime;
-
+                if(getType($endTime) === 'string'){
+                        $this->endTime = DateTime::createFromFormat('Y-m-d H:i:s', $endTime);
+                }else{
+                        $this->endTime = $endTime;
+                }
                 return $this;
         }
 

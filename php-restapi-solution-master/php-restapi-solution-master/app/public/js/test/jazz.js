@@ -62,10 +62,10 @@ function updateArtist(row) {
         },
         body: JSON.stringify({
             artistID: document.querySelector('#artistIDInput').value,
-            artistName: document.querySelector('#artistName').value,
+            name: document.querySelector('#artistName').value,
             description: document.querySelector('#descriptionInput').value,
-            imagePath: document.querySelector('#imagePathInput').value,
-            imageSmallPath: document.querySelector('#imageSmallPathInput').value,
+            image: document.querySelector('#imagePathInput').value,
+            imageSmall: document.querySelector('#imageSmallPathInput').value,
         })
     }).then(response => response.json())
         .then(data => {
@@ -116,13 +116,15 @@ function createArtist() {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            artistName: document.querySelector('#artistName').value,
+            artistID: 0,
+            name: document.querySelector('#artistName').value,
             description: document.querySelector('#descriptionInput').value,
-            imagePath: document.querySelector('#imagePathInput').value,
-            imageSmallPath: document.querySelector('#imageSmallPathInput').value,
+            image: document.querySelector('#imagePathInput').value,
+            imageSmall: document.querySelector('#imageSmallPathInput').value,
         })
     }).then(response => response.json())
         .then(data => {
+            console.log(data);
             if (data.status === 1) {
                 addNewRowToArtistsTable({
                     artistID: data["artist"]["artistID"],
@@ -212,7 +214,7 @@ function updateLocation(row) {
             locationID: row.dataset.locationId,
             locationName: document.querySelector('#locationNameInput').value,
             address: document.querySelector('#addressInput').value,
-            imagePath: document.querySelector('#imagePathInput').value,
+            locationImage: document.querySelector('#imagePathInput').value,
             toAndFromText: document.querySelector('#toAndFromText').value,
             accesibillityText: document.querySelector('#toAndFromText').value,
         })
@@ -303,9 +305,10 @@ function createLocation() {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
+            locationID: 0,
             locationName: document.querySelector('#locationNameInput').value,
             address: document.querySelector('#addressInput').value,
-            imagePath: document.querySelector('#imagePathInput').value,
+            locationImage: document.querySelector('#imagePathInput').value,
             toAndFromText: document.querySelector('#toAndFromText').value,
             accesibillityText: document.querySelector('#accesibillityText').value,
         })
@@ -429,60 +432,22 @@ function updateTimeslot(row) {
             alertMessage.classList.remove('d-none');
             alertMessage.value = error.message;
         });
-
-    fetch('/test/updateTimeslot', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(getInputDataTimeSlots(row))
-    }).then(response => response.json())
-        .then(data => {
-            if (data.status === 1) {
-                
-
-                successMessage.classList.remove("d-none");
-                successMessage.innerHTML = data.message;
-                universalModal.hide();
-            }
-            else {
-                showError(data.message);
-            }
-            if (data.status === 1) {
-                alertMessage.classList.remove('alert-danger');
-                alertMessage.classList.add('alert-success');
-            }
-        })
-        .catch(error => {
-            alertMessage.classList.remove('d-none');
-            alertMessage.value = error.message;
-        });
 }
 // helper functions
 function getSelectedOptionText(selectElement) {
     return selectElement.options[selectElement.selectedIndex].innerHTML;
 }
 function getInputDataTimeSlots(row) {
-    const artistSelect = document.querySelector('#artistNameInput');
-    const locationSelect = document.querySelector('#locationNameInput');
-    const hallSelect = document.querySelector('#hallNameInput');
-    const priceInput = document.querySelector('#priceInput');
-    const startTimeInput = document.querySelector('#startTimeInput');
-    const endTimeInput = document.querySelector('#endTimeInput');
-    const maxTicketsInput = document.querySelector('#maxTicketsInput');
-
     return {
         timeslotID: row.dataset.timeslotId,
-        artistID: artistSelect.value,
-        locationID: locationSelect.value,
-        hallID: hallSelect.value,
-        price: priceInput.value,
-        startTime: startTimeInput.value.replace('T', ' ') + ':00',
-        endTime: endTimeInput.value.replace('T', ' ') + ':00',
-        maxTickets: maxTicketsInput.value,
-        artistName: getSelectedOptionText(artistSelect),
-        locationName: getSelectedOptionText(locationSelect),
-        hallName: getSelectedOptionText(hallSelect),
+        eventID: 1,
+        artistID: document.querySelector('#artistNameInput').value,
+        locationID: document.querySelector('#locationNameInput').value,
+        hallID: document.querySelector('#hallNameInput').value,
+        price: document.querySelector('#priceInput').value,
+        startTime: document.querySelector('#startTimeInput').value.replace('T', ' ') + ':00',
+        endTime: document.querySelector('#endTimeInput').value.replace('T', ' ') + ':00',
+        maximumAmountTickets: document.querySelector('#maxTicketsInput').value,
     };
 }
 function handleResponse(data, row, columnProperties) {
@@ -639,16 +604,14 @@ function addNewRowToArtistsTable(data) {
     dataTableArtists.update();
 
     const tableElement = dataTableArtists.table;
-
+    
     const lastRowIndex = tableElement.rows.length - 1;
     const newRow = tableElement.rows[lastRowIndex];
-
     newRow.dataset.artistId = data.artistID;
     newRow.dataset.name = data.artistName;
     newRow.dataset.description = data.description;
     newRow.dataset.image = data.imagePath;
     newRow.dataset.imageSmall = data.imageSmallPath;
-
     goToLastPageArtists();
 }
 function goToLastPageArtists() {
@@ -762,4 +725,3 @@ function updateModalContent(form) {
     dynamicFormModal.innerHTML = '';
     dynamicFormModal.appendChild(form);
 }
-

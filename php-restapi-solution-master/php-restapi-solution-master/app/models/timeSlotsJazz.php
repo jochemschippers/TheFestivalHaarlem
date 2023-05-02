@@ -62,6 +62,39 @@ class TimeSlotsJazz extends TimeSlot implements JsonSerializable
         }
 
         /**
+         * Set the value of artist based on ID
+         *
+         * @return  self
+         */
+        public function setArtistID($artistID)
+        {
+                $this->artist = new JazzArtist($artistID);
+
+                return $this;
+        }
+        /**
+         * Set the value of jazzLocation based on ID
+         *
+         * @return  self
+         */
+        public function setLocationID($jazzLocationID)
+        {
+                $this->jazzLocation = new JazzLocation($jazzLocationID);
+                return $this;
+        }
+
+        /**
+         * Set the value of hall based on ID
+         *
+         * @return  self
+         */
+        public function setHallID($hallID)
+        {
+                $this->hall = new Hall($hallID);
+
+                return $this;
+        }
+        /**
          * Get the value of hall
          */
         public function getHall()
