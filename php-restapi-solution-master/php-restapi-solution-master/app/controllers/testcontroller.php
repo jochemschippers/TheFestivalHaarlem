@@ -78,7 +78,7 @@ class TestController extends Controller
             }
             $expectedType = $argTypes[$index];
             if ($type !== $expectedType) {
-                // Attempt to cast the value to the expected type
+                // Attempt to cast the value to the expected type 
                 $castedValue = null;
                 if ($expectedType === 'integer') {
                     $castedValue = (int) $value;
