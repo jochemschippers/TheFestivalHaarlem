@@ -225,15 +225,6 @@ class TestController extends Controller
 
     public function updateTimeslot()
     {
-    //     int $timeSlotID,
-    // int $eventID,
-    // float $price,
-    // string $startTime,
-    // string $endTime,
-    // int $maximmumAmountTickets,
-    // $artist = new JazzArtist(),
-    // $jazzLocation = new JazzLocation(),
-    // $hall = new Hall()
         $this->handleRequest(function ($data, &$response) {
             $timeslot = $this->validateAndCreateObject(
                 $data,
