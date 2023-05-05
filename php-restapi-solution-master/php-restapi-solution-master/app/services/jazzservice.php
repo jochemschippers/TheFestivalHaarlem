@@ -189,10 +189,10 @@ class JazzService
         $this->checkArtistIDExists($timeslot->getArtist());
         $this->checkLocationIDExists($timeslot->getJazzLocation());
         $this->checkHallIDExists($timeslot->getHall());
-
-        if (strlen($timeslot->getPrice()) > 3) {
-            throw new ErrorException("Price must be under 3 characters.");
+        if (floatval($timeslot->getPrice()) > 150) {
+            throw new ErrorException("Price cannot be higher than 150!");
         }
+
 
         if ($timeslot->getStartTime() >= $timeslot->getEndTime()) {
             throw new ErrorException("Start time must be earlier than end time.");
@@ -200,6 +200,4 @@ class JazzService
 
         // Add any additional necessary checks here.
     }
-
-
 }

@@ -88,6 +88,11 @@ class TestController extends Controller
                 //function will return 'double' since that's how PHP internally represents floating-point numbers. 
                 elseif ($expectedType === 'double') {
                     $castedValue = (float) $value;
+                    //checks if the value is supossed to be 0. If it isn't suposed to be 0, then you want it to make the castedValue invalid. This way it still sends an error if you
+                    //were to send it a give a string
+                    if($value != '0' && $castedValue == 0){
+                        $castedValue = '';
+                    }
                 } elseif ($expectedType === 'object') {
                     $castedValue = $value;
                 } elseif($expectedType === 'dateTime'){

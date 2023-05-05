@@ -7,6 +7,9 @@ const alertMessage = document.getElementById("alert");
 //this is for the alert outside the modal, which should always just give an success.
 const successMessage = document.getElementById("successMessage")
 
+const minDate = '2023-07-26T00:00';
+const maxDate = '2023-07-29T23:59';
+
 let dataTableArtists = new DataTable("#dataTableArtists", {
     searchable: true,
     perPage: 10,
@@ -124,7 +127,6 @@ function createArtist() {
         })
     }).then(response => response.json())
         .then(data => {
-            console.log(data);
             if (data.status === 1) {
                 addNewRowToArtistsTable({
                     artistID: data["artist"]["artistID"],
@@ -143,6 +145,7 @@ function createArtist() {
         })
         .catch(error => {
             showError("Something went wrong! Please try again later");
+            console.log(error.message);
         });
 }
 
@@ -433,6 +436,59 @@ function updateTimeslot(row) {
             alertMessage.value = error.message;
         });
 }
+function configureAddModalTimeSlots(button) {
+    const fields = getTimeSlotsFields(null);
+
+    modalLabel.textContent = 'Add Timeslot';
+    confirmButton.textContent = 'Create';
+    confirmButton.onclick = () => createTimeSlot();
+
+    const form = generateForm(fields);
+    updateModalContent(form);
+}
+
+function createTimeSlot() {
+    fetch('/test/createTimeslot', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            timeslotId: 0,
+            artistId: document.querySelector('#artistNameInput').value,
+            locationId: document.querySelector('#locationNameInput').value,
+            hallId: document.querySelector('#hallNameInput').value,
+            price: document.querySelector('#priceInput').value,
+            startTime: document.querySelector('#startTimeInput').value,
+            endTime: document.querySelector('#endTimeInput').value,
+            maxTickets: document.querySelector('#maxTicketsInput').value,
+        })
+    }).then(response => response.json())
+        .then(data => {
+            if (data.status === 1) {
+                addNewRowToTimeSlotsTable({
+                    timeslotId: data.timeslot.timeslotId,
+                    artistName: data.timeslot.artistName,
+                    locationName: data.timeslot.locationName,
+                    hallName: data.timeslot.hallName,
+                    price: data.timeslot.price,
+                    startTime: data.timeslot.startTime,
+                    endTime: data.timeslot.endTime,
+                    maxTickets: data.timeslot.maxTickets
+                });
+
+                successMessage.classList.remove("d-none");
+                successMessage.innerHTML = data.message;
+                universalModal.hide();
+            }
+            else {
+                showError(data.message);
+            }
+        })
+        .catch(error => {
+            showError(error.message);
+        });
+}
 // helper functions
 function getSelectedOptionText(selectElement) {
     return selectElement.options[selectElement.selectedIndex].innerHTML;
@@ -522,6 +578,9 @@ function openModal(button, modalType) {
     else if (modalType === 'editTimeslot') {
         configureEditModalTimeSlots(button);
     }
+    else if (modalType === 'addTimeslot') {
+        configureAddModalTimeSlots(button);
+    }
 
     universalModal.show();
 }
@@ -546,33 +605,15 @@ function generateForm(fields) {
     return form;
 }
 function createInput(field) {
-    var input;
+    let input;
+
     if (field.type === 'textarea') {
-        input = document.createElement('textarea');
-        if (field.rows) {
-            input.rows = field.rows;
-        }
+        input = createTextareaInput(field);
     } else if (field.type === 'dropdown') {
-        input = document.createElement('select');
-        field.source.activeRows.forEach(row => {
-            const option = document.createElement('option');
-            option.value = row.children[0].textContent;
-            option.text = row.children[1].textContent;
-            if (option.value === field.value) {
-                option.selected = true;
-                if (field.id === "hallNameInput" && field.locationID != row.children[2].textContent) {
-                    console.log(field.locationID);
-                    option.selected = false;
-                }
-            }
-
-            input.add(option);
-        });
+        input = createDropdownInput(field);
     } else {
-        input = document.createElement('input');
-        input.type = field.type;
+        input = createBasicInput(field);
     }
-
 
     input.id = field.id;
     input.className = 'form-control';
@@ -581,12 +622,44 @@ function createInput(field) {
         input.readOnly = true;
     }
 
-    if (field.type !== 'dropdown') {
-        input.value = field.value;
+    return input;
+}
+function createTextareaInput(field) {
+    let input = document.createElement('textarea');
+    if (field.rows) {
+        input.rows = field.rows;
     }
-    if (field.readonly) {
-        input.readOnly = true;
+    input.value = field.value;
+    return input;
+}
+function createDropdownInput(field) {
+    let input = document.createElement('select');
+    field.source.activeRows.forEach(row => {
+        const option = document.createElement('option');
+        option.value = row.children[0].textContent;
+        option.text = row.children[1].textContent;
+        if (option.value === field.value) {
+            option.selected = true;
+            if (field.id === "hallNameInput" && field.locationID != row.children[2].textContent) {
+                console.log(field.locationID);
+                option.selected = false;
+            }
+        }
+        input.add(option);
+    });
+    return input;
+}
+function createBasicInput(field) {
+    let input = document.createElement('input');
+    input.type = field.type;
+
+    if (field.type === 'datetime-local') {
+        input.min = minDate;
+        input.max = maxDate;
+        input.step = '60';
     }
+
+    input.value = field.value;
     return input;
 }
 function addNewRowToArtistsTable(data) {
@@ -600,18 +673,15 @@ function addNewRowToArtistsTable(data) {
         '<button class="btn btn-danger" onclick="openModal(this, \'deleteArtist\')">delete</button>',
     ];
     dataTableArtists.rows().add([newRowData]);
-
     dataTableArtists.update();
 
-    const tableElement = dataTableArtists.table;
-    
-    const lastRowIndex = tableElement.rows.length - 1;
-    const newRow = tableElement.rows[lastRowIndex];
-    newRow.dataset.artistId = data.artistID;
-    newRow.dataset.name = data.artistName;
-    newRow.dataset.description = data.description;
-    newRow.dataset.image = data.imagePath;
-    newRow.dataset.imageSmall = data.imageSmallPath;
+    const lastRowData = dataTableArtists.activeRows[dataTableArtists.activeRows.length - 1];
+
+    lastRowData.dataset.artistId = data.artistID;
+    lastRowData.dataset.name = data.artistName;
+    lastRowData.dataset.description = data.description;
+    lastRowData.dataset.image = data.imagePath;
+    lastRowData.dataset.imageSmall = data.imageSmallPath;
     goToLastPageArtists();
 }
 function goToLastPageArtists() {
@@ -636,16 +706,14 @@ function addNewRowToLocationsTable(data) {
 
     dataTableLocations.update();
 
-    const tableElement = dataTableLocations.table;
-    const lastRowIndex = tableElement.rows.length - 1;
-    const newRow = tableElement.rows[lastRowIndex];
+    const lastRowData = dataTableLocations.activeRows[dataTableArtists.activeRows.length - 1];
 
-    newRow.dataset.locationId = data.locationID;
-    newRow.dataset.locationName = data.locationName;
-    newRow.dataset.address = data.address;
-    newRow.dataset.image = data.imagePath;
-    newRow.dataset.toAndFromText = data.toAndFromText;
-    newRow.dataset.accesibillityText = data.accesibillityText;
+    lastRowData.dataset.locationId = data.locationID;
+    lastRowData.dataset.locationName = data.locationName;
+    lastRowData.dataset.address = data.address;
+    lastRowData.dataset.image = data.imagePath;
+    lastRowData.dataset.toAndFromText = data.toAndFromText;
+    lastRowData.dataset.accesibillityText = data.accesibillityText;
 
     goToLastPageLocations();
 }
@@ -663,25 +731,20 @@ function shortenString(str) {
     return str;
 }
 function getLocationFields(row) {
+    let fields = [];
+    //no need to get a locationID input field for adding a new location, as that will be done with auto increment in the db. means no field for location id required.
     if (row !== null) {
-        return [
-            { id: 'locationIDInput', label: 'Location ID', value: row.dataset.locationId, type: 'text', readonly: true },
-            { id: 'locationNameInput', label: 'Location Name', value: row.dataset.locationName, type: 'text' },
-            { id: 'addressInput', label: 'Address', value: row.dataset.address, type: 'text' },
-            { id: 'imagePathInput', label: 'Image Path', value: row.dataset.image, type: 'text' },
-            { id: 'toAndFromText', label: 'To And From Text', value: row.dataset.toAndFromText, type: 'textarea', rows: 5 },
-            { id: 'accesibillityText', label: 'Accessibility Text', value: row.dataset.accesibillityText, type: 'textarea', rows: 5 }
-        ];
+        fields.push({ id: 'locationIDInput', label: 'Location ID', value: row.dataset.locationId, type: 'text', readonly: true })
     }
-    else {
-        return [
-            { id: 'locationNameInput', label: 'Location Name', value: '', type: 'text' },
-            { id: 'addressInput', label: 'Address', value: '', type: 'text' },
-            { id: 'imagePathInput', label: 'Image Path', value: '', type: 'text' },
-            { id: 'toAndFromText', label: 'To And From Text', value: '', type: 'textarea', rows: 5 },
-            { id: 'accesibillityText', label: 'Accessibility Text', value: '', type: 'textarea', rows: 5 }
-        ];
-    }
+    fields.push(
+        { id: 'locationNameInput', label: 'Location Name', value: row ? row.dataset.locationName : '', type: 'text' },
+        { id: 'addressInput', label: 'Address', value: row ? row.dataset.address : '', type: 'text' },
+        { id: 'imagePathInput', label: 'Image Path', value: row ? row.dataset.image : '', type: 'text' },
+        { id: 'toAndFromText', label: 'To And From Text', value: row ? row.dataset.toAndFromText : '', type: 'textarea', rows: 5 },
+        { id: 'accesibillityText', label: 'Accessibility Text', value: row ? row.dataset.accesibillityText : '', type: 'textarea', rows: 5 }
+    );
+
+    return fields
 }
 function getHallFields(row) {
     if (row !== null) {
@@ -698,28 +761,18 @@ function getHallFields(row) {
     }
 }
 function getTimeSlotsFields(row) {
+    let fields = [];
     if (row !== null) {
-        return [
-            { id: 'timeslotIDInput', label: 'Timeslot ID', value: row.dataset.timeslotId, type: 'text', readonly: true },
-            { id: 'artistNameInput', label: 'Artist Name', value: row.dataset.artistId, type: 'dropdown', source: dataTableArtists },
-            { id: 'locationNameInput', label: 'Location Name', value: row.dataset.locationId, type: 'dropdown', source: dataTableLocations },
-            { id: 'hallNameInput', label: 'Hall Name', value: row.dataset.hallId, type: 'dropdown', source: dataTableHalls, locationID: row.dataset.locationId },
-            { id: 'priceInput', label: 'Price', value: row.dataset.price, type: 'text' },
-            { id: 'startTimeInput', label: 'Start Time', value: row.dataset.startTime, type: 'datetime-local' },
-            { id: 'endTimeInput', label: 'End Time', value: row.dataset.endTime, type: 'datetime-local' },
-            { id: 'maxTicketsInput', label: 'Maximum Tickets', value: row.dataset.maxTickets, type: 'text' }
-        ];
-    } else {
-        return [
-            { id: 'artistNameInput', label: 'Artist Name', value: '', type: 'dropdown', source: dataTableArtists },
-            { id: 'locationNameInput', label: 'Location Name', value: '', type: 'dropdown', source: dataTableLocations },
-            { id: 'hallNameInput', label: 'Hall Name', value: '', type: 'dropdown', source: dataTableHalls },
-            { id: 'priceInput', label: 'Price', value: '', type: 'text' },
-            { id: 'startTimeInput', label: 'Start Time', value: '', type: 'text' },
-            { id: 'endTimeInput', label: 'End Time', value: '', type: 'text' },
-            { id: 'maxTicketsInput', label: 'Maximum Tickets', value: '', type: 'text' }
-        ];
+        fields.push({ id: 'timeslotIDInput', label: 'Timeslot ID', value: row.dataset.timeslotId, type: 'text', readonly: true });
     }
+    fields.push({ id: 'artistNameInput', label: 'Artist Name', value: row ? row.dataset.artistId : '', type: 'dropdown', source: dataTableArtists },
+    { id: 'locationNameInput', label: 'Location Name', value: row ? row.dataset.locationId : '', type: 'dropdown', source: dataTableLocations },
+    { id: 'hallNameInput', label: 'Hall Name', value: row ? row.dataset.hallId : '', type: 'dropdown', source: dataTableHalls, locationID:  row ? row.dataset.locationId : '' },
+    { id: 'priceInput', label: 'Price', value: row ? row.dataset.price : '', type: 'text' },
+    { id: 'startTimeInput', label: 'Start Time', value: row ? row.dataset.startTime : '', type: 'datetime-local' },
+    { id: 'endTimeInput', label: 'End Time', value: row ? row.dataset.endTime : '', type: 'datetime-local' },
+    { id: 'maxTicketsInput', label: 'Maximum Tickets', value: row ? row.dataset.maxTickets : '', type: 'text' });
+    return fields;
 }
 function updateModalContent(form) {
     dynamicFormModal.innerHTML = '';
