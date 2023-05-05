@@ -7,8 +7,8 @@ const alertMessage = document.getElementById("alert");
 //this is for the alert outside the modal, which should always just give an success.
 const successMessage = document.getElementById("successMessage")
 
-const minDate = '2023-07-26T00:00';
-const maxDate = '2023-07-29T23:59';
+const minDate = '2023-07-27T00:00';
+const maxDate = '2023-07-30T23:59';
 
 let dataTableArtists = new DataTable("#dataTableArtists", {
     searchable: true,
@@ -176,11 +176,7 @@ function confirmDeleteArtist(row) {
             if (data.status === 1) {
                 successMessage.classList.remove("d-none");
                 successMessage.innerHTML = data.message;
-                const pageIndex = dataTableArtists.currentPage - 1;
-                var rowIndex = Array.from(dataTableArtists.table.rows).indexOf(row);
-                rowIndex += (dataTableArtists.options.perPage * pageIndex - 1);
-                dataTableArtists.rows().remove(rowIndex);
-                dataTableArtists.update();
+                removeRow(dataTableArtists, row);
                 universalModal.hide();
             }
             else {
@@ -275,15 +271,11 @@ function confirmDeleteLocation(row) {
             if (data.status === 1) {
                 successMessage.classList.remove("d-none");
                 successMessage.innerHTML = data.message;
-                const pageIndex = dataTableLocations.currentPage - 1;
-                var rowIndex = Array.from(dataTableLocations.table.rows).indexOf(row);
-                rowIndex += (dataTableLocations.options.perPage * pageIndex - 1);
-                dataTableLocations.rows().remove(rowIndex);
-                dataTableLocations.update();
+                removeRow(dataTableLocations, row);
                 universalModal.hide();
             }
             else {
-                showError("data.message");
+                showError(data.message);
             }
         })
         .catch(error => {
@@ -318,14 +310,7 @@ function createLocation() {
     }).then(response => response.json())
         .then(data => {
             if (data.status === 1) {
-                addNewRowToLocationsTable({
-                    locationID: data.location.locationID,
-                    locationName: data.location.locationName,
-                    address: data.location.address,
-                    imagePath: data.location.locationImage,
-                    toAndFromText: data.location.toAndFromText,
-                    accesibillityText: data.location.accesibillityText
-                });
+                addNewRowToLocationsTable(data);
 
                 successMessage.classList.remove("d-none");
                 successMessage.innerHTML = data.message;
@@ -338,6 +323,7 @@ function createLocation() {
         .catch(error => {
             showError(error.message);
         });
+
 }
 
 //halls functions
@@ -420,20 +406,55 @@ function updateTimeslot(row) {
                 { datasetKey: 'hallId', value: document.querySelector('#hallNameInput').value },
                 { datasetKey: 'price', value: document.querySelector('#priceInput').value },
                 { datasetKey: 'startTime', value: document.querySelector('#startTimeInput').value },
-                { datasetKey: 'endTime', value: document.querySelector('#endTimeInput').value},
+                { datasetKey: 'endTime', value: document.querySelector('#endTimeInput').value },
                 { datasetKey: 'maxTickets', value: document.querySelector('#maxTicketsInput').value },
                 { columnIndex: 1, value: document.querySelector('#artistNameInput').options[document.querySelector('#artistNameInput').selectedIndex].innerHTML },
                 { columnIndex: 2, value: document.querySelector('#locationNameInput').options[document.querySelector('#locationNameInput').selectedIndex].innerHTML },
                 { columnIndex: 3, value: document.querySelector('#hallNameInput').options[document.querySelector('#hallNameInput').selectedIndex].innerHTML },
                 { columnIndex: 4, value: document.querySelector('#priceInput').value },
-                { columnIndex: 5, value: document.querySelector('#startTimeInput').value},
+                { columnIndex: 5, value: document.querySelector('#startTimeInput').value },
                 { columnIndex: 6, value: document.querySelector('#endTimeInput').value },
-                { columnIndex: 7, value: document.querySelector('#maxTicketsInput').value},
+                { columnIndex: 7, value: document.querySelector('#maxTicketsInput').value },
             ];
-            handleResponse(data, row, columnProperties);})
+            handleResponse(data, row, columnProperties);
+        })
         .catch(error => {
             alertMessage.classList.remove('d-none');
             alertMessage.value = error.message;
+        });
+}
+function configureDeleteModalTimeSlots(button) {
+    modalLabel.textContent = 'Delete Time Slot';
+    confirmButton.textContent = 'Delete';
+    confirmButton.className = 'btn btn-danger';
+    dynamicFormModal.innerHTML = 'Are you <strong>POSITIVE</strong> you want to delete this time slot?';
+    confirmButton.onclick = () => confirmDeleteTimeSlot(button.closest("tr"));
+}
+
+function confirmDeleteTimeSlot(row) {
+    fetch('/test/deleteTimeslot', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            timeSlotID: row.dataset.timeslotId
+        })
+    }).then(response => response.json())
+        .then(data => {
+
+            if (data.status === 1) {
+                successMessage.classList.remove("d-none");
+                successMessage.innerHTML = data.message;
+                removeRow(dataTableTimeSlotsJazz, row);
+                universalModal.hide();
+            }
+            else {
+                showError(data.message);
+            }
+        })
+        .catch(error => {
+            showError("Something went wrong! Please try again later");
         });
 }
 function configureAddModalTimeSlots(button) {
@@ -453,29 +474,11 @@ function createTimeSlot() {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-            timeslotId: 0,
-            artistId: document.querySelector('#artistNameInput').value,
-            locationId: document.querySelector('#locationNameInput').value,
-            hallId: document.querySelector('#hallNameInput').value,
-            price: document.querySelector('#priceInput').value,
-            startTime: document.querySelector('#startTimeInput').value,
-            endTime: document.querySelector('#endTimeInput').value,
-            maxTickets: document.querySelector('#maxTicketsInput').value,
-        })
+        body: JSON.stringify(getInputDataTimeSlots(null))
     }).then(response => response.json())
         .then(data => {
             if (data.status === 1) {
-                addNewRowToTimeSlotsTable({
-                    timeslotId: data.timeslot.timeslotId,
-                    artistName: data.timeslot.artistName,
-                    locationName: data.timeslot.locationName,
-                    hallName: data.timeslot.hallName,
-                    price: data.timeslot.price,
-                    startTime: data.timeslot.startTime,
-                    endTime: data.timeslot.endTime,
-                    maxTickets: data.timeslot.maxTickets
-                });
+                addNewRowToTimeSlotsTable(data);
 
                 successMessage.classList.remove("d-none");
                 successMessage.innerHTML = data.message;
@@ -495,14 +498,14 @@ function getSelectedOptionText(selectElement) {
 }
 function getInputDataTimeSlots(row) {
     return {
-        timeslotID: row.dataset.timeslotId,
-        eventID: 1,
+        timeslotID: row ? row.dataset.timeslotId : 0,
         artistID: document.querySelector('#artistNameInput').value,
+        eventID: 1,
         locationID: document.querySelector('#locationNameInput').value,
         hallID: document.querySelector('#hallNameInput').value,
         price: document.querySelector('#priceInput').value,
-        startTime: document.querySelector('#startTimeInput').value.replace('T', ' ') + ':00',
-        endTime: document.querySelector('#endTimeInput').value.replace('T', ' ') + ':00',
+        startTime: (document.querySelector('#startTimeInput').value.replace('T', ' ')) + ':00',
+        endTime: (document.querySelector('#endTimeInput').value.replace('T', ' ')) + ':00',
         maximumAmountTickets: document.querySelector('#maxTicketsInput').value,
     };
 }
@@ -575,13 +578,15 @@ function openModal(button, modalType) {
     else if (modalType === 'editHall') {
         configureEditModalHalls(button);
     }
-    else if (modalType === 'editTimeslot') {
+    else if (modalType === 'editTimeSlot') {
         configureEditModalTimeSlots(button);
     }
-    else if (modalType === 'addTimeslot') {
+    else if (modalType === 'deleteTimeSlot') {
+        configureDeleteModalTimeSlots(button);
+    }
+    else if (modalType === 'addTimeSlot') {
         configureAddModalTimeSlots(button);
     }
-
     universalModal.show();
 }
 
@@ -682,47 +687,75 @@ function addNewRowToArtistsTable(data) {
     lastRowData.dataset.description = data.description;
     lastRowData.dataset.image = data.imagePath;
     lastRowData.dataset.imageSmall = data.imageSmallPath;
-    goToLastPageArtists();
-}
-function goToLastPageArtists() {
-    // Calculate the last page index
-    const perPage = dataTableArtists.options.perPage;
-    const rowCount = dataTableArtists.data.length;
-    const lastPageIndex = Math.ceil(rowCount / perPage);
-    dataTableArtists.page(lastPageIndex);
+    goToLastPage(dataTableArtists);
 }
 function addNewRowToLocationsTable(data) {
     const newRowData = [
-        data.locationID,
-        data.locationName,
-        data.address,
-        data.imagePath,
-        shortenString(data.toAndFromText),
-        shortenString(data.accesibillityText),
+        data.location.locationID,
+        data.location.locationName,
+        data.location.address,
+        data.location.locationImage,
+        shortenString(data.location.toAndFromText,),
+        shortenString(data.location.accesibillityText),
         '<button class="btn btn-primary" style="margin-right:15px;" onclick="openModal(this, \'editLocation\')">edit</button>',
         '<button class="btn btn-danger" onclick="openModal(this, \'deleteLocation\')">delete</button>',
     ];
     dataTableLocations.rows().add([newRowData]);
 
     dataTableLocations.update();
+    const lastRowData = dataTableLocations.activeRows[dataTableLocations.activeRows.length - 1];
 
-    const lastRowData = dataTableLocations.activeRows[dataTableArtists.activeRows.length - 1];
+    lastRowData.dataset.locationId = data.location.locationID;
+    lastRowData.dataset.locationName = data.location.locationName;
+    lastRowData.dataset.address = data.location.address;
+    lastRowData.dataset.image = data.location.locationImage;
+    lastRowData.dataset.toAndFromText = data.location.toAndFromText;
+    lastRowData.dataset.accesibillityText = data.location.accesibillityText;
 
-    lastRowData.dataset.locationId = data.locationID;
-    lastRowData.dataset.locationName = data.locationName;
-    lastRowData.dataset.address = data.address;
-    lastRowData.dataset.image = data.imagePath;
-    lastRowData.dataset.toAndFromText = data.toAndFromText;
-    lastRowData.dataset.accesibillityText = data.accesibillityText;
-
-    goToLastPageLocations();
+    goToLastPage(dataTableLocations);
 }
-function goToLastPageLocations() {
-    // Calculate the last page index
-    const perPage = dataTableLocations.options.perPage;
-    const rowCount = dataTableLocations.data.length;
+function addNewRowToTimeSlotsTable(data) {
+    const startTime = new Date(data.timeslot.startTime);
+    const endTime = new Date(data.timeslot.endTime);
+
+    const formattedStartTime = startTime.toISOString().slice(0, 19).replace('T', ' ');
+    const formattedEndTime = endTime.toISOString().slice(0, 19).replace('T', ' ');
+
+    const newRowData = [
+        data.timeslot.timeSlotID,
+        data.timeslot.artist.name,
+        data.timeslot.jazzLocation.locationName,
+        data.timeslot.hall.hallName,
+        data.timeslot.price,
+        formattedStartTime,
+        formattedEndTime,
+        data.timeslot.maximumAmountTickets,
+        '<button class="btn btn-primary" style="margin-right:15px;" onclick="openModal(this, \'editTimeSlot\')">edit</button>',
+        '<button class="btn btn-danger" onclick="openModal(this, \'deleteTimeSlot\')">delete</button>',
+    ];
+    console.log(newRowData);
+
+    dataTableTimeSlotsJazz.rows().add([newRowData]);
+    dataTableTimeSlotsJazz.update();
+
+    const lastRowData = dataTableTimeSlotsJazz.activeRows[dataTableTimeSlotsJazz.activeRows.length - 1];
+
+    lastRowData.dataset.timeslotId = data.timeslot.timeSlotID;
+    lastRowData.dataset.artistName = data.timeslot.artist.name;
+    lastRowData.dataset.locationName = data.timeslot.jazzLocation.locationName;
+    lastRowData.dataset.hallName = data.timeslot.hall.hallName;
+    lastRowData.dataset.price = data.timeslot.price;
+    lastRowData.dataset.startTime = formattedStartTime;
+    lastRowData.dataset.endTime = formattedEndTime;
+    lastRowData.dataset.maxTickets = data.timeslot.maximumAmountTickets;
+
+    goToLastPage(dataTableTimeSlotsJazz);
+}
+function goToLastPage(dataTable) {
+    const perPage = dataTable.options.perPage;
+    const rowCount = dataTable.data.length;
     const lastPageIndex = Math.ceil(rowCount / perPage);
-    dataTableLocations.page(lastPageIndex);
+    dataTable.page(lastPageIndex);
 }
 function shortenString(str) {
     if (str.length > 80) {
@@ -741,7 +774,7 @@ function getLocationFields(row) {
         { id: 'addressInput', label: 'Address', value: row ? row.dataset.address : '', type: 'text' },
         { id: 'imagePathInput', label: 'Image Path', value: row ? row.dataset.image : '', type: 'text' },
         { id: 'toAndFromText', label: 'To And From Text', value: row ? row.dataset.toAndFromText : '', type: 'textarea', rows: 5 },
-        { id: 'accesibillityText', label: 'Accessibility Text', value: row ? row.dataset.accesibillityText : '', type: 'textarea', rows: 5 }
+        { id: 'accesibillityText', label: 'Accessibility Text', value: row ? row.dataset.accessibilityText : '', type: 'textarea', rows: 5 }
     );
 
     return fields
@@ -760,18 +793,26 @@ function getHallFields(row) {
         ];
     }
 }
+function removeRow(dataTable, row){
+    const pageIndex = dataTable.currentPage - 1;
+    var rowIndex = Array.from(dataTable.table.rows).indexOf(row);
+    rowIndex += (dataTable.options.perPage * pageIndex - 1);
+    dataTable.rows().remove(rowIndex);
+    dataTable.update();
+}
+
 function getTimeSlotsFields(row) {
     let fields = [];
     if (row !== null) {
         fields.push({ id: 'timeslotIDInput', label: 'Timeslot ID', value: row.dataset.timeslotId, type: 'text', readonly: true });
     }
     fields.push({ id: 'artistNameInput', label: 'Artist Name', value: row ? row.dataset.artistId : '', type: 'dropdown', source: dataTableArtists },
-    { id: 'locationNameInput', label: 'Location Name', value: row ? row.dataset.locationId : '', type: 'dropdown', source: dataTableLocations },
-    { id: 'hallNameInput', label: 'Hall Name', value: row ? row.dataset.hallId : '', type: 'dropdown', source: dataTableHalls, locationID:  row ? row.dataset.locationId : '' },
-    { id: 'priceInput', label: 'Price', value: row ? row.dataset.price : '', type: 'text' },
-    { id: 'startTimeInput', label: 'Start Time', value: row ? row.dataset.startTime : '', type: 'datetime-local' },
-    { id: 'endTimeInput', label: 'End Time', value: row ? row.dataset.endTime : '', type: 'datetime-local' },
-    { id: 'maxTicketsInput', label: 'Maximum Tickets', value: row ? row.dataset.maxTickets : '', type: 'text' });
+        { id: 'locationNameInput', label: 'Location Name', value: row ? row.dataset.locationId : '', type: 'dropdown', source: dataTableLocations },
+        { id: 'hallNameInput', label: 'Hall Name', value: row ? row.dataset.hallId : '', type: 'dropdown', source: dataTableHalls, locationID: row ? row.dataset.locationId : '' },
+        { id: 'priceInput', label: 'Price', value: row ? row.dataset.price : '', type: 'text' },
+        { id: 'startTimeInput', label: 'Start Time', value: row ? row.dataset.startTime : '', type: 'datetime-local' },
+        { id: 'endTimeInput', label: 'End Time', value: row ? row.dataset.endTime : '', type: 'datetime-local' },
+        { id: 'maxTicketsInput', label: 'Maximum Tickets', value: row ? row.dataset.maxTickets : '', type: 'text' });
     return fields;
 }
 function updateModalContent(form) {

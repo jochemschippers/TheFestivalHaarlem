@@ -59,7 +59,7 @@ class TestController extends Controller
     {
         try {
             $constructorArgs = $this->validateObject($data, $constructorArgs, $argTypes);
-            return $this->createObject($className, $constructorArgs, $data, $argTypes);
+            return $this->createObject($className, $constructorArgs, $data);
         } catch (TypeError $e) {
             $response['status'] = 0;
             $response['message'] = $e->getMessage();
@@ -90,19 +90,19 @@ class TestController extends Controller
                     $castedValue = (float) $value;
                     //checks if the value is supossed to be 0. If it isn't suposed to be 0, then you want it to make the castedValue invalid. This way it still sends an error if you
                     //were to send it a give a string
-                    if($value != '0' && $castedValue == 0){
+                    if ($value != '0' && $castedValue == 0) {
                         $castedValue = '';
                     }
                 } elseif ($expectedType === 'object') {
                     $castedValue = $value;
-                } elseif($expectedType === 'dateTime'){
+                } elseif ($expectedType === 'dateTime') {
                     $castedValue = DateTime::createFromFormat('Y-m-d H:i:s', $value);
                 }
                 // Check if the casted value matches the expected type
                 if (gettype($castedValue) === $expectedType) {
                     // Update the value in constructor arguments to the casted value, prevents error in the object creation class
                     $constructorArgs[$index] = $castedValue;
-                }else {
+                } else {
 
                     throw new TypeError("Something went wrong! We expected {$expectedType} for the {$key}, {$type} given. Please check the provided data.");
                 }
@@ -111,7 +111,7 @@ class TestController extends Controller
 
         return $constructorArgs;
     }
-    private function createObject($className, $constructorArgs, $data, $argTypes)
+    private function createObject($className, $constructorArgs, $data)
     {
         $reflection = new ReflectionClass($className);
         $object = $reflection->newInstanceArgs($constructorArgs);
@@ -121,7 +121,7 @@ class TestController extends Controller
                 $setter = 'set' . ucfirst($key);
                 if (method_exists($object, $setter)) {
                     $object->{$setter}($value);
-                }else {
+                } else {
                     throw new TypeError("Invalid property: {$key}. Please check the provided data.");
                 }
             } catch (TypeError $e) {
@@ -236,7 +236,7 @@ class TestController extends Controller
                 'timeSlotsJazz',
                 [
                     $data["timeslotID"],
-                    $data["eventID"],
+                    1,
                     $data["price"],
                     $data["startTime"],
                     $data["endTime"],
@@ -251,6 +251,49 @@ class TestController extends Controller
             if ($timeslot) {
                 $this->jazzService->updateTimeslotJazz($timeslot);
                 $response['message'] = 'Timeslot is successfully updated!';
+            }
+        });
+    }
+    public function createTimeSlot()
+    {
+        $this->handleRequest(function ($data, &$response) {
+
+            $timeslot = $this->validateAndCreateObject(
+                $data,
+                'timeSlotsJazz',
+                [
+                    0,
+                    1,
+                    $data["price"],
+                    $data["startTime"],
+                    $data["endTime"],
+                    $data["maximumAmountTickets"],
+                    new JazzArtist($data["artistID"]),
+                    new JazzLocation($data["locationID"]),
+                    new Hall($data["hallID"]),
+                ],
+                ['integer', 'integer', 'double', 'string', 'string', 'integer', 'object', 'object', 'object'],
+                $response
+            );
+            if ($timeslot) {
+                $response['timeslot'] = $this->jazzService->createTimeSlotJazz($timeslot);
+                $response['message'] = 'Timeslot is successfully created!';
+            }
+        });
+    }
+    public function deleteTimeslot()
+    {
+        $this->handleRequest(function ($data, &$response) {
+            $timeslot = $this->validateAndCreateObject(
+                $data,
+                'timeSlot',
+                [$data["timeSlotID"]],
+                ['integer'],
+                $response
+            );
+            if ($timeslot) {
+                $this->jazzService->deleteTimeslotJazz($timeslot);
+                $response['message'] = 'Timeslot is successfully deleted!';
             }
         });
     }

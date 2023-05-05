@@ -263,6 +263,19 @@ class JazzRepository extends Repository
             throw new ErrorException("It seems something went wrong with our database! Please try again later.");
         }
     }
+
+    function checkHallAndLocationCombiExists($hallID, $locationID)
+    {
+        try {
+            $stmt = $this->connection->prepare("SELECT hallID FROM Halls WHERE hallID = ? AND locationID = ?");
+            $stmt->execute([$hallID, $locationID]);
+            $result = $stmt->fetch();
+
+            return $result !== false;
+        } catch (PDOException $e) {
+            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
+        }
+    }
     function updateLocation($location)
     {
         try {
@@ -317,6 +330,78 @@ class JazzRepository extends Repository
                 $timeslot->getHall()->getHallID(),
                 $timeslot->getTimeSlotID()
             ]);
+        } catch (PDOException $e) {
+            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
+        }
+    }
+    function createAndPopulateTimeSlotJazz($timeslot)
+    {
+        $createdTimeslot = $this->createTimeSlotJazz($timeslot);
+        $populatedTimeslot = $this->getTimeSlotInformation($createdTimeslot);
+        return $populatedTimeslot;
+    }
+    private function createTimeSlotJazz($timeslot)
+    {
+        try {
+            // Insert into TimeSlots table
+            $stmt1 = $this->connection->prepare("INSERT INTO TimeSlots (`price`, `eventID`, `startTime`, `endTime`, `maximumAmountTickets`) VALUES (?,1,?,?,?)");
+            $stmt1->execute([
+                $timeslot->getPrice(),
+                $timeslot->getStartTime()->format('Y-m-d H:i:s'),
+                $timeslot->getEndTime()->format('Y-m-d H:i:s'),
+                $timeslot->getMaximumAmountTickets(),
+            ]);
+
+            $timeslot->setTimeSlotID($this->connection->lastInsertId());
+
+            // Insert into TimeSlotsJazz table
+            $stmt2 = $this->connection->prepare("INSERT INTO TimeSlotsJazz (`timeSlotID`, `artistID`, `locationID`, `hallID`) VALUES (?,?,?,?)");
+            $stmt2->execute([
+                $timeslot->getTimeSlotID(),
+                $timeslot->getArtist()->getArtistID(),
+                $timeslot->getJazzLocation()->getLocationID(),
+                $timeslot->getHall()->getHallID(),
+            ]);
+
+            return $timeslot;
+        } catch (PDOException $e) {
+            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
+        }
+    }
+    private function getTimeSlotInformation($timeslot)
+    {
+        try {
+            $stmt = $this->connection->prepare("
+                SELECT
+                    ja.name AS artistName,
+                    jl.locationName,
+                    h.hallName
+                FROM
+                    TimeSlotsJazz AS tsj
+                INNER JOIN JazzArtists AS ja ON tsj.artistID = ja.artistID
+                INNER JOIN JazzLocations AS jl ON tsj.locationID = jl.locationID
+                INNER JOIN Halls AS h ON tsj.hallID = h.hallID AND h.locationID = jl.locationID
+                WHERE
+                    tsj.timeSlotID = ?
+            ");
+            $stmt->execute([$timeslot->getTimeSlotID()]);
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            $timeslot->getArtist()->setName($result['artistName']);
+            $timeslot->getJazzLocation()->setLocationName($result['locationName']);
+            $timeslot->getHall()->setHallName($result['hallName']);
+
+
+            return $timeslot;
+        } catch (PDOException $e) {
+            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
+        }
+    }
+    function deleteTimeslotJazz($timeslot)
+    {
+        try {
+            $stmt = $this->connection->prepare("DELETE FROM `TimeSlots` WHERE timeSlotID = ?");
+            $stmt->execute([$timeslot->getTimeSlotID()]);
         } catch (PDOException $e) {
             throw new ErrorException("It seems something went wrong with our database! Please try again later.");
         }

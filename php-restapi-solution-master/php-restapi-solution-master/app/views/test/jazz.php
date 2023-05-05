@@ -165,7 +165,7 @@
             <i class="fa fa-table"></i> Jazz TimeSlots data
         </div>
         <div class="card-body">
-            <button class="btn btn-primary" onclick="openModal(this, 'addTimeslot')" id="add-timeslot-button">Add Timeslot</button>
+            <button class="btn btn-primary" onclick="openModal(this, 'addTimeSlot')" id="add-timeslot-button">Add Timeslot</button>
             <div class="table-responsive">
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTableTimeslots">
@@ -216,10 +216,10 @@
                                     <td><?= htmlspecialchars($timeslot->getEndTime()->format('Y-m-d H:i:s')) ?></td>
                                     <td><?= htmlspecialchars($timeslot->getMaximumAmountTickets()) ?></td>
                                     <td>
-                                        <button class="btn btn-primary" style="margin-right:15px;" onclick="openModal(this, 'editTimeslot')">Edit</button>
+                                        <button class="btn btn-primary" style="margin-right:15px;" onclick="openModal(this, 'editTimeSlot')">Edit</button>
                                     </td>
                                     <td>
-                                        <button class="btn btn-danger" onclick="openModal(this, 'deleteTimeslot')">Delete</button>
+                                        <button class="btn btn-danger" onclick="openModal(this, 'deleteTimeSlot')">Delete</button>
                                     </td>
                                 </tr>
                             <?php } ?>
