@@ -2,19 +2,20 @@
 require_once __DIR__ . '/controller.php';
 require_once __DIR__ . '/../services/jazzservice.php';
 require_once __DIR__ . '/../services/yummyservice.php';
+require_once __DIR__ . '/../services/apiservice.php';
 
 class TestController extends Controller
 {
     private $jazzService;
     private $yummyService;
-    private $apikeyService;
+    private $apiService;
 
     // initialize services
     function __construct()
     {
         $this->yummyService = new YummyService();
         $this->jazzService = new JazzService();
-        // $this->apikeyService = new ApikeyService();
+        $this->apiService = new ApiService();
     }
 
     public function index()
@@ -24,13 +25,88 @@ class TestController extends Controller
         $this->displayView($models);
     }
 
-    public function apikeys(){
+    public function api(){
         include_once __DIR__ . '/../views/test/adminnav.php';
         $models = [
-            // "apikeys" => $this->yummyService->getAllApiKeys(),
+            "apis" => $this->apiService->getAll(),
         ];
         $this->displayView($models);
     }
+
+    public function createApi()
+    {
+        $json_data = file_get_contents("php://input");
+        $data = json_decode($json_data, true);
+        $response = array(
+            'status' => 1,
+            'message' => 'Api is successfully created!',
+            'api' => ''
+        );
+        if ($data !== null) {
+            try {
+                //artistID wont be used, so it's 0 for now
+                $api = new Api(0, $data["APIName"], $data["APIKEY"]);
+                $response['api'] = $this->apiService->create($api);
+            } catch (ErrorException $e) {
+                $response['status'] = 0;
+                $response['message'] = $e->getMessage();
+            }
+        } else {
+            $response['status'] = 0;
+            $response['message'] = "Invalid input data format. Please check the provided data.";
+        }
+
+        echo json_encode($response);
+    }
+    public function updateApi()
+    {
+        // Read the JSON data from the request body
+        $json_data = file_get_contents("php://input");
+        $data = json_decode($json_data, true);
+        $response = array(
+            'status' => 1,
+            'message' => 'Api is successfully updated!'
+        );
+        if ($data !== null) {
+            try {
+                $api = new API($data["ApiID"], $data["APIName"], $data["APIKEY"]);
+                $this->apiService->update($api);
+            } catch (ErrorException $e) {
+                $response['status'] = 0;
+                $response['message'] = $e->getMessage();
+            }
+        } else {
+            $response['status'] = 0;
+            $response['message'] = "Invalid input data format. Please check the provided data.";
+        }
+
+        echo json_encode($response);
+    }
+    public function deleteApi()
+    {
+        // Read the JSON data from the request body
+        $json_data = file_get_contents("php://input");
+        $data = json_decode($json_data, true);
+        $response = array(
+            'status' => 1,
+            'message' => 'Api is successfully deleted!'
+        );
+        if ($data !== null) {
+            try {
+                $api = new Api($data["ApiID"]);
+                $this->apiService->Delete($api);
+            } catch (ErrorException $e) {
+                $response['status'] = 0;
+                $response['message'] = $e->getMessage();
+            }
+        } else {
+            $response['status'] = 0;
+            $response['message'] = "Invalid input data format. Please check the provided data.";
+        }
+
+        echo json_encode($response);
+    }
+
     public function jazz()
     {
         include_once __DIR__ . '/../views/test/adminnav.php';

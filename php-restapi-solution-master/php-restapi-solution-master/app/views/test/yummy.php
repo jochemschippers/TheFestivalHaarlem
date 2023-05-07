@@ -110,7 +110,7 @@
                                                         </div>
 
                                                         <input type="hidden" name="editRestaurantId" form="editRestaurant-<?= $restaurant->getRestaurantID() ?>" value="<?= $restaurant->getRestaurantID() ?>">
-                                                        <button type="submit" class="btn btn-primary" id="confirmEditbutton" form="editRestaurant-<?= $restaurant->getRestaurantID() ?>">Restaurant aanpassen</button>
+                                                        <button type="submit" class="btn btn-primary" id="confirmEditbutton" form="editRestaurant-<?= $restaurant->getRestaurantID() ?>">Edit restaurant</button>
                                                     </form>
                                                 </div>
                                                 <div class="modal-footer">
