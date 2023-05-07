@@ -235,7 +235,7 @@ class JazzService
         if ($end > $festivalEnd) {
             throw new ErrorException("End time must be earlier than or equal to the {$festivalEnd->format('jS \o\f F')}");
         }
-        if($start->format('Y-m-d') == $end->format('Y-m-d')){
+        if($start->format('Y-m-d') != $end->format('Y-m-d')){
             throw new ErrorException("Start time and end time must be on the same day!");
         }
     }

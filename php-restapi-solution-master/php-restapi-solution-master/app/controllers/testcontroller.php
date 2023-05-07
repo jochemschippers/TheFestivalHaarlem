@@ -69,6 +69,10 @@ class TestController extends Controller
     private function validateObject($data, $constructorArgs, $argTypes)
     {
         $argKeys = array_keys($data);
+        var_dump($argKeys);
+        var_dump($constructorArgs);
+        var_dump($argTypes);
+
         foreach ($constructorArgs as $index => $value) {
             $type = gettype($value);
             //to catch a warning when the amount of parameters in $argKeys do not allign with amount in $constructorArgs
@@ -103,7 +107,6 @@ class TestController extends Controller
                     // Update the value in constructor arguments to the casted value, prevents error in the object creation class
                     $constructorArgs[$index] = $castedValue;
                 } else {
-
                     throw new TypeError("Something went wrong! We expected {$expectedType} for the {$key}, {$type} given. Please check the provided data.");
                 }
             }
