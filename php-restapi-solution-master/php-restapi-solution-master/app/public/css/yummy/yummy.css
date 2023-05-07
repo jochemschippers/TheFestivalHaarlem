@@ -109,3 +109,51 @@ body {
 .show {
   display: block;
 }
+
+#textArea {
+  height: 283px;
+}
+
+#overview {
+  background-color: #FFF;
+}
+
+#phoneNr {
+  width: 160px !important;
+  margin-left: 0;
+}
+
+/* input buttons */
+.input-group-append {
+  display: flex;
+}
+
+
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+  padding: 5px;
+  text-align: center;
+  width: 50px;
+  border: 1px solid #ced4da;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+#nrAdult {
+  width: 100px;
+}
+
+#nrChild {
+  width: 100px;
+}
+
+.custom-modal-dialog {
+  max-width: 1300px !important;
+  width: 80%;
+}

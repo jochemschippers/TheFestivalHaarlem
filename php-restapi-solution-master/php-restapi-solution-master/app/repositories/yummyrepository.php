@@ -339,6 +339,37 @@ class YummyRepository extends Repository
         }
     }
 
+    public function getAllRestaurantTimeSlotsYummy(){
+        try {
+            // query
+            $stmt = $this->connection->prepare("
+            SELECT s.timeSlotID, r.restaurantID, s.eventID, s.price, s.startTime, s.endTime, s.maximumAmountTickets,
+            r.restaurantID FROM TimeSlots AS s JOIN TimeSlotsYummy AS r ON r.timeSlotID = s.timeSlotID
+            ");
+ //HIER NU FF RESTAURANT ID FIXEN
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $stmt->execute();
+            $results = $stmt->fetchAll();
+
+            $restaurantSlots = [];
+            foreach ($results as $row) {
+                $restaurantSlot = new TimeSlotsYummy(
+                    $row["timeSlotID"],
+                    $row['restaurantID'],
+                    $row['eventID'],
+                    $row['price'],
+                    $row['startTime'],
+                    $row['endTime'],
+                    $row['maximumAmountTickets'],
+                );
+                array_push($restaurantSlots, $restaurantSlot);
+            }
+            return $restaurantSlots;
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+
     public function getRestaurantReservationInfo($restaurantId)
     {
         try {

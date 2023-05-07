@@ -60,6 +60,10 @@ class YummyService
     {
         return $this->repository->getAllTimeSlots();
     }
+    public function getAllRestaurantTimeSlotsYummy()
+    {
+        return $this->repository->getAllRestaurantTimeSlotsYummy();
+    }
     public function getRestaurantReservationInfo($restaurantId)
     {
         // Retrieve data from both models

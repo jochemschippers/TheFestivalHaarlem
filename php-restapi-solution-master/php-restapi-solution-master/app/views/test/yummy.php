@@ -4,7 +4,6 @@
         <div class="card-header">
             <i class="fa fa-table"></i> YummyRestaurant Edit
         </div>
-
         <div class="card-body">
             <div class="table-responsive">
                 <div id="restaurants-table">
@@ -63,7 +62,7 @@
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form method="POST" role="form" id="editRestaurant-<?= $restaurant->getRestaurantID() ?>">
+                                                    <form method="POST" role="form" id="editRestaurant-<?= $restaurant->getRestaurantID() ?>" onsubmit="return checkEditRestaurantForm()">
 
                                                         <div class="form-group">
                                                             <label for="editRestaurantName">Name</label>
@@ -138,7 +137,7 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form role="form" method="post" id="addRestaurantForm" enctype="multipart/form-data">
+                                        <form role="form" method="post" id="addRestaurantForm" enctype="multipart/form-data" onsubmit="return checkAddRestaurantForm()">
                                             <div class="mb-3">
                                                 <label for="createRestaurantName">Restaurant Name</label>
                                                 <input type="text" class="form-control" form="addRestaurantForm" id="createRestaurant-name" name="createRestaurantName" placeholder="Name">
@@ -204,14 +203,11 @@
         </div>
     </div>
 
-
-
     <!-- HIER CRUD RESERVATIONS -->
     <div class="card mb-3 panel important">
         <div class="card-header">
             <i class="fa fa-table"></i> Reservation Edit
         </div>
-
         <div class="card-body">
             <div class="table-responsive">
                 <div id="reservations-table">
@@ -276,7 +272,7 @@
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form method="POST" role="form" id="editReservationForm-<?= $reservation->getTicketID() ?>">
+                                                    <form method="POST" role="form" id="editReservationForm-<?= $reservation->getTicketID() ?>" onsubmit="return checkEditReservationForm(<?=$reservation->getTicketID()?>)">
 
                                                         <div class="form-group">
                                                             <label for="editReservationTimeSlotID">TimeSlotId</label>
@@ -337,7 +333,7 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form role="form" method="post" id="addReservationForm" enctype="multipart/form-data">
+                                        <form role="form" method="post" id="addReservationForm" enctype="multipart/form-data" onsubmit="return checkAddReservationForm()">
 
                                             <div class="mb-3">
                                                 <label for="createReservationTimeSlotID">TimeSlotID</label>
@@ -385,14 +381,11 @@
         </div>
     </div>
 
-
     <!-- HIER CRUD TIMESLOTSYUMMY -->
     <div class="card mb-3 panel important">
         <div class="card-header">
             <i class="fa fa-table"></i> TimeSlotsYummy Edit
         </div>
-
-
         <div class="card">
             <div class="card-body">
                 <div id="timeSlotsYummy-table">
@@ -491,8 +484,6 @@
                                                 <label for="createRestaurantAddress">RestaurantID</label>
                                                 <input type="text" class="form-control" form="addTimeSlotsYummyForm" id="createTimeSLotsYummyID" name="createTimeSLotsYummyID" placeholder="RestaurantID">
                                             </div>
-
-
                                             <div class="d-grid gap-2" id="createButtons">
                                                 <button type="submit" class="btn btn-primary btn-lg" form="addTimeSlotsYummyForm">Create</button>
                                             </div>
@@ -509,11 +500,9 @@
             </div>
         </div>
     </div>
-
     <div id="paginationControls"></div> <!-- houden -->
-
+    
+    <script src="../js/test/yummy.js"></script>
 </main>
-
-
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

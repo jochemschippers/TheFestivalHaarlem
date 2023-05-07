@@ -71,3 +71,8 @@ body {
   #nrChild {
     width: 100px;
   }
+
+  .custom-modal-dialog {
+    max-width: 1300px !important;
+    width: 80%;
+  }

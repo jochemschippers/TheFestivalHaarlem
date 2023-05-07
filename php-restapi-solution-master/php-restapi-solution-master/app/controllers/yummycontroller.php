@@ -14,48 +14,73 @@ class YummyController extends Controller
 
     public function index()
     {
+        $this->checkPosts();
         $models = [
             "restaurants" => $this->yummyService->getAll(),
+            "timeSlots" => $this->yummyService->getAllTimeSlots(),
             "foodTypes" => $this->yummyService->getFoodTypes(),
             "restaurantFoodTypes" => $this->yummyService->getAllRestaurantFoodTypes(),
+            "allTimeSlotsYummy" => $this->yummyService->getAllRestaurantTimeSlotsYummy(),
         ];
         $this->displayView($models);
     }
 
     public function restaurant()
     {
-        if (isset($_GET['restaurantId'])) {
-            // Sanitize the restaurant ID
-            $restaurantId = filter_input(INPUT_GET, 'restaurantId', FILTER_SANITIZE_NUMBER_INT);
+        try {
+            $this->checkPosts();
+            if (isset($_GET['restaurantId'])) {
+                // Sanitize the restaurant ID
+                $restaurantId = filter_input(INPUT_GET, 'restaurantId', FILTER_SANITIZE_NUMBER_INT);
 
-            // Get all necessary data for the view
+                // Get all necessary data for the view
+                $models = [
+                    "restaurantId" => $restaurantId,
+                    "timeSlots" => $this->yummyService->getAllTimeSlots(),
+                    "images" => $this->yummyService->getImages($restaurantId),
+                    "restaurant" => $this->yummyService->getOne($restaurantId),
+                    "menuItems" => $this->yummyService->getMenuItems($restaurantId),
+                    "restaurantFoodTypes" => $this->yummyService->getAllRestaurantFoodTypes(),
+                    "restaurantReservations" => $this->yummyService->getAllRestaurantReservations(),
+                    "timeSlotsYummy" => $this->yummyService->getRestaurantReservationInfo($restaurantId),
+                ];
+                // Display the view
+                $this->displayView($models);
+            } else {
+                header("Location: /Yummy");
+                exit();
+            }
+        } catch (Exception $e) {
+            // Display an error message within the same view
             $models = [
-                "restaurantId" => $restaurantId,
-                "timeSlots" => $this->yummyService->getAllTimeSlots(),
-                "images" => $this->yummyService->getImages($restaurantId),
-                "restaurant" => $this->yummyService->getOne($restaurantId),
-                "menuItems" => $this->yummyService->getMenuItems($restaurantId),
-                "restaurantFoodTypes" => $this->yummyService->getAllRestaurantFoodTypes(),
-                "restaurantReservations" => $this->yummyService->getAllRestaurantReservations(),
-                "timeSlotsYummy" => $this->yummyService->getRestaurantReservationInfo($restaurantId),
+                "errorMessage" => "Error: " . $e->getMessage(),
+                "restaurantId" => $restaurantId, // Pass the restaurant ID to the view
             ];
-            // Display the view
             $this->displayView($models);
-        } else {
-            header("Location: /Yummy");
-            exit();
         }
-        $this->checkPosts();
+    }
+
+
+    public function YummyReservation()
+    {
+        $restaurantId = $_GET['restaurantId'];
+        $models = [
+            "restaurantId" => $restaurantId,
+            "timeSlots" => $this->yummyService->getAllTimeSlots(),
+            "restaurant" => $this->yummyService->getOne($restaurantId),
+            "restaurantReservations" => $this->yummyService->getAllRestaurantReservations(),
+            "timeSlotsYummy" => $this->yummyService->getRestaurantReservationInfo($restaurantId),
+        ];
+
+        $this->displayView($models);
     }
 
     private function checkPosts()
     {
         if ($_SERVER["REQUEST_METHOD"] === 'POST' && !empty($_POST)) {
             // Set flag to indicate form submission
-
-            $inputFields = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-
             // Sanitize and validate specific input fields
+            $inputFields = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $customerName = filter_var($inputFields['customerName'], FILTER_SANITIZE_SPECIAL_CHARS);
             $phoneNr = filter_var($inputFields['phoneNr'], FILTER_SANITIZE_SPECIAL_CHARS);
             $nrAdult = filter_var($inputFields['nrAdult'], FILTER_SANITIZE_NUMBER_INT);
@@ -63,15 +88,18 @@ class YummyController extends Controller
             $remark = filter_var($inputFields['remark'], FILTER_SANITIZE_SPECIAL_CHARS);
             $timeSlot = filter_var($inputFields['btnradio'], FILTER_SANITIZE_NUMBER_INT);
             $restaurantId = filter_input(INPUT_GET, 'restaurantId', FILTER_SANITIZE_NUMBER_INT);
+            if (isset($inputFields['restaurantId'])) {
+                $restaurantId = filter_var($inputFields['restaurantId'], FILTER_SANITIZE_NUMBER_INT);
+            }
 
             // Check if all required fields are present and valid
-            if ($customerName && $this->checkPhoneNumber($phoneNr) && $nrAdult && isset($nrChild) && $remark && $timeSlot && $restaurantId) {
+            if ($customerName && $this->checkPhoneNumber($phoneNr) && $nrAdult && isset($nrChild) && $timeSlot && $restaurantId) {
                 // Inputs are valid, create reservation
                 if ($this->createReservation($restaurantId, $timeSlot, $customerName, $phoneNr, $nrAdult, $nrChild, $remark)) {
                     $message = "<h2 class='fixed-bottom text-light bg-success rounded-2 text-center' id='successMessage'>Reservation created successfully!</h2>";
                 } else {
                     $message = "<h2 class='fixed-bottom text-light bg-danger rounded-2 text-center' id='errorMessage'>Failed to create reservation. Please check your inputs and try again.</h2>";
-                }    
+                }
             } else {
                 // Inputs are not valid, show error message
                 $errorMsg = "Invalid input fields. Please check the following fields:";
@@ -87,7 +115,7 @@ class YummyController extends Controller
                 if ($nrChild > 20) {
                     $errorMsg .= "- Number of children is invalid";
                 }
-                if (!$remark) {
+                if (strlen($remark) > 255) {
                     $errorMsg .= "- Remark is invalid";
                 }
                 if (!$timeSlot) {
@@ -98,6 +126,7 @@ class YummyController extends Controller
                 }
                 $message = "<h2 class='fixed-bottom text-light bg-danger rounded-2 text-center' id='errorMsg'>$errorMsg</h2>";
             }
+            echo $message;
         }
     }
 
@@ -110,17 +139,6 @@ class YummyController extends Controller
             // The input is not a valid phone number
             return false;
         }
-    }
-
-    public function YummyReservation()
-    {
-        $restaurantId = $_GET['restaurantId'];
-        $models = [
-            "restaurantId" => $restaurantId,
-            "restaurant" => $this->yummyService->getOne($restaurantId)
-        ];
-
-        $this->displayView($models);
     }
 
     public function getAll()
@@ -162,6 +180,9 @@ class YummyController extends Controller
         // retrieve data
         return $this->yummyService->getAllTimeSlots();
     }
+    public function getAllRestaurantTimeSlotsYummy(){
+        return $this->yummyService->getAllRestaurantTimeSlotsYummy();
+    }
 
     public function getRestaurantReservationInfo($restaurantId)
     {
@@ -191,3 +212,5 @@ class YummyController extends Controller
         }
     }
 }
+?>
+<script src="../js/yummy/yummyController.js"></script>

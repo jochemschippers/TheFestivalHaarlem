@@ -19,9 +19,16 @@
                     </p>
                 </div>
             </div>
+            <div class="row">
+                <?php foreach ($restaurants as $restaurant) {
+                    $restaurantIDs[] = $restaurant->getRestaurantId();
+                } ?>
+                <a class="btn btn-primary col-6" onclick="getRandomRestaurantId(<?php echo json_encode($restaurantIDs); ?>)">
+                    Surprise me!
+                </a>
+            </div>
         </div>
     </div>
-
 
     <div class="container-fluid">
         <div class="row">
@@ -49,8 +56,8 @@
                             array_push($foodTypeNames, $foodTypeName); // add the foodTypeId to the array
                             // display the label and input element for this type
                     ?>
-                            <input type="radio" class="btn-check" name="btnradio" id="btnradio<?php echo $i ?>" onclick="filterSelection('<?php echo strtolower($type->getFoodTypeName()) ?> ')">
-                            <label class="btn btn-outline-primary" for="btnradio<?php echo $i ?>"><?php echo $type->getFoodTypeName() ?></label>
+                            <input type="radio" class="btn-check" name="btnradio" id="btnradio<?= $i ?>" onclick="filterSelection('<?= strtolower($type->getFoodTypeName()) ?> ')">
+                            <label class="btn btn-outline-primary" for="btnradio<?= $i ?>"><?= $type->getFoodTypeName() ?></label>
                     <?php
                             $i++; // increment $i after displaying the label and input element
                         }
@@ -73,9 +80,9 @@
                             }
                         }
                     ?>
-                        <div class="filterDiv  <?php echo strtolower(trim($foodTypeNames)) ?> col-md-2 ">
+                        <div class="filterDiv  <?= strtolower(trim($foodTypeNames)) ?> col-md-2 ">
                             <div class="card" id="card">
-                                <img src="/image/<?php echo $restaurant->getBannerImage() ?>" class="card-img-top" alt="Logo" id="cardLogo">
+                                <img src="/image/<?= $restaurant->getBannerImage() ?>" class="card-img-top" alt="Logo" id="cardLogo">
                                 <div class="card-body d-flex flex-column" id="cardBody">
                                     <h5 class="card-title"><i>
                                             <?= $restaurant->getRestaurantName() ?>
@@ -87,87 +94,210 @@
                                             <?= $restaurant->getCardDescription() ?>
                                         </i></p>
 
-                                    <a class="btn btn-primary mt-auto" onclick="getRestaurantId(<?php echo $restaurant->getRestaurantId(); ?>)">Menu and
+                                    <a class="btn btn-primary mt-auto" onclick="getRestaurantId(<?= $restaurant->getRestaurantId(); ?>)">Menu and
                                         info</a>
-
-                                    <script>
-                                        function getRestaurantId(restaurantId) {
-                                            // Do something with the restaurantId variable
-                                            console.log('Restaurant ID:', restaurantId);
-
-                                            // Redirect to the restaurant page with the restaurantId variable as a query parameter
-                                            window.location.href = '/yummy/restaurant?restaurantId=' + restaurantId;
-                                        }
-                                    </script>
-
-                                    <a href="#" class="btn btn-primary">Make your reservation</a>
+                                    <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reservationModal-<?= $restaurant->getRestaurantId() ?>">Make your reservation</a>
                                 </div>
                             </div>
                         </div>
+                        <!-- start of modal -->
+                        <div class="modal fade" id="reservationModal-<?= $restaurant->getRestaurantId() ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog custom-modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+
+                                        <?php
+                                        $timeSlotsYummy = array();
+                                        foreach ($allTimeSlotsYummy as $timeSlot) {
+                                            if ($timeSlot->getRestaurantID() == $restaurant->getRestaurantId()) {
+                                                $timeSlotsYummy[] = $timeSlot;
+                                            }
+                                        }
+                                        ?>
+                                        <form id="form" method="POST" onsubmit="return checkForm()">
+
+                                            <?php $arrayselector = 0 ?>
+                                            <?php $numberButtons = 1; ?>
+
+                                            <div class="row text-center">
+                                                <h2>Make a reservation for:
+                                                    <?= $restaurant->getRestaurantName() ?>
+                                                </h2>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <h4>Select your arrival date and time</h4>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <h4>Your reservation details</h4>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <!-- buttons thursday and friday -- for form use btnradio -->
+                                                <div class="col-md-3">
+                                                    <h5><ins>Thursday 26 July</ins></h5>
+                                                    <?php
+                                                    $i = 1;
+                                                    for ($j = 0; $j < 3; $j++) {
+                                                        $maxSeats = $timeSlotsYummy[$arrayselector]->getMaximumAmountTickets();
+                                                    ?>
+                                                        <!-- Display the session date and time with the session number -->
+                                                        <label class="btn btn-outline-primary w-100">
+                                                            <input type="radio" class="btn-check" name="btnradio" value="<?= $timeSlotsYummy[$arrayselector]->getTimeSlotID() ?>" data-max-tickets="<?= $maxSeats ?>">
+                                                            <?= "<b>Session $i: " . $timeSlotsYummy[$arrayselector]->getStartTime()->format('H:i') . "</b>" ?>
+                                                        </label><br>
+                                                    <?php
+                                                        $numberButtons++;
+                                                        $arrayselector++;
+                                                        $i++;
+                                                    }
+                                                    ?>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <h5><ins>Friday 27 July</ins></h5>
+                                                    <?php
+                                                    $i = 1;
+                                                    for ($j = 0; $j < 3; $j++) {
+                                                        $maxSeats = $timeSlotsYummy[$arrayselector]->getMaximumAmountTickets();
+                                                    ?>
+                                                        <!-- Display the session date and time with the session number -->
+                                                        <label class="btn btn-outline-primary w-100">
+                                                            <input type="radio" class="btn-check" name="btnradio" value="<?= $timeSlotsYummy[$arrayselector]->getTimeSlotID() ?>" data-max-tickets="<?= $maxSeats ?>">
+                                                            <?= "<b>Session $i: " . $timeSlotsYummy[$arrayselector]->getStartTime()->format('H:i') . "</b>" ?>
+                                                        </label><br>
+                                                    <?php
+                                                        $numberButtons++;
+                                                        $arrayselector++;
+                                                        $i++;
+                                                    }
+                                                    ?>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <!-- id = customerName -->
+                                                    <label for="customerName">
+                                                        <h5>Name on reservation</h5>
+                                                    </label>
+                                                    <input class="form-control" id="customerName" name="customerName" type="text" placeholder="Enter name" required>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <!-- id = phoneNr -->
+                                                    <label for="phoneNr">
+                                                        <h5>Phone number</h5>
+                                                    </label>
+                                                    <input class="form-control" id="phoneNr" name="phoneNr" type="tel" placeholder="00 123456789" required>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <h4>Available seats</h4>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <h4>Group size</h4>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <h5><ins>Saturday 28 July</ins></h5>
+                                                    <?php
+                                                    $i = 1;
+                                                    for ($j = 0; $j < 3; $j++) {
+                                                        $maxSeats = $timeSlotsYummy[$arrayselector]->getMaximumAmountTickets();
+                                                    ?>
+                                                        <!-- Display the session date and time with the session number -->
+                                                        <label class="btn btn-outline-primary w-100">
+                                                            <input type="radio" class="btn-check" name="btnradio" value="<?= $timeSlotsYummy[$arrayselector]->getTimeSlotID() ?>" data-max-tickets="<?= $maxSeats ?>">
+                                                            <?= "<b>Session $i: " . $timeSlotsYummy[$arrayselector]->getStartTime()->format('H:i') . "</b>" ?>
+                                                        </label><br>
+                                                    <?php
+                                                        $numberButtons++;
+                                                        $arrayselector++;
+                                                        $i++;
+                                                    }
+                                                    ?>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <h5><ins>Sunday 29 July</ins></h5>
+                                                    <?php
+                                                    $i = 1;
+                                                    for ($j = 0; $j < 3; $j++) {
+                                                        $maxSeats = $timeSlotsYummy[$arrayselector]->getMaximumAmountTickets();
+                                                    ?>
+                                                        <!-- Display the session date and time with the session number -->
+                                                        <label class="btn btn-outline-primary w-100">
+                                                            <input type="radio" class="btn-check" name="btnradio" value="<?= $timeSlotsYummy[$arrayselector]->getTimeSlotID() ?>" data-max-tickets="<?= $maxSeats ?>">
+                                                            <?= "<b>Session $i: " . $timeSlotsYummy[$arrayselector]->getStartTime()->format('H:i') . "</b>" ?>
+                                                        </label><br>
+                                                    <?php
+                                                        $numberButtons++;
+                                                        $arrayselector++;
+                                                        $i++;
+                                                    }
+                                                    ?>
+                                                </div>
+                                                <div class="col-3">
+                                                    <p class="fs-3"><strong><span id="seats">No timeslot selected</span></strong></p>
+                                                </div>
+                                                <div class="col-3">
+                                                    <h5>Number of adults</h5>
+                                                    <div class="input-group">
+                                                        <button class="btn btn-outline-secondary Aminus-btn minusButton" type="button">-</button>
+                                                        <input class="aInputNumber" type="number" id="nrAdult" name="nrAdult" value="1" min="1" max="20">
+                                                        <button class="btn btn-outline-secondary Aplus-btn plusButton" type="button">+</button>
+                                                        <h5>Number of children (-12)</h5>
+                                                        <button class="btn btn-outline-secondary Cminus-btn minusButton" type="button">-</button>
+                                                        <input class="cInputNumber" type="number" id="nrChild" name="nrChild" value="0" min="0" max="20">
+                                                        <button class="btn btn-outline-secondary Cplus-btn plusButton" type="button">+</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <br><br>
+                                                    <h5>Any special requests or allergies? Enter them below.</h5>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <br><br>
+                                                    <h5>Details</h5>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <textarea class="form-control" id="remark" name="remark" rows="3"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="border" id="overview">
+                                                        <p>Number of adults: <span id="adults">1</span></p>
+                                                        <p>Number Children: <span id="children">0</span></p>
+                                                        <p>Reservation fee* (<span id="group">1</span>): €<span id="price">10.00</span></p>
+                                                        <hr>
+                                                        <p>Total price: €<span id="total-price">10.00</span></p>
+                                                    </div>
+                                                    <p>*A reservation fee of €10,- pp. will be administerred.<br>
+                                                        This fee will be deducted from the final check on visiting the restaurant.
+                                                    </p>
+                                                    <input type="hidden" name="restaurantId" id="restaurantId" value="<?= $restaurant->getRestaurantId() ?>">
+                                                    <button class="btn btn-primary" type="submit" for="form">Continue</button>
+                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end of modal -->
                     <?php }
                     $foodTypesList = array();
                     foreach ($restaurantFoodTypes as $foodType) {
                         $foodTypesList[$foodType->getRestaurantID()][] = $foodType->getFoodTypeId();
                     }
-
-                    echo "<script>";
-                    echo "var foodTypesList = " . json_encode($foodTypesList) . ";";
-                    echo "</script>";
                     ?>
                 </div>
             </div>
-
-            <script>
-                filterSelection("all")
-
-                function filterSelection(c) {
-                    var x, i;
-                    x = document.getElementsByClassName("filterDiv");
-                    if (c == "all") c = "";
-                    // Add the "show" class (display:block) to the filtered elements, and remove the "show" class from the elements that are not selected
-                    for (i = 0; i < x.length; i++) {
-                        RemoveClass(x[i], "show");
-                        if (x[i].className.indexOf(c) > -1) AddClass(x[i], "show");
-                    }
-                }
-
-                // Show filtered elements
-                function AddClass(element, name) {
-                    var i, arr1, arr2;
-                    arr1 = element.className.split(" ");
-                    arr2 = name.split(" ");
-                    for (i = 0; i < arr2.length; i++) {
-                        if (arr1.indexOf(arr2[i]) == -1) {
-                            element.className += " " + arr2[i];
-                        }
-                    }
-                }
-
-                // Hide elements that are not selected
-                function RemoveClass(element, name) {
-                    var i, arr1, arr2;
-                    arr1 = element.className.split(" ");
-                    arr2 = name.split(" ");
-                    for (i = 0; i < arr2.length; i++) {
-                        while (arr1.indexOf(arr2[i]) > -1) {
-                            arr1.splice(arr1.indexOf(arr2[i]), 1);
-                        }
-                    }
-                    element.className = arr1.join(" ");
-                }
-
-                // Add active class to the current control button (highlight it)
-                var btnContainer = document.getElementById("myBtnContainer");
-                var btns = btnContainer.getElementsByClassName("btn");
-                for (var i = 0; i < btns.length; i++) {
-                    btns[i].addEventListener("click", function() {
-                        var current = document.getElementsByClassName("active");
-                        current[0].className = current[0].className.replace(" active", "");
-                        this.className += " active";
-                    });
-                }
-            </script>
-
             <div class="container" id="otherEventInformation">
                 <div class="row" id="oERow">
                 </div>
@@ -189,6 +319,7 @@
             </div>
         </div>
     </div>
-</body>
 
-</html>
+    <script src="../js/yummy/restaurant.js"></script>
+    <script src="../js/yummy/yummy.js"></script>
+</body>
