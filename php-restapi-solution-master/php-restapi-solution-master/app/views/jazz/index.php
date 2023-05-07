@@ -41,9 +41,9 @@
                 <h3><?= $artists[$i]->getName() ?></h3>
                 <p><?= $artists[$i]->getDescription() ?></p>
                 <?php //check if artist plays at any point of time during the festival 
-                if(isset($artists[$i]->getTimeSlots()[0])){ ?>
-                <hr><span class="textSmall">Plays the <?= //gets first time this artist will show up
-                $artists[$i]->getTimeSlots()[0]->getStartTime()->format('dS') ?>!</span>
+                if (isset($artists[$i]->getTimeSlots()[0])) { ?>
+                  <hr><span class="textSmall">Plays the <?= //gets first time this artist will show up
+                                                        $artists[$i]->getTimeSlots()[0]->getStartTime()->format('dS') ?>!</span>
                 <?php } ?>
                 <button class="buttonJazz"> Learn More About artist</button>
               </div>
@@ -64,15 +64,15 @@
 
 
       <h2 class="margin-bottom underlined textCenter">Schedule:</h2>
-      <div id="scheduleCarousel" data-bs-ride="carousel" class="carousel slide">
+      <div id="scheduleCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="30000">
         <div class="carousel-inner">
           <?php
           $dateList = ['2023-07-27', '2023-07-28', '2023-07-29', '2023-07-30'];
-
           for ($dateIndex = 0; $dateIndex < count($dateList); $dateIndex++) {
             $targetDate = new DateTime($dateList[$dateIndex]);
             $uniqueHalls = [];
             $timeSlotByHall = [];
+
 
             for ($i = 0; $i < count($timeSlots); $i++) {
               $timeSlot = $timeSlots[$i];
@@ -156,7 +156,7 @@
                               <?php //checks if location is GroteMarkt, if so, change style
                               if ($isGroteMarkt) { ?>
                               <?php //give each even number a first-schedule-button style
-                              if ($i % 2 == 0) { ?>first-schedule-button<?php } ?> 
+                                if ($i % 2 == 0) { ?>first-schedule-button<?php } ?> 
                               grote-Markt-Item<?php } ?>">
                                 <img src="<?= $timeSlotByHall[$currentHallID][$i]->getArtist()->getImage() ?>"> </img>
                                 <div class="container add-ticket">
@@ -169,8 +169,20 @@
                                       €<?= $timeSlotByHall[$currentHallID][$i]->getPrice() ?></p>
                                   </div>
                                 </div>
-                                <div class="container add-button">
-                                  <p> <?php if(!$isGroteMarkt) { ?>add<?php } else if($isGroteMarkt) { ?>FREE<?php } ?> </p>
+                                <?php
+                                $buttonClass = ($isGroteMarkt || $timeSlotByHall[$currentHallID][$i]->getCurrentlyBoughtTickets() < $timeSlotByHall[$currentHallID][$i]->getMaximumAmountTickets()) ? 'add-button' : 'disabled';
+                                //grote markt is always a free event, so, make it free. otherwise check if still available
+                                $buttonText = $isGroteMarkt ? 'FREE' : ($timeSlotByHall[$currentHallID][$i]->getCurrentlyBoughtTickets() >= $timeSlotByHall[$currentHallID][$i]->getMaximumAmountTickets() ? 'SOLD<br>OUT' : 'add');                                ?>
+                                <div class="container <?= $buttonClass; ?>" data-ticket-info='{
+                                  "timeSlotID": "<?= $timeSlotByHall[$currentHallID][$i]->getTimeSlotID(); ?>",
+                                  "date": "<?= $timeSlotByHall[$currentHallID][$i]->getStartTime()->format('j F l'); ?>",
+                                  "timeRange": "<?= $timeSlotByHall[$currentHallID][$i]->getStartTime()->format('G:i'); ?> - <?= $timeSlotByHall[$currentHallID][$i]->getEndTime()->format('G:i'); ?>", 
+                                  "artistName": "<?= $timeSlotByHall[$currentHallID][$i]->getArtist()->getName(); ?>",
+                                  "colorID": "<?= //logic for this line: Based on the color ID the javascript chooses which color to make the first column of a row. 0 = primary (red) 1 or more = secondary (yellow) -1 = day or week tickets (gradient)
+                                  $currentHallID ?>",
+                                  "location": "<?= $timeSlotByHall[$currentHallID][$i]->getJazzLocation()->getLocationName() ?>, <?= $timeSlotByHall[$currentHallID][$i]->getHall()->getHallName() ?>", 
+                                  "price": "<?= $timeSlotByHall[$currentHallID][$i]->getPrice() ?>"}'>
+                                  <p><?= $buttonText; ?></p>
                                 </div>
                               </td>
                               <?php if ($j == 0) { ?><td style="width: 65px;"></td> <?php } ?>
@@ -228,4 +240,46 @@
       </div>
 
 
+    </div>
+    <div class="modal" tabindex="-1" id="ticketModal">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="ticketTitle"> Jazz Event Ticket</h5>
+            <button type="button" class="btn-close" style="margin-bottom: 1;" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="d-flex justify-content-between table-ticket">
+              <div class="text-center" id="date-location">
+                <p id="ticketDate"></p>
+                <p id="ticketLocation"></p>
+              </div>
+              <div class="artist-time-range mr-auto">
+                <p id="ticketArtist"></p>
+                <p id="ticketTimeRange"></p>
+              </div>
+              <div class="d-flex flex-column align-items-center price">
+                <p>Price:</p>
+                <p id="ticketPrice"></p>
+              </div>
+              <div class="d-flex flex-column align-items-center justify-content-center quantityTickets mr-auto ml-4">
+                <div class="btn-group justify-content-center align-items-center" role="group">
+                  <button type="button" class="btn btn-outline-secondary modal-input text-center justify-content-center" id="minusButton">-</button>
+                  <input type="number" class="text-center" id="ticketQuantity" value="1" max="10">
+                  <button type="button" class="btn btn-outline-secondary modal-input text-center justify-content-center" id="plusButton">+</button>
+                </div>
+              </div>
+              <div class="d-flex flex-column align-items-center price">
+                <p>Subtotal:</p>
+                <p id="ticketTotal"></p>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="line-height longTermTicketButton buttonJazz mr-auto" id="addToProgram">Add to personal program</button>
+            <button type="button" class="line-height longTermTicketButton buttonJazz ml-auto" id="cancel">Cancel</button>
+
+          </div>
+        </div>
+      </div>
     </div>

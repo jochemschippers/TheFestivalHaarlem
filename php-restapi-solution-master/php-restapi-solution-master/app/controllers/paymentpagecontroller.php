@@ -49,5 +49,8 @@ class paymentpageController extends Controller
         ];
         $this->displayView($models);
     }
+    public function getPersonalProgramItems(){
+        
+    }
 }
 ?>

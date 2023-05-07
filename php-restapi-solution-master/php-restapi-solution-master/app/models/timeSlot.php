@@ -9,7 +9,7 @@ class TimeSlot implements JsonSerializable
         private DateTime $startTime;
         private DateTime $endTime;
         private int $maximumAmountTickets;
-
+        private int $currentlyBoughtTickets;
         //made all options possible to be null. This is done so the Yummy page doesn't crash. The yummy admin page requires a timeslot that has different variables that are null
         public function __construct(?int $timeSlotID = null, ?int $eventID = null, ?float $price = null, ?DateTime $startTime = null, ?DateTime $endTime = null, ?int $maximumAmountTickets = null)
         {
@@ -156,5 +156,25 @@ class TimeSlot implements JsonSerializable
                         'endTime' => $this->endTime->format(DateTime::ATOM),
                         'maximumAmountTickets' => $this->maximumAmountTickets,
                 ];
+        }
+
+        /**
+         * Get the value of currentlyBoughtTickets
+         */ 
+        public function getCurrentlyBoughtTickets()
+        {
+                return $this->currentlyBoughtTickets;
+        }
+
+        /**
+         * Set the value of currentlyBoughtTickets
+         *
+         * @return  self
+         */ 
+        public function setCurrentlyBoughtTickets($currentlyBoughtTickets)
+        {
+                $this->currentlyBoughtTickets = $currentlyBoughtTickets;
+
+                return $this;
         }
 }

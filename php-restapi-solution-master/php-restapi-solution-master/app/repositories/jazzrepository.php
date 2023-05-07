@@ -63,8 +63,7 @@ class JazzRepository extends Repository
             throw new ErrorException("It seems something went wrong with our database! Please try again later.");
         }
     }
-    function getAllJazzTimeSlots()
-    {
+    public function getAllJazzTimeSlots() {
         try {
             $stmt = $this->connection->prepare("
               SELECT 
@@ -75,7 +74,8 @@ class JazzRepository extends Repository
                 jl.locationID,
                 jl.locationName,
                 h.hallID,
-                h.hallName
+                h.hallName,
+                (SELECT COUNT(*) FROM EventTickets WHERE timeSlotID = ts.timeSlotID) AS boughtTicketsCount
                FROM
                     TimeSlots AS ts
                 INNER JOIN TimeSlotsJazz AS tsj ON ts.timeSlotID = tsj.timeSlotID
@@ -91,7 +91,7 @@ class JazzRepository extends Repository
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $stmt->execute();
             $results = $stmt->fetchAll();
-
+    
             $timeSlotsJazz = [];
             foreach ($results as $row) {
                 $timeSlotJazz = new TimeSlotsJazz(
@@ -105,6 +105,7 @@ class JazzRepository extends Repository
                     new JazzLocation($row['locationID'], $row['locationName']),
                     new Hall($row['hallID'], $row['locationID'], $row['hallName'])
                 );
+                $timeSlotJazz->setCurrentlyBoughtTickets($row['boughtTicketsCount']);
                 array_push($timeSlotsJazz, $timeSlotJazz);
             }
             return $timeSlotsJazz;
