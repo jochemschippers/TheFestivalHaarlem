@@ -7,28 +7,38 @@ class TestController extends Controller
 {
     private $jazzService;
     private $yummyService;
+    private $apikeyService;
 
     // initialize services
     function __construct()
     {
         $this->yummyService = new YummyService();
         $this->jazzService = new JazzService();
+        // $this->apikeyService = new ApikeyService();
     }
 
     public function index()
     {
+        include_once __DIR__ . '/../views/test/adminnav.php';
         $models = [];
         $this->displayView($models);
-        include __DIR__ . '/../views/test/adminnav.php';
+    }
+
+    public function apikeys(){
+        include_once __DIR__ . '/../views/test/adminnav.php';
+        $models = [
+            // "apikeys" => $this->yummyService->getAllApiKeys(),
+        ];
+        $this->displayView($models);
     }
     public function jazz()
     {
+        include_once __DIR__ . '/../views/test/adminnav.php';
         $models = [
             "artists" => $this->jazzService->getAllArtists(),
             "locations" => $this->jazzService->getAllLocations(),
         ];
         $this->displayView($models);
-        include __DIR__ . '/../views/test/adminnav.php';
     }
     public function updateArtist()
     {
@@ -131,6 +141,7 @@ class TestController extends Controller
     // Call yummy info
     public function yummy()
     {
+        include_once __DIR__ . '/../views/test/adminnav.php';
         $this->checkPosts();
         $models = [
             "restaurants" => $this->yummyService->getAll(),
@@ -143,7 +154,6 @@ class TestController extends Controller
         ];
         $this->displayView($models);
 
-        include __DIR__ . '/../views/test/adminnav.php';
     }
     // Yummy Functions
     private function checkPosts()

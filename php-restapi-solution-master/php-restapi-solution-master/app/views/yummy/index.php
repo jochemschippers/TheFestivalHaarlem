@@ -322,4 +322,3 @@
 
     <script src="../js/yummy/restaurant.js"></script>
     <script src="../js/yummy/yummy.js"></script>
-</body>

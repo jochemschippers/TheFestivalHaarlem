@@ -1,13 +1,13 @@
 <body>
 
     <div id="form-box">
-    <div class="alert alert-danger d-none" id="alert" role="alert">
+        <div class="alert alert-danger d-none" id="alert" role="alert">
+        </div>
 
-</div>
-        <div class="button-box">
+        <div class="button-box d-flex justify-content-around">
             <div id="btn"></div>
             <button type="button" class="sign-up btn-account" id="loginbtn" onclick="login()">Log in</button>
-            <button type="button" class="sign-up btn-account" id="registerbtn" onclick="register()" style="color: rgb(38, 38, 38);">Sign in</button>
+            <button type="button" class="sign-up btn-account" id="registerbtn" onclick="register()" style="color: rgb(38, 38, 38);">Sign up</button>
         </div>
         <form id="login" class="form-group input-group" method="POST">
             <div class="form-floating">

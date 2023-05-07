@@ -103,3 +103,20 @@ loginForm.addEventListener('submit', function (e) {
         });
 
 });
+
+// Array of image file names
+var images = [
+    "jazz-login-pic.jpg",
+    "yummy-login-picture.jpg"
+];
+
+// Generate a random number between 0 and the number of images
+var randomNumber = Math.floor(Math.random() * images.length);
+
+// Create an img element and set its source using the random number
+var imgElement = document.createElement("img");
+imgElement.src = "../image/account/" + images[randomNumber];
+imgElement.id = "background-image";
+
+// Append the img element to the body
+document.body.appendChild(imgElement);

@@ -191,4 +191,3 @@
     </div>
 
     <script src="../js/yummy/restaurant.js"></script>
-</body>
