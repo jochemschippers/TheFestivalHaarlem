@@ -11,7 +11,7 @@ class TimeSlotsJazz extends TimeSlot implements JsonSerializable
         private JazzLocation $jazzLocation;
         private hall $hall;
 
-        public function __construct(int $timeSlotID, int $eventID, float $price, string $startTime, string $endTime, int $maximmumAmountTickets, $artist = new JazzArtist(), $jazzLocation = new JazzLocation(), $hall = new Hall())
+        public function __construct(int $timeSlotID = 0, int $eventID = 0, float $price = 0, string $startTime = '2001-07-29 02:43:00', string $endTime = '2001-07-29 02:43:01', int $maximmumAmountTickets = 0, $artist = new JazzArtist(), $jazzLocation = new JazzLocation(), $hall = new Hall())
         {
 
                 parent::__construct($timeSlotID, $eventID, $price,  DateTime::createFromFormat('Y-m-d H:i:s', $startTime), DateTime::createFromFormat('Y-m-d H:i:s', $endTime), $maximmumAmountTickets);
@@ -33,7 +33,7 @@ class TimeSlotsJazz extends TimeSlot implements JsonSerializable
          * Set the value of artist
          *
          * @return  self
-         */
+         */     
         public function setArtist($artist)
         {
                 $this->artist = $artist;
@@ -120,5 +120,25 @@ class TimeSlotsJazz extends TimeSlot implements JsonSerializable
                         'jazzLocation' => $this->jazzLocation,
                         'hall' => $this->hall,
                 ]);
+        }
+
+        /**
+         * Get the value of jazzLocation
+         */ 
+        public function getLocation()
+        {
+                return $this->jazzLocation;
+        }
+
+        /**
+         * Set the value of jazzLocation
+         *
+         * @return  self
+         */ 
+        public function setLocation($jazzLocation)
+        {
+                $this->jazzLocation = $jazzLocation;
+
+                return $this;
         }
 }

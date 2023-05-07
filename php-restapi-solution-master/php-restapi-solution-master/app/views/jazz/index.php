@@ -1,23 +1,23 @@
 <body>
   <div class="layered">
-    <div class="background-Image">
+    <div class="background-Image jazz-background-image">
       <div class="border-box">
-        <div class="container" id="titleContainer">
-          <h1>Haarlem Jazz</h1>
-        </div>
       </div>
 
-      <div class="container landingPageContainer">
+      <div class="container landingPageContainer jazz-container-landing ">
         <div class="row">
           <div class="col-md-7" id="titleText">
-            <h2 class="underlined">Learn about our <strong>artists</strong></h2>
-            <p>The Festival Jazz is a premier event. Showcasing the best in local and international jazz talent, in partnership with Haarlem Jazz, the festival’s jazz events provide a vibrant and lively atmosphere for music fans to come together and enjoy the sounds of the genre.
+            <h2 class="underlined">Feel the  <strong>Rhythm</strong> of Haarlem:</h2>
+            <p class="jazz-landing-page-p">Ready for an unforgettable festival experience? Join us in Haarlem for the amazing Haarlem Jazz Festival from July 26th to 29th, 2023! This one-of-a-kind event invites everyone to groove along to a fantastic mix of jazz, blues, and soul in a relaxed, yet lively atmosphere.
               <br> <br>
-              Read below more about the artists, schedule and locations!
+              So, what are you waiting for? Grab your tickets and come join us for a fantastic musical experience at the Haarlem Jazz Festival 2023. See you there!
             </p>
           </div>
+          <div class="col-md-5">
+            
+          </div>
           <div class="col-md-7">
-            <button class="buttonJazz" id="seeScheduleButton"> See Schedule <strong>↓</strong> </button>
+            <button class="buttonJazz d-flex justify-content-center align-items-center" id="seeLocationsButton"> See locations </button>
           </div>
           <h2 class="underlined textCenter">Featuring:</h2>
         </div>

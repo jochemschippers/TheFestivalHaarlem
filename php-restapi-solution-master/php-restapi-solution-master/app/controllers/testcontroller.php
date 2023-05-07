@@ -69,9 +69,6 @@ class TestController extends Controller
     private function validateObject($data, $constructorArgs, $argTypes)
     {
         $argKeys = array_keys($data);
-        var_dump($argKeys);
-        var_dump($constructorArgs);
-        var_dump($argTypes);
 
         foreach ($constructorArgs as $index => $value) {
             $type = gettype($value);
@@ -117,13 +114,15 @@ class TestController extends Controller
     private function createObject($className, $constructorArgs, $data)
     {
         $reflection = new ReflectionClass($className);
-        $object = $reflection->newInstanceArgs($constructorArgs);
+        $object = $reflection->newInstanceArgs();
 
-        foreach ($data as $key => $value) {
+        $keys = array_keys($data);
+        for ($i = 0; $i < count($data); $i++) {
+            $key = $keys[$i];
             try {
                 $setter = 'set' . ucfirst($key);
                 if (method_exists($object, $setter)) {
-                    $object->{$setter}($value);
+                    $object->{$setter}($constructorArgs[$i]);
                 } else {
                     throw new TypeError("Invalid property: {$key}. Please check the provided data.");
                 }
@@ -139,7 +138,13 @@ class TestController extends Controller
             $artist = $this->validateAndCreateObject(
                 $data,
                 'JazzArtist',
-                [$data["artistID"], $data["description"], $data["image"], $data["name"], $data["imageSmall"]],
+                [
+                    $data["artistID"],
+                    $data["name"],
+                    $data["description"],
+                    $data["image"], 
+                    $data["imageSmall"]
+                ],
                 ['integer', 'string', 'string', 'string', 'string'],
                 $response
             );
@@ -171,7 +176,13 @@ class TestController extends Controller
             $artist = $this->validateAndCreateObject(
                 $data,
                 'JazzArtist',
-                [0, $data["description"], $data["image"], $data["name"], $data["imageSmall"]],
+                [
+                    0,
+                    $data["name"],
+                    $data["description"],
+                    $data["image"], 
+                    $data["imageSmall"]
+                ],
                 ['integer', 'string', 'string', 'string', 'string'],
                 $response
             );
@@ -239,16 +250,16 @@ class TestController extends Controller
                 'timeSlotsJazz',
                 [
                     $data["timeslotID"],
+                    new JazzArtist($data["artist"]),
                     1,
+                    new JazzLocation($data["location"]),
+                    new Hall($data["hall"]),
                     $data["price"],
                     $data["startTime"],
                     $data["endTime"],
                     $data["maximumAmountTickets"],
-                    new JazzArtist($data["artistID"]),
-                    new JazzLocation($data["locationID"]),
-                    new Hall($data["hallID"]),
                 ],
-                ['integer', 'integer', 'double', 'string', 'string', 'integer', 'object', 'object', 'object'],
+                ['integer', 'object', 'integer', 'object', 'object', 'double', 'string', 'string', 'integer'],
                 $response
             );
             if ($timeslot) {
@@ -266,16 +277,16 @@ class TestController extends Controller
                 'timeSlotsJazz',
                 [
                     0,
+                    new JazzArtist($data["artist"]),
                     1,
+                    new JazzLocation($data["location"]),
+                    new Hall($data["hall"]),
                     $data["price"],
                     $data["startTime"],
                     $data["endTime"],
                     $data["maximumAmountTickets"],
-                    new JazzArtist($data["artistID"]),
-                    new JazzLocation($data["locationID"]),
-                    new Hall($data["hallID"]),
                 ],
-                ['integer', 'integer', 'double', 'string', 'string', 'integer', 'object', 'object', 'object'],
+                ['integer', 'object', 'integer', 'object', 'object', 'double', 'string', 'string', 'integer'],
                 $response
             );
             if ($timeslot) {

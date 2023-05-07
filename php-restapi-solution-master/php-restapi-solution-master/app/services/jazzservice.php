@@ -136,7 +136,6 @@ class JazzService
 
     private function validateArtistData($artist)
     {
-        $this->allowed_extensions = ['png', 'jpg', 'jpeg', 'gif'];
         if (!$this->validateImage($artist->getImage(), $this->allowed_extensions)) {
             $extensions = implode(', ', $this->allowed_extensions);
             throw new ErrorException("Image path is not in the correct format. It must be one of the following types: {$extensions}");

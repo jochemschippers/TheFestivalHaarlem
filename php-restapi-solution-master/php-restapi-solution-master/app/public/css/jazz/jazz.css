@@ -120,6 +120,21 @@ body {
   background-image: url("/image/jazz/banner.png")
 }
 
+.jazz-background-image {
+  height: auto;
+}
+
+.jazz-landing-page-p {
+  font-weight: 400 !important;
+  font-size: 18px !important;
+  width: 663px !important;
+}
+
+#seeLocationsButton {
+  width: 288px;
+  height: 48px;
+}
+
 .jazzContainer {
   height: 25vw;
   background: linear-gradient(160deg, #f9d1d5, #fac088 120%)
@@ -265,6 +280,12 @@ p span {
   -webkit-background-clip: text;
   overflow: hidden;
   white-space: nowrap;
+}
+
+.jazz-container-landing {
+  top: -100px;
+  position: relative;
+  height: auto;
 }
 
 .first-schedule-button p {
@@ -538,16 +559,19 @@ input::-webkit-inner-spin-button {
   margin-right: auto;
 
 }
-.modal-footer .buttonJazz{
+
+.modal-footer .buttonJazz {
   font-weight: 600;
   font-size: 30px;
   width: 421.3px;
 }
-.primary-ticket{
+
+.primary-ticket {
   background-color: #9B1C31;
   color: white;
 }
-.secondary-ticket{
+
+.secondary-ticket {
   background-color: #FEB548;
   color: #262626;
 }

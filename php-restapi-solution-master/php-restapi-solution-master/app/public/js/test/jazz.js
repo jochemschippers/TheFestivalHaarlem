@@ -499,10 +499,10 @@ function getSelectedOptionText(selectElement) {
 function getInputDataTimeSlots(row) {
     return {
         timeslotID: row ? row.dataset.timeslotId : 0,
-        artistID: document.querySelector('#artistNameInput').value,
+        artist: document.querySelector('#artistNameInput').value,
         eventID: 1,
-        locationID: document.querySelector('#locationNameInput').value,
-        hallID: document.querySelector('#hallNameInput').value,
+        location: document.querySelector('#locationNameInput').value,
+        hall: document.querySelector('#hallNameInput').value,
         price: document.querySelector('#priceInput').value,
         startTime: (document.querySelector('#startTimeInput').value.replace('T', ' ')) + ':00',
         endTime: (document.querySelector('#endTimeInput').value.replace('T', ' ')) + ':00',
