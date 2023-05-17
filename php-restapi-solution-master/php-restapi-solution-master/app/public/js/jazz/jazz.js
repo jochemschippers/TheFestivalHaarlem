@@ -1,6 +1,7 @@
 const addButtonElements = document.querySelectorAll('.add-button');
 const ticketModal = new bootstrap.Modal(document.getElementById('ticketModal'));
 const ticketDateElement = document.getElementById('ticketDate');
+const ticketsLeft = document.getElementById('tickets-left');
 const ticketLocationElement = document.getElementById('ticketLocation');
 const ticketArtist = document.getElementById('ticketArtist');
 const ticketTimeRange = document.getElementById('ticketTimeRange');
@@ -22,7 +23,8 @@ addButtonElements.forEach(addButton => {
         ticketLocationElement.textContent = ticketInfo.location;
         ticketPriceElement.textContent = '€' + parseFloat(ticketInfo.price).toFixed(2);
         ticketTotalElement.textContent = '€' + parseFloat(ticketInfo.price).toFixed(2);
-        console.log(ticketInfo.colorID);
+        ticketsLeft.innerHTML = "tickets left: " + ticketInfo.ticketsLeft;
+        ticketQuantityElement.max = ticketInfo.ticketsLeft;
         if (ticketInfo.colorID == 0) {
             dateLocation.classList.remove("secondary-ticket");
             dateLocation.classList.add("primary-ticket");
@@ -36,8 +38,13 @@ addButtonElements.forEach(addButton => {
 });
 
 plusButton.addEventListener("click", () => {
-    ticketQuantity.value = parseInt(ticketQuantity.value) + 1;
-    updateTicketTotal();
+    const ticketQuantityValue = parseInt(ticketQuantity.value);
+    const ticketsLeft = parseInt(ticketInfo.ticketsLeft);
+    if(ticketQuantityValue < ticketsLeft)
+    {
+        ticketQuantity.value = ticketQuantityValue + 1;
+        updateTicketTotal();
+    }
 });
 
 minusButton.addEventListener("click", () => {

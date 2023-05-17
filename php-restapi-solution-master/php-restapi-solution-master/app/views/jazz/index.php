@@ -178,8 +178,10 @@
                                   "date": "<?= $timeSlotByHall[$currentHallID][$i]->getStartTime()->format('j F l'); ?>",
                                   "timeRange": "<?= $timeSlotByHall[$currentHallID][$i]->getStartTime()->format('G:i'); ?> - <?= $timeSlotByHall[$currentHallID][$i]->getEndTime()->format('G:i'); ?>", 
                                   "artistName": "<?= $timeSlotByHall[$currentHallID][$i]->getArtist()->getName(); ?>",
-                                  "colorID": "<?= //logic for this line: Based on the color ID the javascript chooses which color to make the first column of a row. 0 = primary (red) 1 or more = secondary (yellow) -1 = day or week tickets (gradient)
+                                  "colorID": "<?= 
+                                  //logic for this line: Based on the color ID the javascript chooses which color to make the first column of a row. 0 = primary (red) 1 or more = secondary (yellow) -1 = day or week tickets (gradient)
                                   $currentHallID ?>",
+                                  "ticketsLeft": "<?= $timeSlotByHall[$currentHallID][$i]->getMaximumAmountTickets() - $timeSlotByHall[$currentHallID][$i]->getCurrentlyBoughtTickets() ?>",
                                   "location": "<?= $timeSlotByHall[$currentHallID][$i]->getJazzLocation()->getLocationName() ?>, <?= $timeSlotByHall[$currentHallID][$i]->getHall()->getHallName() ?>", 
                                   "price": "<?= $timeSlotByHall[$currentHallID][$i]->getPrice() ?>"}'>
                                   <p><?= $buttonText; ?></p>
@@ -268,6 +270,7 @@
                   <input type="number" class="text-center" id="ticketQuantity" value="1" max="10">
                   <button type="button" class="btn btn-outline-secondary modal-input text-center justify-content-center" id="plusButton">+</button>
                 </div>
+                <p id="tickets-left">tickets left: </p>
               </div>
               <div class="d-flex flex-column align-items-center price">
                 <p>Subtotal:</p>

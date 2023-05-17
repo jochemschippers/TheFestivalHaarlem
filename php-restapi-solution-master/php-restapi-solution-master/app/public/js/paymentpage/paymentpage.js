@@ -4,7 +4,7 @@ fetch('paymentpage/getPersonalProgramItems', {
         'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-        cart: JSON.parse(sessionStorage.getItem('cart') || '[]'),
+        cart: JSON.parse(sessionStorage.getItem('personalProgram') || '[]'),
     })
 }).then(response => response.json())
     .then(data => {

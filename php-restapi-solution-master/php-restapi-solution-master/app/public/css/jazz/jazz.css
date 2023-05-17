@@ -123,7 +123,9 @@ body {
 .jazz-background-image {
   height: auto;
 }
-
+#tickets-left{
+  margin-bottom: 0px;
+}
 .jazz-landing-page-p {
   font-weight: 400 !important;
   font-size: 18px !important;
