@@ -56,8 +56,8 @@ class paymentpageController extends Controller
     
         $response = [
             'status' => 0,
-            'message' => 'cart is empty! please go to products and press "add to cart"',
-            'products' => null
+            'message' => 'cart is empty!',
+            'tickets' => null
         ];
         try {
             if (isset($data["cart"]) && is_array($data["cart"])) {

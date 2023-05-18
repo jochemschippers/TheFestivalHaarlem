@@ -31,9 +31,9 @@
     background-color: 961B1B;
     border-color: white;
     color: white;
-    width: 80%;
+    width: 50%;
     display: block;
-    margin: auto;
+    margin-left: auto;
   }
   body {
     background-color: darkgray;
@@ -96,7 +96,17 @@
     top: 16px;
     z-index: -1;
 }
+.alert {
+  position: fixed;
+  bottom: 0px;
+  right: 0px;
+  width: 50%;
+  z-index: 1000;
+}
 
+.bi {
+  margin-right: .5em;
+}
 #progressbar li:last-child:after {
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;

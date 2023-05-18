@@ -4,10 +4,13 @@ try {
 } catch {
     console.error("Loading the personal program failed. Data might be lost.");
     var personalProgram = [];
+    sessionStorage.setItem('personalProgram', JSON.stringify(personalProgram));
+    
 }
 function addToPersonalProgram(timeSlotID, quantity) {
     quantity = Math.max(quantity, 1);
-
+    personalProgram = JSON.parse(sessionStorage.getItem('personalProgram')) || [];
+    
     const existingTicket = personalProgram.find(item => item.id === timeSlotID);
     if (isNaN(quantity) || quantity <= 0) {
         console.error("Something went wrong while adding to the personal program. Please check if the quantity is correct.");
