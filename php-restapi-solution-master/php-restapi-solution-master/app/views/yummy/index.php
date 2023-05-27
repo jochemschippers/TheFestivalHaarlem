@@ -240,15 +240,21 @@
                                                     <p class="fs-3"><strong><span id="seats">No timeslot selected</span></strong></p>
                                                 </div>
                                                 <div class="col-3">
-                                                    <h5>Number of adults</h5>
-                                                    <div class="input-group">
-                                                        <button class="btn btn-outline-secondary Aminus-btn minusButton" type="button">-</button>
-                                                        <input class="aInputNumber" type="number" id="nrAdult" name="nrAdult" value="1" min="1" max="20">
-                                                        <button class="btn btn-outline-secondary Aplus-btn plusButton" type="button">+</button>
+                                                    <div class="row">
+                                                        <h5>Number of adults</h5>
+                                                        <div class="input-group">
+                                                            <button class="btn btn-outline-secondary Aminus-btn minusButton" type="button">-</button>
+                                                            <input class="aInputNumber" type="number" id="nrAdult" name="nrAdult" value="1" min="1" max="20">
+                                                            <button class="btn btn-outline-secondary Aplus-btn plusButton" type="button">+</button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
                                                         <h5>Number of children (-12)</h5>
-                                                        <button class="btn btn-outline-secondary Cminus-btn minusButton" type="button">-</button>
-                                                        <input class="cInputNumber" type="number" id="nrChild" name="nrChild" value="0" min="0" max="20">
-                                                        <button class="btn btn-outline-secondary Cplus-btn plusButton" type="button">+</button>
+                                                        <div class="input-group">
+                                                            <button class="btn btn-outline-secondary Cminus-btn minusButton" type="button">-</button>
+                                                            <input class="cInputNumber" type="number" id="nrChild" name="nrChild" value="0" min="0" max="20">
+                                                            <button class="btn btn-outline-secondary Cplus-btn plusButton" type="button">+</button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
