@@ -390,17 +390,6 @@
             <div class="card-body">
                 <div id="timeSlotsYummy-table">
                     <?php if (!is_null($timeSlotsYummy) && count($timeSlotsYummy) > 0) { ?>
-                        <!-- <form>
-                            <label>Show
-                                <select id="rows-per-page">
-                                    <option value="5">5</option>
-                                    <option value="10" selected>10</option>
-                                    <option value="25">25</option>
-                                    <option value="50">50</option>
-                                </select>
-                                rows per page
-                            </label>
-                        </form> -->
                         <table class="table table-bordered" id="timeSlotsTable">
                             <thead>
                                 <tr>

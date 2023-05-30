@@ -10,3 +10,6 @@ td {
     max-width: 150px;
     min-width: auto;
 }
+.dataTableLocations{
+   overflow: hidden;
+}
