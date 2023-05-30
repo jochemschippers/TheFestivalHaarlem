@@ -1,7 +1,6 @@
 <?php
 class PatternRouter
 {
-
     private function stripParameters($uri)
     {
         if (str_contains($uri, '?')) {
@@ -39,7 +38,21 @@ class PatternRouter
             $explodedUri[1] = $defaultMethod;
         }
         $methodName = $explodedUri[1];
-        // check if user logged in
+
+        $loginRequiredRoutes = [
+            'login',
+            'payment',
+            'recieve'
+        ];
+        if (in_array($explodedUri[1], $loginRequiredRoutes) && $explodedUri[0] == 'paymentpage') {
+            if (session_status() == PHP_SESSION_NONE) {
+                session_start();
+            }
+            if (!isset($_SESSION['userID'])) {
+                $explodedUri[0] = 'errormessage403';
+                $methodName = $defaultMethod;
+            }
+        }
         if ($explodedUri[0] === 'test') {
             if (session_status() == PHP_SESSION_NONE) {
                 session_start();

@@ -26,7 +26,6 @@ function addToPersonalProgram(timeSlotID, quantity) {
                 quantity: quantity
             });
         }
-
         sessionStorage.setItem('personalProgram', JSON.stringify(personalProgram));
         updateCartItemDisplay();
     }
@@ -43,3 +42,13 @@ function updateCartItemDisplay() {
       cartItemCount.classList.remove("cart-item-count-active");
     }
   }
+  function getQuantityByID(id) {
+    try {
+        let personalProgram = JSON.parse(sessionStorage.getItem('personalProgram')) || [];
+        let ticket = personalProgram.find(item => item.id === id);
+        return ticket ? ticket.quantity : 0;
+    } catch {
+        //Failed to get quantity by ID. The personal program might not exist
+        return 0;
+    }
+}

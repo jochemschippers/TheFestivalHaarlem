@@ -13,10 +13,12 @@ const plusButton = document.getElementById('plusButton');
 const dateLocation = document.getElementById('date-location');
 const carouselSchedule = document.getElementById('scheduleCarousel');
 let ticketInfo;
+let currentMaximum;
 
 addButtonElements.forEach(addButton => {
     addButton.addEventListener('click', function () {
         ticketInfo = JSON.parse(this.dataset.ticketInfo);
+        
         ticketDateElement.textContent = ticketInfo.date;
         ticketArtist.textContent = ticketInfo.artistName;
         ticketTimeRange.textContent = ticketInfo.timeRange;
@@ -25,6 +27,8 @@ addButtonElements.forEach(addButton => {
         ticketTotalElement.textContent = '€' + parseFloat(ticketInfo.price).toFixed(2);
         ticketsLeft.innerHTML = "tickets left: " + ticketInfo.ticketsLeft;
         ticketQuantityElement.max = ticketInfo.ticketsLeft;
+        currentMaximum = ticketInfo.ticketsLeft;
+        ticketQuantityElement.value = 1;
         if (ticketInfo.colorID == 0) {
             dateLocation.classList.remove("secondary-ticket");
             dateLocation.classList.add("primary-ticket");
@@ -65,8 +69,11 @@ function updateTicketTotal() {
 const addToProgramButton = document.getElementById("addToProgram");
 addToProgramButton.addEventListener("click", () => {
     const quantity = parseInt(ticketQuantity.value);
-    addToPersonalProgram(ticketInfo.timeSlotID, quantity);
-
+    const ticketID = ticketInfo.timeSlotID;
+    if(getQuantityByID(ticketID) + quantity < currentMaximum)
+    {
+        addToPersonalProgram(ticketInfo.timeSlotID, quantity);
+    }
     ticketModal.hide();
 });
 

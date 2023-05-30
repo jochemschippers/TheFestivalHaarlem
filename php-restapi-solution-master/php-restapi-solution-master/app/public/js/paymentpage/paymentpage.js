@@ -20,13 +20,15 @@ fetch('paymentpage/getPersonalProgramItems', {
 }).then(response => response.json())
     .then(data => {
         console.log(data);
-        if(data['status'] == 0)
-        {
+        if (data['status'] == 0) {
             showWarning(data['message'])
         }
-        else{
-            if(data['status'] == 1)
-            showWarning("Hey, this is your personal program, but you'd need to login to continue!")
+        else {
+            if (data['status'] == 1)
+                showWarning("Hey there! 👋<br><br>Just a quick heads up! You can review your personal program right here. Take your time," +
+                    "make sure everything's in order, and double-check all the details.<br><br>Ready to move forward? Fantastic! But hold on a second..." +
+                    "We'll need you to log in to proceed. It's a tiny step that helps us keep everything secure and personalized just for you.<br><br>" +
+                    "Enjoy your journey, and let's get you all set up! 😊")
             const timeslots = data['tickets'];
             displayTimeslots(timeslots);
         }
@@ -34,12 +36,27 @@ fetch('paymentpage/getPersonalProgramItems', {
     .catch(error => {
         console.error('Error fetching timeslots data:', error);
     });
+document.getElementById('share-btn').addEventListener('click', () => {
+    const link = window.location.origin + "/share/" + userId;
 
+    // Show the link in the text input
+    document.getElementById('share-link').value = link;
+
+    // Show the share container
+    document.getElementById('share-container').style.display = 'block';
+});
+
+document.getElementById('copy-btn').addEventListener('click', () => {
+    // Copy the link to clipboard
+    const shareLinkInput = document.getElementById('share-link');
+    shareLinkInput.select();
+    document.execCommand('copy');
+});
 function displayTimeslots(timeslots) {
     updatePersonalProgram(timeslots);
     ticketsTableBodyJazz.innerHTML = ""; // Clear existing rows
     timeslots.forEach(timeslot => {
-        if(timeslot.eventID == 1){
+        if (timeslot.eventID == 1) {
             const timeslotRow = createTimeslotRowJazz(timeslot);
             ticketsTableBodyJazz.appendChild(timeslotRow);
         }
@@ -59,7 +76,7 @@ function updatePersonalProgram(timeslots) {
 function createTimeslotRowJazz(timeslot) {
     const row = document.createElement('tr');
 
-    const options = { month: 'long', day: 'numeric' }; 
+    const options = { month: 'long', day: 'numeric' };
     const startTime = new Date(timeslot.startTime);
     const endTime = new Date(timeslot.endTime);
 
@@ -124,12 +141,12 @@ function addRowToTable(tableBody, label, value) {
 function showWarning(message) {
     warningText.innerHTML = `<i class="bi bi-exclamation-triangle-fill"></i> ${message}`;
     warningAlert.classList.remove('d-none');
-  }
-  
-  function showSuccess(message) {
+}
+
+function showSuccess(message) {
     successText.innerHTML = `<i class="bi bi-check-circle-fill"></i> ${message}`;
     successAlert.classList.remove('d-none');
-  }
+}
 function hideWarning() {
     warningAlert.classList.add('d-none');
 }

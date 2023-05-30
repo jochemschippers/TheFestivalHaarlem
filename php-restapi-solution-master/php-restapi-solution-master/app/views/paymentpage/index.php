@@ -71,7 +71,7 @@ $grand_total = 0;
     <div class="container mt-5">
         <h1 class="mb-4">Personal Program</h1>
     </div>
-    <div class="container" id="container">
+    <div class="container mb-5" id="container">
         <div class="row" id="Jazz">
             <div class="col-md-6">
                 <table class="table" id="tableJazz">
@@ -81,7 +81,7 @@ $grand_total = 0;
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        <!-- <tr>
                             <td>
                                 Gare du Nord <br> July 28, 18:00 - 19:00
                             </td>
@@ -100,7 +100,7 @@ $grand_total = 0;
                             <td>
                                 <button>Delete</button>
                             </td>
-                        </tr>
+                        </tr> -->
                     </tbody>
                 </table>
                 <table class="table" id="tableTickets">
@@ -110,7 +110,7 @@ $grand_total = 0;
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        <!-- <tr>
                             <td>
                                 Ratatouille <br> July 29, 19:00 - 21:00
                             </td>
@@ -129,7 +129,7 @@ $grand_total = 0;
                             <td>
                                 <button>Delete</button>
                             </td>
-                        </tr>
+                        </tr> -->
                     </tbody>
                 </table>
             </div>
@@ -144,7 +144,23 @@ $grand_total = 0;
                     <tbody id="priceTableBody">
                     </tbody>
                 </table>
-                <a href="/paymentpage/login" class="btn btn-primary" id="continueButton">Continue</a>
+                <?php
+                $buttonText = 'Continue';
+                $buttonClass = 'btn continue-btn';
+                $buttonHref = '/paymentpage/payment';
 
+                if (!isset($_SESSION['userID'])) {
+                    $buttonText = 'Please login to continue';
+                    $buttonClass = 'btn-secondary';
+                    $buttonHref = 'javascript:void(0)';
+                }
+                ?>
+                <a href="<?php echo $buttonHref; ?>" class="btn <?php echo $buttonClass; ?>" id="continueButton"><?php echo $buttonText; ?></a>
             </div>
         </div>
+        <button id="share-btn" class="btn btn-primary">Share Personal Program</button>
+        <div id="share-container" style="display: none;">
+            <input type="text" id="share-link" readonly>
+            <button id="copy-btn" class="btn btn-secondary">Copy to Clipboard</button>
+        </div>
+    </div>
