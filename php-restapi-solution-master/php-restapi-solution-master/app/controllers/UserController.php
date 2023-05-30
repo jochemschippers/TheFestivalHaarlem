@@ -13,7 +13,7 @@ class UserController extends Controller {
     public function loginToAccount(){
         $response = array(
             'status' => 1,
-            'message' => 'Inloggen gelukt, je wordt nu gebracht naar de homepagina.'
+            'message' => ''
         );
         try{ //geef variable door
             //session vanuit aparte controller

@@ -1,6 +1,8 @@
 <?php
 require_once __DIR__ . '/repository.php';
-require __DIR__ . '/../models/FestivalEvent.php';
+require_once __DIR__ . '/../models/FestivalEvent.php';
+require_once __DIR__ . '/../models/FestivalInformation.php';
+
 
 class EventRepository extends Repository
 {
@@ -18,5 +20,26 @@ class EventRepository extends Repository
             throw new ErrorException("It seems something went wrong with our database! Please try again later.");
         }
     }
+    
+    function getFestivalInformation()
+    {
+        try {
+            $stmt = $this->connection->prepare("SELECT startDate, endDate FROM FestivalInformation ORDER BY festivalID DESC LIMIT 0, 1");
+            $stmt->execute();
+
+            $stmt->setFetchMode(PDO::FETCH_CLASS, 'FestivalInformation');
+            $festivalInformation = $stmt->fetch(PDO::FETCH_ASSOC);
+            if (count($festivalInformation) > 0) {
+                $festivalInformationObject = new FestivalInformation(
+                    new DateTime($festivalInformation["startDate"]),
+                    new DateTime($festivalInformation["endDate"]),
+                );
+                return $festivalInformationObject;
+            } else {
+                throw new ErrorException("No festival information found. Please try again later.");
+            }
+        } catch (PDOException $e) {
+            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
+        }
+    }
 }
-?>

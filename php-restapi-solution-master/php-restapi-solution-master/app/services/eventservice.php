@@ -10,4 +10,3 @@ class EventService {
         return $events;
     }
 }
-?>

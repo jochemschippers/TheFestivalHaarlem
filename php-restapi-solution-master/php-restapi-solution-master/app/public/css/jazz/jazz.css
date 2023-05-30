@@ -10,7 +10,7 @@ body {
 .layered,
 body,
 .buttonJazz {
-  position: relative
+  position: relative;
 }
 
 body {
@@ -35,7 +35,9 @@ body {
   touch-action: manipulation;
   transition: background-color .2s, color .2s;
   width: auto;
-  filter: drop-shadow(10px 10px 0px #FEB866)
+  filter: drop-shadow(10px 10px 0px #FEB866);
+  text-decoration-line: underline;
+
 }
 
 .buttonJazz:hover {
@@ -47,17 +49,20 @@ body {
   transform: scale(.96)
 }
 
-.schedule{
+.schedule {
   height: auto !important;
+  background: linear-gradient(137.11deg, #F9D1D5 24.08%, #FCB247 149.92%) !important;
 }
-.location-text span{
+
+.location-text span {
   font-family: 'Open Sans';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 48px;
-    line-height: 65px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 48px;
+  line-height: 65px;
 }
-.location-text{
+
+.location-text {
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 400;
@@ -65,7 +70,8 @@ body {
   line-height: 54px;
   margin-bottom: 20px;
 }
-.long-term-ticket-text{
+
+.long-term-ticket-text {
   width: 325px;
   font-family: 'Open Sans';
   font-style: normal;
@@ -74,27 +80,30 @@ body {
   line-height: 22px;
   margin-bottom: 5px;
 }
+
 .textSmall {
   all: inherit;
   margin-top: auto;
   padding-left: 0;
   font-weight: 200
 }
-.first-th{
+
+.first-th {
   background-color: #9B1C31 !important;
   color: white !important;
 }
 
-.jazz-schedule tbody tr th{
+.jazz-schedule tbody tr th {
   font-family: 'Open Sans';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 40px;
-    height: 76.24px;
-    width: 675px;
-    color: #262626;
-    background-color: #FEB548;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 40px;
+  height: 76.24px;
+  width: 675px;
+  color: #262626;
+  background-color: #FEB548;
 }
+
 .layered {
   padding: 0;
   z-index: -99999
@@ -109,6 +118,23 @@ body {
 
 .background-Image {
   background-image: url("/image/jazz/banner.png")
+}
+
+.jazz-background-image {
+  height: auto;
+}
+#tickets-left{
+  margin-bottom: 0px;
+}
+.jazz-landing-page-p {
+  font-weight: 400 !important;
+  font-size: 18px !important;
+  width: 663px !important;
+}
+
+#seeLocationsButton {
+  width: 288px;
+  height: 48px;
 }
 
 .jazzContainer {
@@ -164,9 +190,11 @@ p span {
   grid-template-columns: repeat(2, 1fr);
   justify-content: center
 }
+
 #artistCarousel .carousel-item:before {
   left: -1000%;
 }
+
 #artistCarousel .carousel-item:after {
   right: -1000%;
 }
@@ -214,26 +242,33 @@ p span {
   color: #262626;
   background-color: #ffd7a8;
 }
+
 .carousel-control-next-icon:hover {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%333'%3e%3cpath d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e")
-
 }
-.carousel-control-prev-icon:hover{
+
+.carousel-control-prev-icon:hover {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%333'%3e%3cpath d='M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z'/%3e%3c/svg%3e")
 }
 
 .schedule-button {
   background-color: #FEB548;
-    height: 116px;
-    border-radius: 5px;
-    display: flex;
-    padding: 0;
-    max-width: 675px;
+  height: 116px;
+  border-radius: 5px;
+  display: flex;
+  padding: 0;
+  max-width: 675px;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  border-radius: 5px;
+  overflow: hidden;
 }
-.first-schedule-button{
-  background-color: #9B1C31;;
+
+.first-schedule-button {
+  background-color: #9B1C31;
+  ;
 }
-.schedule-button p{
+
+.schedule-button p {
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 700;
@@ -241,28 +276,38 @@ p span {
   line-height: 33px;
   padding: 0;
   text-align: center;
-  width:100%;
-  color:transparent;
+  width: 100%;
+  color: transparent;
   background-image: linear-gradient(180deg, #262626 16.67%, #9B1C31 39.19%);
   -webkit-background-clip: text;
   overflow: hidden;
-    white-space: nowrap;
+  white-space: nowrap;
 }
-.first-schedule-button p{
-  background-image: linear-gradient(180deg, #FFFFFF 0%, #FEB548 42.79%);;;
+
+.jazz-container-landing {
+  top: -100px;
+  position: relative;
+  height: auto;
 }
-.time-text{
+
+.first-schedule-button p {
+  background-image: linear-gradient(180deg, #FFFFFF 0%, #FEB548 42.79%);
+}
+
+.time-text {
   font-weight: 300 !important;
-    font-size: 22px;
-    line-height: 30px;
-    text-align: center;
-    color: #262626 !important;
-    margin-bottom: 10;
+  font-size: 22px;
+  line-height: 30px;
+  text-align: center;
+  color: #262626 !important;
+  margin-bottom: 10;
 }
-.first-schedule-button .container .time-text{
+
+.first-schedule-button .container .time-text {
   color: #FFFF !important;
 }
-.price{
+
+.price {
   height: 20px;
   font-style: normal !important;
   font-weight: 400 !important;
@@ -270,7 +315,8 @@ p span {
   line-height: 22px !important;
   text-align: right !important;
 }
-.add-button{
+
+.add-button {
   align-items: center;
   display: flex;
   padding-left: 0px;
@@ -279,21 +325,59 @@ p span {
   background: #FCBF7F;
   margin-left: 5px;
 }
-.first-schedule-button .add-button{
-  background: #FEB548 ;
+
+.first-schedule-button .add-button {
+  background: #FEB548;
 }
-.add-button p{
+
+.add-button p {
   margin-bottom: 0px;
   font-weight: 400;
   font-style: normal;
-font-size: 35px;
-line-height: 50px;
-color: #262626;
-background-image: none;
+  font-size: 35px;
+  line-height: 50px;
+  color: #262626;
+  background-image: none;
 }
-.schedule-button:hover{
-  cursor: pointer;
+
+.disabled,
+.add-ticket .disabled {
+  background: #968264;
+  cursor: default;
+  align-items: center;
+  display: flex;
+  padding-left: 0px;
+  padding-right: 0px;
+  width: 227.5px;
+  margin-left: 5px;
 }
+
+.disabled p,
+.add-ticket .disabled p {
+  font-size: 25px;
+  /* smaller font-size */
+  line-height: 35px;
+  color: white;
+  white-space: nowrap;
+  /* text wrap */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 400;
+  font-style: normal;
+  margin-bottom: 0px;
+}
+
+.disabled:hover,
+.add-ticket .disabled:hover {
+  background: #968264;
+  /* no hover effect */
+  cursor: unset;
+}
+
+.schedule-button:hover {
+  cursor: auto;
+}
+
 .add-ticket:hover,
 .add-ticket .add-button:hover {
   cursor: pointer;
@@ -304,30 +388,192 @@ background-image: none;
   background: #FFD7A8;
   cursor: pointer;
 }
-#scheduleCarousel .carousel-inner{
+
+#scheduleCarousel .carousel-inner {
   overflow: inherit;
 }
-#scheduleCarousel .carousel-control-prev{
+
+#scheduleCarousel .carousel-control-prev {
   height: 73px;
   opacity: 1;
 }
-#scheduleCarousel .carousel-control-next{
+
+#scheduleCarousel .carousel-control-next {
   height: 73px;
   opacity: 1;
 }
-#scheduleCarousel{
+
+#scheduleCarousel {
   pointer-events: none;
 }
+
 .carousel-item {
   pointer-events: none;
 }
+
 .carousel-inner {
   pointer-events: none;
 }
-.carousel-item > * {
+
+.carousel-item>* {
   pointer-events: auto;
 }
-.grote-Markt-Item{
-  max-width:100%;
+
+.grote-Markt-Item {
+  max-width: 100%;
   width: 1307px;
+}
+
+#ticketModal .modal-dialog {
+  max-width: 1653px !important;
+  width: 1653px !important;
+  margin: auto;
+
+}
+
+#ticketModal .modal-dialog .modal-content {
+  background: linear-gradient(181.26deg, #D9D5D5 -5%, rgba(255, 255, 255, 0) 248.47%), #FFFFFF;
+  border: 1px solid #000000;
+  border-radius: 15px;
+  background-image: url(/image/jazz/modalBackground.png);
+}
+
+#ticketModal .modal-dialog .modal-header {
+  height: 41px;
+  padding-bottom: 0px;
+  padding-top: 0px;
+  align-items: flex-end;
+  border-bottom: var(--bs-modal-header-border-width) solid #000000;
+}
+
+#date-location {
+  width: 342px;
+  height: 80.04px;
+}
+
+#date-location p:first-child {
+  font-weight: 600;
+  font-size: 30px;
+  margin: 0px;
+}
+
+#date-location p {
+  font-weight: 300;
+  font-size: 24px;
+}
+
+.table-ticket {
+  border: 1px solid #000000;
+  border-radius: 10px;
+  overflow: hidden;
+  height: 80px;
+}
+
+.artist-time-range {
+  margin-left: 16px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none !important;
+  margin: 0 !important;
+}
+
+.artist-time-range p:first-child {
+  font-weight: 700;
+  font-size: 30px;
+  margin: 0px;
+}
+
+.artist-time-range p {
+  font-weight: 300;
+  font-size: 22px;
+}
+
+.quantityTickets {
+  margin-right: auto;
+  margin-left: 80px;
+}
+
+#ticketQuantity {
+  box-shadow: 0px 4px 0px #FEB548;
+  font-weight: 700;
+  font-size: 35px;
+  width: 171px;
+  border: 0px;
+}
+
+.modal-input {
+  margin-right: 30px;
+  margin-left: 30px !important;
+  background: #9B1C31;
+  border: 2px solid #262626;
+  box-shadow: 5px 5px 0px #FEB548;
+  border-radius: 8px;
+  width: 57px;
+  height: 41px;
+  justify-content: center;
+  align-items: center;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 30px;
+  color: white;
+  display: inherit;
+  border-radius: 10px !important;
+}
+
+.price {
+  margin-left: 70px;
+  margin-right: 16px;
+
+}
+
+.price:first {
+  margin-right: 80px;
+
+}
+
+.price p:first-child {
+  font-weight: 600;
+  font-size: 24px;
+}
+
+.price p {
+  font-weight: 300;
+  font-size: 22px;
+}
+
+.modal-body {
+  padding-left: 67px;
+  padding-right: 67px;
+  padding-top: 30px;
+}
+
+.modal-footer {
+  padding-left: 67px;
+  padding-right: 67px;
+  padding-bottom: 30px;
+  justify-content: flex-start;
+  border-top: 0px;
+}
+
+.modal-footer .buttonJazz:first-child {
+  margin-right: auto;
+
+}
+
+.modal-footer .buttonJazz {
+  font-weight: 600;
+  font-size: 30px;
+  width: 421.3px;
+}
+
+.primary-ticket {
+  background-color: #9B1C31;
+  color: white;
+}
+
+.secondary-ticket {
+  background-color: #FEB548;
+  color: #262626;
 }
