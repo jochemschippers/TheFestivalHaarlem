@@ -1,50 +1,50 @@
 
-document.addEventListener('DOMContentLoaded', (event) => {
-  const table = document.querySelector('#timeSlotsTable');
-  const select = document.querySelector('#rows-per-page');
-  let currentPage = 1;
+// document.addEventListener('DOMContentLoaded', (event) => {
+//   const table = document.querySelector('#timeSlotsTable');
+//   const select = document.querySelector('#rows-per-page');
+//   let currentPage = 1;
 
-  // Add page navigation elements
-  const pagination = document.createElement('div');
-  const prevButton = document.createElement('button');
-  const nextButton = document.createElement('button');
-  prevButton.textContent = 'Previous';
-  nextButton.textContent = 'Next';
-  pagination.appendChild(prevButton);
-  pagination.appendChild(nextButton);
-  table.parentElement.appendChild(pagination);
+//   // Add page navigation elements
+//   const pagination = document.createElement('div');
+//   const prevButton = document.createElement('button');
+//   const nextButton = document.createElement('button');
+//   prevButton.textContent = 'Previous';
+//   nextButton.textContent = 'Next';
+//   pagination.appendChild(prevButton);
+//   pagination.appendChild(nextButton);
+//   table.parentElement.appendChild(pagination);
 
-  const updateTable = () => {
-    const rowsPerPage = parseInt(select.value);
-    const rows = table.querySelectorAll('tbody tr');
-    const totalPages = Math.ceil(rows.length / rowsPerPage);
+//   const updateTable = () => {
+//     const rowsPerPage = parseInt(select.value);
+//     const rows = table.querySelectorAll('tbody tr');
+//     const totalPages = Math.ceil(rows.length / rowsPerPage);
     
-    // Update visibility of rows
-    for (let i = 0; i < rows.length; i++) {
-      if (Math.floor(i / rowsPerPage) + 1 === currentPage) {
-        rows[i].style.display = 'table-row';
-      } else {
-        rows[i].style.display = 'none';
-      }
-    }
+//     // Update visibility of rows
+//     for (let i = 0; i < rows.length; i++) {
+//       if (Math.floor(i / rowsPerPage) + 1 === currentPage) {
+//         rows[i].style.display = 'table-row';
+//       } else {
+//         rows[i].style.display = 'none';
+//       }
+//     }
 
-    // Update visibility and functionality of page navigation buttons
-    prevButton.disabled = currentPage === 1;
-    nextButton.disabled = currentPage === totalPages;
-    prevButton.onclick = () => { currentPage--; updateTable(); };
-    nextButton.onclick = () => { currentPage++; updateTable(); };
-  };
+//     // Update visibility and functionality of page navigation buttons
+//     prevButton.disabled = currentPage === 1;
+//     nextButton.disabled = currentPage === totalPages;
+//     prevButton.onclick = () => { currentPage--; updateTable(); };
+//     nextButton.onclick = () => { currentPage++; updateTable(); };
+//   };
 
-  // Handle change of rows per page
-  select.addEventListener('change', () => {
-    currentPage = 1;
-    updateTable();
-  });
+//   // Handle change of rows per page
+//   select.addEventListener('change', () => {
+//     currentPage = 1;
+//     updateTable();
+//   });
 
-  // Initial table update
-  updateTable();
-});
-// ----------------- EINDE TABEL FILTER ------------------
+//   // Initial table update
+//   updateTable();
+// });
+// // ----------------- EINDE TABEL FILTER ------------------
 
 // ----------------- HIER DE EDITRESTAURANT CHECKEN ------------------
 function checkEditRestaurantForm() {
@@ -318,3 +318,23 @@ function checkAddReservationForm() {
      return true;
  }
 // ----------------- EINDE ADDRESERVATION CHECKEN ------------------
+let dataTable = new DataTable("#dataTableRestaurants", {
+  searchable: true,
+  perPage: 10,
+  perPageSelect: [10, 25, 50, 100],
+  fixedHeight: true
+});
+
+let dataTableLocations = new DataTable("#dataTableLocations", {
+  searchable: true,
+  perPage: 10,
+  perPageSelect: [10, 25, 50, 100],
+  fixedHeight: true
+});
+
+let dataTableTimeSlots = new DataTable("#timeSlotsTable", {
+  searchable: true,
+  perPage: 10,
+  perPageSelect: [10, 25, 50, 100],
+  fixedHeight: true
+});

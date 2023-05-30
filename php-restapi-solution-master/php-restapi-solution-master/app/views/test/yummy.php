@@ -8,7 +8,7 @@
             <div class="table-responsive">
                 <div id="restaurants-table">
                     <?php if (!is_null($restaurants) && count($restaurants) > 0) { ?>
-                        <table>
+                        <table class="table table-bordered" id="dataTableRestaurants">
                             <thead>
                                 <tr>
                                     <th>ID</th>
@@ -212,7 +212,7 @@
             <div class="table-responsive">
                 <div id="reservations-table">
                     <?php if (!is_null($restaurantReservations) && count($restaurantReservations) > 0) { ?>
-                        <table>
+                        <table class="table table-bordered" id="dataTableLocations">
                             <thead>
                                 <tr>
                                     <th>TicketID</th>
@@ -390,7 +390,7 @@
             <div class="card-body">
                 <div id="timeSlotsYummy-table">
                     <?php if (!is_null($timeSlotsYummy) && count($timeSlotsYummy) > 0) { ?>
-                        <form>
+                        <!-- <form>
                             <label>Show
                                 <select id="rows-per-page">
                                     <option value="5">5</option>
@@ -400,8 +400,8 @@
                                 </select>
                                 rows per page
                             </label>
-                        </form>
-                        <table id="timeSlotsTable">
+                        </form> -->
+                        <table class="table table-bordered" id="timeSlotsTable">
                             <thead>
                                 <tr>
                                     <th>TimeSlotID</th>
@@ -501,7 +501,7 @@
             </div>
         </div>
     </div>
-    <div id="paginationControls"></div> <!-- houden -->
+    <!-- <div id="paginationControls"></div> houden -->
     
     <script src="../js/test/yummy.js"></script>
 </main>
