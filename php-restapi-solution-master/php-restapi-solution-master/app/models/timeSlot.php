@@ -9,7 +9,8 @@ class TimeSlot implements JsonSerializable
         private DateTime $startTime;
         private DateTime $endTime;
         private int $maximumAmountTickets;
-
+        private int $currentlyBoughtTickets;
+        private int $quantity;
         //made all options possible to be null. This is done so the Yummy page doesn't crash. The yummy admin page requires a timeslot that has different variables that are null
         public function __construct(?int $timeSlotID = null, ?int $eventID = null, ?float $price = null, ?DateTime $startTime = null, ?DateTime $endTime = null, ?int $maximumAmountTickets = null)
         {
@@ -36,7 +37,11 @@ class TimeSlot implements JsonSerializable
          */
         public function setStartTime($startTime)
         {
-                $this->startTime = $startTime;
+                if(getType($startTime) === 'string'){
+                        $this->startTime = DateTime::createFromFormat('Y-m-d H:i:s', $startTime);
+                }else{
+                        $this->startTime = $startTime;
+                }
 
                 return $this;
         }
@@ -55,8 +60,11 @@ class TimeSlot implements JsonSerializable
          */
         public function setEndTime($endTime)
         {
-                $this->endTime = $endTime;
-
+                if(getType($endTime) === 'string'){
+                        $this->endTime = DateTime::createFromFormat('Y-m-d H:i:s', $endTime);
+                }else{
+                        $this->endTime = $endTime;
+                }
                 return $this;
         }
 
@@ -148,6 +156,47 @@ class TimeSlot implements JsonSerializable
                         'startTime' => $this->startTime->format(DateTime::ATOM),
                         'endTime' => $this->endTime->format(DateTime::ATOM),
                         'maximumAmountTickets' => $this->maximumAmountTickets,
+                        'quantity' =>$this->getQuantity(),
                 ];
+        }
+
+        /**
+         * Get the value of currentlyBoughtTickets
+         */ 
+        public function getCurrentlyBoughtTickets()
+        {
+                return $this->currentlyBoughtTickets;
+        }
+
+        /**
+         * Set the value of currentlyBoughtTickets
+         *
+         * @return  self
+         */ 
+        public function setCurrentlyBoughtTickets($currentlyBoughtTickets)
+        {
+                $this->currentlyBoughtTickets = $currentlyBoughtTickets;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of quantity
+         */ 
+        public function getQuantity()
+        {
+                return $this->quantity;
+        }
+
+        /**
+         * Set the value of quantity
+         *
+         * @return  self
+         */ 
+        public function setQuantity($quantity)
+        {
+                $this->quantity = $quantity;
+
+                return $this;
         }
 }

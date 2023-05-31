@@ -43,7 +43,6 @@ class AccountService {
     }
     }
     public function logout(){
-        //was in controller, not sure if still works ^^
 
         //if user somehow tries to log out when user has no session. This prevents crash
         if (session_status() == PHP_SESSION_NONE) {

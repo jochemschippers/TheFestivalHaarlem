@@ -7,14 +7,62 @@ const alertMessage = document.getElementById("alert");
 //this is for the alert outside the modal, which should always just give an success.
 const successMessage = document.getElementById("successMessage")
 
-function showError(errorMessage) {
-    alertMessage.classList.remove('d-none');
-    if (alertMessage.classList.contains("success")) {
-        alertMessage.classList.remove("alert-success")
-    }
-    alertMessage.classList.add("alert-danger");
-    alertMessage.innerHTML = errorMessage;
-}
+const minDate = '2023-07-27T00:00';
+const maxDate = '2023-07-30T23:59';
+
+loadJsFilesFromFolder('/js/test/jazz/', ['halls.js', 'artists.js','timeSlots.js', 'locations.js']);
+
+let dataTableArtists = new DataTable("#dataTableArtists", {
+    searchable: true,
+    perPage: 10,
+    perPageSelect: [10, 25, 50, 100],
+    fixedHeight: true
+});
+
+
+let dataTableLocations = new DataTable("#dataTableLocations", {
+    searchable: true,
+    perPage: 10,
+    perPageSelect: [10, 25, 50, 100],
+    fixedHeight: true
+});
+
+let dataTableHalls = new DataTable("#dataTableHalls", {
+    searchable: true,
+    perPage: 10,
+    perPageSelect: [10, 25, 50, 100],
+    fixedHeight: true
+});
+
+let dataTableTimeSlotsJazz = new DataTable("#dataTableTimeslots", {
+    searchable: true,
+    perPage: 10,
+    perPageSelect: [10, 25, 50, 100],
+    fixedHeight: true
+});
+
+//create artist 
+
+
+
+//delete artists
+
+
+
+
+//edit update location methods
+
+
+
+
+
+
+// helper functions
+
+
+
+
+
 
 
 dynamicFormModal.addEventListener('submit', function (e) {
@@ -22,12 +70,6 @@ dynamicFormModal.addEventListener('submit', function (e) {
 });
 
 
-let dataTable = new DataTable("#dataTableArtists", {
-    searchable: true,
-    perPage: 10,
-    perPageSelect: [10, 25, 50, 100],
-    fixedHeight: true
-});
 
 
 function openModal(button, modalType) {
@@ -42,201 +84,30 @@ function openModal(button, modalType) {
     }
     else if (modalType === 'addArtist') {
         configureAddModalArtists();
-    }   
+    }
     else if (modalType === 'editLocation') {
         configureEditModalLocations(button);
     }
-
+    else if (modalType === 'deleteLocation') {
+        configureDeleteModalLocations(button);
+    }
+    else if (modalType === 'addLocation') {
+        configureAddModalLocations(button);
+    }
+    else if (modalType === 'editHall') {
+        configureEditModalHalls(button);
+    }
+    else if (modalType === 'editTimeSlot') {
+        configureEditModalTimeSlots(button);
+    }
+    else if (modalType === 'deleteTimeSlot') {
+        configureDeleteModalTimeSlots(button);
+    }
+    else if (modalType === 'addTimeSlot') {
+        configureAddModalTimeSlots(button);
+    }
     universalModal.show();
 }
-//update/edit artist functions
-function configureEditModalArtists(button) {
-    const row = button.closest("tr");
-    const fields = [
-        { id: 'artistIDInput', label: 'Artist ID', value: row.dataset.artistId, type: 'text', readonly: true },
-        { id: 'artistName', label: 'Artist Name', value: row.dataset.name, type: 'text' },
-        { id: 'descriptionInput', label: 'Description', value: row.dataset.description, type: 'textarea', rows: 5 },
-        { id: 'imagePathInput', label: 'Image Path', value: row.dataset.image, type: 'text' },
-        { id: 'imageSmallPathInput', label: 'Image Small Path', value: row.dataset.imageSmall, type: 'text' }
-    ];
-    modalLabel.textContent = 'Edit Artist';
-    confirmButton.textContent = 'Update';
-    confirmButton.onclick = () => updateArtist(row);
-    const form = generateForm(fields);
-    dynamicFormModal.innerHTML = '';
-    dynamicFormModal.appendChild(form);
-}
-function updateArtist(row) {
-    fetch('/test/updateArtist', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            artistID: document.querySelector('#artistIDInput').value,
-            artistName: document.querySelector('#artistName').value,
-            description: document.querySelector('#descriptionInput').value,
-            imagePath: document.querySelector('#imagePathInput').value,
-            imageSmallPath: document.querySelector('#imageSmallPathInput').value,
-        })
-    }).then(response => response.json())
-        .then(data => {
-            if (data.status === 1) {
-                // Update the table row with the new data
-                row.dataset.artistId = document.querySelector('#artistIDInput').value;
-                row.dataset.name = document.querySelector('#artistName').value;
-                row.dataset.description = document.querySelector('#descriptionInput').value;
-                row.dataset.image = document.querySelector('#imagePathInput').value;
-                row.dataset.imageSmall = document.querySelector('#imageSmallPathInput').value;
-
-                const columns = row.children;
-                columns[1].textContent = document.querySelector('#artistName').value;
-                columns[2].textContent = (document.querySelector('#descriptionInput').value).substring(0, 80) + "...";
-                columns[3].textContent = document.querySelector('#imagePathInput').value;
-                columns[4].textContent = document.querySelector('#imageSmallPathInput').value;
-                successMessage.classList.remove("d-none");
-                successMessage.innerHTML = data.message;
-                universalModal.hide();
-            }
-            else {
-                showError(data.message);
-            }
-        })
-        .catch(error => {
-            showError("Something went wrong! Please try again later");
-        });
-}
-
-
-
-//create artist functions
-function configureAddModalArtists() {
-    const fields = [
-        { id: 'artistName', label: 'Artist Name', value: '', type: 'text' },
-        { id: 'descriptionInput', label: 'Description', value: '', type: 'textarea', rows: 5 },
-        { id: 'imagePathInput', label: 'Image Path', value: '', type: 'text' },
-        { id: 'imageSmallPathInput', label: 'Image Small Path', value: '', type: 'text' }
-    ];
-    modalLabel.textContent = 'Add Artist';
-    confirmButton.textContent = 'create';
-    confirmButton.onclick = () => createArtist();
-    const form = generateForm(fields);
-    dynamicFormModal.innerHTML = '';
-    dynamicFormModal.appendChild(form);
-}
-
-function createArtist() {
-    fetch('/test/createArtist', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            artistName: document.querySelector('#artistName').value,
-            description: document.querySelector('#descriptionInput').value,
-            imagePath: document.querySelector('#imagePathInput').value,
-            imageSmallPath: document.querySelector('#imageSmallPathInput').value,
-        })
-    }).then(response => response.json())
-        .then(data => {
-            if (data.status === 1) {
-                addNewRowToTable({
-                    artistID: data["artist"]["artistID"],
-                    artistName: data["artist"]["name"],
-                    description: data["artist"]["description"],
-                    imagePath: data["artist"]["imagePath"],
-                    imageSmallPath: data["artist"]["imageSmallPath"]
-                });
-                successMessage.classList.remove("d-none");
-                successMessage.innerHTML = data.message;
-                universalModal.hide();
-            }
-            else {
-                showError(data.message);
-            }
-        })
-        .catch(error => {
-            showError("Something went wrong! Please try again later");
-        });
-}
-function addNewRowToTable(data) {
-    // Access the underlying table element
-    const tableElement = dataTable.table;
-
-    // Insert a new row to the table
-    const newRow = tableElement.insertRow(-1);
-
-    newRow.dataset.artistId = data.artistID;
-    newRow.dataset.name = data.artistName;
-    newRow.dataset.description = data.description;
-    newRow.dataset.image = data.imagePath;
-    newRow.dataset.imageSmall = data.imageSmallPath;
-
-    newRow.insertCell(0).textContent = data.artistID;
-    newRow.insertCell(1).textContent = data.artistName;
-    newRow.insertCell(2).textContent = data.description.substring(0, 80) + "...";
-    newRow.insertCell(3).textContent = data.imagePath;
-    newRow.insertCell(4).textContent = data.imageSmallPath;
-
-    let editCell = document.createElement('td');
-    editCell.innerHTML = '<button class="btn btn-primary" style="margin-right:15px;" onclick="openModal(this, \'edit\')">edit</button>';
-    newRow.appendChild(editCell);
-
-    let deleteCell = document.createElement('td');
-    deleteCell.innerHTML = '<button class="btn btn-danger" onclick="openModal(this, \'delete\')">delete</button>';
-    newRow.appendChild(deleteCell);
-    goToLastPage();
-}
-function goToLastPage() {
-    // Calculate the last page index
-    const perPage = dataTable.options.perPage;
-    const rowCount = dataTable.data.length;
-    const lastPageIndex = Math.ceil(rowCount / perPage);
-    dataTable.page(lastPageIndex);
-}
-
-
-
-//delete artists functions
-
-function configureDeleteModalArtists(button) {
-    modalLabel.textContent = 'Delete Artist';
-    confirmButton.textContent = 'Delete';
-    confirmButton.className = 'btn btn-danger';
-    dynamicFormModal.innerHTML = 'Are you <strong>POSITIVE</strong> you want to delete this artist? <strong>This will also delete the timeslot corresponding to the artist</strong>';
-    confirmButton.onclick = () => confirmDeleteArtist(button.closest("tr"));
-}
-
-function confirmDeleteArtist(row) {
-    const artistID = row.dataset.artistId;
-    fetch('/test/deleteArtist', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            artistID: artistID
-        })
-    }).then(response => response.json())
-        .then(data => {
-            if (data.status === 1) {
-                successMessage.classList.remove("d-none");
-                successMessage.innerHTML = data.message;
-                row.remove();
-                universalModal.hide();
-            }
-            else {
-                showError(data.message);
-            }
-        })
-        .catch(error => {
-            alertMessage.classList.remove('d-none');
-            alertMessage.value = "Something went wrong! Please try again later";
-        });
-}
-
-
-
 
 function generateForm(fields) {
     const form = document.createElement('form');
@@ -258,16 +129,14 @@ function generateForm(fields) {
     return form;
 }
 function createInput(field) {
-    var input;
-    //create tag
+    let input;
+
     if (field.type === 'textarea') {
-        input = document.createElement('textarea');
-        if (field.rows) {
-            input.rows = field.rows;
-        }
+        input = createTextareaInput(field);
+    } else if (field.type === 'dropdown') {
+        input = createDropdownInput(field);
     } else {
-        input = document.createElement('input');
-        input.type = field.type;
+        input = createBasicInput(field);
     }
 
     input.id = field.id;
@@ -277,89 +146,43 @@ function createInput(field) {
         input.readOnly = true;
     }
 
-    input.value = field.value;
-    if (field.readonly) {
-        input.readOnly = true;
-    }
     return input;
 }
-
-
-// code for locations table: 
-
-const dataTableLocations = new DataTable("#dataTableLocations", {
-    searchable: true,
-    perPage: 10,
-    perPageSelect: [10, 25, 50, 100],
-    fixedHeight: true
-});
-
-
-//edit update location methods
-function configureEditModalLocations(button) {
-    const row = button.closest("tr");
-    const fields = [
-        { id: 'locationIDInput', label: 'Location ID', value: row.dataset.locationId, type: 'text', readonly: true },
-        { id: 'locationNameInput', label: 'Location Name', value: row.dataset.locationName, type: 'text' },
-        { id: 'addressInput', label: 'Address', value: row.dataset.address, type: 'text' },
-        { id: 'imagePathInput', label: 'Image Path', value: row.dataset.image, type: 'text' },
-        { id: 'toAndFromText', label: 'To And From Text', value: row.dataset.toAndFromText, type: 'textarea', rows: 5 },
-        { id: 'accessibilityText', label: 'To And From Text', value: row.dataset.accessibilityText, type: 'textarea', rows: 5 }
-    ];
-    modalLabel.textContent = 'Edit Locations';
-    confirmButton.textContent = 'Update';
-    confirmButton.onclick = () => updateLocation(row);
-
-    const form = generateForm(fields);
-    dynamicFormModal.innerHTML = '';
-    dynamicFormModal.appendChild(form);
+function createTextareaInput(field) {
+    let input = document.createElement('textarea');
+    if (field.rows) {
+        input.rows = field.rows;
+    }
+    input.value = field.value;
+    return input;
 }
-function updateLocation(row) {
-    fetch('/test/updateLocation', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            locationID: row.dataset.locationId,
-            locationName: document.querySelector('#locationNameInput').value,
-            address: document.querySelector('#addressInput').value,
-            imagePath: document.querySelector('#imagePathInput').value,
-            toAndFromText: document.querySelector('#toAndFromText').value,
-            accessibilityText: document.querySelector('#toAndFromText').value,
-        })
-    }).then(response => response.json())
-        .then(data => {
-            if (data.status === 1) {
-                  // Update the table row with the new data
-                  row.dataset.locationId = row.dataset.locationId,
-                  row.dataset.locationName = document.querySelector('#locationNameInput').value;
-                  row.dataset.description = document.querySelector('#addressInput').value;
-                  row.dataset.image = document.querySelector('#imagePathInput').value;
-                  row.dataset.imageSmall = document.querySelector('#toAndFromText').value;
-                  row.dataset.accessibilityText = document.querySelector('#toAndFromText').value;
-  
-                  const columns = row.children;
-                  columns[1].textContent = document.querySelector('#locationNameInput').value;
-                  columns[2].textContent = document.querySelector('#addressInput').value;
-                  columns[3].textContent = document.querySelector('#imagePathInput').value;
-                  columns[4].textContent = (document.querySelector('#toAndFromText').value).substring(0, 80) + "...";
-                  columns[5].textContent = (document.querySelector('#toAndFromText').value).substring(0, 80) + "...";
+function createDropdownInput(field) {
+    let input = document.createElement('select');
+    field.source.activeRows.forEach(row => {
+        const option = document.createElement('option');
+        option.value = row.children[0].textContent;
+        option.text = row.children[1].textContent;
+        if (option.value === field.value) {
+            option.selected = true;
+            if (field.id === "hallNameInput" && field.locationID != row.children[2].textContent) {
+                console.log(field.locationID);
+                option.selected = false;
+            }
+        }
+        input.add(option);
+    });
+    return input;
+}
+function createBasicInput(field) {
+    let input = document.createElement('input');
+    input.type = field.type;
 
-                successMessage.classList.remove("d-none");
-                successMessage.innerHTML = data.message;
-                universalModal.hide();
-            }
-            else {
-                showError(data.message);
-            }
-            if (data.status === 1) {
-                alertMessage.classList.remove('alert-danger');
-                alertMessage.classList.add('alert-success');
-            }
-        })
-        .catch(error => {
-            alertMessage.classList.remove('d-none');
-            alertMessage.value = "Something went wrong! Please try again later";
-        });
+    if (field.type === 'datetime-local') {
+        input.min = minDate;
+        input.max = maxDate;
+        input.step = '60';
+    }
+
+    input.value = field.value;
+    return input;
 }
