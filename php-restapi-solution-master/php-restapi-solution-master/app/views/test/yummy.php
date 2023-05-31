@@ -318,11 +318,9 @@
                                 <?php } ?>
                             </tbody>
                         </table>
-                    <?php
-                    } else { ?>
+                    <?php } else { ?>
                         <p>No reservations found. Please try again later or add more reservations.</p>
-                    <?php }
-                    ?>
+                    <?php } ?>
                     <div class="row">
                         <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addReservationModal">Add reservation</button>
                         <div class="modal fade" tabindex="-1" id="addReservationModal" aria-hidden="true">

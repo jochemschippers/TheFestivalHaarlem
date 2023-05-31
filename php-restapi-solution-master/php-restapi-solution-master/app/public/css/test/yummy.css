@@ -10,6 +10,6 @@ td {
     max-width: 150px;
     min-width: auto;
 }
-.dataTableLocations{
-   overflow: hidden;
+.modal-content{
+  overflow: hidden;
 }
