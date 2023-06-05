@@ -77,4 +77,3 @@ class paymentpageController extends Controller
         echo json_encode($response);
     }
 }
-?>

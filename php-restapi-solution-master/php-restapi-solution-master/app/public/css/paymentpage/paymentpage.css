@@ -1,104 +1,114 @@
+thead {
+  background-color: gray;
+}
 
-  thead{
-    background-color: gray;
-  }
-  #tableTickets{
-    background-color: lightgray;
-  }
-  #background{
-    width: 100%;
-  }
-  #progressContainer{   
-    max-width: 100vw;
-    width: auto;
-  }
-  #container{
-    background-color: gainsboro;
-    padding: 1%;
-    max-width: 100vw;
-    height: auto;
-  }
-  #tablePrice{
-    background-color: lightgray;
-    width: 50%;
-    margin-left: auto;
-  }
-  #left{
-    background-color: darkgray;
-    padding: 10;
-  }
-  .continue-btn{
-    background-color: 961B1B;
-    border-color: white;
-    color: white;
+#tableTickets {
+  background-color: lightgray;
+}
 
-  }
-  #continueButton{
-    width: 50%;
-    display: block;
-    margin-left: auto;
-  }
-  body {
-    background-color: darkgray;
+#background {
+  width: 100%;
+}
+
+#progressContainer {
+  max-width: 100vw;
+  width: auto;
+}
+
+#container {
+  background-color: gainsboro;
+  padding: 1%;
+  max-width: 100vw;
+  height: auto;
+}
+
+#tablePrice {
+  background-color: lightgray;
+  width: 50%;
+  margin-left: auto;
+}
+
+#left {
+  background-color: darkgray;
+  padding: 10;
+}
+
+.continue-btn {
+  background-color: 961B1B;
+  border-color: white;
+  color: white;
+
+}
+
+#continueButton {
+  width: 50%;
+  display: block;
+  margin-left: auto;
+}
+
+body {
+  background-color: darkgray;
 }
 
 .card {
-    z-index: 0;
-    background-color: #ECEFF1;
-    margin: 10px;
+  z-index: 0;
+  background-color: #ECEFF1;
+  margin: 10px;
 }
 
 .top {
-    padding-left: 13% !important;
-    padding-right: 13% !important;
+  padding-left: 13% !important;
+  padding-right: 13% !important;
 }
 
 /*Icon progressbar*/
 #progressbar {
-    overflow: hidden;
-    color: #262626;
-    padding-left: 0px;
-    margin-top: 1%;
-} 
+  overflow: hidden;
+  color: #262626;
+  padding-left: 0px;
+  margin-top: 1%;
+}
 
 #progressbar li {
-    list-style-type: none;
-    font-size: 13px;
-    width: 25%;
-    float: left;
-    position: relative;
-    font-weight: 400;
+  list-style-type: none;
+  font-size: 13px;
+  width: 33.33%;
+  float: left;
+  position: relative;
+  font-weight: 400;
+  color: #262626 !important;
 }
 
 #progressbar .step0:before {
-    font-family: FontAwesome;
-    content: "\f10c";
-    color: #262626;
+  font-family: FontAwesome;
+  content: "\f10c";
+  color: #262626;
 }
 
 #progressbar li:before {
-    width: 40px;
-    height: 40px;
-    line-height: 45px;
-    display: block;
-    font-size: 20px;
-    background: #D4D4D4;
-    border-radius: 50%;
-    margin: auto;
-    padding: 0px;
+  width: 40px;
+  height: 40px;
+  line-height: 45px;
+  display: block;
+  font-size: 20px;
+  background: #D4D4D4;
+  border-radius: 50%;
+  margin: auto;
+  padding: 0px;
 }
 
 /*ProgressBar connectors*/
 #progressbar li:after {
-    content: '';
-    width: 100%;
-    height: 12px;
-    background: #D4D4D4;
-    position: absolute;
-    left: 0;
-    top: 16px;
-    z-index: -1;
+  content: '';
+  width: 100%;
+  height: 12px;
+  background: #D4D4D4;
+  position: absolute;
+  left: 0;
+  top: 16px;
+  z-index: -1;
 }
+
 .alert {
   position: fixed;
   bottom: 0px;
@@ -110,70 +120,87 @@
 .bi {
   margin-right: .5em;
 }
-#progressbar li:last-child:after {
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-    position: absolute;
-    left: -50%;
-}
-
-#progressbar li:nth-child(2):after, #progressbar li:nth-child(3):after {
-    left: -50%;
-}
-#progressbar li:first-child:after {
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
-    position: absolute;
-    left: 50%;
-    width:50%;
-}
 
 #progressbar li:last-child:after {
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  position: absolute;
+  left: -50%;
+}
+
+#progressbar li:nth-child(2):after,
+#progressbar li:nth-child(3):after {
+  left: -50%;
 }
 
 #progressbar li:first-child:after {
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  position: absolute;
+  left: 50%;
+  width: 50%;
+}
+
+#progressbar li:last-child:after {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+#progressbar li:first-child:after {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
 }
 
 /*Color number of the step and the connector before it*/
-#progressbar li.active:before, #progressbar li.active:after {
-    background: #8CCC3D;
+#progressbar li.active:before,
+#progressbar li.active:after {
+  background: #8CCC3D;
 }
 
 #progressbar li.active:before {
-    font-family: FontAwesome;
-    content: "\f00c";
+  font-family: FontAwesome;
+  content: "\f00c";
 }
 
 .icon {
-    width: 80px;
-    height: 60px;
-    margin-right: 15px;
+  width: 80px;
+  height: 60px;
+  margin-right: 15px;
 }
-.icon-content { 
-    padding-bottom: .5%;
+
+.icon-content {
+  padding-bottom: .5%;
 }
-#flex .icon{
+
+#flex .icon {
   margin-left: 123.583;
 }
-#flex{
+
+#flex {
   width: 25%;
 }
-#row-width{
+
+#row-width {
   width: 100vw;
   padding-right: 0px !important;
   padding-left: 0px !important;
 }
+
 #progressbar i {
   display: block;
   margin-bottom: 5px;
   margin-top: 10px;
+  color:#262626;
+  text-decoration: none !important;
 }
 
 #progressbar p {
   font-size: 13px;
   margin: 0;
+}
+
+.step0 a{
+  text-decoration:none;
+  color:#262626;
+  
 }

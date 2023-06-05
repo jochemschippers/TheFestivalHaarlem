@@ -19,9 +19,13 @@ fetch('paymentpage/getPersonalProgramItems', {
     })
 }).then(response => response.json())
     .then(data => {
-        console.log(data);
         if (data['status'] == 0) {
             showWarning(data['message'])
+            let continueButton = document.getElementById('continueButton');
+            continueButton.classList.add('btn-secondary');
+            continueButton.classList.remove('btn-primary');
+            continueButton.href = 'javascript:void(0)'; 
+            continueButton.textContent = 'Cart is empty!'
         }
         else {
             if (data['status'] == 1)
@@ -34,8 +38,9 @@ fetch('paymentpage/getPersonalProgramItems', {
         }
     })
     .catch(error => {
-        console.error('Error fetching timeslots data:', error);
+        showWarning('Error while loading the personal program. Please try again later.');
     });
+
 document.getElementById('share-btn').addEventListener('click', () => {
     const link = window.location.origin + "/share/" + userId;
 
@@ -110,6 +115,15 @@ function createTimeslotRowJazz(timeslot) {
 function fillPriceTable(timeslots) {
     const priceTableBody = document.getElementById('priceTableBody');
     priceTableBody.innerHTML = ""; // Clear existing rows
+
+    const { subtotal, vat, total } = calculateTotals(timeslots);
+
+    
+    addRowToTable(priceTableBody, 'Subtotal', `€${subtotal.toFixed(2)}`);
+    addRowToTable(priceTableBody, 'VAT (9%)', `€${vat.toFixed(2)}`);
+    addRowToTable(priceTableBody, 'Total', `€${total.toFixed(2)}`);
+}
+function calculateTotals(timeslots) {
     let subtotal = 0;
     let vat = 0;
 
@@ -122,10 +136,9 @@ function fillPriceTable(timeslots) {
     });
 
     const total = subtotal + vat;
-    addRowToTable(priceTableBody, 'Subtotal', `€${subtotal.toFixed(2)}`);
-    addRowToTable(priceTableBody, 'VAT (9%)', `€${vat.toFixed(2)}`);
-    addRowToTable(priceTableBody, 'Total', `€${total.toFixed(2)}`);
+    return { subtotal, vat, total };
 }
+
 function addRowToTable(tableBody, label, value) {
     const row = document.createElement('tr');
     const labelCell = document.createElement('td');

@@ -1,27 +1,3 @@
-<?php
-// Create an array of test data for tickets
-$tickets = array(
-    array(
-        "id" => 1234,
-        "date" => "2023-03-15",
-        "name" => "John Smith",
-        "price" => 50,
-        "amount" => 2
-    ),
-    array(
-        "id" => 2345,
-        "date" => "2023-03-16",
-        "name" => "Jane Doe",
-        "price" => 40,
-        "amount" => 1
-    ),
-    // Add more tickets as you wish
-);
-
-// Initialize a variable to store the grand total
-$grand_total = 0;
-?>
-
 <body>
     <img id="background" src="\image\Payment\overview\backgroundpayment.png">
 
@@ -41,10 +17,6 @@ $grand_total = 0;
                         <li class="active step0">
                             <i class="fa fa-magnifying-glass-dollar fa-3x"></i>
                             <p>Review tickets</p>
-                        </li>
-                        <li class="step0">
-                            <i class="fa fa-sign-in-alt fa-3x"></i>
-                            <p>Login</p>
                         </li>
                         <li class="step0">
                             <i class="fa fa-credit-card fa-3x"></i>
@@ -81,26 +53,6 @@ $grand_total = 0;
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- <tr>
-                            <td>
-                                Gare du Nord <br> July 28, 18:00 - 19:00
-                            </td>
-                            <td>
-                                Location: <br> Patronaat
-                            </td>
-                            <td>
-                                Total price: <br> €30
-                            </td>
-                            <td>
-                                Amount <br>
-                                <input type="number" value="2" min="1">
-                                <button>+</button>
-                                <button>-</button>
-                            </td>
-                            <td>
-                                <button>Delete</button>
-                            </td>
-                        </tr> -->
                     </tbody>
                 </table>
                 <table class="table" id="tableTickets">
@@ -110,26 +62,6 @@ $grand_total = 0;
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- <tr>
-                            <td>
-                                Ratatouille <br> July 29, 19:00 - 21:00
-                            </td>
-                            <td>
-                                Location: <br> Ratatouille
-                            </td>
-                            <td>
-                                Total price: <br> €40
-                            </td>
-                            <td>
-                                Amount <br>
-                                <input type="number" value="4" min="1">
-                                <button>+</button>
-                                <button>-</button>
-                            </td>
-                            <td>
-                                <button>Delete</button>
-                            </td>
-                        </tr> -->
                     </tbody>
                 </table>
             </div>
@@ -155,7 +87,7 @@ $grand_total = 0;
                     $buttonHref = 'javascript:void(0)';
                 }
                 ?>
-                <a href="<?php echo $buttonHref; ?>" class="btn <?php echo $buttonClass; ?>" id="continueButton"><?php echo $buttonText; ?></a>
+                <a href="<?= $buttonHref; ?>" class="btn <?= $buttonClass; ?>" id="continueButton"><?php echo $buttonText; ?></a>
             </div>
         </div>
         <button id="share-btn" class="btn btn-primary">Share Personal Program</button>
