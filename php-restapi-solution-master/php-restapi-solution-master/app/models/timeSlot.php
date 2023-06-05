@@ -158,6 +158,7 @@ class TimeSlot implements JsonSerializable
                         'endTime' => $this->endTime->format(DateTime::ATOM),
                         'maximumAmountTickets' => $this->maximumAmountTickets,
                         'quantity' =>$this->getQuantity(),
+                        'currentlyBoughtTickets' => $this->currentlyBoughtTickets
                 ];
         }
 
