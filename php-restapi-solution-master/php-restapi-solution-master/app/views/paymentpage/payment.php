@@ -42,5 +42,7 @@
     </div>
   </div>
   <div id="payContainer">
+  <?php
+?>
   </div>
 </body>

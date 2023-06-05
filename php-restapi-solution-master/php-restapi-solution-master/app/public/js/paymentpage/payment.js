@@ -11,7 +11,7 @@ fetch('/paymentpage/getPersonalProgramItems', {
   .then(data => {
     if (data['status'] == 2) {
         const timeslots = data['tickets'];
-        initiateMolliePayment(calculateTotals(timeslots)["total"]);
+        calculateTotals(timeslots)["total"];
     }
   })
   .catch(error => {
