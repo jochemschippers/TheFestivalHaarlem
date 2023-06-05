@@ -229,7 +229,7 @@ class JazzService
             throw new ErrorException("Start time must be earlier than end time.");
         }
         if ($start < $festivalStart) {
-            throw new ErrorException("Start time must be later than atleast the{$festivalStart->format('jS \o\f F')}");
+            throw new ErrorException("Start time must be later than atleast the {$festivalStart->format('jS \o\f F')}");
         }
         if ($end > $festivalEnd) {
             throw new ErrorException("End time must be earlier than or equal to the {$festivalEnd->format('jS \o\f F')}");

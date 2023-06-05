@@ -13,6 +13,9 @@ class ApiService {
         // retrieve data
         return $this->repository->getAll();
     }
+    public function getMollie(){
+        return $this->repository->getMollie();
+    }
     public function create($data) {
         // retrieve data
         return $this->repository->create($data);

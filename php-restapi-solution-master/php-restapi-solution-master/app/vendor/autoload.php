@@ -4,10 +4,5 @@
 
 $loader = require_once __DIR__.'/composer-autoload.php';
 
-// Aliases for the whitelisted classes. For more information see:
-// https://github.com/humbug/php-scoper/blob/master/README.md#class-whitelisting
-if (!class_exists('ComposerAutoloaderInit324b4f85a17a789be41bb3fb426e028c', false) && !interface_exists('ComposerAutoloaderInit324b4f85a17a789be41bb3fb426e028c', false) && !trait_exists('ComposerAutoloaderInit324b4f85a17a789be41bb3fb426e028c', false)) {
-    spl_autoload_call('_PhpScopera9ad0faf21db\ComposerAutoloaderInit324b4f85a17a789be41bb3fb426e028c');
-}
 
 return $loader;

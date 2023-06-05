@@ -20,6 +20,7 @@ class TimeSlot implements JsonSerializable
                 $this->startTime = $startTime ?? new DateTime();
                 $this->endTime = $endTime ?? new DateTime();
                 $this->maximumAmountTickets = $maximumAmountTickets ?? 0;
+                $this->quantity = 0;
         }
 
         /**

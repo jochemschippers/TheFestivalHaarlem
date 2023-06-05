@@ -31,6 +31,17 @@ class ApiRepository extends Repository
             echo $e;
         }
     }
+    public function getMollie(){
+         try {
+            // query
+            $stmt = $this->connection->prepare("SELECT APIKEY FROM APIs WHERE APIName = ?");
+
+            return $stmt->execute(['Mollie']);
+        } catch (PDOException $e) {
+            echo $e;
+        }
+    }
+
     
     public function create($data)
     {

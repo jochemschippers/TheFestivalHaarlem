@@ -104,7 +104,7 @@ class TestController extends Controller
                     // Update the value in constructor arguments to the casted value, prevents error in the object creation class
                     $constructorArgs[$index] = $castedValue;
                 } else {
-                    throw new TypeError("Something went wrong! We expected {$expectedType} for the {$key}, {$type} given. Please check the provided data.");
+                    throw new TypeError("Something went wrong! We expected a {$expectedType} value for the {$this->toReadableString($key)}, but a {$type} value was given. Please check the provided data.");
                 }
             }
         }
@@ -122,9 +122,13 @@ class TestController extends Controller
             try {
                 $setter = 'set' . ucfirst($key);
                 if (method_exists($object, $setter)) {
-                    $object->{$setter}($constructorArgs[$i]);
+                    try{
+                        $object->{$setter}($constructorArgs[$i]);
+                    }catch(TypeError $e){
+                        throw new TypeError("{$this->toReadableString($key)} has invalid parameters. Please check the provided data.");
+                    }
                 } else {
-                    throw new TypeError("Invalid property: {$key}. Please check the provided data.");
+                    throw new TypeError("Invalid property: {$this->toReadableString($key)}. Please check the provided data.");
                 }
             } catch (TypeError $e) {
                 throw $e;
@@ -312,6 +316,13 @@ class TestController extends Controller
         });
     }
 
+    function toReadableString($input) {
+        $output = preg_replace('/(?<=\\w)(?=[A-Z])/'," $1", $input);
+        $output = ucfirst($output);
+    
+        return $output;
+    }
+    
 
 
     // Yummy -------------------------------------
