@@ -24,7 +24,7 @@ class CartService
                     $changedItemsCount += 1;
                 }
                 if($item['quantity'] != 0)
-                {
+                {// TODO: toevoegen yummy timeslotID. Ook zorgen dat in de frontend de reservering informatie wordt doorgegeven/opgeslagen.
                     $ticket = $this->repository->getJazzTimeSlotById($item['id']);
                     $ticket->setQuantity($item['quantity']);
                     $cartItems[] = $ticket;

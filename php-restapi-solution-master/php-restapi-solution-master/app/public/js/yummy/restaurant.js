@@ -2,6 +2,8 @@
 // alert("The file has been reached.");
 // console.log("The file has been reached.");
 
+// ADD TO PERSONAL PROGRAM
+
 
 {/* <div class="modal-body"></div> */}
 document.querySelectorAll('.modal-body').forEach(modalBody => {
@@ -149,8 +151,18 @@ function checkForm() {
     }
 
     // Input is valid, submit form
-    submitForm(() => closeModal());
-    return true;
+
+    const quantity = parseInt(nrAdult.value + nrChild.value);
+    const ticketID = timeSlot.value;
+    let currentMaximum = 20;
+    if(getQuantityByID(ticketID) + quantity < currentMaximum)
+    {
+        addToPersonalProgram(ticketID, quantity);
+    }
+
+
+    // submitForm(() => closeModal());
+    // return true;
 }
 
 function checkPhoneNumber(phoneNr) {

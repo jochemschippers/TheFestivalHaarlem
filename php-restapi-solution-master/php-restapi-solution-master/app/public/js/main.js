@@ -11,7 +11,7 @@ function addToPersonalProgram(timeSlotID, quantity) {
     quantity = Math.max(quantity, 1);
     personalProgram = JSON.parse(sessionStorage.getItem('personalProgram')) || [];
     
-    const existingTicket = personalProgram.find(item => item.id === timeSlotID);
+    const existingTicket = personalProgram.find(ticket => ticket.id === timeSlotID);
     if (isNaN(quantity) || quantity <= 0) {
         console.error("Something went wrong while adding to the personal program. Please check if the quantity is correct.");
     } else if(isNaN(timeSlotID) || timeSlotID <= null){

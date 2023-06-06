@@ -8,6 +8,7 @@ let successText = successAlert.querySelector('p');
 let warningText = warningAlert.querySelector('p');
 
 const ticketsTableBodyJazz = document.getElementById('tableJazz').getElementsByTagName('tbody')[0];
+const ticketsTableBodyYummy = document.getElementById('tableYummy').getElementsByTagName('tbody')[0];
 
 fetch('paymentpage/getPersonalProgramItems', {
     method: 'POST',
@@ -24,7 +25,7 @@ fetch('paymentpage/getPersonalProgramItems', {
             let continueButton = document.getElementById('continueButton');
             continueButton.classList.add('btn-secondary');
             continueButton.classList.remove('btn-primary');
-            continueButton.href = 'javascript:void(0)'; 
+            continueButton.href = 'javascript:void(0)';
             continueButton.textContent = 'Cart is empty!'
         }
         else {
@@ -57,17 +58,42 @@ document.getElementById('copy-btn').addEventListener('click', () => {
     shareLinkInput.select();
     document.execCommand('copy');
 });
+// function displayTimeslots(timeslots) {
+//     updatePersonalProgram(timeslots);
+//     ticketsTableBodyJazz.innerHTML = ""; // Clear existing rows
+//     ticketsTableBodyYummy.innerHTML = ""; // Clear existing rows
+//     timeslots.forEach(timeslot => {
+//         if (timeslot.eventID == 1) {
+//             const timeslotRow = createTimeslotRowJazz(timeslot);
+//             ticketsTableBodyJazz.appendChild(timeslotRow);
+//         }
+//         if (timeslot.eventID == 2) {
+//             const timeslotRow = createTimeslotRowYummy(timeslot);
+//             ticketsTableBodyYummy.appendChild(timeslotRow);
+//         }
+//     });
+//     fillPriceTable(timeslots);
+// }
+
 function displayTimeslots(timeslots) {
     updatePersonalProgram(timeslots);
     ticketsTableBodyJazz.innerHTML = ""; // Clear existing rows
-    timeslots.forEach(timeslot => {
+    ticketsTableBodyYummy.innerHTML = ""; // Clear existing rows
+
+    for (let index = 0; index < timeslots.length; index++) {
+        const timeslot = timeslots[index];
         if (timeslot.eventID == 1) {
-            const timeslotRow = createTimeslotRowJazz(timeslot);
+            const timeslotRow = createTimeslotRowJazz(timeslot, index);
             ticketsTableBodyJazz.appendChild(timeslotRow);
         }
-    });
+        if (timeslot.eventID == 2) {
+            const timeslotRow = createTimeslotRowYummy(timeslot, index); // call naar restaurant reservering info toevoegen.
+            ticketsTableBodyYummy.appendChild(timeslotRow);
+        }
+    }
     fillPriceTable(timeslots);
 }
+
 function updatePersonalProgram(timeslots) {
     //delete the pp from storage
     sessionStorage.setItem('personalProgram', JSON.stringify([]));
@@ -78,7 +104,8 @@ function updatePersonalProgram(timeslots) {
     sessionStorage.setItem('personalProgram', JSON.stringify(personalProgram));
     updateCartItemDisplay(personalProgram);
 }
-function createTimeslotRowJazz(timeslot) {
+
+function createTimeslotRowJazz(timeslot, index) {
     const row = document.createElement('tr');
 
     const options = { month: 'long', day: 'numeric' };
@@ -95,15 +122,179 @@ function createTimeslotRowJazz(timeslot) {
     priceCell.innerHTML = `Total price: <br> €${timeslot.price}`;
 
     const amountCell = document.createElement('td');
-    amountCell.innerHTML = `Amount <br>
-    <input type="number" value="${timeslot.quantity}" min="1">
-    <button>+</button>
-    <button>-</button>`;
+    const amountText = document.createTextNode('Amount');
+    const input = document.createElement('input');
+    input.type = "number";
+    input.value = timeslot.quantity;
+    input.min = "1";
+    input.max = timeslot.maxTickets;
+    input.id = `inputField${index}`;
+    const minusButton = document.createElement('button');
+    minusButton.id = `minusButton${index}`;
+    minusButton.className = 'btn btn-primary';
+    minusButton.innerText = '-';
+    minusButton.addEventListener('click', function () {
+        var inputField = document.getElementById(`inputField${index}`);
+        if (parseInt(inputField.value, 10) > 1) {
+            inputField.value = parseInt(inputField.value, 10) - 1;
+        }
+    });
+    const plusButton = document.createElement('button');
+    plusButton.id = `plusButton${index}`;
+    plusButton.className = 'btn btn-primary';
+    plusButton.innerText = '+';
+    plusButton.addEventListener('click', function () {
+        var inputField = document.getElementById(`inputField${index}`);
+        inputField.value = parseInt(inputField.value, 10) + 1;
+    });
+    amountCell.appendChild(amountText);
+    amountCell.appendChild(input);
+    amountCell.appendChild(plusButton);
+    amountCell.appendChild(minusButton);
+
+    const deleteButton = document.createElement('button');
+    deleteButton.className = 'btn btn-danger';
+    deleteButton.id = `deleteButton${index}`;
+    deleteButton.innerText = 'Delete';
+    deleteButton.addEventListener('click', function () {
+        // Delete the timeslot from the timeslots array
+        timeslots.splice(timeslots.indexOf(timeslot), 1);
+        // Redraw the table
+        displayTimeslots(timeslots);
+    });
 
     const deleteCell = document.createElement('td');
-    deleteCell.innerHTML = `<button>Delete</button>`;
+    deleteCell.appendChild(deleteButton); // Append the delete button to the deleteCell
 
     row.appendChild(artistCell);
+    row.appendChild(locationCell);
+    row.appendChild(priceCell);
+    row.appendChild(amountCell);
+    row.appendChild(deleteCell);
+    return row;
+}
+
+// const deleteButton = document.createElement('button');
+//     deleteButton.className = 'btn btn-danger';
+//     deleteButton.id = `deleteButton${index}`;
+//     deleteButton.innerText = 'Delete';
+//     deleteButton.addEventListener('click', function () {
+//         // Filter the timeslot out of the timeslots array
+//         let updatedTimeslots = timeslots.filter(ts => ts !== timeslot);
+//         // Redraw the table
+//         displayTimeslots(updatedTimeslots);
+//     });
+
+//     const deleteCell = document.createElement('td');
+//     deleteCell.appendChild(deleteButton); // Append the delete button to the deleteCell
+
+//     row.appendChild(artistCell);
+//     row.appendChild(locationCell);
+//     row.appendChild(priceCell);
+//     row.appendChild(amountCell);
+//     row.appendChild(deleteCell);
+
+// function createTimeslotRowJazz(timeslot) {
+//     const row = document.createElement('tr');
+
+//     const options = { month: 'long', day: 'numeric' };
+//     const startTime = new Date(timeslot.startTime);
+//     const endTime = new Date(timeslot.endTime);
+
+//     const artistCell = document.createElement('td');
+//     artistCell.innerHTML = `${timeslot.artist.name} <br> ${startTime.toLocaleDateString(undefined, options)}, ${startTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} - ${endTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+
+//     const locationCell = document.createElement('td');
+//     locationCell.innerHTML = `Location: <br> ${timeslot.jazzLocation.locationName}, ${timeslot.hall.hallName}`;
+
+//     const priceCell = document.createElement('td');
+//     priceCell.innerHTML = `Total price: <br> €${timeslot.price}`;
+
+//     const amountCell = document.createElement('td');
+//     amountCell.innerHTML = `
+//     Amount <br>
+//     <input type="number" id="inputField" value="${timeslot.quantity}" min="1">
+//     <button id="plusButton" class="btn btn-primary">+</button>
+//     <button id="minusButton" class="btn btn-primary">-</button>
+//     `;
+
+//     const deleteCell = document.createElement('td');
+//     deleteCell.innerHTML = `<button class="btn btn-danger">Delete</button>`;
+
+//     row.appendChild(artistCell);
+//     row.appendChild(locationCell);
+//     row.appendChild(priceCell);
+//     row.appendChild(amountCell);
+//     row.appendChild(deleteCell);
+
+//     return row;
+// }
+
+function createTimeslotRowYummy(timeslot, index) { //YUMMY TIMESLOT
+    const row = document.createElement('tr');
+
+    const options = { month: 'long', day: 'numeric' };
+    const startTime = new Date(timeslot.startTime);
+    const endTime = new Date(timeslot.endTime);
+
+    const restaurantCell = document.createElement('td');
+    restaurantCell.innerHTML = `${timeslot.restaurant} <br> ${startTime.toLocaleDateString(undefined, options)}, ${startTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} - ${endTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+
+    const locationCell = document.createElement('td');
+    locationCell.innerHTML = `Location: <br> ${timeslot.restaurantName}`;
+
+    const priceCell = document.createElement('td');
+    priceCell.innerHTML = `Total price: <br> €${timeslot.price}`;
+
+    const amountCell = document.createElement('td');
+    const amountText = document.createTextNode('Amount');
+    const input = document.createElement('input');
+    input.type = "number";
+    input.value = timeslot.quantity;
+    input.min = "1";
+    input.max = "20";
+    input.id = `inputFieldYummy${index}`;
+
+    const minusButton = document.createElement('button');
+    minusButton.id = `minusButtonYummy${index}`;
+    minusButton.className = 'btn btn-primary';
+    minusButton.innerText = '-';
+    minusButton.addEventListener('click', function () {
+        var inputField = document.getElementById(`inputFieldYummy${index}`);
+        if (parseInt(inputField.value, 10) > 1) {
+            inputField.value = parseInt(inputField.value, 10) - 1;
+        }
+    });
+    const plusButton = document.createElement('button');
+    plusButton.id = `plusButtonYummy${index}`;
+    plusButton.className = 'btn btn-primary';
+    plusButton.innerText = '+';
+    plusButton.addEventListener('click', function () {
+        var inputField = document.getElementById(`inputFieldYummy${index}`);
+        inputField.value = parseInt(inputField.value, 10) + 1;
+    });
+
+
+    amountCell.appendChild(amountText);
+    amountCell.appendChild(input);
+    amountCell.appendChild(plusButton);
+    amountCell.appendChild(minusButton);
+
+    const deleteButton = document.createElement('button');
+    deleteButton.className = 'btn btn-danger';
+    deleteButton.id = `deleteButton${index}`;
+    deleteButton.innerText = 'Delete';
+    deleteButton.addEventListener('click', function () {
+        // Delete the timeslot from the timeslots array
+        timeslots.splice(timeslots.indexOf(timeslot), 1);
+        // Redraw the table
+        displayTimeslots(timeslots);
+    });
+
+    const deleteCell = document.createElement('td');
+    deleteCell.appendChild(deleteButton); // Append the delete button to the deleteCell
+
+    row.appendChild(restaurantCell);
     row.appendChild(locationCell);
     row.appendChild(priceCell);
     row.appendChild(amountCell);
@@ -111,14 +302,13 @@ function createTimeslotRowJazz(timeslot) {
 
     return row;
 }
-
 function fillPriceTable(timeslots) {
     const priceTableBody = document.getElementById('priceTableBody');
     priceTableBody.innerHTML = ""; // Clear existing rows
 
     const { subtotal, vat, total } = calculateTotals(timeslots);
 
-    
+
     addRowToTable(priceTableBody, 'Subtotal', `€${subtotal.toFixed(2)}`);
     addRowToTable(priceTableBody, 'VAT (9%)', `€${vat.toFixed(2)}`);
     addRowToTable(priceTableBody, 'Total', `€${total.toFixed(2)}`);

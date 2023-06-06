@@ -55,7 +55,7 @@
                     <tbody>
                     </tbody>
                 </table>
-                <table class="table" id="tableTickets">
+                <table class="table" id="tableYummy">
                     <thead class="thead">
                         <tr>
                             <th>Yummy</th>

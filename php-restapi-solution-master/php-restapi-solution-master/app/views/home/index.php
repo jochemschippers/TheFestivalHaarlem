@@ -47,7 +47,7 @@
 
 
     <!-- START WYSIWYG CODE -->
-    <div>
+    <!-- <div>
         <textarea id="tiny"></textarea>
     </div>
     <script>
@@ -63,7 +63,7 @@
         });
 
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
-    </script>
+    </script> -->
     <!-- // END WYSIWYG CODE -->
 
     <!-- BASE HOMEPAGE CODE -->
