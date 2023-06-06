@@ -1,0 +1,7 @@
+{
+    "name": "thefestival/tayam",
+    "description": "the festival project 2.3",
+    "require": {
+        "mollie/mollie-api-php": "^2.56"
+    }
+}

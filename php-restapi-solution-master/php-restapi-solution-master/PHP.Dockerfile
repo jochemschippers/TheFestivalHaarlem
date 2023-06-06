@@ -6,5 +6,6 @@ RUN pecl install xdebug && docker-php-ext-enable xdebug
 
 RUN pecl install apcu && \
     docker-php-ext-enable apcu
-	
+COPY php.ini /usr/local/etc/php/
+
 	
