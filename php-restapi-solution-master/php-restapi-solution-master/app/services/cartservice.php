@@ -42,6 +42,26 @@ class CartService
         }
         return ['items' => $cartItems, 'message' => $message];
     }
+    public function calculateTotals($cartItems) {
+        $subtotal = 0;
+        $vat = 0;
+
+        foreach ($cartItems as $item) {
+            $total = $item->getPrice() * $item->getQuantity();
+            $subtotal += $total;
+
+            if ($item->getEventID() !== 2) {
+                $vat += $total * 0.09;
+            }
+        }
+        $total = $subtotal + $vat;
+
+        return [
+            'subtotal' => number_format($subtotal, 2),
+            'vat' => number_format($vat, 2),
+            'total' => number_format($total, 2)
+        ];
+    }
     private function updateQuantity($item)
     {
         $amountSoldAndMaximumTickets = $this->repository->getAmountSoldAndMaximum($item['id']);

@@ -33,16 +33,66 @@
       <div class="alert alert-success alert-dismissible d-none" role="alert">
         <button type="button" class="btn-close" aria-label="Close"></button>
         <p><i class="bi bi-check-circle-fill"></i> ...</p>
-    </div>
+      </div>
 
-    <div class="alert alert-warning alert-dismissible d-none" role="alert">
+      <div class="alert alert-warning alert-dismissible d-none" role="alert">
         <button type="button" class="btn-close" aria-label="Close"></button>
         <p><i class="bi bi-exclamation-triangle-fill"></i> ...</p>
-    </div>
+      </div>
     </div>
   </div>
   <div id="payContainer">
-  <?php
-?>
+    <div id="loading" class="loading d-flex justify-content-center align-items-center w-100">
+      <h1> redirecting to payment page...</h1>
+    <div class="loader loader--style2 " title="1">
+  <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+     width="200px" height="200px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+  <path fill="#000" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z">
+    <animateTransform attributeType="xml"
+      attributeName="transform"
+      type="rotate"
+      from="0 25 25"
+      to="360 25 25"
+      dur="0.6s"
+      repeatCount="indefinite"/>
+    </path>
+  </svg>
+</div>
+    </div>
   </div>
+  <style>
+    .loader {
+      margin: 0 0 2em;
+      height: 100px;
+      width: 20%;
+      text-align: center;
+      padding: 1em;
+      margin: 0 auto 1em;
+      display: inline-block;
+      vertical-align: top;
+    }
+    .loading{
+      min-height:50vh;
+      flex-direction:column;
+    }
+
+    .spinner {
+      border: 16px solid #f3f3f3;
+      border-top: 16px solid #3498db;
+      border-radius: 50%;
+      width: 120px;
+      height: 120px;
+      animation: spin 2s linear infinite;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
 </body>

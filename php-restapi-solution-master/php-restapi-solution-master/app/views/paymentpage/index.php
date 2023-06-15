@@ -10,7 +10,6 @@
                 <div class="d-flex flex-column text-sm-right">
                 </div>
             </div>
-            <!-- Add class 'active' to progress -->
             <div class="row d-flex justify-content-center">
                 <div class="col-12">
                     <ul id="progressbar" class="text-center">
