@@ -1,6 +1,4 @@
 <body>
-    <!-- UIT DB GEBRUIK JE (YUMMYRESTAURANTS, timeSlotsYummy, RestaurantMenuItems, RestaurantImages, RestaurantFoodTypes) -->
-
     <link href="../css/yummy/detailPage.css" rel="stylesheet">
     <link href="../css/reservation.css" rel="stylesheet">
 
@@ -19,22 +17,16 @@
         }
     }
     ?>
-
     <div class="container">
         <div class="row">
             <div class="col-md-5" id="titleText"> <!-- PAS AAN NAAR EVENT PAGE OF DETAIL PAGE (AANTAL columns) -->
                 <h2><i>
                         <?= $restaurant[0]->getRestaurantName() ?>
                     </i></h2> <!-- RESTAURANT NAME -->
-
                 <!-- RESTAURANT DESCRIPTION -->
                 <?= $restaurant[0]->getDescription() ?>
-
             </div>
-
             <?php
-            // assume $images is an array of images from the database
-
             foreach ($images as $image) {
                 if ($image->GetImageIndex() == 2) {
             ?>
@@ -46,7 +38,6 @@
             ?>
         </div>
     </div>
-
     <div class="container">
         <div class="row">
             <div class="col-md-6">
@@ -100,28 +91,17 @@
                 </div>
             </div>
             <div class="col-md-5" id="restaurantLocation">
-
                 <?php
                 try {
                     $address = $restaurant[0]->getAddress();
-                    // Split the address into street, postal code, and city
                     list($street, $postal_code, $city) = preg_split("/[,\/]/", $address);
-                    // Remove any leading or trailing whitespace from the components
                     $street = trim($street);
                     $postal_code = trim($postal_code);
                     $city = trim($city);
-
-                    // Construct the URL for the Google Maps Geocoding API
                     $url = "https://maps.googleapis.com/maps/api/geocode/json?address=" . urlencode($street . "," . $postal_code . "," . $city) . "&key=AIzaSyAKJHajPT4KF2mNhgUQLbrJDnvhcImFkS8";
-
-                    // Retrieve the latitude and longitude from the API response
                     $response = file_get_contents($url);
                     $data = json_decode($response);
-
-                    // Construct the URL for the Google Maps Embed API
                     $url = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d0.0!2d!3d!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s$street%2C%20$postal_code%20$city!2s$street%2C%20$postal_code%20$city!5e0!3m2!1sen!2sus!4v1541431408042";
-
-                    // Embed the Google Maps location in HTML using an iframe element
                     echo '<iframe src="' . $url . '" width="700" height="250" frameborder="0" style="border: 2px solid black;" allowfullscreen></iframe>';
                 } catch (Exception $e) {
                     echo "Could not retrieve location information from Google Maps API. $e";
@@ -134,9 +114,7 @@
         <div class="row">
             <div class="col-md-8" style="margin-top: 50px;">
                 <div class="border-box" id="restaurantMenu">
-
                     <h1>Menu Items:</h1>
-
                     <?php
                     $voorgerechten = [];
                     $hoofdgerechten = [];
@@ -157,14 +135,7 @@
                                 // do nothing
                         }
                     }
-
-                    // function checkSpecialty($item){
-                    //     switch($item){
-                    //         case($item ==)
-                    //     }
-                    // }
                     ?>
-
                     <h4>Starters</h4>
                     <?php foreach ($voorgerechten as $voorgerecht) : ?>
                         <?= '<span style="font-size: 16px; font-weight: bold;">' . $voorgerecht->getName() . '</span> &euro; ' . $voorgerecht->getPrice() ?>
@@ -172,7 +143,6 @@
                                 <?= $voorgerecht->getDescription() ?>
                             </i></p>
                     <?php endforeach; ?>
-
                     <h4>Main courses</h4>
                     <?php foreach ($hoofdgerechten as $hoofdgerecht) : ?>
                         <?= '<span style="font-size: 16px; font-weight: bold;">' . $hoofdgerecht->getName() . '</span> &euro; ' . $hoofdgerecht->getPrice() ?>
@@ -180,7 +150,6 @@
                                 <?= $hoofdgerecht->getDescription() ?>
                             </i></p>
                     <?php endforeach; ?>
-
                     <h4>Desserts</h4>
                     <?php foreach ($nagerechten as $nagerecht) : ?>
                         <?= '<span style="font-size: 16px; font-weight: bold;">' . $nagerecht->getName() . '</span> &euro; ' . $nagerecht->getPrice() ?>
@@ -212,9 +181,7 @@
                     ?>
                     <?= $hour ?> hours.
                 </p>
-                <!-- RESTAURANT SCHEDULE AND PRICES -->
             </div>
-
             <div class="col-md-3" id="guestPrices">
                 <h3>Prices</h3>
                 <p>Adults: <i>
@@ -222,7 +189,7 @@
                     </i> </p>
                 <p>Children: <i>
                         <?= $restaurant[0]->getChildPrice() ?>
-                    </i> </p> <!-- HERE RESTAURANT PRICES -->
+                    </i> </p>
             </div>
         </div>
         <div class="row">
@@ -238,9 +205,7 @@
                 <?php
                 $time = 0;
                 for ($i = 1; $i <= $restaurant[0]->getAmountSessions(); $i++) { ?>
-
                     <p><?= $timeSlotsYummy[$time++]->getStartTime()->format('H:i') ?></p>
-
                 <?php }
                 ?>
             </div>
@@ -250,11 +215,10 @@
                 <h4>Contact</h4>
                 <p><i>
                         <?= str_replace(',', ',<br>', $restaurant[0]->getAddress()) ?>
-                    </i></p> <!-- HERE CONTACT INFO EXTRA-->
+                    </i></p>
                 <p><i>
                         <?= str_replace(',', ',<br>', $restaurant[0]->getContact()) ?>
-                    </i></p> <!-- HERE CONTACT INFO EXTRA-->
-
+                    </i></p>
             </div>
             <?php
             foreach ($images as $image) {
@@ -262,16 +226,13 @@
             ?>
                     <div class="col-md-6" id="bottomPicture" style="background-image: url('/image/<?= $image->getImageLink(); ?>');"></div>
             <?php
-                    break; // break the loop once we find the image with GetImageIndex = 3
+                    break;
                 }
             }
             ?>
 
         </div>
     </div>
-
-    <!-- MODAL OVERLAY -->
-
     <div class="modal fade" id="reservationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog custom-modal-dialog">
             <div class="modal-content">
@@ -295,7 +256,6 @@
                             </div>
                         </div>
                         <div class="row">
-                            <!-- buttons thursday and friday -- for form use btnradio -->
                             <div class="col-md-3">
                                 <h5><ins>Thursday 26 July</ins></h5>
                                 <?php
@@ -303,7 +263,6 @@
                                 for ($j = 0; $j < 3; $j++) {
                                     $maxSeats = $timeSlotsYummy[$arrayselector]->getMaximumAmountTickets();
                                 ?>
-                                    <!-- Display the session date and time with the session number -->
                                     <label class="btn btn-outline-primary w-100">
                                         <input type="radio" class="btn-check" name="btnradio" value="<?= $timeSlotsYummy[$arrayselector]->getTimeSlotID() ?>" data-max-tickets="<?= $maxSeats ?>">
                                         <?= "<b>Session $i: " . $timeSlotsYummy[$arrayselector]->getStartTime()->format('H:i') . "</b>" ?>
@@ -322,7 +281,6 @@
                                 for ($j = 0; $j < 3; $j++) {
                                     $maxSeats = $timeSlotsYummy[$arrayselector]->getMaximumAmountTickets();
                                 ?>
-                                    <!-- Display the session date and time with the session number -->
                                     <label class="btn btn-outline-primary w-100">
                                         <input type="radio" class="btn-check" name="btnradio" value="<?= $timeSlotsYummy[$arrayselector]->getTimeSlotID() ?>" data-max-tickets="<?= $maxSeats ?>">
                                         <?= "<b>Session $i: " . $timeSlotsYummy[$arrayselector]->getStartTime()->format('H:i') . "</b>" ?>
@@ -335,14 +293,12 @@
                                 ?>
                             </div>
                             <div class="col-md-4">
-                                <!-- id = customerName -->
                                 <label for="customerName">
                                     <h5>Name on reservation</h5>
                                 </label>
                                 <input class="form-control" id="customerName" name="customerName" type="text" placeholder="Enter name" required>
                             </div>
                             <div class="col-md-2">
-                                <!-- id = phoneNr -->
                                 <label for="phoneNr">
                                     <h5>Phone number</h5>
                                 </label>
@@ -367,7 +323,6 @@
                                 for ($j = 0; $j < 3; $j++) {
                                     $maxSeats = $timeSlotsYummy[$arrayselector]->getMaximumAmountTickets();
                                 ?>
-                                    <!-- Display the session date and time with the session number -->
                                     <label class="btn btn-outline-primary w-100">
                                         <input type="radio" class="btn-check" name="btnradio" value="<?= $timeSlotsYummy[$arrayselector]->getTimeSlotID() ?>" data-max-tickets="<?= $maxSeats ?>">
                                         <?= "<b>Session $i: " . $timeSlotsYummy[$arrayselector]->getStartTime()->format('H:i') . "</b>" ?>
@@ -386,7 +341,6 @@
                                 for ($j = 0; $j < 3; $j++) {
                                     $maxSeats = $timeSlotsYummy[$arrayselector]->getMaximumAmountTickets();
                                 ?>
-                                    <!-- Display the session date and time with the session number -->
                                     <label class="btn btn-outline-primary w-100">
                                         <input type="radio" class="btn-check" name="btnradio" value="<?= $timeSlotsYummy[$arrayselector]->getTimeSlotID() ?>" data-max-tickets="<?= $maxSeats ?>">
                                         <?= "<b>Session $i: " . $timeSlotsYummy[$arrayselector]->getStartTime()->format('H:i') . "</b>" ?>

@@ -2,22 +2,32 @@
 require_once __DIR__ . '/controller.php';
 require_once __DIR__ . '/../services/jazzservice.php';
 require_once __DIR__ . '/../services/yummyservice.php';
+require_once __DIR__ . '/../services/apiservice.php';
 
 class TestController extends Controller
 {
     private $jazzService;
     private $yummyService;
+    private $apiService;
 
     // initialize services
     function __construct()
     {
         $this->yummyService = new YummyService();
         $this->jazzService = new JazzService();
+        $this->apiService = new ApiService();
     }
 
     public function index()
     {
         $models = [];
+        $this->displayView($models);
+        include __DIR__ . '/../views/test/adminnav.php';
+    }
+    public function api(){
+        $models = [
+            "apis" => $this->apiService->getAll(),
+        ];
         $this->displayView($models);
         include __DIR__ . '/../views/test/adminnav.php';
     }

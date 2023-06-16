@@ -242,15 +242,12 @@
                                         <?php } else { ?>
                                             <td title="No">No</td>
                                         <?php } ?>
-
                                         <td>
                                             <button class="btn btn-primary edit-btn" data-id="<?= $reservation->getTicketID() ?>" data-bs-toggle="modal" data-bs-target="#editReservation-<?= $reservation->getTicketID() ?>">
                                                 Edit
                                             </button>
                                         </td>
                                         <td>
-                                            <!-- ----------------------- DIT NOG BIJWERKEN. VEEL NAMEN MOETEN WORDEN VERANDERD ------------------------- -->
-
                                             <?php if ($reservation->getIsActive()) { ?>
                                                 <form method="post" id="deactivateReservation-<?= $reservation->getTicketID() ?>" onsubmit="return confirm('Are you sure you want to deactivate reservation: <?= $reservation->getTicketID() ?>?')">
                                                     <input type="hidden" id="deactivateReservationTicketID" name="deactivateReservationTicketID" value="<?= $reservation->getTicketID() ?>">
@@ -273,7 +270,6 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     <form method="POST" role="form" id="editReservationForm-<?= $reservation->getTicketID() ?>" onsubmit="return checkEditReservationForm(<?=$reservation->getTicketID()?>)">
-
                                                         <div class="form-group">
                                                             <label for="editReservationTimeSlotID">TimeSlotId</label>
                                                             <input type="text" class="form-control" id="editReservationTimeSlotID" name="editReservationTimeSlotID" form="editReservationForm-<?= $reservation->getTicketID() ?>" value="<?= $reservation->getTimeSlotID() ?>" required>
@@ -294,17 +290,14 @@
                                                             <label for="editReservationNumberAdults">NumberAdults</label>
                                                             <input type="text" class="form-control" id="editReservationNumberAdults" name="editReservationNumberAdults" form="editReservationForm-<?= $reservation->getTicketID() ?>" value="<?= $reservation->getNumberAdults() ?>" required>
                                                         </div>
-
                                                         <div class="form-group">
                                                             <label for="editReservationNumberChildren">NumberChildren</label>
                                                             <input type="text" class="form-control" id="editReservationNumberChildren" name="editReservationNumberChildren" form="editReservationForm-<?= $reservation->getTicketID() ?>" value="<?= $reservation->getNumberChildren() ?>" required>
                                                         </div>
-
                                                         <div class="form-group">
                                                             <label for="editReservationRemark">Remark</label>
                                                             <input type="text" class="form-control" id="editReservationRemark" name="editReservationRemark" form="editReservationForm-<?= $reservation->getTicketID() ?>" value="<?= $reservation->getRemark() ?>" required>
                                                         </div>
-
                                                         <input type="hidden" name="editReservationTicketID" form="editReservationForm-<?= $reservation->getTicketID() ?>" value="<?= $reservation->getTicketID() ?>">
                                                         <button type="submit" class="btn btn-primary" id="confirmEditbutton" form="editReservationForm-<?= $reservation->getTicketID() ?>">reservation aanpassen</button>
                                                     </form>
@@ -413,8 +406,6 @@
                                                 <button type="submit" class="btn btn-danger delete-btn" form="deleteTimeSlotYummy-<?= $timeSlotYummy->getTimeSlotID() ?>">Delete</button>
                                             </form>
                                         </td>
-
-                                        <!-- HIER KOMEN MODALS VOOR ADD EN EDIT TIMESLOTSYUMMY -->
                                         <div class="modal fade" tabindex="-1" id="editTimeSlotYummy-<?= $timeSlotYummy->getTimeSlotID() ?>" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered">
                                                 <div class="modal-content">
@@ -444,7 +435,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- HIER EINDE MODALS VOOR ADD EN EDIT TIMESLOTSYUMMY -->
                                     </tr>
                                 <?php } ?>
                             </tbody>
@@ -488,7 +478,6 @@
             </div>
         </div>
     </div>
-    <!-- <div id="paginationControls"></div> houden -->
     
     <script src="../js/test/yummy.js"></script>
 </main>

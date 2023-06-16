@@ -1,15 +1,11 @@
 <body>
-    <!-- HIER LOOP VOOR EVENT ID EN ACTIVITY ID -->
-
     <div class="modal fade" id="reservationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog custom-modal-dialog">
             <div class="modal-content">
                 <div class="modal-body">
                     <form onsubmit="return checkForm()" id="form" method="POST">
-
                         <?php $arrayselector = 0 ?>
                         <?php $numberButtons = 1; ?>
-
                         <div class="row text-center">
                             <h2>Make a reservation for:
                                 <?= $restaurant[0]->getRestaurantName() ?>
@@ -24,7 +20,6 @@
                             </div>
                         </div>
                         <div class="row">
-                            <!-- buttons thursday and friday -- for form use btnradio -->
                             <div class="col-md-3">
                                 <h5><ins>Thursday 26 July</ins></h5>
                                 <?php
@@ -32,7 +27,6 @@
                                 for ($j = 0; $j < 3; $j++) {
                                     $maxSeats = $timeSlotsYummy[$arrayselector]->getMaximumAmountTickets();
                                 ?>
-                                    <!-- Display the session date and time with the session number -->
                                     <label class="btn btn-outline-primary w-100">
                                         <input type="radio" class="btn-check" name="btnradio" value="<?= $timeSlotsYummy[$arrayselector]->getTimeSlotID() ?>" data-max-tickets="<?= $maxSeats ?>">
                                         <?= "<b>Session $i: " . $timeSlotsYummy[$arrayselector]->getStartTime()->format('H:i') . "</b>" ?>
@@ -51,7 +45,6 @@
                                 for ($j = 0; $j < 3; $j++) {
                                     $maxSeats = $timeSlotsYummy[$arrayselector]->getMaximumAmountTickets();
                                 ?>
-                                    <!-- Display the session date and time with the session number -->
                                     <label class="btn btn-outline-primary w-100">
                                         <input type="radio" class="btn-check" name="btnradio" value="<?= $timeSlotsYummy[$arrayselector]->getTimeSlotID() ?>" data-max-tickets="<?= $maxSeats ?>">
                                         <?= "<b>Session $i: " . $timeSlotsYummy[$arrayselector]->getStartTime()->format('H:i') . "</b>" ?>
@@ -64,14 +57,12 @@
                                 ?>
                             </div>
                             <div class="col-md-4">
-                                <!-- id = customerName -->
                                 <label for="customerName">
                                     <h5>Name on reservation</h5>
                                 </label>
                                 <input class="form-control" id="customerName" name="customerName" type="text" placeholder="Enter name" required>
                             </div>
                             <div class="col-md-2">
-                                <!-- id = phoneNr -->
                                 <label for="phoneNr">
                                     <h5>Phone number</h5>
                                 </label>
@@ -96,7 +87,6 @@
                                 for ($j = 0; $j < 3; $j++) {
                                     $maxSeats = $timeSlotsYummy[$arrayselector]->getMaximumAmountTickets();
                                 ?>
-                                    <!-- Display the session date and time with the session number -->
                                     <label class="btn btn-outline-primary w-100">
                                         <input type="radio" class="btn-check" name="btnradio" value="<?= $timeSlotsYummy[$arrayselector]->getTimeSlotID() ?>" data-max-tickets="<?= $maxSeats ?>">
                                         <?= "<b>Session $i: " . $timeSlotsYummy[$arrayselector]->getStartTime()->format('H:i') . "</b>" ?>
@@ -115,7 +105,6 @@
                                 for ($j = 0; $j < 3; $j++) {
                                     $maxSeats = $timeSlotsYummy[$arrayselector]->getMaximumAmountTickets();
                                 ?>
-                                    <!-- Display the session date and time with the session number -->
                                     <label class="btn btn-outline-primary w-100">
                                         <input type="radio" class="btn-check" name="btnradio" value="<?= $timeSlotsYummy[$arrayselector]->getTimeSlotID() ?>" data-max-tickets="<?= $maxSeats ?>">
                                         <?= "<b>Session $i: " . $timeSlotsYummy[$arrayselector]->getStartTime()->format('H:i') . "</b>" ?>

@@ -32,37 +32,28 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-6" id="titleText"> <!-- PAS AAN NAAR EVENT PAGE OF DETAIL PAGE (AANTAL columns) -->
+            <div class="col-md-6" id="titleText">
             </div>
             <div class="col-md-4">
             </div>
             <div class="row text-center">
                 <h1>Participating Restaurants</h1>
             </div>
-
-            <!-- DIT STUK GAAT ZO WEG -->
-
             <div class="row">
                 <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                     <?php
-                    $foodTypeNames = []; // initialize an empty array to store the foodTypeIds
-                    $i = 0; // initialize $i outside the loop
+                    $foodTypeNames = [];
+                    $i = 0;
                     foreach ($foodTypes as $type) {
-                        $foodTypeName = $type->getFoodTypeName(); // get the foodTypeId for the current type
+                        $foodTypeName = $type->getFoodTypeName();
                         if (in_array($foodTypeName, $foodTypeNames)) {
                             // foodTypeId is already in the list, do nothing
                         } else {
-                            // foodTypeId is not in the list, add it
-                            array_push($foodTypeNames, $foodTypeName); // add the foodTypeId to the array
-                            // display the label and input element for this type
-                    ?>
+                            array_push($foodTypeNames, $foodTypeName); ?>
                             <input type="radio" class="btn-check" name="btnradio" id="btnradio<?= $i ?>" onclick="filterSelection('<?= strtolower($type->getFoodTypeName()) ?> ')">
                             <label class="btn btn-outline-primary" for="btnradio<?= $i ?>"><?= $type->getFoodTypeName() ?></label>
-                    <?php
-                            $i++; // increment $i after displaying the label and input element
-                        }
-                    }
-                    ?>
+                    <?php $i++; }
+                    } ?>
                     <input type="radio" class="btn-check" name="btnradio" id="btnradio6" onclick="filterSelection('all')" checked>
                     <label class="btn btn-outline-primary" for="btnradio6">Clear selected</label>
                 </div>
@@ -100,12 +91,10 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- start of modal -->
                         <div class="modal fade" id="reservationModal-<?= $restaurant->getRestaurantId() ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog custom-modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-body">
-
                                         <?php
                                         $timeSlotsYummy = array();
                                         foreach ($allTimeSlotsYummy as $timeSlot) {
@@ -115,10 +104,8 @@
                                         }
                                         ?>
                                         <form id="form" method="POST" onsubmit="return checkForm()">
-
                                             <?php $arrayselector = 0 ?>
                                             <?php $numberButtons = 1; ?>
-
                                             <div class="row text-center">
                                                 <h2>Make a reservation for:
                                                     <?= $restaurant->getRestaurantName() ?>
@@ -133,7 +120,6 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <!-- buttons thursday and friday -- for form use btnradio -->
                                                 <div class="col-md-3">
                                                     <h5><ins>Thursday 26 July</ins></h5>
                                                     <?php
@@ -141,7 +127,6 @@
                                                     for ($j = 0; $j < 3; $j++) {
                                                         $maxSeats = $timeSlotsYummy[$arrayselector]->getMaximumAmountTickets();
                                                     ?>
-                                                        <!-- Display the session date and time with the session number -->
                                                         <label class="btn btn-outline-primary w-100">
                                                             <input type="radio" class="btn-check" name="btnradio" value="<?= $timeSlotsYummy[$arrayselector]->getTimeSlotID() ?>" data-max-tickets="<?= $maxSeats ?>">
                                                             <?= "<b>Session $i: " . $timeSlotsYummy[$arrayselector]->getStartTime()->format('H:i') . "</b>" ?>
@@ -160,7 +145,6 @@
                                                     for ($j = 0; $j < 3; $j++) {
                                                         $maxSeats = $timeSlotsYummy[$arrayselector]->getMaximumAmountTickets();
                                                     ?>
-                                                        <!-- Display the session date and time with the session number -->
                                                         <label class="btn btn-outline-primary w-100">
                                                             <input type="radio" class="btn-check" name="btnradio" value="<?= $timeSlotsYummy[$arrayselector]->getTimeSlotID() ?>" data-max-tickets="<?= $maxSeats ?>">
                                                             <?= "<b>Session $i: " . $timeSlotsYummy[$arrayselector]->getStartTime()->format('H:i') . "</b>" ?>
@@ -173,14 +157,12 @@
                                                     ?>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <!-- id = customerName -->
                                                     <label for="customerName">
                                                         <h5>Name on reservation</h5>
                                                     </label>
                                                     <input class="form-control" id="customerName" name="customerName" type="text" placeholder="Enter name" required>
                                                 </div>
                                                 <div class="col-md-2">
-                                                    <!-- id = phoneNr -->
                                                     <label for="phoneNr">
                                                         <h5>Phone number</h5>
                                                     </label>
@@ -205,7 +187,6 @@
                                                     for ($j = 0; $j < 3; $j++) {
                                                         $maxSeats = $timeSlotsYummy[$arrayselector]->getMaximumAmountTickets();
                                                     ?>
-                                                        <!-- Display the session date and time with the session number -->
                                                         <label class="btn btn-outline-primary w-100">
                                                             <input type="radio" class="btn-check" name="btnradio" value="<?= $timeSlotsYummy[$arrayselector]->getTimeSlotID() ?>" data-max-tickets="<?= $maxSeats ?>">
                                                             <?= "<b>Session $i: " . $timeSlotsYummy[$arrayselector]->getStartTime()->format('H:i') . "</b>" ?>
@@ -224,7 +205,6 @@
                                                     for ($j = 0; $j < 3; $j++) {
                                                         $maxSeats = $timeSlotsYummy[$arrayselector]->getMaximumAmountTickets();
                                                     ?>
-                                                        <!-- Display the session date and time with the session number -->
                                                         <label class="btn btn-outline-primary w-100">
                                                             <input type="radio" class="btn-check" name="btnradio" value="<?= $timeSlotsYummy[$arrayselector]->getTimeSlotID() ?>" data-max-tickets="<?= $maxSeats ?>">
                                                             <?= "<b>Session $i: " . $timeSlotsYummy[$arrayselector]->getStartTime()->format('H:i') . "</b>" ?>
@@ -295,7 +275,6 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- end of modal -->
                     <?php }
                     $foodTypesList = array();
                     foreach ($restaurantFoodTypes as $foodType) {
