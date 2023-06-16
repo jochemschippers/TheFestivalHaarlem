@@ -12,21 +12,22 @@
 
   <?php
 
-  $currentUri = $_SERVER['REQUEST_URI'];
-  $segmentsOfUrl = explode('/', trim($currentUri, '/'));
-  $cssFiles = [];
+$currentUri = $_SERVER['REQUEST_URI'];
+$path = parse_url($currentUri, PHP_URL_PATH);
+$segmentsOfUrl = explode('/', trim($path, '/'));
+$cssFiles = [];
 
-  for ($i = 0; $i < count($segmentsOfUrl); $i++) {
-    if (!empty($segmentsOfUrl[$i])) {
-      $cssFiles[] = "/css/{$segmentsOfUrl[0]}/{$segmentsOfUrl[$i]}.css";
-    }
+for ($i = 0; $i < count($segmentsOfUrl); $i++) {
+  if (!empty($segmentsOfUrl[$i])) {
+    $cssFiles[] = "/css/{$segmentsOfUrl[0]}/{$segmentsOfUrl[$i]}.css";
   }
+}
 
-  if (empty($segmentsOfUrl[0])) {
-    $cssFiles[] = "/css/home.css";
+if (empty($segmentsOfUrl[0])) {
+  $cssFiles[] = "/css/home.css";
 }
 foreach ($cssFiles as $cssFile): ?>
-    <link rel="stylesheet" type="text/css" href="<?= $cssFile ?>">
+  <link rel="stylesheet" type="text/css" href="<?= $cssFile ?>">
 <?php endforeach; ?>
 </head>
 
