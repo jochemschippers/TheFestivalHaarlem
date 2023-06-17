@@ -31,6 +31,24 @@ class TestController extends Controller
         $this->displayView($models);
         include __DIR__ . '/../views/test/adminnav.php';
     }
+    public function apiCreate()
+    {
+        $this->handleRequest(function ($data, &$response) {
+            $this->apiService->create($data);
+        });
+    }
+    public function apiUpdate()
+    {
+        $this->handleRequest(function ($data, &$response) {
+            $this->apiService->update($data);
+        });
+    }
+    public function apiDelete()
+    {
+        $this->handleRequest(function ($data, &$response) {
+            $this->apiService->delete($data);
+        });
+    }    
     public function jazz()
     {
         $models = [

@@ -45,7 +45,7 @@ class ApiRepository extends Repository
     
     public function create($data)
     {
-        // creates a new restaurant
+        // creates a new api
         try {
             // query
             $stmt = $this->connection->prepare("INSERT INTO `APIs` (`APIName`, `APIKEY`) VALUES (?,?)");
@@ -79,7 +79,7 @@ class ApiRepository extends Repository
 
     public function delete($data)
     {
-        // this will delete a existing restaurant
+        // this will delete a existing api
         try {
             $stmt = $this->connection->prepare("DELETE FROM `APIs` WHERE ApiID = ?");
             $stmt->execute([$data]);
