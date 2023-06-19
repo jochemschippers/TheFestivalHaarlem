@@ -94,18 +94,23 @@ class PersonalProgramService
         try {
             // Create a new personal program
             $programId = $this->personalProgramRepository->createPersonalProgram($userId);
-
             // Loop through the cart items and create tickets for each item
             foreach ($cartItems as $item) {
-                $this->personalProgramRepository->createEventTicket($item->getId(), $programId);
+                for ($i = 0; $i < $item->getQuantity(); $i++) {
+                    $this->personalProgramRepository->createEventTicket($item->getTimeSlotID(), $programId);
+                }
             }
 
             // Commit the transaction
             $this->personalProgramRepository->commit();
+            return $programId;
         } catch (Exception $e) {
 
             $this->personalProgramRepository->rollBack();
             throw $e;
         }
+    }
+    public function updateStatus($programId, $isPaid){
+        $this->personalProgramRepository->updatePaymentStatus($programId, $isPaid);
     }
 }

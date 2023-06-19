@@ -11,6 +11,12 @@ body{
   position: relative;
   /* Set position to relative for absolute positioning of container */
 }
+.alert{
+  z-index:999999 !important;
+}
+.site-footer{
+  z-index: -1 !important;
+}
 
 #titleContainer {
   position: absolute;

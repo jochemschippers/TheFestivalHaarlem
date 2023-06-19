@@ -8,7 +8,7 @@
     }
   </style>
 </head>
-<nav role='navigation'>
+<nav class="admin-nav" role='navigation'>
   <ul class="main" id="nav">
     <li class="dashboard"><a href="/test">Dashboard</a></li>
     <li class="edit"><a href="#">Edit Festival Info</a></li>
