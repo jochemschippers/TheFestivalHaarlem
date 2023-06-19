@@ -99,7 +99,6 @@ class paymentpageController extends Controller
             $programId= $this->paymentService->getProgramIdByPaymentId($paymentId);
             $this->personalProgramService->updateStatus($programId, true);
         }
-
     }
     private function paymentFailed($models)
     {
@@ -107,38 +106,20 @@ class paymentpageController extends Controller
     }
     public function paymentConfirm()
     {
-        if (session_status() == PHP_SESSION_NONE) {
-            session_start();
-        }
-        $paymentId = $_SESSION['paymentId'] ?? null;
-        $paymentStatus = $_SESSION['paymentStatus'] ?? null;
-
-        // Check if paymentId or paymentStatus is not set in session
-        if (!$paymentId || !$paymentStatus) {
+        $personalProgram =$this->personalProgramService->getMostRecentPersonalProgram($_SESSION['userID'] ?? null);
+        if (!$personalProgram) {
             $models = ['error' => 'Could not retrieve payment information. Please try again later.'];
             $this->paymentFailed($models);
             return;
         }
-        $models = [];
-        switch ($paymentStatus) {
-            case 'failed':
-                $models = ['error' => 'Your payment has failed. Please check your payment details and try again.'];
-                break;
-            case 'canceled':
-                $models = ['error' => 'Your payment was cancelled. Please try again or contact support if you need help.'];
-                break;
-            case 'expired':
-                $models = ['error' => 'Your payment has expired. Please try again.'];
-                break;
-            case 'paid':
-                var_dump("success!");
-                $this->displayView($models);
-                die();
-            default:
-                $models = ['error' => 'Something went wrong with your payment. Please try again later.'];
-                break;
+        if($personalProgram->getIsPaid()){
+            $models = [];
+            $this->displayView($models);
+            return;
+        }else{
+            $models = ['error' => 'Your payment has failed, was cancelled or has expired. Please try again or contact support if you need help.'];
+            $this->paymentFailed($models);
         }
-        $this->paymentFailed($models);
     }
     public function getPaymentId()
     {

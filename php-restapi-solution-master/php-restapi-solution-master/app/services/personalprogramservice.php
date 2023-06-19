@@ -15,34 +15,64 @@ class PersonalProgramService
     }
     public function getCart($cart, $id)
     {
+        $result = $this->getCartItems($cart);
+        $cartItems = $result['items'];
+        $changedItemsCount = $result['changedItemsCount'];
+        $notFoundCount = $result['notFoundCount'];
+        $message = $this->prepareCartMessage($changedItemsCount, $notFoundCount);
+
+        return ['items' => $cartItems, 'message' => $message];
+    }
+    private function getCartItems($cart)
+    {
         $cartItems = [];
         $notFoundCount = 0;
         $changedItemsCount = 0;
-        $message = "";
 
         foreach ($cart as $item) {
             if ($this->checkTimeSlotIDExists($item['id'])) {
-                $oldQuantity = $item['quantity'];
-                $item = $this->updateQuantity($item);
-                if ($item['quantity'] != $oldQuantity) {
-                    $changedItemsCount += 1;
-                }
-                if ($item['quantity'] != 0) { // TODO: toevoegen yummy timeslotID. Ook zorgen dat in de frontend de reservering informatie wordt doorgegeven/opgeslagen.
-                    $ticket = $this->timeSlotRepository->getJazzTimeSlotById($item['id']);
-                    $ticket->setQuantity($item['quantity']);
-                    $cartItems[] = $ticket;
+                $result = $this->processCartItem($item);
+                $item = $result['item'];
+                $changedItemsCount += $result['changed'];
+
+                if ($item['quantity'] != 0) {
+                    $cartItems[] = $this->prepareCartItem($item);
                 }
             } else {
                 $notFoundCount += 1;
             }
         }
+
+        return ['items' => $cartItems, 'changedItemsCount' => $changedItemsCount, 'notFoundCount' => $notFoundCount];
+    }
+    private function processCartItem($item)
+    {
+        $oldQuantity = $item['quantity'];
+        $item = $this->updateQuantity($item);
+        $changed = ($item['quantity'] != $oldQuantity) ? 1 : 0;
+
+        return ['item' => $item, 'changed' => $changed];
+    }
+    private function prepareCartItem($item)
+    {
+        $ticket = $this->timeSlotRepository->getJazzTimeSlotById($item['id']);
+        $ticket->setQuantity($item['quantity']);
+
+        return $ticket;
+    }
+
+    private function prepareCartMessage($changedItemsCount, $notFoundCount)
+    {
+        $message = "";
+
         if ($changedItemsCount > 0) {
             $message .= "<strong> The quantity for {$changedItemsCount} item(s) in your Personal Program has been updated due to stock limitations.</strong> <br>";
         }
         if ($notFoundCount > 0) {
             $message .= "<strong>{$notFoundCount} of the Personal Program items have been sold out or are not available at the moment and have been removed for you.</strong> <br>";
         }
-        return ['items' => $cartItems, 'message' => $message];
+
+        return $message;
     }
     public function calculateTotals($cartItems)
     {
@@ -81,6 +111,10 @@ class PersonalProgramService
 
         return $item;
     }
+    public function getMostRecentPersonalProgram($userId)
+    {
+        return  $this->personalProgramRepository->getMostRecentPersonalProgramByUserId($userId);
+    }
     public function checkTimeSlotIDExists($id)
     {
         if (!$this->timeSlotRepository->checkTimeSlotIDExists($id)) {
@@ -110,7 +144,8 @@ class PersonalProgramService
             throw $e;
         }
     }
-    public function updateStatus($programId, $isPaid){
+    public function updateStatus($programId, $isPaid)
+    {
         $this->personalProgramRepository->updatePaymentStatus($programId, $isPaid);
     }
 }

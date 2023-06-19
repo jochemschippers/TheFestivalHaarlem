@@ -20,6 +20,7 @@ class PaymentService
     {
         return $this->repository->GetJazzTickets();
     }
+    
     public function createMolliePayment($total, $cart, $programID)
     {
         $userId = $_SESSION['userID'];
