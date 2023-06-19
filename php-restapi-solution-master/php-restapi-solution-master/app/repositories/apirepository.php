@@ -81,8 +81,8 @@ class ApiRepository extends Repository
     {
         // this will delete a existing api
         try {
-            $stmt = $this->connection->prepare("DELETE FROM `APIs` WHERE ApiID = ?");
-            $stmt->execute([$data]);
+            $stmt = $this->connection->prepare("DELETE FROM `APIs` WHERE `ApiID` = ?");
+            $stmt->execute([$data->getApiID()]);
 
             return true;
         } catch (PDOException $e) {

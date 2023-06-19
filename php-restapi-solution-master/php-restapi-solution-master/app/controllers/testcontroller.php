@@ -34,42 +34,73 @@ class TestController extends Controller
     public function apiCreate()
     {
         $this->handleRequest(function ($data, &$response) {
-        $api = $this->validateAndCreateObject(
-            $data,
-            'api',
-            [
-                $data["APIID"],
-                $data["APIKEY"],
-                $date["APIName"],
-                ['integer', 'string', 'string']
-            ],
-            $response
-        );
-        if ($api) {
-            $this->apiService->create($data);
-            $response['message'] = "API created successfully.";
-        }
-        else {
-            $response['message'] = "API creation failed.";
-        }
+            // Get the data from the request
+            $apiID = isset($data['apiID']) ? (int)$data['apiID'] : 0;
+            $apiName = isset($data['apiName']) ? (string)$data['apiName'] : '';
+            $apiKey = isset($data['apiKey']) ? (string)$data['apiKey'] : '';
+
+            // Create a new API object
+            $api = new Api($apiID, $apiName, $apiKey);
+
+            // Call the create method from the apiService
+            $result = $this->apiService->create($api);
+
+            // Check the result and set the appropriate response
+            if ($result) {
+                $response['message'] = "API created successfully.";
+                $response['status'] = 1;
+            } else {
+                $response['message'] = "API creation failed.";
+                $response['status'] = 0;
+            }
         });
     }
     public function apiUpdate()
     {
-        var_dump("test");
         $this->handleRequest(function ($data, &$response) {
-            $this->apiService->update($data);
-            $response['message'] = "API updated successfully.";
-        });
-    }
-    public function apiDelete()
-    {
-        var_dump("test");
-        $this->handleRequest(function ($data, &$response) {
-            $this->apiService->delete($data);
-            $response['message'] = "API deleted successfully.";
+            // Get the data from the request
+            $apiID = isset($data['apiID']) ? (int)$data['apiID'] : 0;
+            $apiName = isset($data['apiName']) ? (string)$data['apiName'] : '';
+            $apiKey = isset($data['apiKey']) ? (string)$data['apiKey'] : '';
+    
+            // Create a new API object
+            $api = new Api($apiID, $apiName, $apiKey);
+    
+            // Call the update method from the apiService
+            $result = $this->apiService->update($api);
+    
+            // Check the result and set the appropriate response
+            if ($result) {
+                $response['message'] = "API updated successfully.";
+                $response['status'] = 1;
+            } else {
+                $response['message'] = "API update failed.";
+                $response['status'] = 0;
+            }
         });
     }    
+    public function apiDelete()
+    {
+        $this->handleRequest(function ($data, &$response) {
+            // Get the apiID from the request
+            $apiID = isset($data['apiID']) ? (int)$data['apiID'] : 0;
+
+            // var_dump($apiID);
+    
+            // Call the delete method from the apiService
+            $result = $this->apiService->delete($apiID);
+    
+            // Check the result and set the appropriate response
+            if ($result) {
+                $response['message'] = "API deleted successfully.";
+                $response['status'] = 1;
+            } else {
+                $response['message'] = "API deletion failed.";
+                $response['status'] = 0;
+            }
+        });
+    }   
+    
     public function jazz()
     {
         include __DIR__ . '/../views/test/adminnav.php';

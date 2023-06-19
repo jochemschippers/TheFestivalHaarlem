@@ -22,9 +22,9 @@ function createApi() {
     }
 
     let data = {
-        APIID: createAPIID,
-        APIName: createAPIName,
-        APIKEY: createAPIKey,
+        apiID: createAPIID,
+        apiName: createAPIName,
+        apiKey: createAPIKey,
     };
 
     fetch('/test/apiCreate', {
@@ -62,9 +62,9 @@ function editApi(apiId) {
     }
 
     let data = {
-        ApiID: apiId,
-        APIName: editAPIName,
-        APIKEY: editAPIKey,
+        apiID: apiId,
+        apiName: editAPIName,
+        apiKey: editAPIKey,
     };
 
     fetch('/test/apiUpdate', {
@@ -94,7 +94,7 @@ function editApi(apiId) {
 
 function deleteApi(apiId) {
     let data = {
-        ApiID: apiId,
+        apiID: apiId,
     };
 
     fetch('/test/apiDelete', {

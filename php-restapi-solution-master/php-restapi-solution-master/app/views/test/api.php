@@ -28,10 +28,11 @@
                                             </button>
                                         </td>
                                         <td>
-                                            <form method="post" id="delete-<?= $api->getApiID() ?>" onsubmit="return confirm('Are you sure you want to delete API: <?= $api->getApiName() ?>?')">
-                                                <input type="hidden" id="deleteAPIID" name="deleteAPIID" value="<?= $api->getApiID() ?>">
-                                                <button type="submit" class="btn btn-danger delete-btn" form="delete-<?= $api->getApiID() ?>">Delete</button>
-                                            </form>
+                                        <form method="post" id="delete-<?= $api->getApiID() ?>" 
+                                            onsubmit="event.preventDefault(); if (confirm('Are you sure you want to delete API: <?= $api->getApiName() ?>?')) deleteApi(<?= $api->getApiID() ?>);">
+                                            <input type="hidden" id="deleteAPIID" name="deleteAPIID" value="<?= $api->getApiID() ?>">
+                                            <button type="submit" class="btn btn-danger delete-btn" form="delete-<?= $api->getApiID() ?>">Delete</button>
+                                        </form>
                                         </td>
                                     </tr>
                                     <div class="modal fade" tabindex="-1" id="editAPI-<?= $api->getApiID() ?>" aria-hidden="true">
@@ -42,7 +43,7 @@
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form method="POST" role="form" id="editAPIForm-<?= $api->getApiID() ?>" onsubmit="event.preventDefault(); editApi(<?= $api->getApiID() ?>);">
+                                                    <form method="POST" role="form" enctype="multipart/form-data" id="editAPIForm-<?= $api->getApiID() ?>" onsubmit="event.preventDefault(); editApi(<?= $api->getApiID() ?>);">
 
                                                         <p>API-ID: <?= $api->getApiID() ?></p>
 
