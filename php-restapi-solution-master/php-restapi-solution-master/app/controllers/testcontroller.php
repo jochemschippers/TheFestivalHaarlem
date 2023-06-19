@@ -34,20 +34,39 @@ class TestController extends Controller
     public function apiCreate()
     {
         $this->handleRequest(function ($data, &$response) {
+        $api = $this->validateAndCreateObject(
+            $data,
+            'api',[
+            $data["APIKey"],
+            $date["APIName"],
+            ['string', 'string']
+            ],
+            $response
+        );
+        if ($api) {
             $this->apiService->create($data);
+            $response['message'] = "API created successfully.";
+        }
+        else {
+            $response['message'] = "API creation failed.";
+        }
         });
     }
     public function apiUpdate()
     {
+        var_dump("test");
         $this->handleRequest(function ($data, &$response) {
             $this->apiService->update($data);
         });
+        $response['message'] = "API updated successfully.";
     }
     public function apiDelete()
     {
+        var_dump("test");
         $this->handleRequest(function ($data, &$response) {
             $this->apiService->delete($data);
         });
+        $response['message'] = "API deleted successfully.";
     }    
     public function jazz()
     {
