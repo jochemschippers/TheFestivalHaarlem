@@ -77,12 +77,12 @@ class ApiRepository extends Repository
         }
     }
 
-    public function delete($data)
+    public function delete($apiID)
     {
-        // this will delete a existing api
         try {
-            $stmt = $this->connection->prepare("DELETE FROM `APIs` WHERE `ApiID` = ?");
-            $stmt->execute([$data->getApiID()]);
+            $stmt = $this->connection->prepare("DELETE FROM `APIs` WHERE `ApiID` = :apiID");
+            $stmt->bindParam(':apiID', $apiID, PDO::PARAM_INT);
+            $stmt->execute();
 
             return true;
         } catch (PDOException $e) {

@@ -57,6 +57,7 @@ class TestController extends Controller
     }
     public function apiUpdate()
     {
+        var_dump("test");
         $this->handleRequest(function ($data, &$response) {
             // Get the data from the request
             $apiID = isset($data['apiID']) ? (int)$data['apiID'] : 0;
@@ -81,6 +82,7 @@ class TestController extends Controller
     }    
     public function apiDelete()
     {
+        var_dump("test");
         $this->handleRequest(function ($data, &$response) {
             // Get the apiID from the request
             $apiID = isset($data['apiID']) ? (int)$data['apiID'] : 0;

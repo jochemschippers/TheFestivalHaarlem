@@ -38,6 +38,7 @@ function createApi() {
             if (!response.ok) {
                 throw new Error(`Network error: ${response.statusText}`);
             }
+            window.location.reload();
             return response.json();
         })
         .then((data) => {
@@ -78,6 +79,7 @@ function editApi(apiId) {
             if (!response.ok) {
                 throw new Error(`Network error: ${response.statusText}`);
             }
+            window.location.reload();
             return response.json();
         })
         .then((data) => {
@@ -108,6 +110,7 @@ function deleteApi(apiId) {
             if (!response.ok) {
                 throw new Error(`Network error: ${response.statusText}`);
             }
+            window.location.reload();
             return response.json();
         })
         .then((data) => {
