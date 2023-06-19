@@ -123,33 +123,33 @@ function deleteApi(apiId) {
             console.error('Error:', error);
         });
 }
-document.addEventListener('DOMContentLoaded', (event) => {
-    // Event listener for creating new API
-    const createForm = document.getElementById('addAPIForm');
-    if (createForm) {
-        createForm.addEventListener('submit', function (e) {
-            e.preventDefault();
-            createApi();
-        });
-    }
+// document.addEventListener('DOMContentLoaded', (event) => {
+//     // Event listener for creating new API
+//     const createForm = document.getElementById('addAPIForm');
+//     if (createForm) {
+//         createForm.addEventListener('submit', function (e) {
+//             e.preventDefault();
+//             createApi();
+//         });
+//     }
 
-    // Event listeners for editing APIs
-    const editForms = document.querySelectorAll('[id^="editAPIForm-"]');
-    editForms.forEach(function (form) {
-        const apiId = form.id.split('-')[1]; // split id string to get the API ID
-        form.addEventListener('submit', function (e) {
-            e.preventDefault();
-            editApi(apiId);
-        });
-    });
+//     // Event listeners for editing APIs
+//     const editForms = document.querySelectorAll('[id^="editAPIForm-"]');
+//     editForms.forEach(function (form) {
+//         const apiId = form.id.split('-')[1]; // split id string to get the API ID
+//         form.addEventListener('submit', function (e) {
+//             e.preventDefault();
+//             editApi(apiId);
+//         });
+//     });
 
-    // Event listeners for deleting APIs
-    const deleteForms = document.querySelectorAll('[id^="delete-"]');
-    deleteForms.forEach(function (form) {
-        const apiId = form.id.split('-')[1]; // split id string to get the API ID
-        form.addEventListener('submit', function (e) {
-            e.preventDefault();
-            deleteApi(apiId);
-        });
-    });
-});
+//     // Event listeners for deleting APIs
+//     const deleteForms = document.querySelectorAll('[id^="delete-"]');
+//     deleteForms.forEach(function (form) {
+//         const apiId = form.id.split('-')[1]; // split id string to get the API ID
+//         form.addEventListener('submit', function (e) {
+//             e.preventDefault();
+//             deleteApi(apiId);
+//         });
+//     });
+// });

@@ -36,10 +36,12 @@ class TestController extends Controller
         $this->handleRequest(function ($data, &$response) {
         $api = $this->validateAndCreateObject(
             $data,
-            'api',[
-            $data["APIKey"],
-            $date["APIName"],
-            ['string', 'string']
+            'api',
+            [
+                $data["APIID"],
+                $data["APIKEY"],
+                $date["APIName"],
+                ['integer', 'string', 'string']
             ],
             $response
         );
@@ -57,16 +59,16 @@ class TestController extends Controller
         var_dump("test");
         $this->handleRequest(function ($data, &$response) {
             $this->apiService->update($data);
+            $response['message'] = "API updated successfully.";
         });
-        $response['message'] = "API updated successfully.";
     }
     public function apiDelete()
     {
         var_dump("test");
         $this->handleRequest(function ($data, &$response) {
             $this->apiService->delete($data);
+            $response['message'] = "API deleted successfully.";
         });
-        $response['message'] = "API deleted successfully.";
     }    
     public function jazz()
     {
