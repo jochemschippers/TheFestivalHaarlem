@@ -6,68 +6,123 @@ class YummyService
     private $repository;
     function __construct()
     {
-        $this->repository = new YummyRepository();
+        try {
+            $this->repository = new YummyRepository();
+        } catch (PDOException $e) {
+            throw $e;
+        }
     }
 
     public function getAll()
     {
-        // retrieve data
-        return $this->repository->getAll();
+        try {
+            // retrieve data
+            return $this->repository->getAll();
+        } catch (PDOException $e) {
+            throw $e;
+        }
     }
 
     public function getOne($restaurantId)
     {
-        // retrieve data
-        return $this->repository->getOne($restaurantId);
+        try {
+            // retrieve data
+            return $this->repository->getOne($restaurantId);
+        } catch (PDOException $e) {
+            throw $e;
+        }
     }
 
     public function getAllMenuItems()
     {
-        // retrieve data
-        return $this->repository->getAllMenuItems();
+        try {
+            // retrieve data
+            return $this->repository->getAllMenuItems();
+        } catch (PDOException $e) {
+            throw $e;
+        }
     }
 
     public function getMenuItems($restaurantId)
     {
-        // retrieve data
-        return $this->repository->getMenuItems($restaurantId);
+        try {
+            // retrieve data
+            return $this->repository->getMenuItems($restaurantId);
+        } catch (PDOException $e) {
+            throw $e;
+        }
     }
     public function getAllImages()
     {
-        // retrieve data
-        return $this->repository->getAllImages();
+        try {
+            // retrieve data
+            return $this->repository->getAllImages();
+        } catch (PDOException $e) {
+            throw $e;
+        }
     }
     public function getImages($restaurantId)
     {
-        // retrieve data
-        return $this->repository->getImages($restaurantId);
+        try {
+            // retrieve data
+            return $this->repository->getImages($restaurantId);
+        } catch (PDOException $e) {
+            throw $e;
+        }
     }
     public function getFoodTypes()
     {
-        return $this->repository->getAllFoodTypes();
+        try {
+            // retrieve data
+            return $this->repository->getAllFoodTypes();
+        } catch (PDOException $e) {
+            throw $e;
+        }
     }
     public function getAllRestaurantFoodTypes()
     {
-        // retrieve data
-        return $this->repository->getAllRestaurantFoodTypes();
+        try {
+            // retrieve data
+            return $this->repository->getAllRestaurantFoodTypes();
+        } catch (PDOException $e) {
+            throw $e;
+        }
     }
     public function getAllRestaurantReservations()
     {
-        // retrieve data
-        return $this->repository->getAllRestaurantReservations();
+        try {
+            // retrieve data
+            return $this->repository->getAllRestaurantReservations();
+        } catch (PDOException $e) {
+            echo "Connection failed: " . $e->getMessage();
+        }
     }
     public function getAllTimeSlots()
     {
-        return $this->repository->getAllTimeSlots();
+        try {
+            // retrieve data
+            return $this->repository->getAllTimeSlots();
+        } catch (PDOException $e) {
+            throw $e;
+        }
     }
     public function getAllRestaurantTimeSlotsYummy()
     {
-        return $this->repository->getAllRestaurantTimeSlotsYummy();
+        try {
+            // retrieve data
+            return $this->repository->getAllRestaurantTimeSlotsYummy();
+        } catch (PDOException $e) {
+            throw $e;
+        }
     }
     public function getRestaurantReservationInfo($restaurantId)
     {
-        // Retrieve data from both models
-        return $this->repository->getRestaurantReservationInfo($restaurantId);
+        try {
+            // retrieve data
+            return $this->repository->getRestaurantReservationInfo($restaurantId);
+        } catch (PDOException $e) {
+            throw $e;
+        }
     }
     
 
@@ -76,41 +131,69 @@ class YummyService
     // CRUD YUMMY RESTAURANTS
     public function createRestaurant($restaurant)
     {
-        // creates a new restaurant
-        $this->repository->createRestaurant($restaurant);
+        try {
+            // creates a new restaurant
+            $this->repository->createRestaurant($restaurant);
+        } catch (PDOException $e) {
+            throw $e;
+        }
     }
     public function updateRestaurant($update)
     {
-        // this updates a existing restaurant
-        return $this->repository->updateRestaurant($update);
+        try {
+            // this updates a existing restaurant
+            $this->repository->updateRestaurant($update);
+        } catch (PDOException $e) {
+            throw $e;
+        }
     }
     public function deleteRestaurant($delete)
     {
-        // this will delete a existing restaurant
-        return $this->repository->deleteRestaurant($delete);
+        try {
+            // this will delete a existing restaurant
+            $this->repository->deleteRestaurant($delete);
+        } catch (PDOException $e) {
+            throw $e;
+        }
     }
     // END CRUD YUMMY RESTAURANTS
 
     // CRUD YUMMY RESERVATIONS
     public function createReservation($reservation)
     {
-        // creates a new restaurant
-        return $this->repository->createReservation($reservation);
+        try {
+            // creates a new restaurant
+            $this->repository->createReservation($reservation);
+        } catch (PDOException $e) {
+            throw $e;
+        }
     }
     public function editReservation($update)
     {
-        // this updates a existing reservation
-        return $this->repository->editReservation($update);
+        try {
+            // this updates a existing reservation
+            $this->repository->editReservation($update);
+        } catch (PDOException $e) {
+            echo "Connection failed: " . $e->getMessage();
+        }
     }
     public function activateReservation($activate)
     {
-        // this will activate a existing reservation
-        return $this->repository->activateReservation($activate);
+        try {
+            // this will activate a existing reservation
+            $this->repository->activateReservation($activate);
+        } catch (PDOException $e) {
+            throw $e;
+        }
     }
     public function deactivateReservation($deactivate)
     {
-        // this will deactivate a existing reservation
-        return $this->repository->deactivateReservation($deactivate);
+        try {
+            // this will deactivate a existing reservation
+            $this->repository->deactivateReservation($deactivate);
+        } catch (PDOException $e) {
+            throw $e;
+        }
     }
     // END CRUD YUMMY RESERVATIONS
 
@@ -118,6 +201,11 @@ class YummyService
 
     public function getAllTimeSlotsYummy()
     {
-        return $this->repository->getAllTimeSlotsYummy();
+        try {
+            // retrieve data
+            return $this->repository->getAllTimeSlotsYummy();
+        } catch (PDOException $e) {
+            throw $e;
+        }
     }
 }

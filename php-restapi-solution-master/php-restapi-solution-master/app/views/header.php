@@ -9,7 +9,9 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
   <link href="../css/main.css" rel="stylesheet">
   <script src="https://kit.fontawesome.com/384ef59d1a.js" crossorigin="anonymous"></script>
-
+  
+  <link rel="icon" href="/image/home/TheFestivalLogoIco.ico" type="image/x-icon">
+  <title>TheHaarlemFestival</title>
   <?php
 
 $currentUri = $_SERVER['REQUEST_URI'];

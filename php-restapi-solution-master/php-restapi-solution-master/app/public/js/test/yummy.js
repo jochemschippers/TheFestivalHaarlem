@@ -45,6 +45,26 @@
 //   updateTable();
 // });
 // // ----------------- EINDE TABEL FILTER ------------------
+let dataTable = new DataTable("#dataTableRestaurants", {
+  searchable: true,
+  perPage: 10,
+  perPageSelect: [10, 25, 50, 100],
+  fixedHeight: true
+});
+
+let dataTableLocations = new DataTable("#dataTableLocations", {
+  searchable: true,
+  perPage: 10,
+  perPageSelect: [10, 25, 50, 100],
+  fixedHeight: true
+});
+
+let dataTableTimeSlots = new DataTable("#timeSlotsTable", {
+  searchable: true,
+  perPage: 10,
+  perPageSelect: [10, 25, 50, 100],
+  fixedHeight: true
+});
 
 // ----------------- HIER DE EDITRESTAURANT CHECKEN ------------------
 function checkEditRestaurantForm() {
@@ -318,23 +338,4 @@ function checkAddReservationForm() {
      return true;
  }
 // ----------------- EINDE ADDRESERVATION CHECKEN ------------------
-let dataTable = new DataTable("#dataTableRestaurants", {
-  searchable: true,
-  perPage: 10,
-  perPageSelect: [10, 25, 50, 100],
-  fixedHeight: true
-});
 
-let dataTableLocations = new DataTable("#dataTableLocations", {
-  searchable: true,
-  perPage: 10,
-  perPageSelect: [10, 25, 50, 100],
-  fixedHeight: true
-});
-
-let dataTableTimeSlots = new DataTable("#timeSlotsTable", {
-  searchable: true,
-  perPage: 10,
-  perPageSelect: [10, 25, 50, 100],
-  fixedHeight: true
-});
