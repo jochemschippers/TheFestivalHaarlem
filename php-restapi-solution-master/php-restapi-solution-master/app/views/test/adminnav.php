@@ -1,4 +1,6 @@
 <head>
+  <link rel="icon" href="/image/home/TheFestivalLogoIco.ico" type="image/x-icon">
+  <title>TheHaarlemFestival</title>
   <style>
     nav[role="navigation"] {
       /* z-index: -1; */

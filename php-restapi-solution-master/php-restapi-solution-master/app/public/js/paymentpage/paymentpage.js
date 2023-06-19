@@ -160,8 +160,8 @@ function createTimeslotRowJazz(timeslot, index) {
     });
     amountCell.appendChild(amountText);
     amountCell.appendChild(input);
-    amountCell.appendChild(plusButton);
     amountCell.appendChild(minusButton);
+    amountCell.appendChild(plusButton);
 
     const deleteButton = document.createElement('button');
     deleteButton.className = 'btn btn-danger';
@@ -288,8 +288,8 @@ function createTimeslotRowYummy(timeslot, index) { //YUMMY TIMESLOT
 
     amountCell.appendChild(amountText);
     amountCell.appendChild(input);
-    amountCell.appendChild(plusButton);
     amountCell.appendChild(minusButton);
+    amountCell.appendChild(plusButton);
 
     const deleteButton = document.createElement('button');
     deleteButton.className = 'btn btn-danger';

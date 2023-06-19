@@ -13,3 +13,8 @@ td {
 .modal-content{
   overflow: hidden;
 }
+
+.table {
+  margin-left: 0;
+  margin-right: 0;
+}

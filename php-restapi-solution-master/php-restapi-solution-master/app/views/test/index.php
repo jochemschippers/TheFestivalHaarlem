@@ -1,5 +1,3 @@
-
-
 <main role="main">
   <div class="row panel important vh15">
         <div class="col-xl-3 col-sm-6 mb-3">
@@ -66,6 +64,24 @@
             </a>
           </div>
         </div>
+        
+        <div class="col-xl-3 col-sm-6 mb-3">
+          <div class="card text-white bg-info o-hidden h-100">
+            <div class="card-body">
+              <div class="card-body-icon">
+                <i class="fa fa-fw fa-users"></i> <!-- You can choose any icon here -->
+              </div>
+              <div class="mr-5 text-black explainationText">Manage Users and their details</div>
+            </div>
+            <a class="card-footer text-black explainationText clearfix small z-1" href="/test/users">
+              <span class="float-left">Edit Users</span>
+              <span class="float-right">
+                <i class="fa fa-angle-right"></i>
+              </span>
+            </a>
+          </div>
+        </div>
+
       </div> 
       <?php
 

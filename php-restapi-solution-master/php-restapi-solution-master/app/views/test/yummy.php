@@ -7,7 +7,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <div id="restaurants-table">
+                <!-- <div id="restaurants-table"> -->
                     <?php if (!is_null($restaurants) && count($restaurants) > 0) { ?>
                         <table class="table table-bordered" id="dataTableRestaurants">
                             <thead>
@@ -199,7 +199,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                <!-- </div> -->
             </div>
         </div>
     </div>
@@ -211,7 +211,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <div id="reservations-table">
+                <!-- <div id="reservations-table"> -->
                     <?php if (!is_null($restaurantReservations) && count($restaurantReservations) > 0) { ?>
                         <table class="table table-bordered" id="dataTableLocations">
                             <thead>
@@ -368,7 +368,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                <!-- </div> -->
             </div>
         </div>
     </div>
@@ -380,7 +380,7 @@
         </div>
         <div class="card">
             <div class="card-body">
-                <div id="timeSlotsYummy-table">
+                <!-- <div id="timeSlotsYummy-table"> -->
                     <?php if (!is_null($timeSlotsYummy) && count($timeSlotsYummy) > 0) { ?>
                         <table class="table table-bordered" id="timeSlotsTable">
                             <thead>
@@ -475,7 +475,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                <!-- </div> -->
             </div>
         </div>
     </div>

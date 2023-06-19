@@ -214,3 +214,10 @@ body {
 #priceTableBody {
   background-color: white;
 }
+
+input {
+  width: 50px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}

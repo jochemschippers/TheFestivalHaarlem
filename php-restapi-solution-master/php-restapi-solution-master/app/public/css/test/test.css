@@ -123,7 +123,6 @@ footer[role="contentinfo"] {
 
 /* panels */
 .panel {
-  background-color: white;
   color: darkslategray;
   -webkit-border-radius: 0.3rem;
   -moz-border-radius: 0.3rem;

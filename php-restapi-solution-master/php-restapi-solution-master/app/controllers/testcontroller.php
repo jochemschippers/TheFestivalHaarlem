@@ -20,16 +20,16 @@ class TestController extends Controller
 
     public function index()
     {
+        include __DIR__ . '/../views/test/adminnav.php';
         $models = [];
         $this->displayView($models);
-        include __DIR__ . '/../views/test/adminnav.php';
     }
     public function api(){
+        include __DIR__ . '/../views/test/adminnav.php';
         $models = [
             "apis" => $this->apiService->getAll(),
         ];
         $this->displayView($models);
-        include __DIR__ . '/../views/test/adminnav.php';
     }
     public function apiCreate()
     {
@@ -51,6 +51,7 @@ class TestController extends Controller
     }    
     public function jazz()
     {
+        include __DIR__ . '/../views/test/adminnav.php';
         $models = [
             "artists" => $this->jazzService->getAllArtists(),
             "locations" => $this->jazzService->getAllLocations(),
@@ -58,7 +59,6 @@ class TestController extends Controller
             "timeSlotsJazz" => $this->jazzService->getAllTimeSlots(),
         ];
         $this->displayView($models);
-        include __DIR__ . '/../views/test/adminnav.php';
     }
     private function handleRequest($action)
     {
