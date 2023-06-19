@@ -28,7 +28,7 @@
                                             </button>
                                         </td>
                                         <td>
-                                        <form method="post" id="delete-<?= $api->getApiID() ?>" 
+                                        <form method="post" enctype="multipart/form-data" id="delete-<?= $api->getApiID() ?>" 
                                             onsubmit="event.preventDefault(); if (confirm('Are you sure you want to delete API: <?= $api->getApiName() ?>?')) deleteApi(<?= $api->getApiID() ?>);">
                                             <input type="hidden" id="deleteAPIID" name="deleteAPIID" value="<?= $api->getApiID() ?>">
                                             <button type="submit" class="btn btn-danger delete-btn" form="delete-<?= $api->getApiID() ?>">Delete</button>
