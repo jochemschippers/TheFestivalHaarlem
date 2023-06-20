@@ -107,4 +107,16 @@ class AccountService {
         // Check if both similarities are below the defined threshold.
         return $nameSimilarity < $similarityThreshold && $emailSimilarity < $similarityThreshold;
     }
+
+    
+
+    public function getUserById($id){
+        return $this->repository->getUserById($id);
+    }
+    public function getAllUsers(){
+        return $this->repository->getAllUsers();
+    }
+    public function updateUser($user){
+        return $this->repository->updateUser($user);
+    }
 }

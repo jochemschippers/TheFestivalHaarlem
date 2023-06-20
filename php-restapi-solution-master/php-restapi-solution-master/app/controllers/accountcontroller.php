@@ -80,4 +80,97 @@ class AccountController extends Controller
     {
         $this->service->logout();
     }
+    public function userdetails() {
+        $models = [
+            // "username" => $_SESSION['fullName'],
+            "userDetails" => $this->service->getUserById($_SESSION['userID']),
+            // "userDetails" => $this->service->getAllUsers(),
+        ];
+        $this->displayView($models);
+    }
+
+    public function updateUser() {
+        $this->handleRequest(function ($data, &$response) {
+            // Get the user data from the request
+            $fullName = isset($data['fullName']) ? $data['fullName'] : null;
+            $email = isset($data['email']) ? $data['email'] : null;
+            $phoneNumber = isset($data['phoneNumber']) ? $data['phoneNumber'] : null;
+
+            if (isset($data['password'])){
+                $password = password_hash($data['password'], PASSWORD_DEFAULT);
+            } else {
+                $password = $_SESSION['password'];
+            }
+            
+            $updatedUser = new User($fullName, $_SESSION['userRole'], $email, $phoneNumber, $password, $_SESSION['userID']);
+    
+            // Call the update method from the userService
+            $result = $this->service->updateUser($updatedUser);
+    
+            // Check the result and set the appropriate response
+            if ($result) {
+                $response['message'] = "User details updated successfully.";
+                $response['status'] = 1;
+
+                $this->sendConfirmationEmail($email);
+
+            } else {
+                $response['message'] = "User details update failed.";
+                $response['status'] = 0;
+            }
+        });
+    }
+
+    private function sendConfirmationEmail($email) {
+        $to = $email;
+        $subject = "Account Update Confirmation";
+        $message = "Hello, your account details have been updated successfully. If you did not make this change, please contact us immediately.";
+        $headers = 'From: kuulmukkab@gmail.com' . "\r\n" .
+                'Reply-To: ' . $email . "\r\n" .
+                'X-Mailer: PHP/' . phpversion();
+        mail($to, $subject, $message, $headers);
+    }
+    
+    private function handleRequest($action)
+    {
+        $json_data = file_get_contents("php://input");
+        $data = json_decode($json_data, true);
+        $response = array(
+            'status' => 1,
+            'message' => ''
+        );
+
+        if ($data !== null) {
+            try {
+                $action($data, $response);
+            } catch (ErrorException $e) {
+                $response['status'] = 0;
+                $response['message'] = $e->getMessage();
+            }
+        } else {
+            $response['status'] = 0;
+            $response['message'] = "Invalid input data format. Please check the provided data.";
+        }
+
+        echo json_encode($response);
+    }
 }
+// $response = array(
+//     'status' => 1,
+//     'message' => "user details"
+// );
+// if (session_status() == PHP_SESSION_NONE) {
+//     session_start();
+// }
+// if (isset($_SESSION['userID'])) {
+//     $response['userID'] = $_SESSION['userID'];
+//     $response['userRole'] = $_SESSION['userRole'];
+//     $response['fullName'] = $_SESSION['fullName'];
+// } else {
+//     $response['status'] = 0;
+//     $response['message'] = "user is not logged in";
+// }
+// echo json_encode($response);
+
+// $user = $this->service->getUserById($_SESSION['userID']);
+// var_dump($user)

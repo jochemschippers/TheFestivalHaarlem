@@ -75,9 +75,17 @@ class AccountRepository extends Repository
     function getUserById($id)
     {
         try {
-            $stmt = $this->connection->prepare("SELECT * FROM `Users` WHERE ID = ?");
+            $stmt = $this->connection->prepare("SELECT `email`, `userRole`, `fullName`, `phoneNumber`, `password` FROM `Users` WHERE userID = ?");
             $stmt->execute([$id]);
-            $user = $stmt->fetch();
+            $userData = $stmt->fetch();
+            $user = new User(
+                $userData['fullName'],
+                0,
+                $userData['email'],
+                $userData['phoneNumber'],
+                $userData['password'],
+                $id
+            );
             return $user;
         } catch (Exception $e) {
             throw new ErrorException("It seems something went wrong with our database! Please try again later.");
@@ -96,14 +104,33 @@ class AccountRepository extends Repository
         }
     }
 
-    function updateUser($id, $firstname, $lastname, $email, $password, $postalcode, $housenumber)
+    function updateUser($updatedUser)
     {
         try {
-            $stmt = $this->connection->prepare("UPDATE `Users` SET `firstname`=?,`lastname`=?,`email`=?,`password`=?,`postalcode`=?,`housenumber`=? WHERE ID = ?");
-            $stmt->execute([$firstname, $lastname, $email, $password, $postalcode, $housenumber, $id]);
+            
+            $stmt = $this->connection->prepare("UPDATE `Users` SET `email`=?,`userRole`=?,`fullName`=?,`phoneNumber`=?,`password`=? WHERE userID = ?");
+            $stmt->bindParam(1, $updatedUser->getEmail());
+            $stmt->bindParam(2, $updatedUser->getUserRole());
+            $stmt->bindParam(3, $updatedUser->getFullName());
+            $stmt->bindParam(4, $updatedUser->getPhoneNumber());
+            $stmt->bindParam(5, $updatedUser->getPassword());
+            $stmt->bindParam(6, $updatedUser->getUserID());
+    
+            $stmt->execute();
+            $rowCount = $stmt->rowCount();
+    
+            if($rowCount === 0) {
+                throw new ErrorException("No rows were updated. User ID could be invalid.");
+            }
             return true;
-        } catch (Exception $e) {
+        } catch (PDOException $e) {
+            error_log("Database error: " . $e->getMessage()); // Log error message
             throw new ErrorException("It seems something went wrong with our database! Please try again later.");
+            return false;
+        } catch (Exception $e) {
+            error_log("Error: " . $e->getMessage()); // Log error message
+            throw new ErrorException("Something went wrong! Please try again later.");
+            return false;
         }
     }
 
