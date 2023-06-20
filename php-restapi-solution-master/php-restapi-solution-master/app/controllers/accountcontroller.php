@@ -92,15 +92,17 @@ class AccountController extends Controller
     public function updateUser() {
         $this->handleRequest(function ($data, &$response) {
             // Get the user data from the request
-            var_dump($data);
             $fullName = isset($data['fullName']) ? $data['fullName'] : null;
             $email = isset($data['email']) ? $data['email'] : null;
             $phoneNumber = isset($data['phoneNumber']) ? $data['phoneNumber'] : null;
-            $password = isset($data['password']) ? $data['password'] : null;
-            
+
+            if (isset($data['password'])){
+                $password = password_hash($data['password'], PASSWORD_DEFAULT);
+            } else {
+                $password = $_SESSION['password'];
+            }
             
             $updatedUser = new User($fullName, $_SESSION['userRole'], $email, $phoneNumber, $password, $_SESSION['userID']);
-            error_log("updateUser");
     
             // Call the update method from the userService
             $result = $this->service->updateUser($updatedUser);
@@ -109,11 +111,24 @@ class AccountController extends Controller
             if ($result) {
                 $response['message'] = "User details updated successfully.";
                 $response['status'] = 1;
+
+                $this->sendConfirmationEmail($email);
+
             } else {
                 $response['message'] = "User details update failed.";
                 $response['status'] = 0;
             }
         });
+    }
+
+    private function sendConfirmationEmail($email) {
+        $to = $email;
+        $subject = "Account Update Confirmation";
+        $message = "Hello, your account details have been updated successfully. If you did not make this change, please contact us immediately.";
+        $headers = 'From: kuulmukkab@gmail.com' . "\r\n" .
+                'Reply-To: ' . $email . "\r\n" .
+                'X-Mailer: PHP/' . phpversion();
+        mail($to, $subject, $message, $headers);
     }
     
     private function handleRequest($action)

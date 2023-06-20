@@ -117,6 +117,6 @@ class AccountService {
         return $this->repository->getAllUsers();
     }
     public function updateUser($user){
-        $this->repository->updateUser($user);
+        return $this->repository->updateUser($user);
     }
 }

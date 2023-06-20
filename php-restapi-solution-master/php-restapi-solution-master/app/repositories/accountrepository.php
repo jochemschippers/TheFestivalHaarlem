@@ -107,7 +107,7 @@ class AccountRepository extends Repository
     function updateUser($updatedUser)
     {
         try {
-            var_dump($updatedUser);
+            
             $stmt = $this->connection->prepare("UPDATE `Users` SET `email`=?,`userRole`=?,`fullName`=?,`phoneNumber`=?,`password`=? WHERE userID = ?");
             $stmt->bindParam(1, $updatedUser->getEmail());
             $stmt->bindParam(2, $updatedUser->getUserRole());
@@ -126,9 +126,11 @@ class AccountRepository extends Repository
         } catch (PDOException $e) {
             error_log("Database error: " . $e->getMessage()); // Log error message
             throw new ErrorException("It seems something went wrong with our database! Please try again later.");
+            return false;
         } catch (Exception $e) {
             error_log("Error: " . $e->getMessage()); // Log error message
             throw new ErrorException("Something went wrong! Please try again later.");
+            return false;
         }
     }
 

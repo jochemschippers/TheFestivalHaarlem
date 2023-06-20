@@ -99,3 +99,11 @@
     display: inline;
   }
   
+  .nav-item.active {
+    background-color: #f55945 !important;
+    border-radius: 24px;
+}
+
+i.active {
+  color: #f55945;
+}

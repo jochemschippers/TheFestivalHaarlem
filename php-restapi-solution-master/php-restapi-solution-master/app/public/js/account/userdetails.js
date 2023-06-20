@@ -27,15 +27,16 @@ document.querySelector('form').addEventListener('submit', function(event) {
         body: JSON.stringify(data)
     })
     .then(response => response.json())
-    // .then(data => {
-    //     if (data.status === 1) {
-    //         // Handle success, e.g., display a success message
-    //         alert(data.message);
-    //     } else {
-    //         // Handle error, e.g., display an error message
-    //         alert(data.message);
-    //     }
-    // })
+    .then(data => {
+        if (data.status === 1) {
+            // Handle success, e.g., display a success message
+            alert(data.message);
+        } else {
+            // Handle error, e.g., display an error message
+            alert(data.message);
+        }
+        location.reload();
+    })
     .catch((error) => {
         console.error('Error:', error);
     });

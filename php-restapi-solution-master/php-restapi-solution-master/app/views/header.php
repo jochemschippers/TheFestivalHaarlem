@@ -37,25 +37,31 @@
 <header class="header-container">
   <div class="logo">
     <img class="logoImage" src="https://i.ibb.co/9TR3YTC/Logo-small2.png" alt="logo festival"> </img>
-  </div>
+  </div>  
   <nav class="navbar" id="navbar">
-    <span class="nav-item"><a href="/">Home</a></span>
+    <span class="nav-item <?php echo $_SERVER['REQUEST_URI'] == '/' ? 'active' : '' ?>"><a href="/">Home</a></span>
     <?php if (isset($events) && (is_array($events) || is_object($events))) { ?>
-      <?php foreach ($events as $event) { ?>
-        <span class="nav-item"><a href="/<?= str_replace(' ', '-', $event->getEventName()) ?>"><?= $event->getEventName() ?></a></span>
-      <?php } ?>
+        <?php foreach ($events as $event) { 
+            $eventUrl = '/' . str_replace(' ', '-', $event->getEventName());
+        ?>
+            <span class="nav-item <?php echo $_SERVER['REQUEST_URI'] == $eventUrl ? 'active' : '' ?>">
+                <a href="<?php echo $eventUrl; ?>"><?= $event->getEventName() ?></a>
+            </span>
+        <?php } ?>
     <?php } else { ?>
-      <span class="nav-item"><a href="#">It seems our server is down. Please visit the website again later.</a></span>
+        <span class="nav-item"><a href="#">It seems our server is down. Please visit the website again later.</a></span>
     <?php } ?>
-  </nav>
-  <div class="user-options">
-    <div class="option"><a href="/account/userdetails"><i class="fa fa-cog fa-2x"></i></a></div>
-    <div class="option"><a href="/test"><i class="fa fa-sharp fa-solid fa-screwdriver-wrench fa-2x"></i></a></div>
-    <div class="option"><a href="/paymentpage"><span class="cart-item-count"></span><i class="fa fa-shopping-cart fa-2x"></i></a></div>
+</nav>
+<div class="user-options">
+    <div class="option"><a href="/account/userdetails"><i class="fa fa-cog fa-2x <?php echo $_SERVER['REQUEST_URI'] == '/account/userdetails' ? 'active' : '' ?>"></i></a></div>
+    <div class="option"><a href="/test"><i class="fa fa-sharp fa-solid fa-screwdriver-wrench fa-2x <?php echo $_SERVER['REQUEST_URI'] == '/test' ? 'active' : '' ?>"></i></a></div>
+    <div class="option"><a href="/paymentpage"><span class="cart-item-count"></span><i class="fa fa-shopping-cart fa-2x <?php echo $_SERVER['REQUEST_URI'] == '/paymentpage' ? 'active' : '' ?>"></i></a></div>
     <?php
     $uri = explode('/', trim($_SERVER['REQUEST_URI'], '/'));
     // if user not logged in, login option, otherwise logout option
-    if (!isset($_SESSION['userID'])) { ?><div class="option"><a href="/account"><i class="fa fa-user fa-2x"></i></a></div><?php } else { ?>
-      <div class="option"><a href="/account/logout"><i class="fa fa-right-from-bracket fa-2x"></i></a></div><?php }  ?>
+    if (!isset($_SESSION['userID'])) { ?><div class="option"><a href="/account"><i class="fa fa-user fa-2x <?php echo $_SERVER['REQUEST_URI'] == '/account' ? 'active' : '' ?>"></i></a></div><?php } else { ?>
+      <div class="option"><a href="/account/logout"><i class="fa fa-right-from-bracket fa-2x <?php echo $_SERVER['REQUEST_URI'] == '/account/logout' ? 'active' : '' ?>"></i></a></div><?php }  ?>
   </div>
 </header>
+
+

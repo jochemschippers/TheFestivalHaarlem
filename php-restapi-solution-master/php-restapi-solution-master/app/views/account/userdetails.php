@@ -4,7 +4,6 @@
         <h1 id="title">User Details</h1>
 
         <form method="POST" action="">
-            <?php var_dump($userDetails); ?>
             <label for="fullNameUpdate">Full Name:</label><br>
             <input type="text" id="fullNameUpdate" name="fullNameUpdate" value="<?= $userDetails->getFullName() ?>"><br>
             
