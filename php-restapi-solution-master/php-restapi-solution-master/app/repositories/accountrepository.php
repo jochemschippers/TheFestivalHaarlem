@@ -160,6 +160,36 @@ class AccountRepository extends Repository
         }
     }
 
+    function checkEmail($email)
+    {
+        try {
+            $stmt = $this->connection->prepare("SELECT `email` FROM `Users` WHERE email = ?");
+            $stmt->execute([$email]);
+            $email = $stmt->fetch();
+            if ($email) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception $e) {
+            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
+            return false;
+        }
+    }
+
+    function resetPassword($email, $password) {
+        try {
+            var_dump($email, $password);
+            $stmt = $this->connection->prepare("UPDATE `Users` SET `password` = ? WHERE `email` = ?");
+            $stmt->execute([$password, $email]);
+            return true;
+        } catch (Exception $e) {
+            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
+            return false;
+        }
+
+    }
+
     function deleteUser($id)
     {
         try {

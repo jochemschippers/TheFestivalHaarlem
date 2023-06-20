@@ -1,7 +1,8 @@
 <form method="post" action="process_reset_password.php">
     <label for="newPassword">New Password:</label>
     <input type="password" id="newPassword" name="newPassword" required>
-    <input type="hidden" name="token" value="<?= $_GET['token'] ?>">
+    <label for="confirmNewPassword">Confirm New Password:</label>
+    <input type="password" id="confirmNewPassword" name="confirmNewPassword" required>
     <input type="hidden" name="email" value="<?= $_GET['email'] ?>">
     <input type="submit" value="Reset Password">
 </form>

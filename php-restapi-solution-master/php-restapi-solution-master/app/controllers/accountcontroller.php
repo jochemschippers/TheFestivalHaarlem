@@ -146,13 +146,13 @@ class AccountController extends Controller
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth = true;
-            $mail->Username = 'kuulmukkab@gmail.com';
-            $mail->Password = 'rmmtnpeozvlgqzwp';
+            $mail->Username = 'info.thehaarlemfestival@gmail.com';
+            $mail->Password = 'fesvstifrbiaxkil';
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port = 587;
 
             //Recipients
-            $mail->setFrom('kuulmukkab@gmail.com', 'The Haalem Festival');
+            $mail->setFrom('info.thehaarlemfestival@gmail.com', 'The Haalem Festival');
             $mail->addAddress($email, $nameReceiver ?? 'User');
 
             // Content
@@ -194,23 +194,72 @@ class AccountController extends Controller
 
         echo json_encode($response);
     }
-}
-// $response = array(
-//     'status' => 1,
-//     'message' => "user details"
-// );
-// if (session_status() == PHP_SESSION_NONE) {
-//     session_start();
-// }
-// if (isset($_SESSION['userID'])) {
-//     $response['userID'] = $_SESSION['userID'];
-//     $response['userRole'] = $_SESSION['userRole'];
-//     $response['fullName'] = $_SESSION['fullName'];
-// } else {
-//     $response['status'] = 0;
-//     $response['message'] = "user is not logged in";
-// }
-// echo json_encode($response);
 
-// $user = $this->service->getUserById($_SESSION['userID']);
-// var_dump($user)
+    public function reset_password()
+    {
+        $models = [];
+        $this->displayView($models);
+    }
+
+    public function checkEmail() {
+
+        $this->handleRequest(function ($data, &$response) {
+            // Get the user data from the request
+            $email = isset($data['email']) ? $data['email'] : null;
+
+            $result = $this->service->checkEmail($email);
+
+            if ($result) {
+                $response['message'] = "We will send you a mail to change your password.";
+                $response['status'] = 0;
+
+                $Subject = 'Password Reset';
+                $Body    = 'Hello, you have requested to reset your password. Please click on the link below to reset your password. <br> <a href="http://localhost/account/reset_password?email=' . urlencode($email) . '">Reset Password</a>';
+                $AltBody = 'This is the body in plain text for non-HTML mail clients';
+                try {
+                    $this->sendEmail($email, null, $Subject, $Body, $AltBody);
+                } catch (Exception $e) {
+                    // Log or echo your error message
+                    error_log($e->getMessage());
+                }
+            } else {
+                $response['message'] = "No user found with this email.";
+                $response['status'] = 1;
+            }
+        });
+    }
+
+    public function resetPassword() {
+
+        var_dump("test");
+        $this->handleRequest(function ($data, &$response) {
+            // Get the user data from the request
+            $email = isset($data['email']) ? $data['email'] : null;
+            $password = isset($data['newPassword']) ? $data['newPassword'] : null;
+
+            var_dump($email);
+            var_dump($password);
+
+            $result = $this->service->resetPassword($email, $password);
+
+            if ($result) {
+                $response['message'] = "Password reset successfully.";
+                $response['status'] = 0;
+
+                $Subject = 'Password Reset Confirmation';
+                $Body    = 'Hello, your password has been reset successfully. If you did not make this change, please contact us immediately.';
+                $AltBody = 'This is the body in plain text for non-HTML mail clients';
+                try {
+                    $this->sendEmail($email, null, $Subject, $Body, $AltBody);
+                } catch (Exception $e) {
+                    // Log or echo your error message
+                    error_log($e->getMessage());
+                }
+            } else {
+                $response['message'] = "Password reset failed.";
+                $response['status'] = 1;
+            }
+        });
+    }
+}
+

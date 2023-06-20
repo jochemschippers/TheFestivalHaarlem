@@ -119,4 +119,11 @@ class AccountService {
     public function updateUser($user){
         return $this->repository->updateUser($user);
     }
+    public function checkEmail($email){
+        return $this->repository->checkEmailExists($email);
+    }
+    public function resetPassword($email, $newPassword){
+        $this->repository->resetPassword($email, password_hash($newPassword, PASSWORD_DEFAULT));
+        return $newPassword;
+    }
 }

@@ -20,6 +20,7 @@
             </div>
             <button type="submit" class="submit-btn btn-account">Log in</button>
         </form>
+        <p>Forgot your password? <button id="resetbtn" onclick="reset()">Reset it here</button></p>
         <form id="register" class="input-group" method="POST">
             <div class="form-floating">
                 <input type="email" class="form-control input-field" placeholder="name@example.com" id="emailRegister" minlength="7" required>
@@ -43,5 +44,13 @@
                 <label for="floatingInput">Confirm Password</label>
             </div>
             <button type="submit" class="submit-btn btn-account" id="signUp">Register</button>
+        </form>
+        <form id="reset" class="input-group" method="POST">
+            <div class="form-floating">
+                <input type="email" class="form-control input-field" placeholder="your@email.com"
+                    id="emailReset" minlength="7" required>
+                <label for="floatingInput">Email address</label>
+            </div>
+            <button type="submit" class="submit-btn btn-account">Reset</button>
         </form>
     </div>
