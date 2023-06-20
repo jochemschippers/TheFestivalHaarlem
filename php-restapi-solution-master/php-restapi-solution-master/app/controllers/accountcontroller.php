@@ -80,4 +80,82 @@ class AccountController extends Controller
     {
         $this->service->logout();
     }
+    public function userdetails() {
+        $models = [
+            // "username" => $_SESSION['fullName'],
+            "userDetails" => $this->service->getUserById($_SESSION['userID']),
+            // "userDetails" => $this->service->getAllUsers(),
+        ];
+        $this->displayView($models);
+    }
+
+    public function updateUser() {
+        $this->handleRequest(function ($data, &$response) {
+            // Get the user data from the request
+            var_dump($data);
+            $fullName = isset($data['fullName']) ? $data['fullName'] : null;
+            $email = isset($data['email']) ? $data['email'] : null;
+            $phoneNumber = isset($data['phoneNumber']) ? $data['phoneNumber'] : null;
+            $password = isset($data['password']) ? $data['password'] : null;
+            
+            
+            $updatedUser = new User($fullName, $_SESSION['userRole'], $email, $phoneNumber, $password, $_SESSION['userID']);
+            error_log("updateUser");
+    
+            // Call the update method from the userService
+            $result = $this->service->updateUser($updatedUser);
+    
+            // Check the result and set the appropriate response
+            if ($result) {
+                $response['message'] = "User details updated successfully.";
+                $response['status'] = 1;
+            } else {
+                $response['message'] = "User details update failed.";
+                $response['status'] = 0;
+            }
+        });
+    }
+    
+    private function handleRequest($action)
+    {
+        $json_data = file_get_contents("php://input");
+        $data = json_decode($json_data, true);
+        $response = array(
+            'status' => 1,
+            'message' => ''
+        );
+
+        if ($data !== null) {
+            try {
+                $action($data, $response);
+            } catch (ErrorException $e) {
+                $response['status'] = 0;
+                $response['message'] = $e->getMessage();
+            }
+        } else {
+            $response['status'] = 0;
+            $response['message'] = "Invalid input data format. Please check the provided data.";
+        }
+
+        echo json_encode($response);
+    }
 }
+// $response = array(
+//     'status' => 1,
+//     'message' => "user details"
+// );
+// if (session_status() == PHP_SESSION_NONE) {
+//     session_start();
+// }
+// if (isset($_SESSION['userID'])) {
+//     $response['userID'] = $_SESSION['userID'];
+//     $response['userRole'] = $_SESSION['userRole'];
+//     $response['fullName'] = $_SESSION['fullName'];
+// } else {
+//     $response['status'] = 0;
+//     $response['message'] = "user is not logged in";
+// }
+// echo json_encode($response);
+
+// $user = $this->service->getUserById($_SESSION['userID']);
+// var_dump($user)

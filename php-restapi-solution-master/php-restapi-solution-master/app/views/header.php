@@ -48,6 +48,7 @@ foreach ($cssFiles as $cssFile): ?>
     <?php } ?>
   </nav>
   <div class="user-options">
+    <div class="option"><a href="/account/userdetails"><i class="fa fa-cog fa-2x"></i></a></div>
     <div class="option"><a href="/test"><i class="fa fa-sharp fa-solid fa-screwdriver-wrench fa-2x"></i></a></div>
     <div class="option"><a href="/paymentpage"><span class="cart-item-count"></span><i class="fa fa-shopping-cart fa-2x"></i></a></div>
     <?php
