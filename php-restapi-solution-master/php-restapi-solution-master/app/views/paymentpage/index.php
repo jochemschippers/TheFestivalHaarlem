@@ -1,5 +1,5 @@
 <body>
-    <img id="background" src="\image\Payment\overview\backgroundpayment.png">
+<div id="logo" class="d-flex justify-content-center align-items-center"><img id="background" class="" src="\image\Payment\overview\backgroundpayment.png"></div>
 
 
     <div class="container" id="progressContainer">

@@ -170,7 +170,9 @@ main li {
   margin: 0.5em 0;
 }
 
-
+.admin-nav{
+  z-index:-9;
+}
 /* forms */
 form input,
 form textarea,

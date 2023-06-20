@@ -57,7 +57,6 @@ class paymentpageController extends Controller
         try {
             if (isset($data["cart"]) && is_array($data["cart"])) {
                 $getCartItemsResult = $this->personalProgramService->getCart($data["cart"], $_SESSION['userID'] ?? null);
-
                 if (!empty($getCartItemsResult['items'])) {
                     $response['tickets'] = $getCartItemsResult['items'];
                     $response['message'] = $getCartItemsResult['message'];
@@ -79,7 +78,8 @@ class paymentpageController extends Controller
             $getCartItemsResult = $this->personalProgramService->getCart($data["cart"], $_SESSION['userID'] ?? null);
             $totals = $this->personalProgramService->calculateTotals($getCartItemsResult['items']);
             try {
-                $paymentUrl = $this->paymentService->createMolliePayment($totals['total']);
+                $programId = $this->personalProgramService->saveCart($getCartItemsResult['items'], $_SESSION['userID']);
+                $paymentUrl = $this->paymentService->createMolliePayment($totals['total'], $getCartItemsResult, $programId);
                 echo json_encode(["paymentUrl" => $paymentUrl]);
             } catch (ErrorException $e) {
                 echo json_encode(["error" => $e->getMessage()]);
@@ -90,46 +90,44 @@ class paymentpageController extends Controller
     }
     public function mollieWebhook()
     {
-        $mollie = new \Mollie\Api\MollieApiClient();
-        $paymentId = $_POST['id'];
-        $payment = $mollie->payments->get($paymentId);
-        $models = ['error' => 'Something went wrong with your payment. Please try again later.'];
-
-        switch ($payment->status) {
-            case 'failed':
-                $models = ['error' => 'Your payment has failed. Please check your payment details and try again.'];
-                break;
-            case 'canceled':
-                $models = ['error' => 'Your payment was cancelled. Please try again or contact support if you need help.'];
-                break;
-            case 'expired':
-                $models = ['error' => 'Your payment has expired. Please try again.'];
-                break;
+        if (!isset($_POST['id'])) {
+            http_response_code(400);
+            exit("No payment ID provided");
         }
-        $this->paymentFailed($models);
+        $paymentId = $_POST['id'];
+        if($this->paymentService->checkIfPaymentPaid($paymentId)){
+            $programId= $this->paymentService->getProgramIdByPaymentId($paymentId);
+            $this->personalProgramService->updateStatus($programId, true);
+        }
     }
     private function paymentFailed($models)
     {
         $this->displayView($models);
     }
-    public function paymentSuccess()
+    public function paymentConfirm()
     {
-
-        $paymentId = $_GET['id'];
-        $models = ['error' => 'Something went wrong with your payment. Please try again later.'];
-        try {
-            $status = $this->paymentService->verifyPayment($paymentId);
-            if ($status == 'paid') {
-                $cartItems = $this->personalProgramService->getCart($_SESSION['cart'], $_SESSION['userID'] ?? null)['items'];
-                $this->personalProgramService->saveCart($cartItems, $_SESSION['userID']);
-                // Display a success view
-
-                $this->displayView($models);
-                return;
-            }
-        } catch (ErrorException $e) {
-            $models = ['error' => 'Something went wrong on our side. Sorry! Please try again later.' . $e->getMessage()];
+        $personalProgram =$this->personalProgramService->getMostRecentPersonalProgram($_SESSION['userID'] ?? null);
+        if (!$personalProgram) {
+            $models = ['error' => 'Could not retrieve payment information. Please try again later.'];
+            $this->paymentFailed($models);
+            return;
         }
-        $this->paymentFailed($models);
+        if($personalProgram->getIsPaid()){
+            $models = [];
+            $this->displayView($models);
+            
+            return;
+        }else{
+            $models = ['error' => 'Your payment has failed, was cancelled or has expired. Please try again or contact support if you need help.'];
+            $this->paymentFailed($models);
+        }
+    }
+    public function getPaymentId()
+    {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        $paymentId = $_SESSION['paymentId'] ?? null;
+        echo json_encode(["paymentId" => $paymentId]);
     }
 }

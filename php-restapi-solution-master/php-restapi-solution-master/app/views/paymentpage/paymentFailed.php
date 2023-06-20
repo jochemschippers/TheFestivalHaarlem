@@ -9,7 +9,7 @@
                     <?php if ($models['error'] == 'Your payment has failed. Please check your payment details and try again.'){ ?>
                         <a href="<?= $models['paymentLink']; ?>" class="btn btn-primary">Try the same payment again</a>
                     <?php }else{ ?>
-                        <a href="/paymentPage" class="btn btn-primary">Go Back to Payment Page</a>
+                        <a href="/paymentpage" class="btn btn-primary">Go Back to Payment Page</a>
                     <?php } ?>
                 </div>
             </div>

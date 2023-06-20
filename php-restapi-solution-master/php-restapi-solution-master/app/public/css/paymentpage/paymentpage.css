@@ -7,7 +7,7 @@ thead {
 }
 
 #background {
-  width: 100%;
+  margin-bottom: 5%;
 }
 
 #progressContainer {
@@ -185,7 +185,10 @@ body {
   padding-right: 0px !important;
   padding-left: 0px !important;
 }
-
+#logo{
+  overflow:hidden;
+  height: 30%;
+}
 #progressbar i {
   display: block;
   margin-bottom: 5px;
