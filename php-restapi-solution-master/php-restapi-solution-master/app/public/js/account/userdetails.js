@@ -27,6 +27,7 @@ document.querySelector('form').addEventListener('submit', function(event) {
         body: JSON.stringify(data)
     })
     .then(response => response.json())
+    .then(data => console.log(data))
     .then(data => {
         if (data.status === 1) {
             // Handle success, e.g., display a success message

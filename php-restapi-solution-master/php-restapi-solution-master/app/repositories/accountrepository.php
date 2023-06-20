@@ -25,15 +25,17 @@ class AccountRepository extends Repository
         try {
             $stmt = $this->connection->prepare("INSERT INTO `Users`(`email`, `userRole`, `fullName`, `phoneNumber`, `password`) VALUES (?,0,?,?,?)");
             $stmt->execute([
-                $user->getEmail(), 
-                $user->getFullName(), 
-                $user->getPhoneNumber(), 
-                $user->getPassword()]);
+                $user->getEmail(),
+                $user->getFullName(),
+                $user->getPhoneNumber(),
+                $user->getPassword()
+            ]);
         } catch (Exception $e) {
             throw new ErrorException("It seems something went wrong with our database! Please try again later." . $e->getMessage());
         }
     }
-    function getPasswordByEmail($email){
+    function getPasswordByEmail($email)
+    {
         try {
             $stmt = $this->connection->prepare("SELECT `password` FROM `Users` WHERE email = ?");
             $stmt->execute([$email]);
@@ -65,7 +67,7 @@ class AccountRepository extends Repository
             $stmt = $this->connection->prepare("SELECT userID, userRole, fullName FROM `Users` WHERE email = ?");
             $stmt->execute([$email]);
             $userData = $stmt->fetch();
-            $user = new User($userData['fullName'], $userData['userRole'],'', '', '', $userData['userID'], );            
+            $user = new User($userData['fullName'], $userData['userRole'], '', '', '', $userData['userID'],);
             return $user;
         } catch (Exception $e) {
             throw new ErrorException("It seems something went wrong with our database! Please try again later.");
@@ -107,22 +109,46 @@ class AccountRepository extends Repository
     function updateUser($updatedUser)
     {
         try {
-            
-            $stmt = $this->connection->prepare("UPDATE `Users` SET `email`=?,`userRole`=?,`fullName`=?,`phoneNumber`=?,`password`=? WHERE userID = ?");
-            $stmt->bindParam(1, $updatedUser->getEmail());
-            $stmt->bindParam(2, $updatedUser->getUserRole());
-            $stmt->bindParam(3, $updatedUser->getFullName());
-            $stmt->bindParam(4, $updatedUser->getPhoneNumber());
-            $stmt->bindParam(5, $updatedUser->getPassword());
-            $stmt->bindParam(6, $updatedUser->getUserID());
-    
-            $stmt->execute();
-            $rowCount = $stmt->rowCount();
-    
-            if($rowCount === 0) {
-                throw new ErrorException("No rows were updated. User ID could be invalid.");
+            if ($updatedUser->getPassword() == "" || $updatedUser->getPassword() == null || $updatedUser->getPassword() == " " || $updatedUser->getPassword() == '') {
+                $stmt = $this->connection->prepare("UPDATE `Users` SET `email`= :email,`fullName`= :fullName,`phoneNumber`= :phoneNumber WHERE userID = :userId;");
+                $stmt->bindValue(':email', $updatedUser->getEmail());
+                $stmt->bindValue(':fullName', $updatedUser->getFullName());
+                $stmt->bindValue(':phoneNumber', $updatedUser->getPhoneNumber());
+                $stmt->bindValue(':userId', $updatedUser->getUserID());
+                $stmt->execute();
+                $rowCount = $stmt->rowCount();
+                if (!$stmt->execute()) {
+                    error_log(print_r($stmt->errorInfo(), true));
+                }
+                if ($rowCount === 0) {
+                    throw new ErrorException("No rows were updated. User ID could be invalid.");
+                }
+                return true;
+            } else {
+                $updatedUser->setPassword(password_hash($updatedUser->getPassword(), PASSWORD_DEFAULT));
+                $stmt = $this->connection->prepare("UPDATE `Users` SET `email`=?,`userRole`=?,`fullName`=?,`phoneNumber`=?,`password`=? WHERE userID = ?");
+                $email = $updatedUser->getEmail();
+                $userRole = $updatedUser->getUserRole();
+                $fullName = $updatedUser->getFullName();
+                $phoneNumber = $updatedUser->getPhoneNumber();
+                $password = $updatedUser->getPassword();
+
+                $userID = (int)$updatedUser->getUserID();
+
+                $stmt->bindValue(1, $email);
+                $stmt->bindValue(2, $userRole);
+                $stmt->bindValue(3, $fullName);
+                $stmt->bindValue(4, $phoneNumber);
+                $stmt->bindValue(5, $password);
+                $stmt->bindValue(6, $userID);
+
+                $stmt->execute();
+                $rowCount = $stmt->rowCount();
+                if ($rowCount === 0) {
+                    throw new ErrorException("No rows were updated 2. User ID could be invalid.");
+                }
+                return true;
             }
-            return true;
         } catch (PDOException $e) {
             error_log("Database error: " . $e->getMessage()); // Log error message
             throw new ErrorException("It seems something went wrong with our database! Please try again later.");

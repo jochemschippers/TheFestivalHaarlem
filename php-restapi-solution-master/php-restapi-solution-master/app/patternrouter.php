@@ -59,6 +59,16 @@ class PatternRouter
                 $methodName = $defaultMethod;
             }
         }
+        if ($explodedUri[1] === 'userdetails') {
+            if (session_status() == PHP_SESSION_NONE) {
+                session_start();
+            }
+
+            if (!isset($_SESSION['userID'])) {
+                $explodedUri[0] = 'errormessage403';
+                $methodName = $defaultMethod;
+            }
+        }
 
         $controllerName = str_replace('-', '', $explodedUri[0]) . "controller";
 

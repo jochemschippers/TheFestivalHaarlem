@@ -7,24 +7,24 @@
 </form>
 
 <?php
-$newPassword = $_POST['newPassword'];
-$token = $_POST['token'];
-$email = $_POST['email'];
+// $newPassword = $_POST['newPassword'];
+// $token = $_POST['token'];
+// $email = $_POST['email'];
 
-// Fetch the stored token from the DB
-$storedToken = getTokenFromDB($email);
+// // Fetch the stored token from the DB
+// $storedToken = getTokenFromDB($email);
 
-if (hash_equals($storedToken, $token)) {
-    // If the token is valid, hash the new password
-    $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+// if (hash_equals($storedToken, $token)) {
+//     // If the token is valid, hash the new password
+//     $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
     
-    // Update the password in the database
-    updatePassword($email, $hashedPassword);
+//     // Update the password in the database
+//     updatePassword($email, $hashedPassword);
 
-    // Remove the token from the database
-    removeTokenFromDB($email);
-    echo "Password reset successful";
-} else {
-    echo "Invalid token";
-}
+//     // Remove the token from the database
+//     removeTokenFromDB($email);
+//     echo "Password reset successful";
+// } else {
+//     echo "Invalid token";
+// }
 ?>

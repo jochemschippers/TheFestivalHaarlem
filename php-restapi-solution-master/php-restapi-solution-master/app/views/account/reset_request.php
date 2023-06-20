@@ -5,12 +5,12 @@
 </form>
 
 <?php
-$email = $_POST['email'];
-$token = bin2hex(random_bytes(50)); // generate a random token
-storeTokenInDB($email, $token); // store the token in your DB, associated with the user
+// $email = $_POST['email'];
+// $token = bin2hex(random_bytes(50)); // generate a random token
+// storeTokenInDB($email, $token); // store the token in your DB, associated with the user
 
-$resetLink = "https://localhost/reset_password.php?token=$token&email=$email";
+// $resetLink = "https://localhost/reset_password.php?token=$token&email=$email";
 
-// Then send an email with the reset link
-sendEmail($email, $resetLink);
+// // Then send an email with the reset link
+// sendEmail($email, $resetLink);
 ?>

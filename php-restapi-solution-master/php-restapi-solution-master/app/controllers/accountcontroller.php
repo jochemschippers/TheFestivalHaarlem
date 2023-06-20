@@ -2,6 +2,11 @@
 require_once __DIR__ . '/controller.php';
 require __DIR__ . '/../services/accountservice.php';
 require_once __DIR__ . '/../models/user.php';
+require_once __DIR__ . '/../vendor/autoload.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 
 class AccountController extends Controller
 {
@@ -38,7 +43,7 @@ class AccountController extends Controller
                 //0 at the end represents userRole, 1 = admin 0 = normal visitor
                 $userToRegister = new User($data["fullname"], 0, $data["email"], $data["phoneNumber"], $data["password"]);
                 $this->service->register($userToRegister);
-            }catch (ErrorException $e) {
+            } catch (ErrorException $e) {
                 $response['status'] = 0;
                 $response['message'] = $e->getMessage();
             }
@@ -80,7 +85,8 @@ class AccountController extends Controller
     {
         $this->service->logout();
     }
-    public function userdetails() {
+    public function userdetails()
+    {
         $models = [
             // "username" => $_SESSION['fullName'],
             "userDetails" => $this->service->getUserById($_SESSION['userID']),
@@ -89,48 +95,82 @@ class AccountController extends Controller
         $this->displayView($models);
     }
 
-    public function updateUser() {
+    public function updateUser()
+    {
         $this->handleRequest(function ($data, &$response) {
             // Get the user data from the request
             $fullName = isset($data['fullName']) ? $data['fullName'] : null;
             $email = isset($data['email']) ? $data['email'] : null;
             $phoneNumber = isset($data['phoneNumber']) ? $data['phoneNumber'] : null;
 
-            if (isset($data['password'])){
-                $password = password_hash($data['password'], PASSWORD_DEFAULT);
+            if (isset($data['password']) && $data['password'] != "") {
+                // $password = password_hash($data['password'], PASSWORD_DEFAULT);
+                $password = $data['password'];
             } else {
-                $password = $_SESSION['password'];
+                $password = "";
             }
-            
             $updatedUser = new User($fullName, $_SESSION['userRole'], $email, $phoneNumber, $password, $_SESSION['userID']);
-    
-            // Call the update method from the userService
+
             $result = $this->service->updateUser($updatedUser);
-    
-            // Check the result and set the appropriate response
+
             if ($result) {
                 $response['message'] = "User details updated successfully.";
                 $response['status'] = 1;
 
-                $this->sendConfirmationEmail($email);
-
+                $Subject = 'Account Update Confirmation';
+                $Body    = 'Hello, your account details have been updated successfully. If you did not make this change, please contact us immediately.';
+                $AltBody = 'This is the body in plain text for non-HTML mail clients';
+                try {
+                    $this->sendEmail($email, $fullName, $Subject, $Body, $AltBody);
+                } catch (Exception $e) {
+                    // Log or echo your error message
+                    error_log($e->getMessage());
+                }
+                var_dump($response);
             } else {
                 $response['message'] = "User details update failed.";
                 $response['status'] = 0;
             }
+            // $data = null;
         });
     }
 
-    private function sendConfirmationEmail($email) {
-        $to = $email;
-        $subject = "Account Update Confirmation";
-        $message = "Hello, your account details have been updated successfully. If you did not make this change, please contact us immediately.";
-        $headers = 'From: kuulmukkab@gmail.com' . "\r\n" .
-                'Reply-To: ' . $email . "\r\n" .
-                'X-Mailer: PHP/' . phpversion();
-        mail($to, $subject, $message, $headers);
+    private function sendEmail($email, $nameReceiver, $subject, $body, $altBody)
+    {
+        //Create a new PHPMailer instance
+        $mail = new PHPMailer(true);
+
+        try {
+            //Server settings
+            $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'kuulmukkab@gmail.com';
+            $mail->Password = 'rmmtnpeozvlgqzwp';
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port = 587;
+
+            //Recipients
+            $mail->setFrom('kuulmukkab@gmail.com', 'The Haalem Festival');
+            $mail->addAddress($email, $nameReceiver ?? 'User');
+
+            // Content
+            $mail->isHTML(true);
+            $mail->Subject = $subject;
+            $mail->Body = $body;
+            $mail->AltBody = $altBody;
+
+            if ($mail->send()) {
+                // echo 'Message has been sent';
+            } else {
+                // echo 'Message could not be sent.';
+            }
+        } catch (Exception $e) {
+            // echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
     }
-    
+
     private function handleRequest($action)
     {
         $json_data = file_get_contents("php://input");
