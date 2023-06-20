@@ -115,6 +115,7 @@ class paymentpageController extends Controller
         if($personalProgram->getIsPaid()){
             $models = [];
             $this->displayView($models);
+            
             return;
         }else{
             $models = ['error' => 'Your payment has failed, was cancelled or has expired. Please try again or contact support if you need help.'];

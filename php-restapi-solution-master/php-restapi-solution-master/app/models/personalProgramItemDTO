@@ -1,0 +1,9 @@
+<?php
+
+class PersonalProgramItem{
+    private $title;
+    private $dateTime;
+    private $amount;
+    private $price; 
+    
+}

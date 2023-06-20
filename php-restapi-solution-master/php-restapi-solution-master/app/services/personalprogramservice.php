@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . '/../repositories/TimeSlotRepository.php';
-require_once __DIR__ . '/../repositories/PersonalProgramRepository.php';
+require_once __DIR__ . '/../repositories/timeslotrepository.php';
+require_once __DIR__ . '/../repositories/personalprogramrepository.php';
 
 
 class PersonalProgramService
