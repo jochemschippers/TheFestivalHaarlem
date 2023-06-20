@@ -1,5 +1,5 @@
 <body>
-  <img id="background" src="\image\Payment\overview\backgroundpayment.png">
+<div id="logo" class="d-flex justify-content-center align-items-center"><img id="background" class="" src="\image\Payment\overview\backgroundpayment.png"></div>
 
 
   <div class="container" id="progressContainer">
@@ -41,9 +41,10 @@
       </div>
     </div>
   </div>
+
   <div id="payContainer">
     <div id="loading" class="loading d-flex justify-content-center align-items-center w-100">
-      <h1> redirecting to payment page...</h1>
+      <h1> redirecting to personal program page...</h1>
     <div class="loader loader--style2 " title="1">
   <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
      width="200px" height="200px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
@@ -60,39 +61,4 @@
 </div>
     </div>
   </div>
-  <style>
-    .loader {
-      margin: 0 0 2em;
-      height: 100px;
-      width: 20%;
-      text-align: center;
-      padding: 1em;
-      margin: 0 auto 1em;
-      display: inline-block;
-      vertical-align: top;
-    }
-    .loading{
-      min-height:50vh;
-      flex-direction:column;
-    }
-
-    .spinner {
-      border: 16px solid #f3f3f3;
-      border-top: 16px solid #3498db;
-      border-radius: 50%;
-      width: 120px;
-      height: 120px;
-      animation: spin 2s linear infinite;
-    }
-
-    @keyframes spin {
-      0% {
-        transform: rotate(0deg);
-      }
-
-      100% {
-        transform: rotate(360deg);
-      }
-    }
-  </style>
 </body>

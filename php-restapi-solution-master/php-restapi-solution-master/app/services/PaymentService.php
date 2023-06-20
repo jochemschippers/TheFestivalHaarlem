@@ -36,9 +36,9 @@ class PaymentService
                 "webhookUrl"  => $this->URL . "paymentPage/mollieWebhook",
             ]);
             $this->storePaymentId($userId, $payment->id, $programID);
-            error_log($payment->id);
             return $payment->getCheckoutUrl();
         } catch (\Mollie\Api\Exceptions\ApiException $e) {
+            error_log($e->getMessage());
             throw new ErrorException("Something went wrong with our payment provider! We are fixing the issue right now, please try again later.");
 
             //throw new ErrorException($e->getMessage());
@@ -78,7 +78,8 @@ class PaymentService
 
             if ($paymentStatus === 'open') {
                 // If the payment status is 'open', throw an exception to prevent creating a new payment
-                throw new ErrorException('You have an open payment. Please complete that payment first. <a href="' . $this->getPaymentUrl($paymentId) . '">Click here to complete your payment.</a>');
+                throw new ErrorException('You have an open payment. Please complete that payment first. <a href="' . $this->getPaymentUrl($paymentId) . '">Click here to complete your payment.</a>
+                Do you want to cancel that payment? Please click on cancel on the mollie payment page.');
             }
         }
     }
@@ -91,5 +92,9 @@ class PaymentService
     {
         $payment = $this->mollie->payments->get($paymentId);
         return $payment->getCheckoutUrl();
+    }
+    public function deletePaymentById($paymentId)
+    {
+        $this->repository->deletePaymentIdByPaymentId($paymentId);
     }
 }

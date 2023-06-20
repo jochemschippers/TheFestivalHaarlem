@@ -1,0 +1,50 @@
+h2 {
+    font-family: 'Martel';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 54px;
+}
+
+p {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 26px;
+}
+
+th {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 27px;
+}
+
+td {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 27px;
+    margin: 13px;
+}
+
+table {
+    border-collapse: collapse;
+    border: 2px solid #961B1B !important;
+    background-color: #FBD195 !important;
+    background: #FBD195 !important;
+    border: 2px solid #961B1B !important;
+}
+tr{
+    background-color: #FBD195 !important;
+    background: #FBD195 !important;
+}
+.table>:not(caption)>*>* {
+    border-bottom-width: 0;
+}
+tfoot{
+    border-top-width: 2px;
+}
