@@ -5,7 +5,9 @@ class PersonalProgram{
         private $programID;
         private int $userID;
         private $isPaid;
-
+        private $personalProgramItems;
+        private $items;
+        private $totals;
 
         public function __construct($programID, $isPaid){
             $this->programID = $programID;
@@ -68,6 +70,66 @@ class PersonalProgram{
         public function setIsPaid($isPaid)
         {
                 $this->isPaid = $isPaid;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of personalProgramItems
+         */ 
+        public function getPersonalProgramItems()
+        {
+                return $this->personalProgramItems;
+        }
+
+        /**
+         * Set the value of personalProgramItems
+         *
+         * @return  self
+         */ 
+        public function setPersonalProgramItems($personalProgramItems)
+        {
+                $this->personalProgramItems = $personalProgramItems;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of items
+         */ 
+        public function getItems()
+        {
+                return $this->items;
+        }
+
+        /**
+         * Set the value of items
+         *
+         * @return  self
+         */ 
+        public function setItems($items)
+        {
+                $this->items = $items;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of totals
+         */ 
+        public function getTotals()
+        {
+                return $this->totals;
+        }
+
+        /**
+         * Set the value of totals
+         *
+         * @return  self
+         */ 
+        public function setTotals($totals)
+        {
+                $this->totals = $totals;
 
                 return $this;
         }

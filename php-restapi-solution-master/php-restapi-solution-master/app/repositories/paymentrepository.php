@@ -51,7 +51,9 @@ class PaymentRepository extends Repository
     public function getPaymentIdByUserId($userId)
     {
         try {
-            $stmt = $this->connection->prepare("SELECT payment_id FROM Payments WHERE user_id = ?");
+            $stmt = $this->connection->prepare("SELECT payment_id FROM Payments WHERE user_id = ? 
+            ORDER BY created_at DESC
+            LIMIT 1");
             $stmt->execute([$userId]);
             $result = $stmt->fetch();
             return $result['payment_id'];
@@ -72,7 +74,7 @@ class PaymentRepository extends Repository
     }
     public function deletePaymentIdByPaymentId($paymentId)
     {
-        try{
+        try {
             $stmt = $this->connection->prepare("DELETE FROM Payments WHERE payment_id = ?");
             $stmt->execute([$paymentId]);
         } catch (PDOException $e) {

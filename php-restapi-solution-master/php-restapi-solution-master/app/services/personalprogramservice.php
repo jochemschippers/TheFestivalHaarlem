@@ -60,7 +60,6 @@ class PersonalProgramService
 
         return $ticket;
     }
-
     private function prepareCartMessage($changedItemsCount, $notFoundCount)
     {
         $message = "";
@@ -147,5 +146,19 @@ class PersonalProgramService
     public function updateStatus($programId, $isPaid)
     {
         $this->personalProgramRepository->updatePaymentStatus($programId, $isPaid);
+    }
+    public function fillPersonalProgramWithItems($personalProgram){
+        $personalProgram->setItems($this->personalProgramRepository->getItemsByPersonalProgramId($personalProgram->getProgramID()));
+        if($personalProgram->getItems() == null){
+            throw new ErrorException("Personal Program not found");
+        }
+        return $personalProgram;
+    }
+    public function getPersonalProgramById($personalProgramId, $userId){
+        $personalProgram = $this->personalProgramRepository->getPersonalProgramByIds($personalProgramId, $userId);
+        if($personalProgram == null){
+            throw new ErrorException("Personal Program not found");
+        }
+        return $personalProgram;
     }
 }

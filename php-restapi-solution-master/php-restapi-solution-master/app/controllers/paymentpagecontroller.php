@@ -2,6 +2,7 @@
 require_once __DIR__ . '/../services/paymentservice.php';
 require_once __DIR__ . '/../services/yummyservice.php';
 require_once __DIR__ . '/../services/personalprogramservice.php';
+require_once __DIR__ . '/../services/encryptionservice.php';
 require_once __DIR__ . '/controller.php';
 
 
@@ -11,12 +12,14 @@ class paymentpageController extends Controller
     private $paymentService;
     private $yummyService;
     private $personalProgramService;
+    private $encryptionService;
 
     function __construct()
     {
         $this->paymentService = new PaymentService();
         $this->yummyService = new YummyService();
         $this->personalProgramService = new PersonalProgramService();
+        $this->encryptionService = new EncryptionService();
     }
 
 
@@ -98,6 +101,7 @@ class paymentpageController extends Controller
         if($this->paymentService->checkIfPaymentPaid($paymentId)){
             $programId= $this->paymentService->getProgramIdByPaymentId($paymentId);
             $this->personalProgramService->updateStatus($programId, true);
+            $this->paymentService->deletePaymentById($paymentId);
         }
     }
     private function paymentFailed($models)
@@ -113,13 +117,41 @@ class paymentpageController extends Controller
             return;
         }
         if($personalProgram->getIsPaid()){
-            $models = [];
-            $this->displayView($models);
+            $userId = $_SESSION['userID'];
+            $personalProgramId = $personalProgram->getProgramId();
             
+            $combinedId = $userId . '|' . $personalProgramId;
+            $encryptedId = $this->encryptionService->encryptId($combinedId);
+            $url = 'https://' . $_SERVER['HTTP_HOST'] . "/paymentPage/personalProgram?id={$encryptedId}";
+            header("Location: $url");
             return;
         }else{
             $models = ['error' => 'Your payment has failed, was cancelled or has expired. Please try again or contact support if you need help.'];
             $this->paymentFailed($models);
+        }
+    }
+    public function personalProgram(){
+        $encryptedId = $_GET['id'] ?? null;
+        if(!$encryptedId){
+            $models = ['error' => 'Could not retrieve personal program. Please check if the typed url is correct.'];
+            $this->paymentFailed($models);
+            return;
+        }
+        try{
+            $decryptedId = $this->encryptionService->decryptId($encryptedId);
+            $personalProgram = $this->personalProgramService->getPersonalProgramById($decryptedId['personalProgramId'] , $decryptedId['userId']);
+            $personalProgram = $this->personalProgramService->fillPersonalProgramWithItems($personalProgram);
+            $personalProgram->setTotals($this->personalProgramService->calculateTotals($personalProgram->getItems()));
+            $models = ["personalProgram" => $personalProgram];
+            $this->displayView($models);
+        }catch(ErrorException $e){
+            $models = ['error' => 'Could not retrieve personal program. Please check if the typed url is correct.'];
+            $this->paymentFailed($models);
+            return;
+        } catch (Exception $e) {
+            $models = ['error' => 'Could not retrieve personal program. Please check if the typed url is correct.'];
+            $this->paymentFailed($models);
+            return;
         }
     }
     public function getPaymentId()
@@ -129,5 +161,8 @@ class paymentpageController extends Controller
         }
         $paymentId = $_SESSION['paymentId'] ?? null;
         echo json_encode(["paymentId" => $paymentId]);
+    }
+    private function getURL(){
+        return 'https://' . $_SERVER['HTTP_HOST'] . '/';
     }
 }
