@@ -23,9 +23,15 @@ thead {
 }
 
 #tablePrice {
-  background-color: lightgray;
+  background-color: #FCB247;
   width: 50%;
+  border: 2px solid #961B1B !important;
   margin-left: auto;
+  border-collapse: separate;
+  border-spacing: 0 0em;
+}
+#tablePrice tr{
+  margin: 0px;
 }
 
 #left {
@@ -47,7 +53,7 @@ thead {
 }
 
 body {
-  background-color:  #F0F0F0;
+  background-color: #F0F0F0;
 }
 
 .card {
@@ -185,15 +191,17 @@ body {
   padding-right: 0px !important;
   padding-left: 0px !important;
 }
-#logo{
-  overflow:hidden;
+
+#logo {
+  overflow: hidden;
   height: 30%;
 }
+
 #progressbar i {
   display: block;
   margin-bottom: 5px;
   margin-top: 10px;
-  color:#262626;
+  color: #262626;
   text-decoration: none !important;
 }
 
@@ -202,16 +210,17 @@ body {
   margin: 0;
 }
 
-.step0 a{
-  text-decoration:none;
-  color:#262626;
-  
+.step0 a {
+  text-decoration: none;
+  color: #262626;
+
 }
 
 .table {
   width: 100%;
-  border-collapse: collapse;
-  background-color: white;
+  background-color: #FCB247;
+  border-collapse: separate;
+  border-spacing: 0 1em;
 }
 
 #priceTableBody {
@@ -223,4 +232,51 @@ input {
   border: 1px solid #ccc;
   border-radius: 4px;
   resize: vertical;
+}
+
+.table-header {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 27px;
+  background-color: #FCB247;
+  border-bottom: 2px solid #961B1B !important;
+
+}
+
+.tables {
+  border: 2px solid #961B1B !important;
+  background-color: #FCB247;
+  background: #FCB247;
+
+}
+
+td {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 27px;
+  margin: 13px;
+}
+
+.thead {
+  margin-left: 0.25rem;
+}
+
+tr {
+  background-color: #FBD195 !important;
+  background: #FBD195 !important;
+  margin-bottom: 10px;
+  border: 1px solid #000000;
+
+}
+
+.table>:not(caption)>*>* {
+  border-bottom-width: 0;
+}
+
+tfoot {
+  border-top-width: 2px;
 }

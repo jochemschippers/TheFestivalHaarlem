@@ -55,14 +55,17 @@
             <p class="mt-1 mb-auto">
                 Your personal program ID is ‘HAFES<?= $personalProgram->getProgramID() ?>’ <br>
                 The personal program has been sent to your email address, along with all the necessary information for a great day in Haarlem. <br>
-                For questions, changes or support mail ‘thefestival@haarlem.com
+                For questions, changes or support mail ‘thefestival@haarlem.com 
+                <br>
+                <br>
+                <strong>share the fun with this qr-code!</strong>
             </p>
         </div>
         <div class="col-6 d-flex flex-column">
             <h2 class="mt-auto mb-1">Your personal program</h2>
             <table class="mb-auto w-100 table">
                 <thead>
-                    <tr style="border-bottom: 2px solid #961B1B;">
+                    <tr style="border-bottom: 2px solid #961B1B !important;">
                         <th>Event</th>
                         <th>Date</th>
                         <th>Time</th>
@@ -73,20 +76,30 @@
                 <tbody>
                     <?php foreach ($personalProgram->getItems() as $item) : ?>
                         <tr>
-                            <td><?= $item->getTitle() ?></td>
                             <td>
                                 <?php
                                 $startDate = $item->getStartTime()->format('Y-m-d');
                                 $endDate = $item->getEndTime()->format('Y-m-d');
+                                $title;
+                                if (empty($item->getTitle())) {
+                                    // Compute the duration in days
+                                    $duration = $item->getEndTime()->diff($item->getStartTime())->days;
+
+                                    if ($duration >= 2) {
+                                        $item->setTitle("Week Ticket Jazz");
+                                    } else {
+                                        $item->setTitle("Day Ticket Jazz");
+                                    }
+                                }
                                 ?>
-                                <?= $startDate !== $endDate ? "$startDate - $endDate" : $startDate ?>
+                                <?= $item->getTitle() ?>
+
                             </td>
                             <td>
-                                <?php
-                                $startDate = $item->getStartTime()->format('Y-m-d');
-                                $endDate = $item->getEndTime()->format('Y-m-d');
-                                ?>
-                                <?= $startDate !== $endDate ? 'multiple' : $item->getStartTime()->format('H:i') . ' - ' . $item->getEndTime()->format('H:i') ?>
+                                <?= $startDate !== $endDate ? 'multiple' : $startDate ?>
+                            </td>
+                            <td>
+                                <?= $startDate !== $endDate ? '-' : $item->getStartTime()->format('H:i') . ' - ' . $item->getEndTime()->format('H:i') ?>
                             </td>
                             <td><?= $item->getQuantity() . 'x' ?></td>
                             <td><?= number_format($item->getPrice() * $item->getQuantity(), 2) ?></td>
@@ -115,7 +128,7 @@
         </path>
     </svg>
     <div class="row">
-        <img class="image rounded-5 w-auto" id='qr-code' src=""></img>
+        <img class="image rounded-5 w-auto mb-4" id='qr-code' src=""></img>
     </div>
 </body>
 

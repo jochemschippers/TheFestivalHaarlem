@@ -103,7 +103,7 @@ class JazzRepository extends Repository
                     $row['maximumAmountTickets'],
                     new JazzArtist($row['artistID'], '', $row['imageSmall'], $row['name']),
                     new JazzLocation($row['locationID'], $row['locationName']),
-                    new Hall($row['hallID'], $row['locationID'], $row['hallName'])
+                    new Hall($row['hallID'], $row['locationID'], $row['hallName']),
                 );
                 $timeSlotJazz->setCurrentlyBoughtTickets($row['boughtTicketsCount']);
                 array_push($timeSlotsJazz, $timeSlotJazz);
@@ -112,6 +112,46 @@ class JazzRepository extends Repository
         } catch (PDOException $e) {
             throw new ErrorException("It seems something went wrong with our database! Please try again later.");
         }
+    }
+    public function getAllDayTimeSlots() {
+        try {
+            $stmt = $this->connection->prepare("
+                SELECT 
+                    ts.timeSlotID, ts.eventID, ts.price, ts.startTime, ts.endTime, ts.maximumAmountTickets,
+                    (SELECT COUNT(*) FROM EventTickets WHERE timeSlotID = ts.timeSlotID) AS boughtTicketsCount
+                FROM
+                    TimeSlots AS ts
+                LEFT JOIN TimeSlotsJazz AS tsj ON ts.timeSlotID = tsj.timeSlotID
+                WHERE
+                    ts.eventID = 1 AND tsj.timeSlotID IS NULL
+                GROUP BY
+                    ts.timeSlotID
+                ORDER BY
+                    ts.timeSlotID
+            ");
+    
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $stmt->execute();
+            $results = $stmt->fetchAll();
+    
+            $timeSlots = [];
+            foreach ($results as $row) {
+                $timeSlot = new TimeSlot(
+                    $row["timeSlotID"],
+                    $row['eventID'],
+                    $row['price'],
+                    new DateTime($row['startTime']),
+                    new DateTime($row['endTime']),
+                    $row['maximumAmountTickets']
+                );
+                $timeSlot->setCurrentlyBoughtTickets($row['boughtTicketsCount']);
+                array_push($timeSlots, $timeSlot);
+            }
+            return $timeSlots;
+        } catch (PDOException $e) {
+            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
+        }
+
     }
     function getAllLocations()
     {

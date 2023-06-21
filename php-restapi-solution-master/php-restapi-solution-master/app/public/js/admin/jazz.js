@@ -15,7 +15,7 @@ const successMessage = document.getElementById("successMessage")
 const minDate = '2023-07-27T00:00';
 const maxDate = '2023-07-30T23:59';
 
-loadJsFilesFromFolder('/js/test/jazz/', ['halls.js', 'artists.js', 'timeSlots.js', 'locations.js']);
+loadJsFilesFromFolder('/js/admin/jazz/', ['halls.js', 'artists.js', 'timeSlots.js', 'locations.js']);
 
 let dataTableArtists = new DataTable("#dataTableArtists", {
     searchable: true,

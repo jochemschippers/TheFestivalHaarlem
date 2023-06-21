@@ -20,34 +20,30 @@ th {
     font-weight: 700;
     font-size: 20px;
     line-height: 27px;
-}
-
-td {
+  }
+  
+  td {
     font-family: 'Open Sans';
     font-style: normal;
     font-weight: 400;
     font-size: 20px;
     line-height: 27px;
     margin: 13px;
-}
-
-table {
-    border-collapse: collapse;
+  }
+  
+  table {
+    border-collapse: collapse !important;
     border: 2px solid #961B1B !important;
     background-color: #FBD195 !important;
     background: #FBD195 !important;
     border: 2px solid #961B1B !important;
-}
-tr{
+    margin-bottom: 0px;
+  }
+  tr{
     background-color: #FBD195 !important;
     background: #FBD195 !important;
-}
-.table>:not(caption)>*>* {
-    border-bottom-width: 0;
-}
-tfoot{
-    border-top-width: 2px;
-}
+    border:0px !important;
+  }
 #qr-code{
     width: auto;
     height: 100%;

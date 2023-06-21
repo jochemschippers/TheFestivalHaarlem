@@ -1,5 +1,5 @@
 <body>
-<div id="logo" class="d-flex justify-content-center align-items-center"><img id="background" class="" src="\image\Payment\overview\backgroundpayment.png"></div>
+    <div id="logo" class="d-flex justify-content-center align-items-center"><img id="background" class="" src="\image\Payment\overview\backgroundpayment.png"></div>
 
 
     <div class="container" id="progressContainer">
@@ -44,22 +44,14 @@
     </div>
     <div class="container mb-5" id="container">
         <div class="row" id="Jazz">
-            <div class="col-md-6">
+            <div class="col-md-6 tables">
+                <div class="table-header w-100 text-center p-2">Jazz</div>
                 <table class="table" id="tableJazz">
-                    <thead class="thead">
-                        <tr>
-                            <th>Jazz</th>
-                        </tr>
-                    </thead>
                     <tbody>
                     </tbody>
                 </table>
+                <div class="table-header w-100 text-center p-2">Yummy</div>
                 <table class="table" id="tableYummy">
-                    <thead class="thead">
-                        <tr>
-                            <th>Yummy</th>
-                        </tr>
-                    </thead>
                     <tbody>
                     </tbody>
                 </table>

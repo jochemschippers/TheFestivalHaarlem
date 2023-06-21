@@ -57,7 +57,13 @@ class PersonalProgramService
             $ticket = $this->timeSlotRepository->getRestaurantReservationById($item['id']);
             $ticket->setReservation($item['reservation']);
         } else {
-            $ticket = $this->timeSlotRepository->getJazzTimeSlotById($item['id']);
+            //check if it is a day ticket for jazz or a regular ticket; returns either ticket or false
+            $ticket = $this->timeSlotRepository->retrieveTimeSlotIfItIsDayTicket($item['id']);
+            if(!$ticket)
+            {
+                //retrieve regular ticket
+                $ticket = $this->timeSlotRepository->getJazzTimeSlotById($item['id']);
+            }
         }
         $ticket->setQuantity($item['quantity']);
         return $ticket;

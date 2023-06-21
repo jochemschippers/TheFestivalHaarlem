@@ -140,7 +140,10 @@ function submitForm(callback) {
     checkForm();
 }
 function closeModal() {
-    $("#myModal").modal("hide");
+    let modal = document.getElementById('reservationModal');
+    modal.style.display = "none";
+    let modalBackdrop = document.getElementsByClassName('modal-backdrop');
+    modalBackdrop[0].style.display = "none";
 }
 document.addEventListener("DOMContentLoaded", function () {
     const modal = document.getElementById("yourModalId");
