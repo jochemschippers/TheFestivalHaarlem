@@ -1,4 +1,14 @@
 <main role="main">
+    <div id="loading" class="loading d-flex justify-content-center align-items-center w-100 vh-100">
+        <h1> loading admin Jazz page...</h1>
+        <div class="loader loader--style2 " title="1">
+            <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="200px" height="200px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+                <path fill="#000" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z">
+                    <animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite" />
+                </path>
+            </svg>
+        </div>
+    </div>
     <div class="alert alert-success d-none margin-top" id="successMessage" role="alert">
     </div>
     <div class="card mb-3 panel important">
@@ -142,7 +152,7 @@
                         </tfoot>
                         <tbody>
                             <?php foreach ($halls as $hall) { ?>
-                                <tr data-hall-id="<?= htmlspecialchars($hall->getHallID()) ?>" data-hall-name="<?= htmlspecialchars($hall->getHallName()) ?>" data-location-id="<?= htmlspecialchars($hall->getLocationID()) ?>" >
+                                <tr data-hall-id="<?= htmlspecialchars($hall->getHallID()) ?>" data-hall-name="<?= htmlspecialchars($hall->getHallName()) ?>" data-location-id="<?= htmlspecialchars($hall->getLocationID()) ?>">
                                     <td><?= htmlspecialchars($hall->getHallID()) ?></td>
                                     <td><?= htmlspecialchars($hall->getHallName()) ?></td>
                                     <td><?= htmlspecialchars($hall->getLocationID()) ?></td>
@@ -199,14 +209,7 @@
                         </tfoot>
                         <tbody>
                             <?php foreach ($timeSlotsJazz as $timeslot) { ?>
-                                <tr data-timeslot-id="<?= htmlspecialchars($timeslot->getTimeSlotID()) ?>" 
-                                data-artist-id="<?= htmlspecialchars($timeslot->getArtist()->getArtistID()) ?>" 
-                                data-location-id="<?= htmlspecialchars($timeslot->getJazzLocation()->getLocationID()) ?>" 
-                                data-hall-id="<?= htmlspecialchars($timeslot->getHall()->getHallID()) ?>" 
-                                data-price="<?= htmlspecialchars($timeslot->getPrice()) ?>" 
-                                data-start-time="<?= htmlspecialchars($timeslot->getStartTime()->format('Y-m-d H:i:s')) ?>" 
-                                data-end-time="<?= htmlspecialchars($timeslot->getEndTime()->format('Y-m-d H:i:s')) ?>" 
-                                data-max-tickets="<?= htmlspecialchars($timeslot->getMaximumAmountTickets()) ?>">
+                                <tr data-timeslot-id="<?= htmlspecialchars($timeslot->getTimeSlotID()) ?>" data-artist-id="<?= htmlspecialchars($timeslot->getArtist()->getArtistID()) ?>" data-location-id="<?= htmlspecialchars($timeslot->getJazzLocation()->getLocationID()) ?>" data-hall-id="<?= htmlspecialchars($timeslot->getHall()->getHallID()) ?>" data-price="<?= htmlspecialchars($timeslot->getPrice()) ?>" data-start-time="<?= htmlspecialchars($timeslot->getStartTime()->format('Y-m-d H:i:s')) ?>" data-end-time="<?= htmlspecialchars($timeslot->getEndTime()->format('Y-m-d H:i:s')) ?>" data-max-tickets="<?= htmlspecialchars($timeslot->getMaximumAmountTickets()) ?>">
                                     <td><?= htmlspecialchars($timeslot->getTimeSlotID()) ?></td>
                                     <td><?= htmlspecialchars($timeslot->getArtist()->getName()) ?></td>
                                     <td><?= htmlspecialchars($timeslot->getJazzLocation()->getLocationName()) ?></td>

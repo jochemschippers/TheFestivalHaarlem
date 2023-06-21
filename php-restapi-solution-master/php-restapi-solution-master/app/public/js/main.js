@@ -35,7 +35,6 @@ function addToPersonalProgram(timeSlotID, quantity, reservation = null) {
             if (reservation) {
                 newProgramItem.reservation = reservation;
             }
-
             personalProgram.push(newProgramItem);
         }
         sessionStorage.setItem('personalProgram', JSON.stringify(personalProgram));

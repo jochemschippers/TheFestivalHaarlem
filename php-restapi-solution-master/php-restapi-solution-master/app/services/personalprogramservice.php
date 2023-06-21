@@ -75,16 +75,16 @@ class PersonalProgramService
 
         return $message;
     }
-    public function calculateTotals($cartItems)
+    public function calculateTotals($personalProgramItems)
     {
         $subtotal = 0;
         $vat = 0;
 
-        foreach ($cartItems as $item) {
+        foreach ($personalProgramItems as $item) {
             $total = $item->getPrice() * $item->getQuantity();
             $subtotal += $total;
 
-            if ($item->getEventID() !== 2) {
+            if ($item->getEventID() == 1) {
                 $vat += $total * 0.09;
             }
         }
@@ -126,16 +126,19 @@ class PersonalProgramService
         }
         return true;
     }
-    public function savePersonalProgram($cartItems, $userId)
+    public function savePersonalProgram($personalProgramItems, $userId)
     {
         $this->personalProgramRepository->beginTransaction();
         try {
             // Create a new personal program
             $programId = $this->personalProgramRepository->createPersonalProgram($userId);
             // Loop through the cart items and create tickets for each item
-            foreach ($cartItems as $item) {
+            foreach ($personalProgramItems as $item) {
                 for ($i = 0; $i < $item->getQuantity(); $i++) {
-                    $this->personalProgramRepository->createEventTicket($item->getTimeSlotID(), $programId);
+                    $eventTicketId = $this->personalProgramRepository->createEventTicket($item->getTimeSlotID(), $programId);
+                    if($item->getEventID() == 2){
+                        $this->personalProgramRepository->createRestaurantReservation($item->getReservation(), $eventTicketId, $item->getTimeSlotID());
+                    }
                 }
             }
 

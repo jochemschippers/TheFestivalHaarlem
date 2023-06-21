@@ -8,6 +8,11 @@ class Controller
         $eventService = new EventService();
         $events = $eventService->getAll();
         include __DIR__ . '/../views/header.php';
+
+        // Include admin navigation only for AdminController
+        if ($this instanceof AdminController) {
+            include __DIR__ . '/../views/admin/adminnav.php';
+        }
         foreach ($models as $key => $value) {
             ${$key} = $value;
         }

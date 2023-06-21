@@ -49,7 +49,7 @@ class PatternRouter
                 $methodName = $defaultMethod;
             }
         }
-        if ($explodedUri[0] === 'test') {
+        if ($explodedUri[0] === 'admin') {
             if (session_status() == PHP_SESSION_NONE) {
                 session_start();
             }
@@ -95,6 +95,10 @@ class PatternRouter
             }
             $controllerObj->{$methodName}();
         } catch (Exception $e) {
+            $errorMessageController = new ErrormessageController();
+            $errorMessageController->Error500();
+            die();
+        }catch(Error $e){
             $errorMessageController = new ErrormessageController();
             $errorMessageController->Error500();
             die();

@@ -1,3 +1,8 @@
+setTimeout(function() {
+    document.getElementById('loading').classList.add('d-none');
+s}, 2000);
+
+
 const dynamicFormModal = document.getElementById('dynamicFormModal');
 const modalLabel = document.getElementById('universalModalLabel');
 const universalModal = new bootstrap.Modal(document.getElementById('universalModal'), {});
@@ -10,7 +15,7 @@ const successMessage = document.getElementById("successMessage")
 const minDate = '2023-07-27T00:00';
 const maxDate = '2023-07-30T23:59';
 
-loadJsFilesFromFolder('/js/test/jazz/', ['halls.js', 'artists.js','timeSlots.js', 'locations.js']);
+loadJsFilesFromFolder('/js/test/jazz/', ['halls.js', 'artists.js', 'timeSlots.js', 'locations.js']);
 
 let dataTableArtists = new DataTable("#dataTableArtists", {
     searchable: true,
@@ -41,70 +46,59 @@ let dataTableTimeSlotsJazz = new DataTable("#dataTableTimeslots", {
     fixedHeight: true
 });
 
-//create artist 
-
-
-
-//delete artists
-
-
-
-
-//edit update location methods
-
-
-
-
-
-
-// helper functions
-
-
-
-
-
-
 
 dynamicFormModal.addEventListener('submit', function (e) {
     e.preventDefault
 });
 
 
-
-
 function openModal(button, modalType) {
     alertMessage.classList.add("d-none");
     const row = button.closest("tr");
 
-    if (modalType === 'editArtist') {
-        configureEditModalArtists(button);
+    switch (modalType) {
+        case 'editArtist':
+            configureEditModalArtists(button);
+            break;
 
-    } else if (modalType === 'deleteArtist') {
-        configureDeleteModalArtists(button);
-    }
-    else if (modalType === 'addArtist') {
-        configureAddModalArtists();
-    }
-    else if (modalType === 'editLocation') {
-        configureEditModalLocations(button);
-    }
-    else if (modalType === 'deleteLocation') {
-        configureDeleteModalLocations(button);
-    }
-    else if (modalType === 'addLocation') {
-        configureAddModalLocations(button);
-    }
-    else if (modalType === 'editHall') {
-        configureEditModalHalls(button);
-    }
-    else if (modalType === 'editTimeSlot') {
-        configureEditModalTimeSlots(button);
-    }
-    else if (modalType === 'deleteTimeSlot') {
-        configureDeleteModalTimeSlots(button);
-    }
-    else if (modalType === 'addTimeSlot') {
-        configureAddModalTimeSlots(button);
+        case 'deleteArtist':
+            configureDeleteModalArtists(button);
+            break;
+
+        case 'addArtist':
+            configureAddModalArtists();
+            break;
+
+        case 'editLocation':
+            configureEditModalLocations(button);
+            break;
+
+        case 'deleteLocation':
+            configureDeleteModalLocations(button);
+            break;
+
+        case 'addLocation':
+            configureAddModalLocations(button);
+            break;
+
+        case 'editHall':
+            configureEditModalHalls(button);
+            break;
+
+        case 'editTimeSlot':
+            configureEditModalTimeSlots(button);
+            break;
+
+        case 'deleteTimeSlot':
+            configureDeleteModalTimeSlots(button);
+            break;
+
+        case 'addTimeSlot':
+            configureAddModalTimeSlots(button);
+            break;
+
+        default:
+            console.error('Unrecognized modal type:', modalType);
     }
     universalModal.show();
 }

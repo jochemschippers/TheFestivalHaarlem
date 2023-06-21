@@ -29,25 +29,17 @@ class paymentpageController extends Controller
     public function index()
     {
 
-        $models = [
-            "JazzTickets" => $this->paymentService->GetJazzTickets(),
-            "restaurantReservations" => $this->yummyService->getAllRestaurantReservations(),
-        ];
+        $models = [];
         $this->displayView($models);
     }
     public function payment()
     {
-        $models = [
-            "JazzTickets" => $this->paymentService->GetJazzTickets(),
-            "restaurantReservations" => $this->yummyService->getAllRestaurantReservations(),
-        ];
+        $models = [];
         $this->displayView($models);
     }
     public function recieve()
     {
-        $models = [
-            "JazzTickets" => $this->paymentService->GetJazzTickets()
-        ];
+        $models = [];
         $this->displayView($models);
     }
     public function getPersonalProgramItems()

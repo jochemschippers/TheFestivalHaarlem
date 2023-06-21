@@ -38,6 +38,33 @@ class PersonalProgramRepository extends Repository
                 "INSERT INTO EventTickets (timeSlotID, programID) VALUES (?, ?)"
             );
             $stmt->execute([$timeSlotID, $programID]);
+            //return id of last inserted row
+            return $this->connection->lastInsertId();
+        } catch (PDOException $e) {
+            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
+        }
+    }
+    public function createRestaurantReservation($reservation, $eventTicketId, $timeSlotID)
+    {
+        try {
+            $stmt = $this->connection->prepare(
+                "INSERT INTO RestaurantReservation 
+            (ticketID, timeSlotID, reservationName, phoneNumber, numberAdults, numberChildren, remark, isActive) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, false)"
+            );
+
+            $stmt->execute([
+                $eventTicketId,
+                $timeSlotID,
+                $reservation->getCustomerName(),
+                $reservation->getPhoneNumber(),
+                $reservation->getNrOfAdults(),
+                $reservation->getNrOfChild() ?? 0,
+                $reservation->getRemark() ?? 'no remarks',
+            ]);
+
+            //return id of last inserted row
+            return $this->connection->lastInsertId();
         } catch (PDOException $e) {
             throw new ErrorException("It seems something went wrong with our database! Please try again later.");
         }
@@ -63,22 +90,22 @@ class PersonalProgramRepository extends Repository
     }
     public function getPersonalProgramByIds($programId, $userId)
     {
-       try{
-        $stmt = $this->connection->prepare(
-            "SELECT programId, isPaid FROM PersonalPrograms WHERE programId = ? AND userID = ?"
-        );
-        $stmt->execute([$programId, $userId]);
-        $result = $stmt->fetch();
+        try {
+            $stmt = $this->connection->prepare(
+                "SELECT programId, isPaid FROM PersonalPrograms WHERE programId = ? AND userID = ?"
+            );
+            $stmt->execute([$programId, $userId]);
+            $result = $stmt->fetch();
 
-        // Check if a result was found
-        if ($result) {
-            return new PersonalProgram($result['programId'], $result['isPaid']);
-        } else {
-            return null;
+            // Check if a result was found
+            if ($result) {
+                return new PersonalProgram($result['programId'], $result['isPaid']);
+            } else {
+                return null;
+            }
+        } catch (PDOException $e) {
+            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
         }
-       } catch (PDOException $e) {
-        throw new ErrorException("It seems something went wrong with our database! Please try again later.");
-       }
     }
     public function getItemsByPersonalProgramId($personalProgramId)
     {

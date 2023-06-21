@@ -72,8 +72,6 @@ function configureCopyButton() {
 
 function displayTimeslots(timeslots) {
     updatePersonalProgram(timeslots);
-    ticketsTableBodyJazz.innerHTML = ""; // Clear existing rows
-    ticketsTableBodyYummy.innerHTML = ""; // Clear existing rows
 
     for (let index = 0; index < timeslots.length; index++) {
         const timeslot = timeslots[index];
@@ -82,7 +80,7 @@ function displayTimeslots(timeslots) {
             ticketsTableBodyJazz.appendChild(timeslotRow);
         }
         if (timeslot.eventID == 2) {
-            const timeslotRow = createTimeslotRowYummy(timeslot, index); // call naar restaurant reservering info toevoegen.
+            const timeslotRow = createTimeslotRowYummy(timeslot, index); 
             ticketsTableBodyYummy.appendChild(timeslotRow);
         }
     }
@@ -93,7 +91,6 @@ function updatePersonalProgram(timeslots) {
     //delete the pp from storage
     sessionStorage.setItem('personalProgram', JSON.stringify([]));
     timeslots.forEach(timeslot => {
-        console.log(timeslot.reservation);
         addToPersonalProgram(timeslot.timeSlotID, timeslot.quantity, timeslot.reservation);
     });
     sessionStorage.setItem('personalProgram', JSON.stringify(personalProgram));
@@ -267,7 +264,7 @@ function createYummyDeleteCell(timeslot, index) {
     deleteButton.addEventListener('click', function () {
         const rowToDelete = this.parentElement.parentElement;
         timeslots.splice(timeslots.indexOf(timeslot), 1);
-        removePersonalProgramItem(timeslot.timeSlotID);
+        removeFromPersonalProgram(timeslot.timeSlotID);
         fillPriceTable(timeslots);
         rowToDelete.remove();
     });

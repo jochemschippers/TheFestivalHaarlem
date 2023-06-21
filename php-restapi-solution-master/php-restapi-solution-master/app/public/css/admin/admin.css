@@ -171,7 +171,10 @@ main li {
 }
 
 .admin-nav{
-  z-index:-9;
+  z-index:2;
+}
+.site-footer {
+  z-index: 3 !important;
 }
 /* forms */
 form input,
