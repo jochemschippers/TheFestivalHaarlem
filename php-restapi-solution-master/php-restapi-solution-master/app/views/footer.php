@@ -5,7 +5,7 @@
       <div class="col-sm-12 col-md-2">
         <h6>Contact Us:</h6>
         <p class="text-justify">Kooimanstraat 6<br>1578 PC / Haarlem<br>023-12345678</p>
-        <p class="text-justify">info@thefestival.nl</p>
+        <p class="text-justify">info.thehaarlemfestival@gmail.com</p>
       </div>
 
       <div class="col-xs-6 col-md-2">
