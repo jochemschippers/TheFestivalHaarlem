@@ -24,7 +24,8 @@ class TestController extends Controller
         $models = [];
         $this->displayView($models);
     }
-    public function api(){
+    public function api()
+    {
         include __DIR__ . '/../views/test/adminnav.php';
         $models = [
             "apis" => $this->apiService->getAll(),
@@ -63,13 +64,13 @@ class TestController extends Controller
             $apiID = isset($data['apiID']) ? (int)$data['apiID'] : 0;
             $apiName = isset($data['apiName']) ? (string)$data['apiName'] : '';
             $apiKey = isset($data['apiKey']) ? (string)$data['apiKey'] : '';
-    
+
             // Create a new API object
             $api = new Api($apiID, $apiName, $apiKey);
-    
+
             // Call the update method from the apiService
             $result = $this->apiService->update($api);
-    
+
             // Check the result and set the appropriate response
             if ($result) {
                 $response['message'] = "API updated successfully.";
@@ -79,7 +80,7 @@ class TestController extends Controller
                 $response['status'] = 0;
             }
         });
-    }    
+    }
     public function apiDelete()
     {
         var_dump("test");
@@ -88,10 +89,10 @@ class TestController extends Controller
             $apiID = isset($data['apiID']) ? (int)$data['apiID'] : 0;
 
             // var_dump($apiID);
-    
+
             // Call the delete method from the apiService
             $result = $this->apiService->delete($apiID);
-    
+
             // Check the result and set the appropriate response
             if ($result) {
                 $response['message'] = "API deleted successfully.";
@@ -101,8 +102,8 @@ class TestController extends Controller
                 $response['status'] = 0;
             }
         });
-    }   
-    
+    }
+
     public function jazz()
     {
         include __DIR__ . '/../views/test/adminnav.php';
@@ -137,274 +138,69 @@ class TestController extends Controller
 
         echo json_encode($response);
     }
-    private function validateAndCreateObject($data, $className, $constructorArgs, $argTypes, &$response)
-    {
-        try {
-            $constructorArgs = $this->validateObject($data, $constructorArgs, $argTypes);
-            return $this->createObject($className, $constructorArgs, $data);
-        } catch (TypeError $e) {
-            $response['status'] = 0;
-            $response['message'] = $e->getMessage();
-            return null;
-        }
-    }
-    private function validateObject($data, $constructorArgs, $argTypes)
-    {
-        $argKeys = array_keys($data);
 
-        foreach ($constructorArgs as $index => $value) {
-            $type = gettype($value);
-            //to catch a warning when the amount of parameters in $argKeys do not allign with amount in $constructorArgs
-            $key = $index < count($argKeys) ? $argKeys[$index] : "unknown";
-            if ($key === "unknown") {
-                throw new TypeError("Something went wrong! Please contact support.");
-            }
-            $expectedType = $argTypes[$index];
-            if ($type !== $expectedType) {
-                // Attempt to cast the value to the expected type 
-                $castedValue = null;
-                if ($expectedType === 'integer') {
-                    $castedValue = (int) $value;
-                } elseif ($expectedType === 'string') {
-                    $castedValue = (string) $value;
-                } //casted into float, because in the models, we have all objects stored as float, however when using getType, the gettype() 
-                //function will return 'double' since that's how PHP internally represents floating-point numbers. 
-                elseif ($expectedType === 'double') {
-                    $castedValue = (float) $value;
-                    //checks if the value is supossed to be 0. If it isn't suposed to be 0, then you want it to make the castedValue invalid. This way it still sends an error if you
-                    //were to send it a give a string
-                    if ($value != '0' && $castedValue == 0) {
-                        $castedValue = '';
-                    }
-                } elseif ($expectedType === 'object') {
-                    $castedValue = $value;
-                } elseif ($expectedType === 'dateTime') {
-                    $castedValue = DateTime::createFromFormat('Y-m-d H:i:s', $value);
-                }
-                // Check if the casted value matches the expected type
-                if (gettype($castedValue) === $expectedType) {
-                    // Update the value in constructor arguments to the casted value, prevents error in the object creation class
-                    $constructorArgs[$index] = $castedValue;
-                } else {
-                    throw new TypeError("Something went wrong! We expected a {$expectedType} value for the {$this->toReadableString($key)}, but a {$type} value was given. Please check the provided data.");
-                }
-            }
-        }
-
-        return $constructorArgs;
-    }
-    private function createObject($className, $constructorArgs, $data)
-    {
-        $reflection = new ReflectionClass($className);
-        $object = $reflection->newInstanceArgs();
-
-        $keys = array_keys($data);
-        for ($i = 0; $i < count($data); $i++) {
-            $key = $keys[$i];
-            try {
-                $setter = 'set' . ucfirst($key);
-                if (method_exists($object, $setter)) {
-                    try{
-                        $object->{$setter}($constructorArgs[$i]);
-                    }catch(TypeError $e){
-                        throw new TypeError("{$this->toReadableString($key)} has invalid parameters. Please check the provided data.");
-                    }
-                } else {
-                    throw new TypeError("Invalid property: {$this->toReadableString($key)}. Please check the provided data.");
-                }
-            } catch (TypeError $e) {
-                throw $e;
-            }
-        }
-        return $object;
-    }
     public function updateArtist()
     {
         $this->handleRequest(function ($data, &$response) {
-            $artist = $this->validateAndCreateObject(
-                $data,
-                'JazzArtist',
-                [
-                    $data["artistID"],
-                    $data["name"],
-                    $data["description"],
-                    $data["image"], 
-                    $data["imageSmall"]
-                ],
-                ['integer', 'string', 'string', 'string', 'string'],
-                $response
-            );
-            if ($artist) {
-                $this->jazzService->updateArtist($artist);
-                $response['message'] = 'Artist is successfully updated!';
-            }
+            $response['message'] = $this->jazzService->updateArtistService($data);
         });
     }
     public function deleteArtist()
     {
         $this->handleRequest(function ($data, &$response) {
-            $artist = $this->validateAndCreateObject(
-                $data,
-                'JazzArtist',
-                [$data["artistID"]],
-                ['integer'],
-                $response
-            );
-            if ($artist) {
-                $this->jazzService->deleteArtist($artist);
-                $response['message'] = 'Artist is successfully deleted!';
-            }
+            $response['message'] = $this->jazzService->deleteArtistService($data);
         });
     }
+
     public function createArtist()
     {
         $this->handleRequest(function ($data, &$response) {
-            $artist = $this->validateAndCreateObject(
-                $data,
-                'JazzArtist',
-                [
-                    0,
-                    $data["name"],
-                    $data["description"],
-                    $data["image"], 
-                    $data["imageSmall"]
-                ],
-                ['integer', 'string', 'string', 'string', 'string'],
-                $response
-            );
-            if ($artist) {
-                $response['artist'] = $this->jazzService->createArtist($artist);
-                $response['message'] = 'Artist is successfully created!';
-            }
+            $response['message'] = $this->jazzService->createArtistService($data);
         });
     }
+
     public function updateLocation()
     {
         $this->handleRequest(function ($data, &$response) {
-            $location = $this->validateAndCreateObject(
-                $data,
-                'JazzLocation',
-                [$data["locationID"], $data["locationName"], $data["address"], $data["locationImage"], $data["toAndFromText"], $data["accesibillityText"]],
-                ['integer', 'string', 'string', 'string', 'string', 'string'],
-                $response
-            );
-            if ($location) {
-                $this->jazzService->updateLocation($location);
-                $response['message'] = 'Location is successfully updated!';
-            }
+            $response['message'] = $this->jazzService->updateLocationService($data);
         });
     }
+
     public function deleteLocation()
     {
         $this->handleRequest(function ($data, &$response) {
-            $location = $this->validateAndCreateObject(
-                $data,
-                'JazzLocation',
-                [$data["locationID"]],
-                ['integer'],
-                $response
-            );
-            if ($location) {
-                $this->jazzService->deleteLocation($location);
-                $response['message'] = 'Location is successfully deleted!';
-            }
+            $response['message'] = $this->jazzService->deleteLocationService($data);
         });
     }
 
     public function createLocation()
     {
         $this->handleRequest(function ($data, &$response) {
-            $location = $this->validateAndCreateObject(
-                $data,
-                'JazzLocation',
-                [0, $data["locationName"], $data["address"], $data["locationImage"], $data["toAndFromText"], $data["accesibillityText"]],
-                ['integer', 'string', 'string', 'string', 'string', 'string'],
-                $response
-            );
-            if ($location) {
-                $response['location'] = $this->jazzService->createLocation($location);
-                $response['message'] = 'Location is successfully created!';
-            }
+            $response['message'] = $this->jazzService->createLocationService($data);
         });
     }
 
     public function updateTimeslot()
     {
         $this->handleRequest(function ($data, &$response) {
-            $timeslot = $this->validateAndCreateObject(
-                $data,
-                'timeSlotsJazz',
-                [
-                    $data["timeslotID"],
-                    new JazzArtist($data["artist"]),
-                    1,
-                    new JazzLocation($data["location"]),
-                    new Hall($data["hall"]),
-                    $data["price"],
-                    $data["startTime"],
-                    $data["endTime"],
-                    $data["maximumAmountTickets"],
-                ],
-                ['integer', 'object', 'integer', 'object', 'object', 'double', 'string', 'string', 'integer'],
-                $response
-            );
-            if ($timeslot) {
-                $this->jazzService->updateTimeslotJazz($timeslot);
-                $response['message'] = 'Timeslot is successfully updated!';
-            }
+            $response['message'] = $this->jazzService->updateTimeslotService($data);
         });
     }
     public function createTimeSlot()
     {
         $this->handleRequest(function ($data, &$response) {
-
-            $timeslot = $this->validateAndCreateObject(
-                $data,
-                'timeSlotsJazz',
-                [
-                    0,
-                    new JazzArtist($data["artist"]),
-                    1,
-                    new JazzLocation($data["location"]),
-                    new Hall($data["hall"]),
-                    $data["price"],
-                    $data["startTime"],
-                    $data["endTime"],
-                    $data["maximumAmountTickets"],
-                ],
-                ['integer', 'object', 'integer', 'object', 'object', 'double', 'string', 'string', 'integer'],
-                $response
-            );
-            if ($timeslot) {
-                $response['timeslot'] = $this->jazzService->createTimeSlotJazz($timeslot);
-                $response['message'] = 'Timeslot is successfully created!';
-            }
+            $response['message'] = $this->jazzService->createTimeSlotService($data);
         });
     }
+
     public function deleteTimeslot()
     {
         $this->handleRequest(function ($data, &$response) {
-            $timeslot = $this->validateAndCreateObject(
-                $data,
-                'timeSlot',
-                [$data["timeSlotID"]],
-                ['integer'],
-                $response
-            );
-            if ($timeslot) {
-                $this->jazzService->deleteTimeslotJazz($timeslot);
-                $response['message'] = 'Timeslot is successfully deleted!';
-            }
+            $response['message'] = $this->jazzService->deleteTimeslotService($data);
         });
     }
 
-    function toReadableString($input) {
-        $output = preg_replace('/(?<=\\w)(?=[A-Z])/'," $1", $input);
-        $output = ucfirst($output);
-    
-        return $output;
-    }
-    
+
 
 
     // Yummy -------------------------------------

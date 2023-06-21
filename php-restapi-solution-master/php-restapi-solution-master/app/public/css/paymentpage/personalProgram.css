@@ -48,3 +48,22 @@ tr{
 tfoot{
     border-top-width: 2px;
 }
+#qr-code{
+    width: auto;
+    height: 100%;
+    margin-left:3rem;
+    display:none;
+}
+#loader{
+    margin-left: 6rem;
+}
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+  
+    100% {
+      transform: rotate(360deg);
+    }
+  }

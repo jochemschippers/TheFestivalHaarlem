@@ -48,12 +48,12 @@
             </div>
         </div>
     </div>
-    <div class="row w-90 m-5">
+    <div class="row m-5">
         <div class="col-6 d-flex flex-column">
             <h2 class="mt-auto mb-1">Thank you for finishing your personal program <br> We hope you will enjoy
                 and have fun at the Festival</h2>
             <p class="mt-1 mb-auto">
-                Your personal program ID is ‘000000<?= $personalProgram->getProgramID() ?>’ <br>
+                Your personal program ID is ‘HAFES<?= $personalProgram->getProgramID() ?>’ <br>
                 The personal program has been sent to your email address, along with all the necessary information for a great day in Haarlem. <br>
                 For questions, changes or support mail ‘thefestival@haarlem.com
             </p>
@@ -108,6 +108,14 @@
                 </tfoot>
             </table>
         </div>
+    </div>
+    <svg version="1.1" id="loader" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="200px" height="200px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+        <path fill="#000" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z">
+            <animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite" />
+        </path>
+    </svg>
+    <div class="row">
+        <img class="image rounded-5 w-auto" id='qr-code' src=""></img>
     </div>
 </body>
 

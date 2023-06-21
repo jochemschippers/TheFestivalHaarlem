@@ -1,30 +1,42 @@
 try {
     var personalProgram = JSON.parse(sessionStorage.getItem('personalProgram')) || [];
     updateCartItemDisplay();
+    console.log(sessionStorage.getItem('personalProgram') );
+
 } catch {
     console.error("Loading the personal program failed. Data might be lost.");
     var personalProgram = [];
     sessionStorage.setItem('personalProgram', JSON.stringify(personalProgram));
     
 }
-function addToPersonalProgram(timeSlotID, quantity) {
+function addToPersonalProgram(timeSlotID, quantity, reservation = null) {
     quantity = Math.max(quantity, 1);
     personalProgram = JSON.parse(sessionStorage.getItem('personalProgram')) || [];
-    
+
     const existingTicket = personalProgram.find(ticket => ticket.id === timeSlotID);
+
     if (isNaN(quantity) || quantity <= 0) {
         console.error("Something went wrong while adding to the personal program. Please check if the quantity is correct.");
     } else if(isNaN(timeSlotID) || timeSlotID <= null){
         console.error("Something went wrong while adding to the personal program. Please check if the timeslot is correct")
-    } 
-    else {
-        if (existingTicket) {
+    } else {
+        if (existingTicket && reservation == null) {
             existingTicket.quantity += quantity;
+            // Update the reservation data if provided.
+            if (reservation) {
+                existingTicket.reservation = reservation;
+            }
         } else {
-            personalProgram.push({
+            const newProgramItem = {
                 id: timeSlotID,
                 quantity: quantity
-            });
+            };
+            // Add the reservation data if provided.
+            if (reservation) {
+                newProgramItem.reservation = reservation;
+            }
+
+            personalProgram.push(newProgramItem);
         }
         sessionStorage.setItem('personalProgram', JSON.stringify(personalProgram));
         updateCartItemDisplay();
@@ -51,4 +63,9 @@ function updateCartItemDisplay() {
         //Failed to get quantity by ID. The personal program might not exist
         return 0;
     }
+}
+function removeFromPersonalProgram(timeSlotID) {
+    personalProgram = personalProgram.filter(item => item.id !== timeSlotID);
+    sessionStorage.setItem('personalProgram', JSON.stringify(personalProgram));
+    updateCartItemDisplay();
 }

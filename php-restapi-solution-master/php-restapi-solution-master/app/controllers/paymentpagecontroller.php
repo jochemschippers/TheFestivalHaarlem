@@ -3,6 +3,8 @@ require_once __DIR__ . '/../services/paymentservice.php';
 require_once __DIR__ . '/../services/yummyservice.php';
 require_once __DIR__ . '/../services/personalprogramservice.php';
 require_once __DIR__ . '/../services/encryptionservice.php';
+require_once __DIR__ . '/../services/qrservice.php';
+
 require_once __DIR__ . '/controller.php';
 
 
@@ -13,13 +15,14 @@ class paymentpageController extends Controller
     private $yummyService;
     private $personalProgramService;
     private $encryptionService;
-
+    private $qrService;
     function __construct()
     {
         $this->paymentService = new PaymentService();
         $this->yummyService = new YummyService();
         $this->personalProgramService = new PersonalProgramService();
         $this->encryptionService = new EncryptionService();
+        $this->qrService = new QRService();
     }
 
 
@@ -54,15 +57,15 @@ class paymentpageController extends Controller
 
         $response = [
             'status' => 0,
-            'message' => 'cart is empty!',
+            'message' => 'personal program is empty!',
             'tickets' => null
         ];
         try {
             if (isset($data["cart"]) && is_array($data["cart"])) {
-                $getCartItemsResult = $this->personalProgramService->getCart($data["cart"], $_SESSION['userID'] ?? null);
-                if (!empty($getCartItemsResult['items'])) {
-                    $response['tickets'] = $getCartItemsResult['items'];
-                    $response['message'] = $getCartItemsResult['message'];
+                $getPersonalProgramItemsResult = $this->personalProgramService->getPersonalProgram($data["cart"], $_SESSION['userID'] ?? null);
+                if (!empty($getPersonalProgramItemsResult['items'])) {
+                    $response['tickets'] = $getPersonalProgramItemsResult['items'];
+                    $response['message'] = $getPersonalProgramItemsResult['message'];
                     //status of 1 means cart loaded succesfully, 2 means cart loaded succesfully AND user is logged in
                     $response['status'] = isset($_SESSION['userID']) ? 2 : 1;
                 }
@@ -78,11 +81,11 @@ class paymentpageController extends Controller
         $jsonData = file_get_contents('php://input');
         $data = json_decode($jsonData, true);
         if (isset($data["cart"]) && is_array($data["cart"])) {
-            $getCartItemsResult = $this->personalProgramService->getCart($data["cart"], $_SESSION['userID'] ?? null);
-            $totals = $this->personalProgramService->calculateTotals($getCartItemsResult['items']);
+            $getPersonalProgramItemsResult = $this->personalProgramService->getPersonalProgram($data["cart"], $_SESSION['userID'] ?? null);
+            $totals = $this->personalProgramService->calculateTotals($getPersonalProgramItemsResult['items']);
             try {
-                $programId = $this->personalProgramService->saveCart($getCartItemsResult['items'], $_SESSION['userID']);
-                $paymentUrl = $this->paymentService->createMolliePayment($totals['total'], $getCartItemsResult, $programId);
+                $programId = $this->personalProgramService->savePersonalProgram($getPersonalProgramItemsResult['items'], $_SESSION['userID']);
+                $paymentUrl = $this->paymentService->createMolliePayment($totals['total'], $getPersonalProgramItemsResult, $programId);
                 echo json_encode(["paymentUrl" => $paymentUrl]);
             } catch (ErrorException $e) {
                 echo json_encode(["error" => $e->getMessage()]);
@@ -98,8 +101,8 @@ class paymentpageController extends Controller
             exit("No payment ID provided");
         }
         $paymentId = $_POST['id'];
-        if($this->paymentService->checkIfPaymentPaid($paymentId)){
-            $programId= $this->paymentService->getProgramIdByPaymentId($paymentId);
+        if ($this->paymentService->checkIfPaymentPaid($paymentId)) {
+            $programId = $this->paymentService->getProgramIdByPaymentId($paymentId);
             $this->personalProgramService->updateStatus($programId, true);
             $this->paymentService->deletePaymentById($paymentId);
         }
@@ -110,59 +113,63 @@ class paymentpageController extends Controller
     }
     public function paymentConfirm()
     {
-        $personalProgram =$this->personalProgramService->getMostRecentPersonalProgram($_SESSION['userID'] ?? null);
+        $personalProgram = $this->personalProgramService->getMostRecentPersonalProgram($_SESSION['userID'] ?? null);
         if (!$personalProgram) {
             $models = ['error' => 'Could not retrieve payment information. Please try again later.'];
             $this->paymentFailed($models);
             return;
         }
-        if($personalProgram->getIsPaid()){
+        if ($personalProgram->getIsPaid()) {
             $userId = $_SESSION['userID'];
             $personalProgramId = $personalProgram->getProgramId();
-            
+
             $combinedId = $userId . '|' . $personalProgramId;
             $encryptedId = $this->encryptionService->encryptId($combinedId);
             $url = 'https://' . $_SERVER['HTTP_HOST'] . "/paymentPage/personalProgram?id={$encryptedId}";
             header("Location: $url");
             return;
-        }else{
+        } else {
             $models = ['error' => 'Your payment has failed, was cancelled or has expired. Please try again or contact support if you need help.'];
             $this->paymentFailed($models);
         }
     }
-    public function personalProgram(){
+    public function personalProgram()
+    {
         $encryptedId = $_GET['id'] ?? null;
-        if(!$encryptedId){
+        if (!$encryptedId) {
             $models = ['error' => 'Could not retrieve personal program. Please check if the typed url is correct.'];
             $this->paymentFailed($models);
             return;
         }
-        try{
+        try {
             $decryptedId = $this->encryptionService->decryptId($encryptedId);
-            $personalProgram = $this->personalProgramService->getPersonalProgramById($decryptedId['personalProgramId'] , $decryptedId['userId']);
+            $personalProgram = $this->personalProgramService->getPersonalProgramById($decryptedId['personalProgramId'], $decryptedId['userId']);
             $personalProgram = $this->personalProgramService->fillPersonalProgramWithItems($personalProgram);
             $personalProgram->setTotals($this->personalProgramService->calculateTotals($personalProgram->getItems()));
-            $models = ["personalProgram" => $personalProgram];
+            $models = [
+                "personalProgram" => $personalProgram,
+            ];
             $this->displayView($models);
-        }catch(ErrorException $e){
+        } catch (ErrorException $e) {
             $models = ['error' => 'Could not retrieve personal program. Please check if the typed url is correct.'];
             $this->paymentFailed($models);
             return;
         } catch (Exception $e) {
-            $models = ['error' => 'Could not retrieve personal program. Please check if the typed url is correct.'];
+            $models = ['error' => 'Could not retrieve personal program. Please check if the typed url is correct.' . $e->getMessage()];
             $this->paymentFailed($models);
             return;
         }
     }
-    public function getPaymentId()
+    public function getQRCode()
     {
-        if (session_status() == PHP_SESSION_NONE) {
-            session_start();
+        $jsonData = file_get_contents('php://input');
+        $data = json_decode($jsonData, true);
+        $url = $data['url'] ?? null;
+        if ($url) {
+            $qr = $this->qrService->generateQR($url);
+            echo json_encode(["qrImage" => $qr->getDataUri()]);
+        } else {
+            echo json_encode(["error" => "No URL provided."]);
         }
-        $paymentId = $_SESSION['paymentId'] ?? null;
-        echo json_encode(["paymentId" => $paymentId]);
-    }
-    private function getURL(){
-        return 'https://' . $_SERVER['HTTP_HOST'] . '/';
     }
 }

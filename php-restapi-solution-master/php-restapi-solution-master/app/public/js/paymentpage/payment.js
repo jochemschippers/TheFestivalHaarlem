@@ -24,7 +24,7 @@ fetch('createMolliePayment', {
 })
 .catch(error => {
   showError();
-    showWarning('Error while loading the personal program. Please try again later.' + error);
+    showWarning('Error while loading the personal program. Please try again later.');
   });
 
 function showError(){

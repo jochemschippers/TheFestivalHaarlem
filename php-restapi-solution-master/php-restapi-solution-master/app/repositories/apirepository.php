@@ -35,8 +35,9 @@ class ApiRepository extends Repository
          try {
             // query
             $stmt = $this->connection->prepare("SELECT APIKEY FROM APIs WHERE APIName = ?");
-
-            return $stmt->execute(['Mollie']);
+            $stmt->execute(['Mollie']);
+            $result = $stmt->fetch();
+            return $result['APIKEY'];
         } catch (PDOException $e) {
             echo $e;
         }

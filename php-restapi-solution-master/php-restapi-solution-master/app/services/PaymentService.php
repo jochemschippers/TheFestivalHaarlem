@@ -1,10 +1,13 @@
 <?php
 require_once __DIR__ . '/../repositories/paymentrepository.php';
+require_once __DIR__ . '/apiService.php';
 
 
 class PaymentService
 {
     private $repository;
+    private $apiService;
+
     private $mollie;
 
     private $URL;
@@ -13,8 +16,10 @@ class PaymentService
         $this->repository = new PaymentRepository();
         $this->URL = 'https://' . $_SERVER['HTTP_HOST'] . '/';
         require_once __DIR__ . "/../vendor/autoload.php";
+        $this->apiService = new ApiService();
         $this->mollie = new \Mollie\Api\MollieApiClient();
-        $this->mollie->setApiKey("test_wJ4ga3MgMbww8yk3S3Hb98EUxDebuN");
+        error_log($this->apiService->getMollie());
+        $this->mollie->setApiKey($this->apiService->getMollie());
     }
     public function GetJazzTickets()
     {

@@ -13,37 +13,35 @@ class PersonalProgramService
         $this->timeSlotRepository = new TimeSlotRepository();
         $this->personalProgramRepository = new PersonalProgramRepository();
     }
-    public function getCart($cart, $id)
+    public function getPersonalProgram($personalProgram, $id)
     {
-        $result = $this->getCartItems($cart);
-        $cartItems = $result['items'];
-        $changedItemsCount = $result['changedItemsCount'];
-        $notFoundCount = $result['notFoundCount'];
-        $message = $this->prepareCartMessage($changedItemsCount, $notFoundCount);
+        $result = $this->getPersonalProgramItems($personalProgram);
+        $personalProgram = $result['items'];
+        $message = $this->preparePersonalProgramMessage($result['changedItemsCount'], $result['notFoundCount']);
 
-        return ['items' => $cartItems, 'message' => $message];
+        return ['items' => $personalProgram, 'message' => $message];
     }
-    private function getCartItems($cart)
+    private function getPersonalProgramItems($personalProgram)
     {
-        $cartItems = [];
+        $personalProgramItems = [];
         $notFoundCount = 0;
         $changedItemsCount = 0;
 
-        foreach ($cart as $item) {
+        foreach ($personalProgram as $item) {
             if ($this->checkTimeSlotIDExists($item['id'])) {
                 $result = $this->processCartItem($item);
                 $item = $result['item'];
                 $changedItemsCount += $result['changed'];
 
                 if ($item['quantity'] != 0) {
-                    $cartItems[] = $this->prepareCartItem($item);
+                    $personalProgramItems[] = $this->preparePersonalProgramItem($item);
                 }
             } else {
                 $notFoundCount += 1;
             }
         }
 
-        return ['items' => $cartItems, 'changedItemsCount' => $changedItemsCount, 'notFoundCount' => $notFoundCount];
+        return ['items' => $personalProgramItems, 'changedItemsCount' => $changedItemsCount, 'notFoundCount' => $notFoundCount];
     }
     private function processCartItem($item)
     {
@@ -53,14 +51,18 @@ class PersonalProgramService
 
         return ['item' => $item, 'changed' => $changed];
     }
-    private function prepareCartItem($item)
+    private function preparePersonalProgramItem($item)
     {
-        $ticket = $this->timeSlotRepository->getJazzTimeSlotById($item['id']);
+        if (isset($item['reservation'])) {
+            $ticket = $this->timeSlotRepository->getRestaurantReservationById($item['id']);
+            $ticket->setReservation($item['reservation']);
+        } else {
+            $ticket = $this->timeSlotRepository->getJazzTimeSlotById($item['id']);
+        }
         $ticket->setQuantity($item['quantity']);
-
         return $ticket;
     }
-    private function prepareCartMessage($changedItemsCount, $notFoundCount)
+    private function preparePersonalProgramMessage($changedItemsCount, $notFoundCount)
     {
         $message = "";
 
@@ -104,6 +106,9 @@ class PersonalProgramService
             } else if ($item['quantity'] > $amountLeft) {
                 $item['quantity'] = $amountLeft;
             }
+            if($item['quantity'] > 30){
+                $item['quantity'] = 30;
+            }
         } else {
             $item['quantity'] = 0;
         }
@@ -121,7 +126,7 @@ class PersonalProgramService
         }
         return true;
     }
-    public function saveCart($cartItems, $userId)
+    public function savePersonalProgram($cartItems, $userId)
     {
         $this->personalProgramRepository->beginTransaction();
         try {
@@ -147,16 +152,18 @@ class PersonalProgramService
     {
         $this->personalProgramRepository->updatePaymentStatus($programId, $isPaid);
     }
-    public function fillPersonalProgramWithItems($personalProgram){
+    public function fillPersonalProgramWithItems($personalProgram)
+    {
         $personalProgram->setItems($this->personalProgramRepository->getItemsByPersonalProgramId($personalProgram->getProgramID()));
-        if($personalProgram->getItems() == null){
+        if ($personalProgram->getItems() == null) {
             throw new ErrorException("Personal Program not found");
         }
         return $personalProgram;
     }
-    public function getPersonalProgramById($personalProgramId, $userId){
+    public function getPersonalProgramById($personalProgramId, $userId)
+    {
         $personalProgram = $this->personalProgramRepository->getPersonalProgramByIds($personalProgramId, $userId);
-        if($personalProgram == null){
+        if ($personalProgram == null) {
             throw new ErrorException("Personal Program not found");
         }
         return $personalProgram;

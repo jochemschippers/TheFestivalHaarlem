@@ -1,17 +1,20 @@
 <?php
 require_once __DIR__ . '/../repositories/jazzRepository.php';
+require_once __DIR__ . '/utilityservice.php';
+
 
 class JazzService
 {
     private $jazzRepository;
     private $eventRepository;
-
+    private $utilityService;
     private $allowed_extensions = ['png', 'jpg', 'jpeg', 'gif'];
 
     function __construct()
     {
         $this->jazzRepository = new JazzRepository();
         $this->eventRepository = new EventRepository();
+        $this->utilityService = new UtilityService();
     }
     public function getAllArtists()
     {
@@ -234,8 +237,171 @@ class JazzService
         if ($end > $festivalEnd) {
             throw new ErrorException("End time must be earlier than or equal to the {$festivalEnd->format('jS \o\f F')}");
         }
-        if($start->format('Y-m-d') != $end->format('Y-m-d')){
+        if ($start->format('Y-m-d') != $end->format('Y-m-d')) {
             throw new ErrorException("Start time and end time must be on the same day!");
+        }
+    }
+    public function updateArtistService($data)
+    {
+        $artist = $this->utilityService->createAndValidateObject(
+            $data,
+            'JazzArtist',
+            [
+                $data["artistID"],
+                $data["name"],
+                $data["description"],
+                $data["image"],
+                $data["imageSmall"]
+            ],
+            ['integer', 'string', 'string', 'string', 'string']
+        );
+
+        if ($artist) {
+            $this->updateArtist($artist);
+            return 'Artist is successfully updated!';
+        }
+    }
+    public function deleteArtistService($data)
+    {
+        $artist = $this->utilityService->createAndValidateObject(
+            $data,
+            'JazzArtist',
+            [$data["artistID"]],
+            ['integer']
+        );
+
+        if ($artist) {
+            $this->deleteArtist($artist);
+            return 'Artist is successfully deleted!';
+        }
+    }
+
+    public function createArtistService($data)
+    {
+        $artist = $this->utilityService->createAndValidateObject(
+            $data,
+            'JazzArtist',
+            [
+                0,
+                $data["name"],
+                $data["description"],
+                $data["image"],
+                $data["imageSmall"]
+            ],
+            ['integer', 'string', 'string', 'string', 'string']
+        );
+
+        if ($artist) {
+            $this->createArtist($artist);
+            return 'Artist is successfully created!';
+        }
+    }
+
+    public function updateLocationService($data)
+    {
+        $location = $this->utilityService->createAndValidateObject(
+            $data,
+            'JazzLocation',
+            [$data["locationID"], $data["locationName"], $data["address"], $data["locationImage"], $data["toAndFromText"], $data["accesibillityText"]],
+            ['integer', 'string', 'string', 'string', 'string', 'string']
+        );
+
+        if ($location) {
+            $this->updateLocation($location);
+            return 'Location is successfully updated!';
+        }
+    }
+
+    public function deleteLocationService($data)
+    {
+        $location = $this->utilityService->createAndValidateObject(
+            $data,
+            'JazzLocation',
+            [$data["locationID"]],
+            ['integer']
+        );
+
+        if ($location) {
+            $this->deleteLocation($location);
+            return 'Location is successfully deleted!';
+        }
+    }
+    public function createLocationService($data)
+    {
+        $location = $this->utilityService->createAndValidateObject(
+            $data,
+            'JazzLocation',
+            [0, $data["locationName"], $data["address"], $data["locationImage"], $data["toAndFromText"], $data["accesibillityText"]],
+            ['integer', 'string', 'string', 'string', 'string', 'string']
+        );
+
+        if ($location) {
+            $this->createLocation($location);
+            return 'Location is successfully created!';
+        }
+    }
+
+    public function updateTimeslotService($data)
+    {
+        $timeslot = $this->utilityService->createAndValidateObject(
+            $data,
+            'timeSlotsJazz',
+            [
+                $data["timeslotID"],
+                new JazzArtist($data["artist"]),
+                1,
+                new JazzLocation($data["location"]),
+                new Hall($data["hall"]),
+                $data["price"],
+                $data["startTime"],
+                $data["endTime"],
+                $data["maximumAmountTickets"],
+            ],
+            ['integer', 'object', 'integer', 'object', 'object', 'double', 'string', 'string', 'integer']
+        );
+
+        if ($timeslot) {
+            $this->updateTimeslotJazz($timeslot);
+            return 'Timeslot is successfully updated!';
+        }
+    }
+    public function createTimeSlotService($data)
+    {
+        $timeslot = $this->utilityService->createAndValidateObject(
+            $data,
+            'timeSlotsJazz',
+            [
+                0,
+                new JazzArtist($data["artist"]),
+                1,
+                new JazzLocation($data["location"]),
+                new Hall($data["hall"]),
+                $data["price"],
+                $data["startTime"],
+                $data["endTime"],
+                $data["maximumAmountTickets"],
+            ],
+            ['integer', 'object', 'integer', 'object', 'object', 'double', 'string', 'string', 'integer']
+        );
+
+        if ($timeslot) {
+            $this->createTimeSlotJazz($timeslot);
+            return 'Timeslot is successfully created!';
+        }
+    }
+
+    public function deleteTimeslotService($data)
+    {
+        $timeslot = $this->utilityService->createAndValidateObject(
+            $data,
+            'timeSlot',
+            [$data["timeSlotID"]],
+            ['integer']
+        );
+
+        if ($timeslot) {
+            $this->deleteTimeslotJazz($timeslot);
+            return 'Timeslot is successfully deleted!';
         }
     }
 }

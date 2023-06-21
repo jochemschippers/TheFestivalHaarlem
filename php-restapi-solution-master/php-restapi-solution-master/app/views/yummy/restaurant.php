@@ -401,7 +401,7 @@
                                 <p>*A reservation fee of €10,- pp. will be administerred.<br>
                                     This fee will be deducted from the final check on visiting the restaurant.
                                 </p>
-                                <button class="btn btn-primary" type="submit" for="form">Continue</button>
+                                <button id="submitButtonReservation" class="btn btn-primary" type="submit" for="form">Continue</button>
                                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
                             </div>
                         </div>
@@ -410,5 +410,3 @@
             </div>
         </div>
     </div>
-
-    <script src="../js/yummy/restaurant.js"></script>
