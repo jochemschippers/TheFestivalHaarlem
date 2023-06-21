@@ -112,3 +112,19 @@ body {
   transition: background-color 0.5s ease;
   font-weight: 500 !important;
 }
+
+#reset {
+  left: 50px;
+}
+
+#resetOption {
+  margin-left: 50px;
+}
+#resetbtn {
+  background: none;
+  border: none;
+  color: #961B1B;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: inherit
+}

@@ -130,30 +130,6 @@ resetForm.addEventListener('submit', function (e) {
     alertMessage.classList.remove('alert-success');
     alertMessage.classList.add('alert-danger');
     checkEmail(document.getElementById('emailReset').value)
-    // if (checkEmail(document.getElementById('emailReset').value)) {
-    //     fetch('account/resetPassword', {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         },
-    //         body: JSON.stringify({
-    //             email: document.querySelector('#emailReset').value,
-    //         })
-    //     }).then(response => response.json())
-    //         .then(data => {
-    //             if (data.status === 1) {
-    //                 resetForm.reset();
-    //                 alertMessage.classList.remove('alert-danger');
-    //                 alertMessage.classList.add('alert-success');
-    //             }
-    //             alertMessage.classList.remove('d-none');
-    //             alertMessage.innerHTML = data.message;
-    //         })
-    //         .catch(error => {
-    //             alertMessage.classList.remove('d-none');
-    //             alertMessage.innerHTML = "Something went wrong! Please try again later";
-    //         });
-    // }
 });
 
 function checkEmail(email) {
@@ -177,13 +153,6 @@ function checkEmail(email) {
                 alertMessage.classList.remove('d-none');
                 alertMessage.innerHTML = "Something went wrong! Please try again later";
             });
-
-        // if (email == "") {
-        //     alertMessage.classList.remove('d-none');
-        //     alertMessage.innerHTML = "Please enter your email!";
-        //     return false;
-        // }
-        // return true;
     }
     catch (error) {
         alertMessage.classList.remove('d-none');
