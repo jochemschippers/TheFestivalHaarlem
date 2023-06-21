@@ -2,7 +2,10 @@
     <div id="filler"></div>
     <div id="topBar">
         <div class="container userdetails" id="userDetailsContainer">
-            <h1 id="title">User Details</h1>
+            <div style="display: flex; align-items: center;">
+                <h1 id="title">User Details</h1>
+                <div class="alert alert-danger d-none" id="alertUpdate" role="alert"></div>
+            </div>
 
             <form method="POST" action="" id="updateUserForm">
                 <label for="fullNameUpdate">Full Name:</label>
@@ -23,6 +26,7 @@
 
                 <input type="submit" value="Update" id="submitBtn">
             </form>
+
 
             <div>
                 <label id="deleteText">Want to delete your account?<br>Please send us an email at <strong>info.thehaarlemfestival@gmail.com</strong> with the email you registered with and request for deletion.</label>
