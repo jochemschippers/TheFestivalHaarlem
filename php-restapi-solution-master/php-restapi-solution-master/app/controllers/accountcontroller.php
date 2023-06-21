@@ -126,7 +126,7 @@ class AccountController extends Controller
                     // Log or echo your error message
                     error_log($e->getMessage());
                 }
-                var_dump($response);
+                // var_dump($response);
             } else {
                 $response['message'] = "User details update failed.";
                 $response['status'] = 0;

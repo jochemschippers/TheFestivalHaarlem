@@ -1,30 +1,36 @@
 <body>
-<div id="topBar"></div>
-<div class="container userdetails">
-        <h1 id="title">User Details</h1>
+    <div id="filler"></div>
+    <div id="topBar">
+        <div class="container userdetails" id="userDetailsContainer">
+            <div style="display: flex; align-items: center;">
+                <h1 id="title">User Details</h1>
+                <div class="alert alert-danger d-none" id="alertUpdate" role="alert"></div>
+            </div>
 
-        <form method="POST" action="">
-            <label for="fullNameUpdate">Full Name:</label><br>
-            <input type="text" id="fullNameUpdate" name="fullNameUpdate" value="<?= $userDetails->getFullName() ?>"><br>
-            
-            <label for="emailUpdate">Email:</label><br>
-            <input type="email" id="emailUpdate" name="emailUpdate" value="<?= $userDetails->getEmail() ?>"><br>
+            <form method="POST" action="" id="updateUserForm">
+                <label for="fullNameUpdate">Full Name:</label>
+                <input type="text" class="form-control" id="fullNameUpdate" name="fullNameUpdate" value="<?= $userDetails->getFullName() ?>">
 
-            <label for="phoneNumberUpdate">Phone Number:</label><br>
-            <input type="text" id="phoneNumberUpdate" name="phoneNumberUpdate" value="<?= $userDetails->getPhoneNumber() ?>"><br>
+                <label for="emailUpdate">Email:</label>
+                <input type="email" class="form-control" id="emailUpdate" name="emailUpdate" value="<?= $userDetails->getEmail() ?>">
 
-            <p>Change password? Enter down below</p>
-            <label for="passwordUpdates">Password:</label><br>
-            <input type="password" id="passwordUpdate" name="passwordUpdate"><br>
+                <label for="phoneNumberUpdate">Phone Number:</label>
+                <input type="text" class="form-control" id="phoneNumberUpdate" name="phoneNumberUpdate" value="<?= $userDetails->getPhoneNumber() ?>">
 
-            <label for="confirmPasswordUpdate">Confirm Password:</label><br>
-            <input type="password" id="confirmPasswordUpdate" name="confirmPasswordUpdate"><br>
+                <p>Change password? Enter down below</p>
+                <label for="passwordUpdates">Password:</label>
+                <input type="password" class="form-control" id="passwordUpdate" name="passwordUpdate">
 
-            <input type="submit" value="Update">
-        </form>
+                <label for="confirmPasswordUpdate">Confirm Password:</label>
+                <input type="password" class="form-control" id="confirmPasswordUpdate" name="confirmPasswordUpdate">
 
-        <div>
-            <label>To delete your account, please send us an email at support@example.com with your User ID and request for deletion.</label>
+                <input type="submit" value="Update" id="submitBtn">
+            </form>
+
+
+            <div>
+                <label id="deleteText">Want to delete your account?<br>Please send us an email at <strong>info.thehaarlemfestival@gmail.com</strong> with the email you registered with and request for deletion.</label>
+            </div>
         </div>
-</div>
+    </div>
 </body>

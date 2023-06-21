@@ -6,6 +6,7 @@ document.querySelector('form').addEventListener('submit', function(event) {
     let phoneNumber = document.querySelector('#phoneNumberUpdate').value;
     let password = document.querySelector('#passwordUpdate').value;
     let confirmPassword = document.querySelector('#confirmPasswordUpdate').value;
+    let alertMessageElement = document.getElementById('alertUpdate');
 
     if (password != confirmPassword) {
         alert("Passwords do not match!");
@@ -27,16 +28,18 @@ document.querySelector('form').addEventListener('submit', function(event) {
         body: JSON.stringify(data)
     })
     .then(response => response.json())
-    .then(data => console.log(data))
+    // .then(data => console.log(data))
     .then(data => {
+        console.log(data);
         if (data.status === 1) {
-            // Handle success, e.g., display a success message
-            alert(data.message);
+            alertMessageElement.innerHTML = data.message;
+            alertMessageElement.classList.remove('d-none');
+            alert("User details updated successfully!")
+            location.reload();
         } else {
-            // Handle error, e.g., display an error message
-            alert(data.message);
+            alertMessageElement.innerHTML = data.message;
+            alertMessageElement.classList.remove('d-none');
         }
-        location.reload();
     })
     .catch((error) => {
         console.error('Error:', error);
