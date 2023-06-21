@@ -280,7 +280,7 @@ class YummyRepository extends Repository
     {
         try {
             $stmt = $this->connection->prepare("
-            SELECT `ticketID`, `timeSlotID`, `restaurantID`, `reservationName`, `phoneNumber`, `numberAdults`,
+            SELECT `ticketID`, `timeSlotID`, `reservationName`, `phoneNumber`, `numberAdults`,
             `numberChildren`, `remark`, `isActive` FROM `RestaurantReservation`
             ");
 
@@ -293,7 +293,7 @@ class YummyRepository extends Repository
                 $reservation = new Restaurantreservation(
                     $row["ticketID"],
                     $row["timeSlotID"],
-                    $row["restaurantID"],
+                    0,
                     $row["reservationName"],
                     $row["phoneNumber"],
                     $row["numberAdults"],

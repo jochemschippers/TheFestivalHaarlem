@@ -3,7 +3,10 @@ require_once __DIR__ . '/repository.php';
 require_once __DIR__ . '/../models/timeSlot.php';
 require_once __DIR__ . '/../models/JazzArtist.php';
 require_once __DIR__ . '/../models/TimeSlotsJazz.php';
+require_once __DIR__ . '/../models/timeSlotsYummy.php';
 require_once __DIR__ . '/../models/JazzLocation.php';
+require_once __DIR__ . '/../models/timeSlotReservationYummy.php';
+
 
 
 class TimeSlotRepository extends Repository
@@ -82,6 +85,50 @@ class TimeSlotRepository extends Repository
                 );
                 $timeSlotJazz->setCurrentlyBoughtTickets($result['boughtTicketsCount']);
                 return $timeSlotJazz;
+            } else {
+                return null;
+            }
+        } catch (PDOException $e) {
+            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
+        }
+    }
+    public function getRestaurantReservationById($timeslotID)
+    {
+        try {
+            $stmt = $this->connection->prepare("
+        SELECT 
+        ts.timeSlotID, ts.eventID, ts.price, ts.startTime, ts.endTime, ts.maximumAmountTickets,
+        yr.restaurantID,
+        yr.restaurantName,
+        (SELECT COUNT(*) FROM EventTickets WHERE timeSlotID = ts.timeSlotID) AS boughtTicketsCount
+        FROM
+            TimeSlots AS ts
+        INNER JOIN TimeSlotsYummy AS tsy ON ts.timeSlotID = tsy.timeSlotID
+        INNER JOIN YummyRestaurants AS yr ON tsy.restaurantID = yr.restaurantID
+        WHERE
+        ts.eventID = 2 AND ts.timeSlotID = ?
+        GROUP BY
+        ts.timeSlotID
+        ORDER BY
+        ts.timeSlotID;
+        ");
+            $stmt->bindParam(1, $timeslotID);
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $stmt->execute();
+            $result = $stmt->fetch();
+
+            if ($result) {
+                $timeSlotYummy = new TimeSlotReservationYummy(
+                    $result["timeSlotID"],
+                    $result['eventID'],
+                    $result['price'],
+                    $result['startTime'],
+                    $result['endTime'],
+                    $result['maximumAmountTickets'],
+                    $result['restaurantName'],
+                );
+                $timeSlotYummy->setCurrentlyBoughtTickets($result['boughtTicketsCount']);
+                return $timeSlotYummy;
             } else {
                 return null;
             }

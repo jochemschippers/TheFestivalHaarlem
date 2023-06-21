@@ -45,17 +45,17 @@ class PatternRouter
                 session_start();
             }
             if (!isset($_SESSION['userID'])) {
-                $explodedUri[0] = 'errormessage403';
+                $explodedUri[0] = 'errormessage';
                 $methodName = $defaultMethod;
             }
         }
-        if ($explodedUri[0] === 'test') {
+        if ($explodedUri[0] === 'admin') {
             if (session_status() == PHP_SESSION_NONE) {
                 session_start();
             }
 
             if (!isset($_SESSION['userRole']) || $_SESSION['userRole'] != 1) {
-                $explodedUri[0] = 'errormessage403';
+                $explodedUri[0] = 'errormessage';
                 $methodName = $defaultMethod;
             }
         }
@@ -65,13 +65,13 @@ class PatternRouter
             }
 
             if (!isset($_SESSION['userID'])) {
-                $explodedUri[0] = 'errormessage403';
+                $explodedUri[0] = 'errormessage';
                 $methodName = $defaultMethod;
             }
         }
 
         $controllerName = str_replace('-', '', $explodedUri[0]) . "controller";
-
+        require_once __DIR__ . '/controllers/errormessagecontroller.php';
         // load the file with the controller class
         $filename = __DIR__ . '/controllers/' . $controllerName . '.php';
         if ($api) {
@@ -80,7 +80,8 @@ class PatternRouter
         if (file_exists($filename)) {
             require_once $filename;
         } else {
-            http_response_code(404);
+            $errorMessageController = new ErrormessageController();
+            $errorMessageController->Error404();
             die();
         }
         // dynamically call relevant controller method
@@ -94,7 +95,12 @@ class PatternRouter
             }
             $controllerObj->{$methodName}();
         } catch (Exception $e) {
-            http_response_code(404);
+            $errorMessageController = new ErrormessageController();
+            $errorMessageController->Error500();
+            die();
+        }catch(Error $e){
+            $errorMessageController = new ErrormessageController();
+            $errorMessageController->Error500();
             die();
         }
     }

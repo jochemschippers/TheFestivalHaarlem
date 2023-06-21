@@ -1,9 +1,16 @@
+var submitButtonReservation = document.getElementById('submitButtonReservation')
+
+submitButtonReservation.onclick = (e) => {
+    e.preventDefault()
+    checkForm();
+}
+
 document.querySelectorAll('.modal-body').forEach(modalBody => {
     const radioButtons = modalBody.querySelectorAll('input[type="radio"]');
     radioButtons.forEach(radioButton => {
         radioButton.addEventListener('click', () => {
             const maxSeats = radioButton.dataset.maxTickets;
-            updateSeats(maxSeats);    
+            updateSeats(maxSeats);
             radioButtons.forEach(rb => {
                 rb.checked = (rb === radioButton);
             });
@@ -21,13 +28,13 @@ document.querySelectorAll('.modal-body').forEach(modalBody => {
             aInputField.value = parseInt(aInputField.value) - 1;
             updateGroupNr(aInputField.value, cInputField.value, modalBody);
         }
-    });    
+    });
     aPlusButton.addEventListener("click", () => {
         if (aInputField.value < 20) {
-            aInputField.value = parseInt(aInputField.value) + 1;            
+            aInputField.value = parseInt(aInputField.value) + 1;
             updateGroupNr(aInputField.value, cInputField.value, modalBody);
         }
-    });    
+    });
     const cInputField = modalBody.querySelector('.cInputNumber');
     const cMinusButton = modalBody.querySelector(".Cminus-btn");
     const cPlusButton = modalBody.querySelector(".Cplus-btn");
@@ -36,13 +43,13 @@ document.querySelectorAll('.modal-body').forEach(modalBody => {
             cInputField.value = parseInt(cInputField.value) - 1;
             updateGroupNr(aInputField.value, cInputField.value, modalBody);
         }
-    });    
+    });
     cPlusButton.addEventListener("click", () => {
         if (cInputField.value < 20) {
-            cInputField.value = parseInt(cInputField.value) + 1;            
+            cInputField.value = parseInt(cInputField.value) + 1;
             updateGroupNr(aInputField.value, cInputField.value, modalBody);
         }
-    });  
+    });
 });
 function updateGroupNr(adultInput, childInput, modalBody) {
     let groupNr = parseInt(adultInput) + parseInt(childInput);
@@ -80,7 +87,7 @@ function checkForm() {
     const nrAdult = document.getElementById("nrAdult");
     const nrChild = document.getElementById("nrChild");
     const remark = document.getElementById("remark");
-    const timeSlot = document.getElementById("btnradio");
+    const timeSlot = document.querySelector('input[name="btnradio"]:checked');
     if (customerName.value.trim() === "") {
         alert("Please enter a valid customer name.");
         customerName.focus();
@@ -106,18 +113,21 @@ function checkForm() {
         remark.focus();
         return false;
     }
-    if (timeSlot.value.trim() === "") {
-        alert("Please select a time slot.");
-        timeSlot.focus();
-        return false;
-    }
-    const quantity = parseInt(nrAdult.value + nrChild.value);
+    const quantity = parseInt(nrAdult.value) + parseInt(nrChild.value);
+
     const ticketID = timeSlot.value;
     let currentMaximum = 20;
-    if(getQuantityByID(ticketID) + quantity < currentMaximum)
-    {
-        addToPersonalProgram(ticketID, quantity);
-    }
+    const reservation = {
+        customerName: customerName.value.trim(),
+        phoneNr: phoneNr.value.trim(),
+        nrAdult: nrAdult.value.trim(),
+        nrChild: nrChild.value.trim(),
+        remark: remark.value.trim(),
+        timeSlot: timeSlot.value,
+    };
+    console.log(reservation);
+    addToPersonalProgram(ticketID, quantity, reservation);
+    closeModal();
 }
 function checkPhoneNumber(phoneNr) {
     const regex = /^((\+31|0)6[-\s]?[1-9](\d[-\s]?){7})$/;
@@ -127,13 +137,7 @@ function submitForm(callback) {
     const form = document.getElementById("#form");
     const formData = new FormData(form);
     const xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            callback();
-        }
-    };
-    xhr.open("POST", form.action, true);
-    xhr.send(formData);
+    checkForm();
 }
 function closeModal() {
     $("#myModal").modal("hide");
@@ -141,16 +145,16 @@ function closeModal() {
 document.addEventListener("DOMContentLoaded", function () {
     const modal = document.getElementById("yourModalId");
     modal.addEventListener("hidden.bs.modal", function () {
-      resetForm();
+        resetForm();
     });
     function resetForm() {
-      const form = document.getElementById("form");
-      form.reset();
-      document.getElementById("adults").textContent = "1";
-      document.getElementById("children").textContent = "0";
-      document.getElementById("group").textContent = "1";
-      document.getElementById("price").textContent = "10.00";
-      document.getElementById("total-price").textContent = "10.00";
-      document.getElementById("seats").textContent = "No timeslot selected";
+        const form = document.getElementById("form");
+        form.reset();
+        document.getElementById("adults").textContent = "1";
+        document.getElementById("children").textContent = "0";
+        document.getElementById("group").textContent = "1";
+        document.getElementById("price").textContent = "10.00";
+        document.getElementById("total-price").textContent = "10.00";
+        document.getElementById("seats").textContent = "No timeslot selected";
     }
-  });
+});
