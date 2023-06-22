@@ -1,4 +1,4 @@
-<link href="../css/test/yummy.css" rel="stylesheet">
+<link href="../css/admin/yummy.css" rel="stylesheet">
 <main role="main">
 <div class="alert alert-success d-none margin-top" id="successMessage" role="alert"></div>
     <div class="card mb-3 panel important">
@@ -299,7 +299,7 @@
                                                             <label for="editReservationRemark">Remark</label>
                                                             <input type="text" class="form-control" id="editReservationRemark" name="editReservationRemark" form="editReservationForm-<?= $reservation->getTicketID() ?>" value="<?= $reservation->getRemark() ?>" required>
                                                         </div>
-                                                        <input type="hidden" name="editReservationTicketID" form="editReservationForm-<?= $reservation->getTicketID() ?>" value="<?= $reservation->getTicketID() ?>">
+                                                        <input type="hidden" name="editReservationTicketID" id="editReservationTicketID" form="editReservationForm-<?= $reservation->getTicketID() ?>" value="<?= $reservation->getTicketID() ?>">
                                                         <button type="submit" class="btn btn-primary" id="confirmEditbutton" form="editReservationForm-<?= $reservation->getTicketID() ?>">reservation aanpassen</button>
                                                     </form>
                                                 </div>
@@ -480,7 +480,7 @@
         </div>
     </div>
     
-    <script src="../js/test/yummy.js"></script>
+    <script src="../js/admin/yummy.js"></script>
 </main>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

@@ -3,12 +3,15 @@ require_once __DIR__ . '/controller.php';
 require_once __DIR__ . '/../services/jazzservice.php';
 require_once __DIR__ . '/../services/yummyservice.php';
 require_once __DIR__ . '/../services/apiservice.php';
+require_once __DIR__ . '/../services/accountservice.php';
+
 
 class AdminController extends Controller
 {
     private $jazzService;
     private $yummyService;
     private $apiService;
+    private $accountService;
 
     // initialize services
     function __construct()
@@ -16,6 +19,7 @@ class AdminController extends Controller
         $this->yummyService = new YummyService();
         $this->jazzService = new JazzService();
         $this->apiService = new ApiService();
+        $this->accountService = new AccountService();
     }
 
     public function index()
@@ -56,7 +60,7 @@ class AdminController extends Controller
     }
     public function apiUpdate()
     {
-        var_dump("test");
+        // var_dump("test");
         $this->handleRequest(function ($data, &$response) {
             // Get the data from the request
             $apiID = isset($data['apiID']) ? (int)$data['apiID'] : 0;
@@ -81,7 +85,7 @@ class AdminController extends Controller
     }
     public function apiDelete()
     {
-        var_dump("test");
+        // var_dump("test");
         $this->handleRequest(function ($data, &$response) {
             // Get the apiID from the request
             $apiID = isset($data['apiID']) ? (int)$data['apiID'] : 0;
@@ -98,6 +102,86 @@ class AdminController extends Controller
             } else {
                 $response['message'] = "API deletion failed.";
                 $response['status'] = 0;
+            }
+        });
+    }
+
+    public function user()
+    {
+        $models = [
+            "users" => $this->accountService->getAllUsers(),
+        ];
+        $this->displayView($models);
+    }
+
+    public function createUser(){
+        $this->handleRequest(function ($data, &$response) {
+            // Get the data from the request
+            $userEmail = isset($data['userEmail']) ? (string)$data['userEmail'] : '';
+            $userRole = isset($data['userRole']) ? (string)$data['userRole'] : '';
+            $userFullName = isset($data['userFullName']) ? (string)$data['userFullName'] : '';
+            $userPhoneNumber = isset($data['userPhoneNumber']) ? (string)$data['userPhoneNumber'] : '';
+            $userPassword = isset($data['userPassword']) ? (string)$data['userPassword'] : '';
+        
+            // Create a new User object
+            $user = new User($userFullName, $userRole, $userEmail, $userPhoneNumber, $userPassword);
+        
+            // Call the create method from the userService
+            $result = $this->accountService->createUser($user);
+        
+            // Check the result and set the appropriate response
+            if ($result) {
+                $response['message'] = "User created successfully.";
+                $response['success'] = 1;
+            } else {
+                $response['message'] = "User creation failed.";
+                $response['success'] = 0;
+            }
+        });
+    }
+
+    public function updateUser(){
+        $this->handleRequest(function ($data, &$response) {
+            // Get the data from the request
+            $userId = isset($data['userId']) ? (int)$data['userId'] : 0;
+            $userEmail = isset($data['userEmail']) ? (string)$data['userEmail'] : '';
+            $userRole = isset($data['userRole']) ? (string)$data['userRole'] : '';
+            $userFullName = isset($data['userFullName']) ? (string)$data['userFullName'] : '';
+            $userPhoneNumber = isset($data['userPhoneNumber']) ? (string)$data['userPhoneNumber'] : '';
+            $userPassword = isset($data['userPassword']) ? (string)$data['userPassword'] : '';
+        
+            // Create a new User object
+            $user = new User($userFullName, $userRole, $userEmail, $userPhoneNumber, $userPassword, $userId);
+        
+            // Call the update method from the userService
+            $result = $this->accountService->updateUser($user);
+        
+            // Check the result and set the appropriate response
+            if ($result) {
+                $response['message'] = "User updated successfully.";
+                $response['success'] = 1;
+            } else {
+                $response['message'] = "User update failed.";
+                $response['success'] = 0;
+            }
+        });
+    }
+
+    public function deleteUser(){
+        $this->handleRequest(function ($data, &$response) {
+            // Get the data from the request
+            $userId = isset($data['userId']) ? (int)$data['userId'] : 0;
+        
+            // Call the delete method from the userService
+            $result = $this->accountService->deleteUser($userId);
+        
+            // Check the result and set the appropriate response
+            if ($result) {
+                $response['message'] = "User deleted successfully.";
+                $response['success'] = 1;
+            } else {
+                $response['message'] = "User deletion failed.";
+                $response['success'] = 0;
             }
         });
     }

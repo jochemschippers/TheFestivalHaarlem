@@ -27,7 +27,7 @@ function createApi() {
         apiKey: createAPIKey,
     };
 
-    fetch('/test/apiCreate', {
+    fetch('/admin/apiCreate', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -68,7 +68,7 @@ function editApi(apiId) {
         apiKey: editAPIKey,
     };
 
-    fetch('/test/apiUpdate', {
+    fetch('/admin/apiUpdate', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -99,7 +99,7 @@ function deleteApi(apiId) {
         apiID: apiId,
     };
 
-    fetch('/test/apiDelete', {
+    fetch('/admin/apiDelete', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
