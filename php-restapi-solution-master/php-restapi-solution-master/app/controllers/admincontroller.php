@@ -87,7 +87,6 @@ class AdminController extends Controller
         $this->handleRequest(function ($data, &$response) {
             // Get the apiID from the request
             $apiID = isset($data['apiID']) ? (int)$data['apiID'] : 0;
-
             // Call the delete method from the apiService
             $result = $this->apiService->delete($apiID);
 

@@ -215,7 +215,6 @@ class AccountRepository extends Repository
     function resetPassword($email, $password)
     {
         try {
-            var_dump($email, $password);
             $stmt = $this->connection->prepare("UPDATE `Users` SET `password` = ? WHERE `email` = ?");
             $stmt->execute([$password, $email]);
             return true;
