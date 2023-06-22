@@ -1,6 +1,4 @@
 <body>
-  <?php var_dump($dayTickets); ?>
-
   <div class="layered">
     <div class="background-Image jazz-background-image">
       <div class="border-box">
