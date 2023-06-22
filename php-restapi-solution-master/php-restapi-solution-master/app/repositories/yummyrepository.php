@@ -280,8 +280,8 @@ class YummyRepository extends Repository
     {
         try {
             $stmt = $this->connection->prepare("
-            SELECT `ticketID`, `timeSlotID`, `reservationName`, `phoneNumber`, `numberAdults`,
-            `numberChildren`, `remark`, `isActive` FROM `RestaurantReservation`
+            SELECT `r.ticketID`, `r.timeSlotID`, `s.restaurantID` ,`r.reservationName`, `r.phoneNumber`, `r.numberAdults`,
+            `r.numberChildren`, `r.remark`, `r.isActive` FROM `RestaurantReservation` AS r JOIN TimeSlotsYummy AS t ON t.timeSlotID = r.timeSlotID
             ");
 
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
@@ -293,7 +293,7 @@ class YummyRepository extends Repository
                 $reservation = new Restaurantreservation(
                     $row["ticketID"],
                     $row["timeSlotID"],
-                    0,
+                    $row["restaurantID"],
                     $row["reservationName"],
                     $row["phoneNumber"],
                     $row["numberAdults"],
@@ -475,15 +475,14 @@ class YummyRepository extends Repository
         try {
             // query
             $stmt = $this->connection->prepare("
-            INSERT INTO `RestaurantReservation`(`timeSlotID`, `restaurantID`, `reservationName`, `phoneNumber`, `numberAdults`, `numberChildren`, `remark`, `isActive`) 
-            VALUES (?,?,?,?,?,?,?,1)
+            INSERT INTO `RestaurantReservation`(`timeSlotID`, `reservationName`, `phoneNumber`, `numberAdults`, `numberChildren`, `remark`, `isActive`) 
+            VALUES (?,?,?,?,?,?,1)
             ");
             // input
             // Bind the parameter value to the placeholder
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $stmt->execute([
                 $reservation->getTimeSlotID(),
-                $reservation->getRestaurantID(),
                 $reservation->getReservationName(),
                 $reservation->getPhoneNumber(),
                 $reservation->getNumberAdults(),
@@ -504,12 +503,12 @@ class YummyRepository extends Repository
         try {
             // query
             $stmt = $this->connection->prepare("UPDATE `RestaurantReservation` SET
-            `timeSlotID`=?, `restaurantID`=?, `reservationName`=?, `phoneNumber`=?,
+            `timeSlotID`=?, `reservationName`=?, `phoneNumber`=?,
             `numberAdults`=?, `numberChildren`=?, `remark`=?, `isActive`=1 WHERE `ticketID`=?");
 
             // input
             $stmt->execute([
-                $update->getTimeSlotID(), $update->getRestaurantID(), $update->getReservationName(), $update->getPhoneNumber(),
+                $update->getTimeSlotID(), $update->getReservationName(), $update->getPhoneNumber(),
                 $update->getNumberAdults(), $update->getNumberChildren(), $update->getRemark(), $update->getTicketID()
             ]);
             return true;
