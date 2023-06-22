@@ -346,7 +346,6 @@ class AdminController extends Controller
             // YUMMY RESERVATION CRUD
             if (isset(
                 $_POST['createReservationTimeSlotID'],
-                $_POST['createReservationRestaurantID'],
                 $_POST['createReservationName'],
                 $_POST['createReservationPhoneNumber'],
                 $_POST['createReservationNumberAdults'],
@@ -359,7 +358,6 @@ class AdminController extends Controller
             }
             if (isset( // pas nog aan
                 $_POST['editReservationTimeSlotID'],
-                $_POST['editReservationRestaurantID'],
                 $_POST['editReservationName'],
                 $_POST['editReservationPhoneNumber'],
                 $_POST['editReservationNumberAdults'],
@@ -521,7 +519,6 @@ class AdminController extends Controller
         // check if all the required POST parameters are set
         if (isset(
             $_POST['createReservationTimeSlotID'],
-            $_POST['createReservationRestaurantID'],
             $_POST['createReservationName'],
             $_POST['createReservationPhoneNumber'],
             $_POST['createReservationNumberAdults'],
@@ -533,7 +530,7 @@ class AdminController extends Controller
             $reservation = new Restaurantreservation(
                 0, // use 0 as the ID for a new reservation
                 $_POST['createReservationTimeSlotID'],
-                $_POST['createReservationRestaurantID'],
+                0, // using 0 because showing restautrant id is still usefull
                 $_POST['createReservationName'],
                 $_POST['createReservationPhoneNumber'],
                 $_POST['createReservationNumberAdults'],
@@ -554,7 +551,6 @@ class AdminController extends Controller
     {
         if (isset(
             $_POST['editReservationTimeSlotID'],
-            $_POST['editReservationRestaurantID'],
             $_POST['editReservationName'],
             $_POST['editReservationPhoneNumber'],
             $_POST['editReservationNumberAdults'],
@@ -565,7 +561,7 @@ class AdminController extends Controller
             $reservation = new Restaurantreservation(
                 $_POST['editReservationTicketID'],
                 $_POST['editReservationTimeSlotID'],
-                $_POST['editReservationRestaurantID'],
+                0, // using 0 because showing restautrant id is still usefull
                 $_POST['editReservationName'],
                 $_POST['editReservationPhoneNumber'],
                 $_POST['editReservationNumberAdults'],

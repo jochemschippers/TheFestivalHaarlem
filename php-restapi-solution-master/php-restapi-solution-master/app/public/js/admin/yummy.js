@@ -232,7 +232,6 @@ function checkAddRestaurantForm() {
 function checkEditReservationForm(ticketID) {
   // Get form input elements
   const timeSlotID = document.getElementById(`editReservationTimeSlotID-${ticketID}`);
-  const restaurantID = document.getElementById(`editReservationRestaurantID-${ticketID}`);
   const reservationName = document.getElementById(`editReservationName-${ticketID}`);
   const phoneNumber = document.getElementById(`editReservationPhoneNumber-${ticketID}`);
   const numberAdults = document.getElementById(`editReservationNumberAdults-${ticketID}`);
@@ -243,11 +242,6 @@ function checkEditReservationForm(ticketID) {
   if (timeSlotID.value.trim() === "") {
     alert("Please enter a valid time slot ID.");
     timeSlotID.focus();
-    return false;
-  }
-  if (restaurantID.value.trim() === "") {
-    alert("Please enter a valid restaurant ID.");
-    restaurantID.focus();
     return false;
   }
   if (reservationName.value.trim() === "") {
@@ -290,7 +284,6 @@ function checkPhoneNumber(phoneNr) {
 function checkAddReservationForm() {
      // Get form input elements
      const timeSlotID = document.getElementById("createReservationTimeSlotID");
-     const restaurantID = document.getElementById("createReservationRestaurantID");
      const reservationName = document.getElementById("createReservationName");
      const phoneNumber = document.getElementById("createReservationPhoneNumber");
      const numberAdults = document.getElementById("createReservationNumberAdults");
@@ -301,11 +294,6 @@ function checkAddReservationForm() {
      if (timeSlotID.value.trim() === "") {
          alert("Please enter a valid TimeSlotID.");
          timeSlotID.focus();
-         return false;
-     }
-     if (restaurantID.value.trim() === "") {
-         alert("Please enter a valid RestaurantID.");
-         restaurantID.focus();
          return false;
      }
      if (reservationName.value.trim() === "") {
