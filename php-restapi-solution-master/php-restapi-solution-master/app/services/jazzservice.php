@@ -301,8 +301,7 @@ class JazzService
         );
 
         if ($artist) {
-            $this->createArtist($artist);
-            return 'Artist is successfully created!';
+            return ['message' => 'Artist is successfully created!', 'artist' => $this->createArtist($artist)];
         }
     }
 
@@ -345,8 +344,7 @@ class JazzService
         );
 
         if ($location) {
-            $this->createLocation($location);
-            return 'Location is successfully created!';
+            return ["message"=> 'Location is successfully created!', "location"=> $this->createLocation($location)];
         }
     }
 
@@ -394,8 +392,7 @@ class JazzService
         );
 
         if ($timeslot) {
-            $this->createTimeSlotJazz($timeslot);
-            return 'Timeslot is successfully created!';
+            return ["message"=> 'Timeslot is successfully created!', "timeslot"=> $this->createTimeSlotJazz($timeslot)];
         }
     }
 

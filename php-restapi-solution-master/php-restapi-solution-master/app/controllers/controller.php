@@ -16,8 +16,8 @@ class Controller
         foreach ($models as $key => $value) {
             ${$key} = $value;
         }
-        $directory = substr(get_class($this), 0, -10);
-        $view = debug_backtrace()[1]['function'];
+        $directory = strtolower(substr(get_class($this), 0, -10));
+        $view = strtolower(debug_backtrace()[1]['function']);
         require __DIR__ . "/../views/$directory/$view.php";
         include __DIR__ . '/../views/footer.php';
     }

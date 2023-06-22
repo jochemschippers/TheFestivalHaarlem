@@ -126,6 +126,7 @@ function getInputDataArtists(row) {
     };
 }
 function addNewRowToArtistsTable(data) {
+    console.log(data);
     const newRowData = [
         data.artist.artistID,
         data.artist.name,

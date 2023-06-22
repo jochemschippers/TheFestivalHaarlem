@@ -235,8 +235,11 @@ class AdminController extends Controller
 
     public function createArtist()
     {
+        
         $this->handleRequest(function ($data, &$response) {
-            $response['message'] = $this->jazzService->createArtistService($data);
+            $artistUpdateResponse = $this->jazzService->createArtistService($data);
+            $response['message'] = $artistUpdateResponse['message'];
+            $response['artist'] = $artistUpdateResponse['artist'];
         });
     }
 
@@ -257,7 +260,9 @@ class AdminController extends Controller
     public function createLocation()
     {
         $this->handleRequest(function ($data, &$response) {
-            $response['message'] = $this->jazzService->createLocationService($data);
+            $locationResponse = $this->jazzService->createLocationService($data);
+            $response['message'] = $locationResponse['message'];
+            $response['location'] = $locationResponse['location'];
         });
     }
 
@@ -270,7 +275,9 @@ class AdminController extends Controller
     public function createTimeSlot()
     {
         $this->handleRequest(function ($data, &$response) {
-            $response['message'] = $this->jazzService->createTimeSlotService($data);
+            $timeSlotResponse = $this->jazzService->createTimeSlotService($data);
+            $response['message'] = $timeSlotResponse['message'];
+            $response['timeslot'] = $timeSlotResponse['timeslot'];
         });
     }
 
