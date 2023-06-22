@@ -97,9 +97,6 @@ class AccountService
         //Optionally starts with a '+' then 1 to 3 digits with possible space after it. 
         //Then, there may be a hyphen, dot, or open parenthesis followed by 1 to 4 digits, and a possible closing parenthesis, hyphen, or dot. this repeats for up to four times
         //Finally, there may be a hyphen, dot, or open parenthesis followed by 1 to 9 digits.
-        if (strlen($phoneNumber) < 13) {
-            return false;
-        }
         $pattern = '/^(?:\+\d{1,3}\s?)?[-. (]?\d{1,4}[-. )]?[-. (]?\d{1,4}[-. )]?[-. (]?\d{1,4}[-. )]?[-. (]?\d{1,4}[-. )]?[-. (]?\d{1,9}$/';
         return preg_match($pattern, $phoneNumber) !== 1;
     }

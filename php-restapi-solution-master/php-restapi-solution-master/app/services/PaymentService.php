@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/../repositories/paymentrepository.php';
-require_once __DIR__ . '/apiService.php';
+require_once __DIR__ . '/apiservice.php';
 
 
 class PaymentService
