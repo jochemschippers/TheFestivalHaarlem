@@ -60,7 +60,6 @@ class AdminController extends Controller
     }
     public function apiUpdate()
     {
-        // var_dump("test");
         $this->handleRequest(function ($data, &$response) {
             // Get the data from the request
             $apiID = isset($data['apiID']) ? (int)$data['apiID'] : 0;
@@ -85,13 +84,9 @@ class AdminController extends Controller
     }
     public function apiDelete()
     {
-        // var_dump("test");
         $this->handleRequest(function ($data, &$response) {
             // Get the apiID from the request
             $apiID = isset($data['apiID']) ? (int)$data['apiID'] : 0;
-
-            // var_dump($apiID);
-
             // Call the delete method from the apiService
             $result = $this->apiService->delete($apiID);
 
@@ -294,7 +289,6 @@ class AdminController extends Controller
     public function yummy()
     {
         if ($_SERVER["REQUEST_METHOD"] === 'POST' && !empty($_POST)) {
-            // var_dump($_POST);
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             // YUMMY RESTAURANT CRUD
             if (

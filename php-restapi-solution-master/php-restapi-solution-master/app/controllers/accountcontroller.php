@@ -175,8 +175,6 @@ class AccountController extends Controller
 
     public function resetPassword()
     {
-
-        // var_dump("test");
         $this->handleRequest(function ($data, &$response) {
             // Get the user data from the request
             $email = isset($data['email']) ? $data['email'] : null;
