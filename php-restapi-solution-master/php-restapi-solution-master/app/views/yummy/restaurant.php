@@ -194,7 +194,7 @@
         </div>
         <div class="row">
             <div class="col-md-8" id="reservation">
-                <a class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#reservationModal">Make a
+                <a class="btn btn-warning btn-lg" data-bs-toggle="modal" data-bs-target="#reservationModal">Make a
                     reservation</a>
                 <p>Any special requests? <br>
                     Please put that in your reservation.</p>
@@ -263,7 +263,7 @@
                                 for ($j = 0; $j < 3; $j++) {
                                     $maxSeats = $timeSlotsYummy[$arrayselector]->getMaximumAmountTickets();
                                 ?>
-                                    <label class="btn btn-outline-primary w-100">
+                                    <label class="btn btn-outline-warning w-100">
                                         <input type="radio" class="btn-check" name="btnradio" value="<?= $timeSlotsYummy[$arrayselector]->getTimeSlotID() ?>" data-max-tickets="<?= $maxSeats ?>">
                                         <?= "<b>Session $i: " . $timeSlotsYummy[$arrayselector]->getStartTime()->format('H:i') . "</b>" ?>
                                     </label><br>
@@ -281,7 +281,7 @@
                                 for ($j = 0; $j < 3; $j++) {
                                     $maxSeats = $timeSlotsYummy[$arrayselector]->getMaximumAmountTickets();
                                 ?>
-                                    <label class="btn btn-outline-primary w-100">
+                                    <label class="btn btn-outline-warning w-100">
                                         <input type="radio" class="btn-check" name="btnradio" value="<?= $timeSlotsYummy[$arrayselector]->getTimeSlotID() ?>" data-max-tickets="<?= $maxSeats ?>">
                                         <?= "<b>Session $i: " . $timeSlotsYummy[$arrayselector]->getStartTime()->format('H:i') . "</b>" ?>
                                     </label><br>
@@ -323,7 +323,7 @@
                                 for ($j = 0; $j < 3; $j++) {
                                     $maxSeats = $timeSlotsYummy[$arrayselector]->getMaximumAmountTickets();
                                 ?>
-                                    <label class="btn btn-outline-primary w-100">
+                                    <label class="btn btn-outline-warning w-100">
                                         <input type="radio" class="btn-check" name="btnradio" value="<?= $timeSlotsYummy[$arrayselector]->getTimeSlotID() ?>" data-max-tickets="<?= $maxSeats ?>">
                                         <?= "<b>Session $i: " . $timeSlotsYummy[$arrayselector]->getStartTime()->format('H:i') . "</b>" ?>
                                     </label><br>
@@ -341,7 +341,7 @@
                                 for ($j = 0; $j < 3; $j++) {
                                     $maxSeats = $timeSlotsYummy[$arrayselector]->getMaximumAmountTickets();
                                 ?>
-                                    <label class="btn btn-outline-primary w-100">
+                                    <label class="btn btn-outline-warning w-100">
                                         <input type="radio" class="btn-check" name="btnradio" value="<?= $timeSlotsYummy[$arrayselector]->getTimeSlotID() ?>" data-max-tickets="<?= $maxSeats ?>">
                                         <?= "<b>Session $i: " . $timeSlotsYummy[$arrayselector]->getStartTime()->format('H:i') . "</b>" ?>
                                     </label><br>
@@ -401,7 +401,7 @@
                                 <p>*A reservation fee of €10,- pp. will be administerred.<br>
                                     This fee will be deducted from the final check on visiting the restaurant.
                                 </p>
-                                <button id="submitButtonReservation" class="btn btn-primary" type="submit" for="form">Continue</button>
+                                <button id="submitButtonReservation" class="btn btn-warning" type="submit" for="form">Continue</button>
                                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="closeModal">Cancel</button>
                             </div>
                         </div>

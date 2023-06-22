@@ -23,7 +23,7 @@
                 <?php foreach ($restaurants as $restaurant) {
                     $restaurantIDs[] = $restaurant->getRestaurantId();
                 } ?>
-                <a class="btn btn-primary col-6" onclick="getRandomRestaurantId(<?php echo json_encode($restaurantIDs); ?>)">
+                <a class="btn btn-warning col-6" onclick="getRandomRestaurantId(<?php echo json_encode($restaurantIDs); ?>)">
                     Surprise me!
                 </a>
             </div>
@@ -51,11 +51,11 @@
                         } else {
                             array_push($foodTypeNames, $foodTypeName); ?>
                             <input type="radio" class="btn-check" name="btnradio" id="btnradio<?= $i ?>" onclick="filterSelection('<?= strtolower($type->getFoodTypeName()) ?> ')">
-                            <label class="btn btn-outline-primary" for="btnradio<?= $i ?>"><?= $type->getFoodTypeName() ?></label>
+                            <label class="btn btn-outline-warning" for="btnradio<?= $i ?>"><?= $type->getFoodTypeName() ?></label>
                     <?php $i++; }
                     } ?>
                     <input type="radio" class="btn-check" name="btnradio" id="btnradio6" onclick="filterSelection('all')" checked>
-                    <label class="btn btn-outline-primary" for="btnradio6">Clear selected</label>
+                    <label class="btn btn-outline-warning" for="btnradio6">Clear selected</label>
                 </div>
             </div>
 
@@ -85,7 +85,7 @@
                                             <?= $restaurant->getCardDescription() ?>
                                         </i></p>
 
-                                    <a class="btn btn-primary mt-auto" onclick="getRestaurantId(<?= $restaurant->getRestaurantId(); ?>)">Menu and
+                                    <a class="btn btn-warning mt-auto" onclick="getRestaurantId(<?= $restaurant->getRestaurantId(); ?>)">Menu and
                                         info</a>
                                 </div>
                             </div>
@@ -101,19 +101,19 @@
             <div class="container" id="otherEventInformation">
                 <div class="row" id="oERow">
                 </div>
-                <div class="row">
-                    <div class="col-md-6">
+                <div class="row justify-content-evenly" id="eventLinks">
+                    <div class="col-md-5">
                         <h1>Jazz</h1>
                         <p>Haarlem Jazz is the premier event for all jazz lovers. We are here to provide a vibrant and
                             lively atmosphere for music fans to come together and enjoy the sounds of the genre.</p>
-                        <a href="/Jazz" class="btn btn-primary">Go to Jazz</a>
+                        <a href="/Jazz" class="btn btn-warning">Go to Jazz</a>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-5">
                         <h1>Stroll Through Haarlem</h1>
                         <p>The historical inner city of Haarlem features a lot of extraordinary monuments. Discover the
                             many interesting, beautiful and surprising monuments that this city makes unique through
                             this tour. </p>
-                        <a href="/Stroll-Through-History" class="btn btn-primary">Go to Stroll though History</a>
+                        <a href="/Stroll-Through-History" class="btn btn-warning">Go to Stroll though History</a>
                     </div>
                 </div>
             </div>
