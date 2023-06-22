@@ -98,14 +98,15 @@ class paymentpageController extends Controller
         $paymentId = $_POST['id'];
         if ($this->paymentService->checkIfPaymentPaid($paymentId)) {
             $programId = $this->paymentService->getProgramIdByPaymentId($paymentId);
-            $this->personalProgramService->updateStatus($programId, true);
-            $this->paymentService->deletePaymentById($paymentId);
-
+            
             $userId = $_SESSION['userID'];
             $combinedId = $userId . '|' . $programId;
             $encryptedId = $this->encryptionService->encryptId($combinedId);
             
             $this->mailService->sendPaymentEmail($encryptedId);
+
+            $this->personalProgramService->updateStatus($programId, true);
+            $this->paymentService->deletePaymentById($paymentId);
         }
     }
     private function paymentFailed($models)

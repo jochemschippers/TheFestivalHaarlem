@@ -234,7 +234,6 @@ function createDeleteCell(timeslot, index) {
     deleteButton.addEventListener('click', function () {
         removeFromPersonalProgram(timeslot.timeSlotID);
         timeslots.splice(timeslots.indexOf(timeslot), 1);
-        displayTimeslots(timeslots);
         const rowToDelete = this.parentElement.parentElement;
         fillPriceTable(timeslots);
         rowToDelete.remove();

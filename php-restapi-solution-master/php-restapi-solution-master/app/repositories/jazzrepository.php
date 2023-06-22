@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/repository.php';
 require_once __DIR__ . '/../models/timeslot.php';
-require_once __DIR__ . '/../models/jazzsartist.php';
+require_once __DIR__ . '/../models/jazzartist.php';
 require_once __DIR__ . '/../models/timeslotsjazz.php';
 require_once __DIR__ . '/../models/jazzlocation.php';
 

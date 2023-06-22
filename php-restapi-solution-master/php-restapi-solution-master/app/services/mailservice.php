@@ -59,14 +59,14 @@ class MailService
             $nameReceiver = $_SESSION['fullName'];
             $subject = "Payment confirmation";
             $body = "We are pleased to confirm the successful receipt of your payment. Thank you for your prompt settlement.<br>
-                To view your event tickets, please click on the following link:<br>            
-                [https://yourwebsite.com/paymentPage/personalProgram?id={$encryptedId}](https://yourwebsite.com/paymentPage/personalProgram?id={$encryptedId})<br>            
-                Please note, this link is personalized for your purchase and should not be shared with others. You will be able to view all the details regarding your purchased event tickets on this page.<br>            
-                Should you have any questions or need further assistance, please do not hesitate to reach out to our customer service team.<br>            
-                Thank you once again for your purchase. We hope you have an enjoyable experience at the event.<br>            
-                Best regards,<br>            
-                The Haarlem Festival Team<br>
-                info.thehaarlemfestival@gmail.com";
+            To view your event tickets, please click on the following link:<br>
+            <a href='" . $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . "/paymentPage/personalProgram?id={$encryptedId}'>View your tickets</a><br>
+            Please note, this link is personalized for your purchase and should not be shared with others. You will be able to view all the details regarding your purchased event tickets on this page.<br>
+            Should you have any questions or need further assistance, please do not hesitate to reach out to our customer service team.<br>
+            Thank you once again for your purchase. We hope you have an enjoyable experience at the event.<br>
+            Best regards,<br>
+            The Haarlem Festival Team<br>
+            info.thehaarlemfestival@gmail.com";
             $altBody = "Payment confirmation";
             $this->sendEmail($email, $nameReceiver, $subject, $body, $altBody);
         } catch (Exception $e) {
@@ -78,7 +78,7 @@ class MailService
     {
         try {
             $subject = 'Password Reset';
-            $body    = 'Hello, you have requested to reset your password. Please click on the link below to reset your password. <br> <a href="http://localhost/account/reset_password?email=' . urlencode(base64_encode($email)) . '">Reset Password</a>';
+            $body = 'Hello, you have requested to reset your password. Please click on the link below to reset your password. <br> <a href="' . $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/account/reset_password?email=' . urlencode(base64_encode($email)) . '">Reset Password</a>';
             $altBody = 'This is the body in plain text for non-HTML mail clients';
             $this->sendEmail($email, $nameReceiver, $subject, $body, $altBody);
         } catch (Exception $e) {
