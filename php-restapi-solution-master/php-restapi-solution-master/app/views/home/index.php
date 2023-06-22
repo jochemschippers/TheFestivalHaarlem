@@ -26,8 +26,9 @@
     <div class="border-box">
         <div class="image" id="titleImage"></div>
         <div class="container" id="titleContainer">
-            <h1>Explore The Festival</h1>
-            <p>Learn more about the amazing Haarlem Festival experience Dutch cuisine, take a stroll around the rich historic center and experience some amazing jazz artists!</p>
+            <h1 id="titleText">Explore The Festival</h1>
+            <p id="datesText">26|27|28|29 July</p>
+            <p id="intoText">Learn more about the amazing Haarlem Festival experience Dutch cuisine, take a stroll around the rich historic center and experience some amazing jazz artists!</p>
         </div>
     </div>
     <div class="container" id="intro" style="color: #000;">
@@ -42,13 +43,12 @@
     </div>
 
     <div class="container banner" id="banner">
-        <h2>Check out the following events:</h2>
     </div>
     <?php
     foreach ($events as $event) {
 
-        $alignment = ($event->getEventID() % 2 == 0) ? 'text-start' : 'text-end';
-        $position = ($event->getEventID() % 2 == 0) ? 'margin-left: 0px;' : 'margin-right: 0px;';
+        $alignment = ($event->getEventID() % 2 == 0) ? 'text-end' : 'text-start';
+        $position = ($event->getEventID() % 2 == 0) ? 'margin-right: 0px;' : 'margin-left: 0px;';
         $background_image = $event->getBannerImage();
         $title = $event->getEventTitle();
         $description = $event->getBannerDescription();
@@ -59,7 +59,7 @@
             <div class="container" style="<?= $position ?>">
                 <h2><ins><?= $title ?></ins></h2>
                 <p><?= $description ?></p>
-                <a class="btn btn-primary" href="<?= $button_link ?>" role="button">Learn More</a>
+                <a class="btn btn-danger" href="<?= $button_link ?>" role="button">Learn More</a>
             </div>
         </div>
 
