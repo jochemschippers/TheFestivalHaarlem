@@ -502,6 +502,7 @@ class YummyRepository extends Repository
     public function editReservation($update)
     {
         // this updates a existing reservation
+        var_dump($update);
         try {
             // query
             $stmt = $this->connection->prepare("UPDATE `RestaurantReservation` SET

@@ -16,6 +16,7 @@
     <li class="yummy"><a href="/admin/yummy">Yummy</a></li>
     <li class="landmark"><a href="#">Stroll Through History</a></li>
     <li class="key"><a href="/admin/api">Manage API</a></li>
+    <li class="users"><a href="/admin/user">Manage Users</a></li>
   </ul>
 </nav>
 <link href="https://unpkg.com/vanilla-datatables@latest/dist/vanilla-dataTables.min.css" rel="stylesheet" type="text/css">

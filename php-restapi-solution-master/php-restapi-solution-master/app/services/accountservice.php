@@ -116,8 +116,14 @@ class AccountService {
     public function getAllUsers(){
         return $this->repository->getAllUsers();
     }
+    public function createUser($user){
+        return $this->repository->createUser($user);
+    }
     public function updateUser($user){
         return $this->repository->updateUser($user);
+    }
+    public function deleteUser($id){
+        return $this->repository->deleteUser($id);
     }
     public function checkEmail($email){
         return $this->repository->checkEmailExists($email);

@@ -92,7 +92,7 @@ function checkEditRestaurantForm() {
     editRestaurantAddress.focus();
     return false;
   }
-  if (editRestaurantContact.value.trim() === "" || isNaN(editRestaurantContact.value.trim())) {
+  if (editRestaurantContact.value.trim() === "") {
     alert("Please enter a valid restaurant contact.");
     editRestaurantContact.focus();
     return false;

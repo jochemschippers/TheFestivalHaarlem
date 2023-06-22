@@ -98,10 +98,45 @@ class AccountRepository extends Repository
     {
         try {
             $stmt = $this->connection->prepare("SELECT * FROM `Users`");
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $stmt->execute();
-            $users = $stmt->fetchAll();
+            $data = $stmt->fetchAll();
+
+            $users = [];
+            foreach ($data as $row) {
+                $user = new User(
+                    $row['fullName'],
+                    $row['userRole'],
+                    $row['email'],
+                    $row['phoneNumber'],
+                    $row['password'],
+                    $row['userID']
+                );
+                array_push($users, $user);
+            }
+
             return $users;
         } catch (Exception $e) {
+            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
+        }
+    }
+
+    function createUser($user) {
+        try {
+            $stmt = $this->connection->prepare("INSERT INTO `Users`(`email`, `userRole`, `fullName`, `phoneNumber`, `password`) VALUES (?,?,?,?,?)");
+            $stmt->execute([
+                $user->getEmail(),
+                $user->getUserRole(),
+                $user->getFullName(),
+                $user->getPhoneNumber(),
+                $user->getPassword()
+            ]);
+            $rowCount = $stmt->rowCount();
+            if ($rowCount === 0) {
+                throw new ErrorException("No rows were inserted. User ID could be invalid.");
+            }
+            return true;
+        } catch (PDOException $e) {
             throw new ErrorException("It seems something went wrong with our database! Please try again later.");
         }
     }
@@ -177,7 +212,8 @@ class AccountRepository extends Repository
         }
     }
 
-    function resetPassword($email, $password) {
+    function resetPassword($email, $password)
+    {
         try {
             var_dump($email, $password);
             $stmt = $this->connection->prepare("UPDATE `Users` SET `password` = ? WHERE `email` = ?");
@@ -187,7 +223,6 @@ class AccountRepository extends Repository
             throw new ErrorException("It seems something went wrong with our database! Please try again later.");
             return false;
         }
-
     }
 
     function deleteUser($id)

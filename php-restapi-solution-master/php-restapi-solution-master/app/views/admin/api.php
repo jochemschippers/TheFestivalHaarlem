@@ -5,9 +5,10 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <div id="restaurants-table">
+                <div id="api-table">
                     <?php if (!is_null($apis) && count($apis) > 0) { ?>
                         <table class="table table-bordered" id="dataTableApis"> 
+                            <thead>
                                 <tr>
                                     <th>API-ID</th>
                                     <th>API-Name</th>

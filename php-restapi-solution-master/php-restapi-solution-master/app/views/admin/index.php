@@ -73,7 +73,7 @@
           </div>
           <div class="mr-5 text-black explainationText">Manage Users and their details</div>
         </div>
-        <a class="card-footer text-black explainationText clearfix small z-1" href="/admin/users">
+        <a class="card-footer text-black explainationText clearfix small z-1" href="/admin/user">
           <span class="float-left">Edit Users</span>
           <span class="float-right">
             <i class="fa fa-angle-right"></i>
