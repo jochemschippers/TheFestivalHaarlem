@@ -174,24 +174,26 @@ function createPriceCell(timeslot) {
 
 function createAmountCell(timeslot, index) {
     const amountCell = document.createElement('td');
-    const amountText = document.createTextNode('Amount');
     const input = document.createElement('input');
     input.type = "number";
     input.value = timeslot.quantity;
     input.min = "1";
     input.max = timeslot.maxTickets;
     input.id = `inputField${index}`;
-
-    appendButtonsToCell(amountCell, index, input);
+    input.disabled = true;
+    input.classList.add('text-center', 'inputField', 'input-personal-program')
+    amountCell.innerHTML = 'Amount: <br>';
+    appendButtonsToCell(amountCell, index, input, timeslot.timeSlotID);
 
     return amountCell;
 }
 
-function appendButtonsToCell(cell, index, inputField) {
-    const minusButton = createButton('-', index, () => updateInputValue(inputField, -1));
-    const plusButton = createButton('+', index, () => updateInputValue(inputField, 1));
+function appendButtonsToCell(cell, index, inputField, timeSlotID) {
+    const minusButton = createButton('-', index, () => updateInputValue(inputField, -1, timeSlotID));
+    const plusButton = createButton('+', index, () => updateInputValue(inputField, 1, timeSlotID));
 
     cell.appendChild(minusButton);
+    cell.appendChild(inputField);
     cell.appendChild(plusButton);
 }
 
@@ -204,11 +206,20 @@ function createButton(text, index, onClick) {
     return button;
 }
 
-function updateInputValue(inputField, change) {
+function updateInputValue(inputField, change, timeSlotID) {
     const value = parseInt(inputField.value, 10);
     const newValue = value + change;
     if (newValue >= 1) {
         inputField.value = newValue;
+        const newQuantity = changeQuantity(timeSlotID, newValue);
+        //update timeslots array if value is changed
+        if (newQuantity !== undefined) {
+            const timeslotToUpdate = timeslots.find(timeslot => timeslot.timeSlotID === timeSlotID);
+            if (timeslotToUpdate) {
+                timeslotToUpdate.quantity = newQuantity;
+            }
+        }
+        fillPriceTable(timeslots);
     }
 }
 

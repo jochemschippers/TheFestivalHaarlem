@@ -113,14 +113,14 @@
                       Would you rather have <strong>access</strong> to the <strong>whole day?</strong> Get your day ticket for only <strong>€35</strong>!
                     </p>
                     <button id="day-ticket" class="line-height longTermTicketButton buttonJazz" data-ticket-info='{
-                        "timeSlotID": "<?= $dayTickets[1]->getTimeSlotID(); ?>",
-                        "date": "<?= $dayTickets[1]->getStartTime()->format('j F l'); ?>",
-                        "timeRange": "<?= $dayTickets[1]->getStartTime()->format('G:i'); ?> - <?= $dayTickets[1]->getEndTime()->format('G:i'); ?>", 
+                        "timeSlotID": "<?= $dayTickets[$dateIndex]->getTimeSlotID(); ?>",
+                        "date": "<?= $dayTickets[$dateIndex]->getStartTime()->format('j F l'); ?>",
+                        "timeRange": "<?= $dayTickets[$dateIndex]->getStartTime()->format('G:i'); ?> - <?= $dayTickets[$dateIndex]->getEndTime()->format('G:i'); ?>", 
                         "artistName": "Day ticket",
                         "colorID": "-1",
-                        "ticketsLeft": "<?= $dayTickets[1]->getMaximumAmountTickets() - $dayTickets[1]->getCurrentlyBoughtTickets() ?>",
+                        "ticketsLeft": "<?= $dayTickets[$dateIndex]->getMaximumAmountTickets() - $dayTickets[$dateIndex]->getCurrentlyBoughtTickets() ?>",
                         "location": "Day pass", 
-                        "price": "<?= $dayTickets[1]->getPrice() ?>"
+                        "price": "<?= $dayTickets[$dateIndex]->getPrice() ?>"
                         }'>
                       <strong>get a day ticket</strong><br> €35
                     </button>

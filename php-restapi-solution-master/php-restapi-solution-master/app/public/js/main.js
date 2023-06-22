@@ -1,13 +1,13 @@
 try {
     var personalProgram = JSON.parse(sessionStorage.getItem('personalProgram')) || [];
     updateCartItemDisplay();
-    console.log(sessionStorage.getItem('personalProgram') );
+    console.log(sessionStorage.getItem('personalProgram'));
 
 } catch {
     console.error("Loading the personal program failed. Data might be lost.");
     var personalProgram = [];
     sessionStorage.setItem('personalProgram', JSON.stringify(personalProgram));
-    
+
 }
 function addToPersonalProgram(timeSlotID, quantity, reservation = null) {
     quantity = Math.max(quantity, 1);
@@ -17,7 +17,7 @@ function addToPersonalProgram(timeSlotID, quantity, reservation = null) {
 
     if (isNaN(quantity) || quantity <= 0) {
         console.error("Something went wrong while adding to the personal program. Please check if the quantity is correct.");
-    } else if(isNaN(timeSlotID) || timeSlotID <= null){
+    } else if (isNaN(timeSlotID) || timeSlotID <= null) {
         console.error("Something went wrong while adding to the personal program. Please check if the timeslot is correct")
     } else {
         if (existingTicket && reservation == null) {
@@ -41,19 +41,43 @@ function addToPersonalProgram(timeSlotID, quantity, reservation = null) {
         updateCartItemDisplay();
     }
 }
+function changeQuantity(timeSlotID, newQuantity) {
+    newQuantity = Math.max(newQuantity, 1);
+    personalProgram = JSON.parse(sessionStorage.getItem('personalProgram')) || [];
+
+    const existingTicket = personalProgram.find(ticket => ticket.id === timeSlotID);
+
+    if (isNaN(newQuantity) || newQuantity <= 0) {
+        showWarning("Something went wrong while adding to the personal program. Please check if the quantity is correct.");
+    } else if (isNaN(timeSlotID) || timeSlotID <= null) {
+        showWarning("Something went wrong while adding to the personal program. Please check if the quantity is correct.");
+    } else {
+        if (existingTicket) {
+            //only work for jazz, other events should have to revisit their page.
+            if (!existingTicket.reservation) {
+                existingTicket.quantity = newQuantity;
+            }
+        } else {
+            showWarning("Something went wrong while adding to the personal program. Please check if the quantity is correct.")
+        }
+        sessionStorage.setItem('personalProgram', JSON.stringify(personalProgram));
+        updateCartItemDisplay();
+        return existingTicket.quantity;
+    }
+}
 function updateCartItemDisplay() {
     const cartItemCount = document.querySelector(".cart-item-count");
     const totalCount = personalProgram.reduce((acc, item) => acc + item.quantity, 0);
-  
+
     if (totalCount > 0) {
-      cartItemCount.textContent = totalCount;
-      cartItemCount.classList.add("cart-item-count-active");
+        cartItemCount.textContent = totalCount;
+        cartItemCount.classList.add("cart-item-count-active");
     } else {
-      cartItemCount.textContent = "";
-      cartItemCount.classList.remove("cart-item-count-active");
+        cartItemCount.textContent = "";
+        cartItemCount.classList.remove("cart-item-count-active");
     }
-  }
-  function getQuantityByID(id) {
+}
+function getQuantityByID(id) {
     try {
         let personalProgram = JSON.parse(sessionStorage.getItem('personalProgram')) || [];
         let ticket = personalProgram.find(item => item.id === id);
