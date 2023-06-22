@@ -14,7 +14,7 @@ class PersonalProgramRepository extends Repository
             $stmt->execute([$userId]);
             return $this->connection->lastInsertId();
         } catch (PDOException $e) {
-            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
+            throw new ErrorException("It seems something went wrong with our database! Please try again later. If the issue persists, please contact support with error code: VWX234");
         }
     }
     public function updatePaymentStatus($programId, $isPaid)
@@ -27,7 +27,7 @@ class PersonalProgramRepository extends Repository
             $stmt->execute([$isPaid, $programId]);
         } catch (PDOException $e) {
             error_log($e->getMessage());
-            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
+            throw new ErrorException("It seems something went wrong with our database! Please try again later. If the issue persists, please contact support with error code: YZA567");
         }
     }
 
@@ -41,7 +41,7 @@ class PersonalProgramRepository extends Repository
             //return id of last inserted row
             return $this->connection->lastInsertId();
         } catch (PDOException $e) {
-            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
+            throw new ErrorException("It seems something went wrong with our database! Please try again later. If the issue persists, please contact support with error code: BCD890");
         }
     }
     public function createRestaurantReservation($reservation, $eventTicketId, $timeSlotID)
@@ -52,7 +52,6 @@ class PersonalProgramRepository extends Repository
             (ticketID, timeSlotID, reservationName, phoneNumber, numberAdults, numberChildren, remark, isActive) 
             VALUES (?, ?, ?, ?, ?, ?, ?, false)"
             );
-
             $stmt->execute([
                 $eventTicketId,
                 $timeSlotID,
@@ -66,7 +65,7 @@ class PersonalProgramRepository extends Repository
             //return id of last inserted row
             return $this->connection->lastInsertId();
         } catch (PDOException $e) {
-            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
+            throw new ErrorException("It seems something went wrong with our database! Please try again later. If the issue persists, please contact support with error code: EFG123");
         }
     }
     public function getMostRecentPersonalProgramByUserId($userId)
@@ -85,7 +84,7 @@ class PersonalProgramRepository extends Repository
                 return null;
             }
         } catch (PDOException $e) {
-            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
+            throw new ErrorException("It seems something went wrong with our database! Please try again later. If the issue persists, please contact support with error code: HIJ456");
         }
     }
     public function getPersonalProgramByIds($programId, $userId)
@@ -104,7 +103,7 @@ class PersonalProgramRepository extends Repository
                 return null;
             }
         } catch (PDOException $e) {
-            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
+            throw new ErrorException("It seems something went wrong with our database! Please try again later. If the issue persists, please contact support with error code: KLM789");
         }
     }
     public function getItemsByPersonalProgramId($personalProgramId)
@@ -153,7 +152,7 @@ class PersonalProgramRepository extends Repository
 
             return $items;
         } catch (PDOException $e) {
-            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
+            throw new ErrorException("It seems something went wrong with our database! Please try again later. If the issue persists, please contact support with error code: NOP012");
         }
     }
 }

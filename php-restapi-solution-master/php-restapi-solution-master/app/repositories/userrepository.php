@@ -19,7 +19,7 @@ class UserRepository extends Repository
                 return true;
             }
         } catch (PDOException $e) {
-            throw new ErrorException("Iets is fout gegaan, probeer het op een later punt nogmaals.");
+            throw new ErrorException("It seems something went wrong with our database! Please try again later. If the issue persists, please contact support with error code: PQR678");
         }
     }
     function registerAccount()
@@ -62,7 +62,7 @@ class UserRepository extends Repository
                     $_SESSION['user'] = $user;
                 }
                 else{
-                    throw new ErrorException("Iets lijkt fout te zijn gegaan. probeer het later nogmaals.");
+                    throw new ErrorException("It seems something went wrong with our database! Please try again later. If the issue persists, please contact support with error code: STU901");
                 }
             }
 

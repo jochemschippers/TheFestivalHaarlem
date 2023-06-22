@@ -112,8 +112,8 @@ class Reservation implements JsonSerializable{
             return [
                     'customerName' => $this->customerName,
                     'phoneNr' => $this->phoneNumber,
-                    'nrOfAdults' => $this->nrOfAdults,
-                    'nrOfChild' => $this->nrOfChild,
+                    'nrAdult' => $this->nrOfAdults,
+                    'nrChild' => $this->nrOfChild,
                     'remark' => $this->remark
             ];
     }

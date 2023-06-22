@@ -105,7 +105,6 @@ class AdminController extends Controller
             }
         });
     }
-
     public function user()
     {
         $models = [
@@ -114,7 +113,8 @@ class AdminController extends Controller
         $this->displayView($models);
     }
 
-    public function createUser(){
+    public function createUser()
+    {
         $this->handleRequest(function ($data, &$response) {
             // Get the data from the request
             $userEmail = isset($data['userEmail']) ? (string)$data['userEmail'] : '';
@@ -122,13 +122,13 @@ class AdminController extends Controller
             $userFullName = isset($data['userFullName']) ? (string)$data['userFullName'] : '';
             $userPhoneNumber = isset($data['userPhoneNumber']) ? (string)$data['userPhoneNumber'] : '';
             $userPassword = isset($data['userPassword']) ? (string)$data['userPassword'] : '';
-        
+
             // Create a new User object
             $user = new User($userFullName, $userRole, $userEmail, $userPhoneNumber, $userPassword);
-        
+
             // Call the create method from the userService
             $result = $this->accountService->createUser($user);
-        
+
             // Check the result and set the appropriate response
             if ($result) {
                 $response['message'] = "User created successfully.";
@@ -140,7 +140,8 @@ class AdminController extends Controller
         });
     }
 
-    public function updateUser(){
+    public function updateUser()
+    {
         $this->handleRequest(function ($data, &$response) {
             // Get the data from the request
             $userId = isset($data['userId']) ? (int)$data['userId'] : 0;
@@ -149,13 +150,13 @@ class AdminController extends Controller
             $userFullName = isset($data['userFullName']) ? (string)$data['userFullName'] : '';
             $userPhoneNumber = isset($data['userPhoneNumber']) ? (string)$data['userPhoneNumber'] : '';
             $userPassword = isset($data['userPassword']) ? (string)$data['userPassword'] : '';
-        
+
             // Create a new User object
             $user = new User($userFullName, $userRole, $userEmail, $userPhoneNumber, $userPassword, $userId);
-        
+
             // Call the update method from the userService
             $result = $this->accountService->updateUser($user);
-        
+
             // Check the result and set the appropriate response
             if ($result) {
                 $response['message'] = "User updated successfully.";
@@ -167,14 +168,15 @@ class AdminController extends Controller
         });
     }
 
-    public function deleteUser(){
+    public function deleteUser()
+    {
         $this->handleRequest(function ($data, &$response) {
             // Get the data from the request
             $userId = isset($data['userId']) ? (int)$data['userId'] : 0;
-        
+
             // Call the delete method from the userService
             $result = $this->accountService->deleteUser($userId);
-        
+
             // Check the result and set the appropriate response
             if ($result) {
                 $response['message'] = "User deleted successfully.";
@@ -185,7 +187,7 @@ class AdminController extends Controller
             }
         });
     }
-    
+
     public function jazz()
     {
         $models = [
@@ -288,7 +290,6 @@ class AdminController extends Controller
     // Call yummy info
     public function yummy()
     {
-
         if ($_SERVER["REQUEST_METHOD"] === 'POST' && !empty($_POST)) {
             // var_dump($_POST);
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -362,6 +363,7 @@ class AdminController extends Controller
                 $_POST['editReservationRemark'],
                 $_POST['editReservationTicketID']
             )) {
+
                 if (!$this->editReservation()) {
                     echo "Something went wrong while updating the reservation";
                 }
@@ -546,6 +548,7 @@ class AdminController extends Controller
 
     public function editReservation()
     {
+
         if (isset(
             $_POST['editReservationTimeSlotID'],
             $_POST['editReservationRestaurantID'],
@@ -567,6 +570,7 @@ class AdminController extends Controller
                 $_POST['editReservationRemark'],
                 1
             );
+
             if ($this->yummyService->editReservation($reservation)) {
                 return true;
             } else {
