@@ -276,10 +276,6 @@
                                                             <input type="text" class="form-control" id="editReservationTimeSlotID" name="editReservationTimeSlotID" form="editReservationForm-<?= $reservation->getTicketID() ?>" value="<?= $reservation->getTimeSlotID() ?>" required>
                                                         </div>
                                                         <div class="form-group">
-                                                            <label for="editReservationRestaurantID">RestaurantID</label>
-                                                            <input type="text" class="form-control" id="editReservationRestaurantID" name="editReservationRestaurantID" form="editReservationForm-<?= $reservation->getTicketID() ?>" value="<?= $reservation->getRestaurantID() ?>" required>
-                                                        </div>
-                                                        <div class="form-group">
                                                             <label for="editReservationName">ReservationName</label>
                                                             <input type="text" class="form-control" id="editReservationName" name="editReservationName" form="editReservationForm-<?= $reservation->getTicketID() ?>" value="<?= $reservation->getReservationName() ?>" required>
                                                         </div>
@@ -330,10 +326,6 @@
                                             <div class="mb-3">
                                                 <label for="createReservationTimeSlotID">TimeSlotID</label>
                                                 <input type="text" class="form-control" form="addReservationForm" id="createReservationTimeSlotID" name="createReservationTimeSlotID" placeholder="TimeSlotID">
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="createReservationRestaurantID">RestaurantID</label>
-                                                <input type="text" class="form-control" form="addReservationForm" id="createReservationRestaurantID" name="createReservationRestaurantID" placeholder="RestaurantID">
                                             </div>
                                             <div class="mb-3">
                                                 <label for="createReservationName">ReservationName</label>
