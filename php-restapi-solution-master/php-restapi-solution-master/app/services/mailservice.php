@@ -14,6 +14,7 @@ class MailService
         try {
             //Server settings
             $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+            $mail->SMTPDebug = 0;
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth = true;
