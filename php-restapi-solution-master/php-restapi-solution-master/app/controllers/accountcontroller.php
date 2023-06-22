@@ -1,19 +1,22 @@
 <?php
 require_once __DIR__ . '/controller.php';
 require __DIR__ . '/../services/accountservice.php';
+require_once __DIR__ . '/../services/mailService.php';
 require_once __DIR__ . '/../models/user.php';
-require_once __DIR__ . '/../vendor/autoload.php';
+// require_once __DIR__ . '/../vendor/autoload.php';
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
+// use PHPMailer\PHPMailer\PHPMailer;
+// use PHPMailer\PHPMailer\SMTP;
+// use PHPMailer\PHPMailer\Exception;
 
 class AccountController extends Controller
 {
     private $service;
+    private $mailService;
     function __construct()
     {
         $this->service = new AccountService();
+        $this->mailService = new MailService();
     }
     public function index()
     {
@@ -119,9 +122,9 @@ class AccountController extends Controller
 
                 $Subject = 'Account Update Confirmation';
                 $Body    = 'Hello, your account details have been updated successfully. If you did not make this change, please contact us immediately.';
-                $AltBody = 'This is the body in plain text for non-HTML mail clients';
+                $AltBody = 'Account Update Confirmation';
                 try {
-                    $this->sendEmail($email, $fullName, $Subject, $Body, $AltBody);
+                    $this->mailService->sendEmail($email, $fullName, $Subject, $Body, $AltBody);
                 } catch (Exception $e) {
                     // Log or echo your error message
                     error_log($e->getMessage());
@@ -135,41 +138,40 @@ class AccountController extends Controller
         });
     }
 
-    private function sendEmail($email, $nameReceiver, $subject, $body, $altBody)
-    {
-        //Create a new PHPMailer instance
-        $mail = new PHPMailer(true);
+    // private function sendEmail($email, $nameReceiver, $subject, $body, $altBody)
+    // {
+    //     //Create a new PHPMailer instance
+    //     $mail = new PHPMailer(true);
+    //     try {
+    //         //Server settings
+    //         $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+    //         $mail->isSMTP();
+    //         $mail->Host = 'smtp.gmail.com';
+    //         $mail->SMTPAuth = true;
+    //         $mail->Username = 'info.thehaarlemfestival@gmail.com';
+    //         $mail->Password = 'fesvstifrbiaxkil';
+    //         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+    //         $mail->Port = 587;
 
-        try {
-            //Server settings
-            $mail->SMTPDebug = SMTP::DEBUG_SERVER;
-            $mail->isSMTP();
-            $mail->Host = 'smtp.gmail.com';
-            $mail->SMTPAuth = true;
-            $mail->Username = 'info.thehaarlemfestival@gmail.com';
-            $mail->Password = 'fesvstifrbiaxkil';
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-            $mail->Port = 587;
+    //         //Recipients
+    //         $mail->setFrom('info.thehaarlemfestival@gmail.com', 'The Haalem Festival');
+    //         $mail->addAddress($email, $nameReceiver ?? 'User');
 
-            //Recipients
-            $mail->setFrom('info.thehaarlemfestival@gmail.com', 'The Haalem Festival');
-            $mail->addAddress($email, $nameReceiver ?? 'User');
+    //         // Content
+    //         $mail->isHTML(true);
+    //         $mail->Subject = $subject;
+    //         $mail->Body = $body;
+    //         $mail->AltBody = $altBody;
 
-            // Content
-            $mail->isHTML(true);
-            $mail->Subject = $subject;
-            $mail->Body = $body;
-            $mail->AltBody = $altBody;
-
-            if ($mail->send()) {
-                // echo 'Message has been sent';
-            } else {
-                // echo 'Message could not be sent.';
-            }
-        } catch (Exception $e) {
-            // echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-        }
-    }
+    //         if ($mail->send()) {
+    //             // echo 'Message has been sent';
+    //         } else {
+    //             // echo 'Message could not be sent.';
+    //         }
+    //     } catch (Exception $e) {
+    //         // echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    //     }
+    // }
 
     private function handleRequest($action)
     {
@@ -217,7 +219,7 @@ class AccountController extends Controller
                 $Body    = 'Hello, you have requested to reset your password. Please click on the link below to reset your password. <br> <a href="http://localhost/account/reset_password?email=' . urlencode($email) . '">Reset Password</a>';
                 $AltBody = 'This is the body in plain text for non-HTML mail clients';
                 try {
-                    $this->sendEmail($email, null, $Subject, $Body, $AltBody);
+                    $this->mailService->sendEmail($email, null, $Subject, $Body, $AltBody);
                 } catch (Exception $e) {
                     // Log or echo your error message
                     error_log($e->getMessage());
@@ -250,7 +252,7 @@ class AccountController extends Controller
                 $Body    = 'Hello, your password has been reset successfully. If you did not make this change, please contact us immediately.';
                 $AltBody = 'This is the body in plain text for non-HTML mail clients';
                 try {
-                    $this->sendEmail($email, null, $Subject, $Body, $AltBody);
+                    $this->mailService->sendEmail($email, null, $Subject, $Body, $AltBody);
                 } catch (Exception $e) {
                     // Log or echo your error message
                     error_log($e->getMessage());

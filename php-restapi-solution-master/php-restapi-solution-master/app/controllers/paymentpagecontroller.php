@@ -4,6 +4,7 @@ require_once __DIR__ . '/../services/yummyservice.php';
 require_once __DIR__ . '/../services/personalprogramservice.php';
 require_once __DIR__ . '/../services/encryptionservice.php';
 require_once __DIR__ . '/../services/qrservice.php';
+require_once __DIR__ . '/../services/mailservice.php';
 
 require_once __DIR__ . '/controller.php';
 
@@ -16,6 +17,7 @@ class paymentpageController extends Controller
     private $personalProgramService;
     private $encryptionService;
     private $qrService;
+    private $mailService;
     function __construct()
     {
         $this->paymentService = new PaymentService();
@@ -23,6 +25,7 @@ class paymentpageController extends Controller
         $this->personalProgramService = new PersonalProgramService();
         $this->encryptionService = new EncryptionService();
         $this->qrService = new QRService();
+        $this->mailService = new MailService();
     }
 
 
@@ -97,6 +100,12 @@ class paymentpageController extends Controller
             $programId = $this->paymentService->getProgramIdByPaymentId($paymentId);
             $this->personalProgramService->updateStatus($programId, true);
             $this->paymentService->deletePaymentById($paymentId);
+
+            $userId = $_SESSION['userID'];
+            $combinedId = $userId . '|' . $programId;
+            $encryptedId = $this->encryptionService->encryptId($combinedId);
+            
+            $this->mailService->sendPaymentEmail($encryptedId);
         }
     }
     private function paymentFailed($models)
