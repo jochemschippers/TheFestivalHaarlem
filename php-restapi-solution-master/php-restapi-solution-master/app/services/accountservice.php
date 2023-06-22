@@ -2,47 +2,47 @@
 require __DIR__ . '/../repositories/accountrepository.php';
 
 
-class AccountService {
+class AccountService
+{
     private $repository;
     function __construct()
     {
         $this->repository = new AccountRepository();
     }
-    public function login($email, $password) {
-        try{
+    public function login($email, $password)
+    {
+        try {
             $current_time = date("H:i:s");
             $encryptedPassword = $this->repository->getPasswordByEmail($email);
             //checks if repository fetched something or checks if the password can be verified
-            if($encryptedPassword == false || !password_verify($password, $encryptedPassword["password"])){
+            if ($encryptedPassword == false || !password_verify($password, $encryptedPassword["password"])) {
                 throw new ErrorException("incorrect email or password! <br>Current time: {$current_time}");
-            }
-            else {
+            } else {
                 $user = $this->repository->getUser($email); //this causes error (i know why! chackek de model)
                 return $user;
             }
-        }catch(Exception $e){
+        } catch (Exception $e) {
             throw $e;
         }
-        
     }
-    public function register($user) {
-        try{
-        $inputStrings = [$user->getFullName(), $user->getEmail(), $user->getPassword(), $user->getPhoneNumber()];
-        $this->validateUserInputs($inputStrings);
-        if($this->repository->checkEmailExists($user->getEmail()))
-        {
-            throw new ErrorException("This email is already linked to an account! Please try to log in.");
+    public function register($user)
+    {
+        try {
+            $inputStrings = [$user->getFullName(), $user->getEmail(), $user->getPassword(), $user->getPhoneNumber()];
+            $this->validateUserInputs($inputStrings);
+            if ($this->repository->checkEmailExists($user->getEmail())) {
+                throw new ErrorException("This email is already linked to an account! Please try to log in.");
+            }
+            //encrypt user password
+            $user->setPassword(password_hash($user->getPassword(), PASSWORD_DEFAULT));
+
+            $this->repository->register($user);
+        } catch (Exception $e) {
+            throw $e;
         }
-        //encrypt user password
-        $user->setPassword(password_hash($user->getPassword(), PASSWORD_DEFAULT));
-
-        $this->repository->register($user);
-
-    }catch(Exception $e){
-        throw $e;
     }
-    }
-    public function logout(){
+    public function logout()
+    {
 
         //if user somehow tries to log out when user has no session. This prevents crash
         if (session_status() == PHP_SESSION_NONE) {
@@ -68,7 +68,7 @@ class AccountService {
         if ($inputStrings[2] !== null && $inputStrings[0] !== null && !$this->isPasswordDistinct($inputStrings[2], $inputStrings[0], $inputStrings[1])) {
             throw new ErrorException("Password is too similar to email, fullname! Please choose a more secure password");
         }
-        if($this->isValidPhoneNumber($inputStrings[3])){
+        if ($this->isValidPhoneNumber($inputStrings[3])) {
             throw new ErrorException("Phone number is invalid!");
         }
     }
@@ -92,43 +92,55 @@ class AccountService {
 
 
 
-    private function isValidPhoneNumber($phoneNumber) {
+    private function isValidPhoneNumber($phoneNumber)
+    {
         //Optionally starts with a '+' then 1 to 3 digits with possible space after it. 
         //Then, there may be a hyphen, dot, or open parenthesis followed by 1 to 4 digits, and a possible closing parenthesis, hyphen, or dot. this repeats for up to four times
         //Finally, there may be a hyphen, dot, or open parenthesis followed by 1 to 9 digits.
+        if (strlen($phoneNumber) < 13) {
+            return false;
+        }
         $pattern = '/^(?:\+\d{1,3}\s?)?[-. (]?\d{1,4}[-. )]?[-. (]?\d{1,4}[-. )]?[-. (]?\d{1,4}[-. )]?[-. (]?\d{1,4}[-. )]?[-. (]?\d{1,9}$/';
         return preg_match($pattern, $phoneNumber) !== 1;
     }
-    private function isPasswordDistinct($password, $fullName, $email) {
+    private function isPasswordDistinct($password, $fullName, $email)
+    {
         $similarityThreshold = 70;
         similar_text(strtolower($password), strtolower($fullName), $nameSimilarity);
         similar_text(strtolower($password), strtolower($email), $emailSimilarity);
-        
+
         // Check if both similarities are below the defined threshold.
         return $nameSimilarity < $similarityThreshold && $emailSimilarity < $similarityThreshold;
     }
 
-    
 
-    public function getUserById($id){
+
+    public function getUserById($id)
+    {
         return $this->repository->getUserById($id);
     }
-    public function getAllUsers(){
+    public function getAllUsers()
+    {
         return $this->repository->getAllUsers();
     }
-    public function createUser($user){
+    public function createUser($user)
+    {
         return $this->repository->createUser($user);
     }
-    public function updateUser($user){
+    public function updateUser($user)
+    {
         return $this->repository->updateUser($user);
     }
-    public function deleteUser($id){
+    public function deleteUser($id)
+    {
         return $this->repository->deleteUser($id);
     }
-    public function checkEmail($email){
+    public function checkEmail($email)
+    {
         return $this->repository->checkEmailExists($email);
     }
-    public function resetPassword($email, $newPassword){
+    public function resetPassword($email, $newPassword)
+    {
         $this->repository->resetPassword($email, password_hash($newPassword, PASSWORD_DEFAULT));
         return $newPassword;
     }
