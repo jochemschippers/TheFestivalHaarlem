@@ -30,7 +30,7 @@ class JazzRepository extends Repository
             }
             return $artists;
         } catch (PDOException $e) {
-            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
+            throw new ErrorException("It seems something went wrong with our database! Please try again later. If the issue persists, please contact support with error code: QRS345");
         }
     }
 
@@ -60,7 +60,7 @@ class JazzRepository extends Repository
             }
             return $timeSlots;
         } catch (PDOException $e) {
-            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
+            throw new ErrorException("It seems something went wrong with our database! Please try again later. If the issue persists, please contact support with error code: XYZ678");
         }
     }
     public function getAllJazzTimeSlots() {
@@ -110,7 +110,7 @@ class JazzRepository extends Repository
             }
             return $timeSlotsJazz;
         } catch (PDOException $e) {
-            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
+            throw new ErrorException("It seems something went wrong with our database! Please try again later. If the issue persists, please contact support with error code: OPQ901");
         }
     }
     public function getAllDayTimeSlots() {
@@ -149,7 +149,7 @@ class JazzRepository extends Repository
             }
             return $timeSlots;
         } catch (PDOException $e) {
-            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
+            throw new ErrorException("It seems something went wrong with our database! Please try again later. If the issue persists, please contact support with error code: RST234");
         }
 
     }
@@ -176,7 +176,7 @@ class JazzRepository extends Repository
             }
             return $locations;
         } catch (PDOException $e) {
-            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
+            throw new ErrorException("It seems something went wrong with our database! Please try again later. If the issue persists, please contact support with error code: UVW567");
         }
     }
     function getAllHalls()
@@ -199,7 +199,7 @@ class JazzRepository extends Repository
             }
             return $halls;
         } catch (PDOException $e) {
-            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
+            throw new ErrorException("It seems something went wrong with our database! Please try again later. If the issue persists, please contact support with error code: MNP890");
         }
     }
     function checkArtistIDExists($artistID)
@@ -211,7 +211,7 @@ class JazzRepository extends Repository
 
             return $result !== false;
         } catch (PDOException $e) {
-            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
+            throw new ErrorException("It seems something went wrong with our database! Please try again later. If the issue persists, please contact support with error code: QWE123");
         }
     }
     function updateArtist($artist)
@@ -226,7 +226,7 @@ class JazzRepository extends Repository
                 $artist->getArtistID()
             ]);
         } catch (PDOException $e) {
-            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
+            throw new ErrorException("It seems something went wrong with our database! Please try again later. If the issue persists, please contact support with error code: ASD456");
         }
     }
     function deleteArtist($artist)
@@ -235,7 +235,7 @@ class JazzRepository extends Repository
             $stmt = $this->connection->prepare("DELETE FROM `JazzArtists` WHERE artistID = ?");
             $stmt->execute([$artist->getArtistID()]);
         } catch (PDOException $e) {
-            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
+            throw new ErrorException("It seems something went wrong with our database! Please try again later. If the issue persists, please contact support with error code: ZXC789");
         }
     }
     function deleteLocation($location)
@@ -244,7 +244,7 @@ class JazzRepository extends Repository
             $stmt = $this->connection->prepare("DELETE FROM `JazzLocations` WHERE locationID = ?");
             $stmt->execute([$location->getLocationID()]);
         } catch (PDOException $e) {
-            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
+            throw new ErrorException("It seems something went wrong with our database! Please try again later. If the issue persists, please contact support with error code: QAZ012");
         }
     }
     function createArtist($artist)
@@ -260,7 +260,7 @@ class JazzRepository extends Repository
             $artist->setArtistID($this->connection->lastInsertId());
             return $artist;
         } catch (PDOException $e) {
-            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
+            throw new ErrorException("It seems something went wrong with our database! Please try again later. If the issue persists, please contact support with error code: WSX345");
         }
     }
 
@@ -273,7 +273,7 @@ class JazzRepository extends Repository
 
             return $result !== false;
         } catch (PDOException $e) {
-            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
+            throw new ErrorException("It seems something went wrong with our database! Please try again later. If the issue persists, please contact support with error code: EDC678");
         }
     }
     function checkTimeSlotIDExists($timeSlotID)
@@ -289,7 +289,7 @@ class JazzRepository extends Repository
 
             return $result !== false;
         } catch (PDOException $e) {
-            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
+            throw new ErrorException("It seems something went wrong with our database! Please try again later. If the issue persists, please contact support with error code: RFV901");
         }
     }
     function checkHallIDExists($hallID)
@@ -301,7 +301,7 @@ class JazzRepository extends Repository
 
             return $result !== false;
         } catch (PDOException $e) {
-            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
+            throw new ErrorException("It seems something went wrong with our database! Please try again later. If the issue persists, please contact support with error code: TGB234");
         }
     }
 
@@ -314,7 +314,7 @@ class JazzRepository extends Repository
 
             return $result !== false;
         } catch (PDOException $e) {
-            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
+            throw new ErrorException("It seems something went wrong with our database! Please try again later. If the issue persists, please contact support with error code: YHN567");
         }
     }
     function updateLocation($location)
@@ -330,7 +330,7 @@ class JazzRepository extends Repository
                 $location->getLocationID()
             ]);
         } catch (PDOException $e) {
-            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
+            throw new ErrorException("It seems something went wrong with our database! Please try again later. If the issue persists, please contact support with error code: UJM890");
         }
     }
     function createLocation($location)
@@ -347,7 +347,7 @@ class JazzRepository extends Repository
             $location->setLocationID($this->connection->lastInsertId());
             return $location;
         } catch (PDOException $e) {
-            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
+            throw new ErrorException("It seems something went wrong with our database! Please try again later. If the issue persists, please contact support with error code: OIK456");
         }
     }
     function updateTimeSlotJazz($timeslot)
@@ -372,7 +372,7 @@ class JazzRepository extends Repository
                 $timeslot->getTimeSlotID()
             ]);
         } catch (PDOException $e) {
-            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
+            throw new ErrorException("It seems something went wrong with our database! Please try again later. If the issue persists, please contact support with error code: PLM123");
         }
     }
     function createAndPopulateTimeSlotJazz($timeslot)
@@ -406,7 +406,7 @@ class JazzRepository extends Repository
 
             return $timeslot;
         } catch (PDOException $e) {
-            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
+            throw new ErrorException("It seems something went wrong with our database! Please try again later. If the issue persists, please contact support with error code: UYT789");
         }
     }
     private function getTimeSlotInformation($timeslot)
@@ -435,7 +435,7 @@ class JazzRepository extends Repository
 
             return $timeslot;
         } catch (PDOException $e) {
-            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
+            throw new ErrorException("It seems something went wrong with our database! Please try again later. If the issue persists, please contact support with error code: QWE012");
         }
     }
     function deleteTimeslotJazz($timeslot)
@@ -444,7 +444,7 @@ class JazzRepository extends Repository
             $stmt = $this->connection->prepare("DELETE FROM `TimeSlots` WHERE timeSlotID = ?");
             $stmt->execute([$timeslot->getTimeSlotID()]);
         } catch (PDOException $e) {
-            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
+            throw new ErrorException("It seems something went wrong with our database! Please try again later. If the issue persists, please contact support with error code: ZXC345");
         }
     }
 }

@@ -22,7 +22,7 @@ class TimeSlotRepository extends Repository
 
             return $result !== false;
         } catch (PDOException $e) {
-            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
+            throw new ErrorException("It seems something went wrong with our database! Please try again later. If the issue persists, please contact support with error code: ABC123");
         }
     }
     function getAmountSoldAndMaximum($timeSlotID)
@@ -36,7 +36,7 @@ class TimeSlotRepository extends Repository
             $result = $stmt->fetch();
             return $result;
         } catch (PDOException $e) {
-            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
+            throw new ErrorException("It seems something went wrong with our database! Please try again later. If the issue persists, please contact support with error code: DEF456");
         }
     }
     public function getJazzTimeSlotById($timeslotID)
@@ -89,7 +89,7 @@ class TimeSlotRepository extends Repository
                 return null;
             }
         } catch (PDOException $e) {
-            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
+            throw new ErrorException("It seems something went wrong with our database! Please try again later. If the issue persists, please contact support with error code: GHI789");
         }
     }
     public function retrieveTimeSlotIfItIsDayTicket($timeSlotID)
@@ -126,7 +126,7 @@ class TimeSlotRepository extends Repository
             }
             return false;
         } catch (PDOException $e) {
-            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
+            throw new ErrorException("It seems something went wrong with our database! Please try again later. If the issue persists, please contact support with error code: JKL012");
         }
     }
     public function getRestaurantReservationById($timeslotID)
@@ -170,7 +170,7 @@ class TimeSlotRepository extends Repository
                 return null;
             }
         } catch (PDOException $e) {
-            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
+            throw new ErrorException("It seems something went wrong with our database! Please try again later. If the issue persists, please contact support with error code: MNO345");
         }
     }
 }

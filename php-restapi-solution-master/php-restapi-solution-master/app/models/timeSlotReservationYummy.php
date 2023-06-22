@@ -62,8 +62,8 @@ class TimeSlotReservationYummy extends TimeSlot implements JsonSerializable
         $this->reservation = new Reservation();
         $this->reservation->setCustomerName($data['customerName'])
             ->setPhoneNumber($data['phoneNr'])
-            ->setNrOfAdults($data['nrOfAdults'])
-            ->setNrOfChild($data['nrOfChild'])
+            ->setNrOfAdults($data['nrAdult'])
+            ->setNrOfChild($data['nrChild'])
             ->setRemark($data['remark']);
         return $this;
     }

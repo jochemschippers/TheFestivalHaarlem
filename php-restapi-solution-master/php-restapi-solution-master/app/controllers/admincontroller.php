@@ -101,7 +101,7 @@ class AdminController extends Controller
             }
         });
     }
-    
+
     public function jazz()
     {
         $models = [
@@ -204,7 +204,6 @@ class AdminController extends Controller
     // Call yummy info
     public function yummy()
     {
-
         if ($_SERVER["REQUEST_METHOD"] === 'POST' && !empty($_POST)) {
             // var_dump($_POST);
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -268,6 +267,14 @@ class AdminController extends Controller
                     echo "Something went wrong while creating the reservation";
                 }
             }
+            error_log($_POST['editReservationTimeSlotID']);
+            error_log($_POST['editReservationRestaurantID']);
+            error_log($_POST['editReservationName']);
+            error_log($_POST['editReservationPhoneNumber']);
+            error_log($_POST['numberAdults']);
+            error_log($_POST['editReservationNumberChildren']);
+            error_log($_POST['editReservationRemark']);
+            error_log($_POST['editReservationTicketID']);
             if (isset( // pas nog aan
                 $_POST['editReservationTimeSlotID'],
                 $_POST['editReservationRestaurantID'],
@@ -278,6 +285,7 @@ class AdminController extends Controller
                 $_POST['editReservationRemark'],
                 $_POST['editReservationTicketID']
             )) {
+
                 if (!$this->editReservation()) {
                     echo "Something went wrong while updating the reservation";
                 }
@@ -462,6 +470,7 @@ class AdminController extends Controller
 
     public function editReservation()
     {
+
         if (isset(
             $_POST['editReservationTimeSlotID'],
             $_POST['editReservationRestaurantID'],
@@ -483,6 +492,7 @@ class AdminController extends Controller
                 $_POST['editReservationRemark'],
                 1
             );
+
             if ($this->yummyService->editReservation($reservation)) {
                 return true;
             } else {

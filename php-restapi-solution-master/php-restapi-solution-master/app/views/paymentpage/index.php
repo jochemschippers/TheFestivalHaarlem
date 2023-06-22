@@ -80,10 +80,10 @@
                 ?>
                 <a href="<?= $buttonHref; ?>" class="btn <?= $buttonClass; ?>" id="continueButton"><?php echo $buttonText; ?></a>
             </div>
-        </div>
-        <button id="share-btn" class="btn btn-primary">Share Personal Program</button>
-        <div id="share-container" style="display: none;">
-            <input type="text" id="share-link" readonly>
-            <button id="copy-btn" class="btn btn-secondary">Copy to Clipboard</button>
+            <button id="share-btn" class="btn continue-btn mt-3 ml-0">Share Personal Program</button>
+            <div id="share-container" class="d-flex justify-content-left align-items-center p-0" style="display: none !important;">
+                <input type="text" id="share-link" class="me-3" readonly>
+                <button id="copy-btn" class="btn btn-secondary">Copy to Clipboard</button>
+            </div>
         </div>
     </div>

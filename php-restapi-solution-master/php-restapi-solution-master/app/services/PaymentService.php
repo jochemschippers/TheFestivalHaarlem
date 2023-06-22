@@ -18,7 +18,6 @@ class PaymentService
         require_once __DIR__ . "/../vendor/autoload.php";
         $this->apiService = new ApiService();
         $this->mollie = new \Mollie\Api\MollieApiClient();
-        error_log($this->apiService->getMollie());
         $this->mollie->setApiKey($this->apiService->getMollie());
     }
     public function GetJazzTickets()

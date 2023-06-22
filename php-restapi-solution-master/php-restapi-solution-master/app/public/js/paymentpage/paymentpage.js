@@ -9,7 +9,6 @@ let warningText = warningAlert.querySelector('p');
 let ticketsTableBodyJazz = null
 let ticketsTableBodyYummy = null
 let timeslots = null;
-console.log(window.location.pathname);
 if (window.location.pathname.toLowerCase() == "/paymentpage") {
     ticketsTableBodyJazz = document.getElementById('tableJazz').getElementsByTagName('tbody')[0];
     ticketsTableBodyYummy = document.getElementById('tableYummy').getElementsByTagName('tbody')[0];
@@ -92,6 +91,7 @@ function updatePersonalProgram(timeslots) {
     //delete the pp from storage
     sessionStorage.setItem('personalProgram', JSON.stringify([]));
     timeslots.forEach(timeslot => {
+        console.log(timeslot);
         addToPersonalProgram(timeslot.timeSlotID, timeslot.quantity, timeslot.reservation);
     });
     sessionStorage.setItem('personalProgram', JSON.stringify(personalProgram));
@@ -174,6 +174,7 @@ function createPriceCell(timeslot) {
 
 function createAmountCell(timeslot, index) {
     const amountCell = document.createElement('td');
+    amountCell.classList.add('text-center');
     const input = document.createElement('input');
     input.type = "number";
     input.value = timeslot.quantity;
@@ -181,7 +182,7 @@ function createAmountCell(timeslot, index) {
     input.max = timeslot.maxTickets;
     input.id = `inputField${index}`;
     input.disabled = true;
-    input.classList.add('text-center', 'inputField', 'input-personal-program')
+    input.classList.add('text-center', 'inputField', 'input-personal-program', 'm-1')
     amountCell.innerHTML = 'Amount: <br>';
     appendButtonsToCell(amountCell, index, input, timeslot.timeSlotID);
 
@@ -191,6 +192,8 @@ function createAmountCell(timeslot, index) {
 function appendButtonsToCell(cell, index, inputField, timeSlotID) {
     const minusButton = createButton('-', index, () => updateInputValue(inputField, -1, timeSlotID));
     const plusButton = createButton('+', index, () => updateInputValue(inputField, 1, timeSlotID));
+    minusButton.classList.add('btn-minus-plus');
+    plusButton.classList.add('btn-minus-plus');
 
     cell.appendChild(minusButton);
     cell.appendChild(inputField);
@@ -286,6 +289,7 @@ function createYummyPriceCell(timeslot) {
 
 function createYummyAmountCell(timeslot, index) {
     const amountCell = document.createElement('td');
+    amountCell.classList.add('text-center');
     const amountText = document.createTextNode('Amount:');
     const input = document.createElement('input');
     input.type = "number";
