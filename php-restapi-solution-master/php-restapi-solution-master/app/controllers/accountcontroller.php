@@ -3,11 +3,6 @@ require_once __DIR__ . '/controller.php';
 require __DIR__ . '/../services/accountservice.php';
 require_once __DIR__ . '/../services/mailService.php';
 require_once __DIR__ . '/../models/user.php';
-// require_once __DIR__ . '/../vendor/autoload.php';
-
-// use PHPMailer\PHPMailer\PHPMailer;
-// use PHPMailer\PHPMailer\SMTP;
-// use PHPMailer\PHPMailer\Exception;
 
 class AccountController extends Controller
 {
@@ -62,7 +57,6 @@ class AccountController extends Controller
             'status' => 1,
             'message' => "login successfull, redirecting to home page. Please wait... <br>if nothing happends; click <a href='/'>here</a>"
         );
-        // Read the JSON data from the request body
         $json_data = file_get_contents("php://input");
         $data = json_decode($json_data, true);
         try {
@@ -91,9 +85,7 @@ class AccountController extends Controller
     public function userdetails()
     {
         $models = [
-            // "username" => $_SESSION['fullName'],
             "userDetails" => $this->service->getUserById($_SESSION['userID']),
-            // "userDetails" => $this->service->getAllUsers(),
         ];
         $this->displayView($models);
     }
@@ -101,11 +93,9 @@ class AccountController extends Controller
     public function updateUser()
     {
         $this->handleRequest(function ($data, &$response) {
-            // Get the user data from the request
             $fullName = isset($data['fullName']) ? $data['fullName'] : null;
             $email = isset($data['email']) ? $data['email'] : null;
             $phoneNumber = isset($data['phoneNumber']) ? $data['phoneNumber'] : null;
-
             if (isset($data['password']) && $data['password'] != "") {
                 // $password = password_hash($data['password'], PASSWORD_DEFAULT);
                 $password = $data['password'];
@@ -113,65 +103,22 @@ class AccountController extends Controller
                 $password = "";
             }
             $updatedUser = new User($fullName, $_SESSION['userRole'], $email, $phoneNumber, $password, $_SESSION['userID']);
-
             $result = $this->service->updateUser($updatedUser);
-
             if ($result) {
-                $response['message'] = "User details updated successfully.";
-                $response['status'] = 1;
-
-                $Subject = 'Account Update Confirmation';
-                $Body    = 'Hello, your account details have been updated successfully. If you did not make this change, please contact us immediately.';
-                $AltBody = 'Account Update Confirmation';
                 try {
-                    $this->mailService->sendEmail($email, $fullName, $Subject, $Body, $AltBody);
+                    $this->mailService->sendUpdateEmail($email, $fullName);
                 } catch (Exception $e) {
-                    // Log or echo your error message
                     error_log($e->getMessage());
                 }
-                // var_dump($response);
+                $response['message'] = "User details updated successfully.";
+                $response['status'] = 1;
             } else {
                 $response['message'] = "User details update failed.";
                 $response['status'] = 0;
             }
-            // $data = null;
+            
         });
     }
-
-    // private function sendEmail($email, $nameReceiver, $subject, $body, $altBody)
-    // {
-    //     //Create a new PHPMailer instance
-    //     $mail = new PHPMailer(true);
-    //     try {
-    //         //Server settings
-    //         $mail->SMTPDebug = SMTP::DEBUG_SERVER;
-    //         $mail->isSMTP();
-    //         $mail->Host = 'smtp.gmail.com';
-    //         $mail->SMTPAuth = true;
-    //         $mail->Username = 'info.thehaarlemfestival@gmail.com';
-    //         $mail->Password = 'fesvstifrbiaxkil';
-    //         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-    //         $mail->Port = 587;
-
-    //         //Recipients
-    //         $mail->setFrom('info.thehaarlemfestival@gmail.com', 'The Haalem Festival');
-    //         $mail->addAddress($email, $nameReceiver ?? 'User');
-
-    //         // Content
-    //         $mail->isHTML(true);
-    //         $mail->Subject = $subject;
-    //         $mail->Body = $body;
-    //         $mail->AltBody = $altBody;
-
-    //         if ($mail->send()) {
-    //             // echo 'Message has been sent';
-    //         } else {
-    //             // echo 'Message could not be sent.';
-    //         }
-    //     } catch (Exception $e) {
-    //         // echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-    //     }
-    // }
 
     private function handleRequest($action)
     {
@@ -203,27 +150,22 @@ class AccountController extends Controller
         $this->displayView($models);
     }
 
-    public function checkEmail() {
+    public function checkEmail()
+    {
 
         $this->handleRequest(function ($data, &$response) {
-            // Get the user data from the request
             $email = isset($data['email']) ? $data['email'] : null;
-
             $result = $this->service->checkEmail($email);
 
             if ($result) {
-                $response['message'] = "We will send you a mail to change your password.";
-                $response['status'] = 0;
-
-                $Subject = 'Password Reset';
-                $Body    = 'Hello, you have requested to reset your password. Please click on the link below to reset your password. <br> <a href="http://localhost/account/reset_password?email=' . urlencode($email) . '">Reset Password</a>';
-                $AltBody = 'This is the body in plain text for non-HTML mail clients';
                 try {
-                    $this->mailService->sendEmail($email, null, $Subject, $Body, $AltBody);
+                    $this->mailService->sendPasswordResetEmail($email, null);
                 } catch (Exception $e) {
                     // Log or echo your error message
                     error_log($e->getMessage());
                 }
+                $response['message'] = "We will send you a mail to change your password.";
+                $response['status'] = 0;                
             } else {
                 $response['message'] = "No user found with this email.";
                 $response['status'] = 1;
@@ -231,7 +173,8 @@ class AccountController extends Controller
         });
     }
 
-    public function resetPassword() {
+    public function resetPassword()
+    {
 
         // var_dump("test");
         $this->handleRequest(function ($data, &$response) {
@@ -239,24 +182,17 @@ class AccountController extends Controller
             $email = isset($data['email']) ? $data['email'] : null;
             $password = isset($data['newPassword']) ? $data['newPassword'] : null;
 
-            var_dump($email);
-            var_dump($password);
-
             $result = $this->service->resetPassword($email, $password);
 
             if ($result) {
-                $response['message'] = "Password reset successfully.";
-                $response['status'] = 0;
-
-                $Subject = 'Password Reset Confirmation';
-                $Body    = 'Hello, your password has been reset successfully. If you did not make this change, please contact us immediately.';
-                $AltBody = 'This is the body in plain text for non-HTML mail clients';
                 try {
-                    $this->mailService->sendEmail($email, null, $Subject, $Body, $AltBody);
+                    $this->mailService->sendResetConfirmEmail($email, null);
                 } catch (Exception $e) {
                     // Log or echo your error message
                     error_log($e->getMessage());
                 }
+                $response['message'] = "Password reset successfully.";
+                $response['status'] = 0;                
             } else {
                 $response['message'] = "Password reset failed.";
                 $response['status'] = 1;
@@ -264,4 +200,3 @@ class AccountController extends Controller
         });
     }
 }
-

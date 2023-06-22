@@ -28,17 +28,19 @@ document.querySelector('form').addEventListener('submit', function(event) {
         body: JSON.stringify(data)
     })
     .then(response => response.json())
-    // .then(data => console.log(data))
+    .then(data => console.log(data))
     .then(data => {
-        console.log(data);
+        // console.log(data);
         if (data.status === 1) {
             alertMessageElement.innerHTML = data.message;
-            alertMessageElement.classList.remove('d-none');
             alert("User details updated successfully!")
-            location.reload();
+            setTimeout(function() {
+                alertMessageElement.classList.remove('d-none');
+                location.reload();
+            }, 5000);
         } else {
             alertMessageElement.innerHTML = data.message;
-            alertMessageElement.classList.remove('d-none');
+            alert("User details not updated!")
         }
     })
     .catch((error) => {
