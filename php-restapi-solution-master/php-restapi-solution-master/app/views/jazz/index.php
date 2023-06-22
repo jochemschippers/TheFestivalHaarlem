@@ -1,9 +1,10 @@
 <body>
+  <?php var_dump($dayTickets); ?>
+
   <div class="layered">
     <div class="background-Image jazz-background-image">
       <div class="border-box">
       </div>
-
       <div class="container landingPageContainer jazz-container-landing ">
         <div class="row">
           <div class="col-md-7" id="titleText">
@@ -113,11 +114,31 @@
                     <p class="long-term-ticket-text">
                       Would you rather have <strong>access</strong> to the <strong>whole day?</strong> Get your day ticket for only <strong>€35</strong>!
                     </p>
-                    <button class="line-height longTermTicketButton buttonJazz"><strong>get a day ticket</strong><br> €35</button>
+                    <button id="day-ticket" class="line-height longTermTicketButton buttonJazz" data-ticket-info='{
+                        "timeSlotID": "<?= $dayTickets[1]->getTimeSlotID(); ?>",
+                        "date": "<?= $dayTickets[1]->getStartTime()->format('j F l'); ?>",
+                        "timeRange": "<?= $dayTickets[1]->getStartTime()->format('G:i'); ?> - <?= $dayTickets[1]->getEndTime()->format('G:i'); ?>", 
+                        "artistName": "Day ticket",
+                        "colorID": "-1",
+                        "ticketsLeft": "<?= $dayTickets[1]->getMaximumAmountTickets() - $dayTickets[1]->getCurrentlyBoughtTickets() ?>",
+                        "location": "Day pass", 
+                        "price": "<?= $dayTickets[1]->getPrice() ?>"
+                        }'>
+                      <strong>get a day ticket</strong><br> €35
+                    </button>
                     <p class="long-term-ticket-text">
                       Can’t choose? You can purchase a week ticket and get <strong>access</strong> to the <strong>whole week</strong>! Get a week ticket for only <strong>€80</strong>!
                     </p>
-                    <button class="line-height longTermTicketButton buttonJazz"><strong>get a week ticket</strong><br> €80</button>
+                    <button id="week-ticket" class="line-height longTermTicketButton buttonJazz"data-ticket-info='{
+                        "timeSlotID": "<?= $dayTickets[3]->getTimeSlotID(); ?>",
+                        "date": "multiple days",
+                        "timeRange": "Any time you want!", 
+                        "artistName": "Week ticket",
+                        "colorID": "-1",
+                        "ticketsLeft": "<?= $dayTickets[3]->getMaximumAmountTickets() - $dayTickets[3]->getCurrentlyBoughtTickets() ?>",
+                        "location": "Week pass", 
+                        "price": "<?= $dayTickets[3]->getPrice() ?>"
+                        }'><strong>get a week ticket</strong><br> €80</button>
                   </div>
 
                   <div class="col-md-9 mt-4">

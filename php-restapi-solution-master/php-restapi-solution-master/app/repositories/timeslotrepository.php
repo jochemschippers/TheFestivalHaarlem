@@ -92,6 +92,43 @@ class TimeSlotRepository extends Repository
             throw new ErrorException("It seems something went wrong with our database! Please try again later.");
         }
     }
+    public function retrieveTimeSlotIfItIsDayTicket($timeSlotID)
+    {
+        try {
+            $stmt = $this->connection->prepare("
+                SELECT 
+                    ts.timeSlotID, ts.eventID, ts.price, ts.startTime, ts.endTime, ts.maximumAmountTickets,
+                    (SELECT COUNT(*) FROM EventTickets WHERE timeSlotID = ts.timeSlotID) AS boughtTicketsCount
+                FROM
+                    TimeSlots AS ts
+                LEFT JOIN TimeSlotsJazz AS tsj ON ts.timeSlotID = tsj.timeSlotID
+                WHERE
+                    ts.eventID = 1 AND tsj.timeSlotID IS NULL AND ts.timeSlotID = ?
+                GROUP BY
+                    ts.timeSlotID
+                ORDER BY
+                    ts.timeSlotID
+            ");
+            $stmt->execute([$timeSlotID]);
+            $result = $stmt->fetch();
+
+            if ($result) {
+                $timeSlot = new TimeSlot(
+                    $result["timeSlotID"],
+                    $result['eventID'],
+                    $result['price'],
+                    new DateTime($result['startTime']),
+                    new DateTime($result['endTime']),
+                    $result['maximumAmountTickets']
+                );
+                $timeSlot->setCurrentlyBoughtTickets($result['boughtTicketsCount']);
+                return $timeSlot;
+            }
+            return false;
+        } catch (PDOException $e) {
+            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
+        }
+    }
     public function getRestaurantReservationById($timeslotID)
     {
         try {

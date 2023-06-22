@@ -12,7 +12,7 @@ function configureEditModalHalls(button) {
 }
 
 function updateHall(row) {
-    fetch('/test/updateHall', {
+    fetch('/admin/updateHall', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

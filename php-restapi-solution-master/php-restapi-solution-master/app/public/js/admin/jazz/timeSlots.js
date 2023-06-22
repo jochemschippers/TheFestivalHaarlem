@@ -11,7 +11,7 @@ function configureEditModalTimeSlots(button) {
     updateModalContent(form);
 }
 function updateTimeslot(row) {
-    fetch('/test/updateTimeslot', {
+    fetch('/admin/updateTimeslot', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -52,7 +52,7 @@ function configureDeleteModalTimeSlots(button) {
 }
 
 function confirmDeleteTimeSlot(row) {
-    fetch('/test/deleteTimeslot', {
+    fetch('/admin/deleteTimeslot', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -89,7 +89,7 @@ function configureAddModalTimeSlots(button) {
 }
 
 function createTimeSlot() {
-    fetch('/test/createTimeslot', {
+    fetch('/admin/createTimeslot', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

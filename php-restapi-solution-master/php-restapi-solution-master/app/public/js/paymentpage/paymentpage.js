@@ -28,6 +28,7 @@ function verifyCart() {
         })
     }).then(response => response.json())
         .then(data => {
+            console.log(data);
             if (data['status'] == 0) {
                 showWarning(data['message'])
                 let continueButton = document.getElementById('continueButton');
@@ -80,7 +81,7 @@ function displayTimeslots(timeslots) {
             ticketsTableBodyJazz.appendChild(timeslotRow);
         }
         if (timeslot.eventID == 2) {
-            const timeslotRow = createTimeslotRowYummy(timeslot, index); 
+            const timeslotRow = createTimeslotRowYummy(timeslot, index);
             ticketsTableBodyYummy.appendChild(timeslotRow);
         }
     }
@@ -120,15 +121,48 @@ function createArtistCell(timeslot) {
     const options = { month: 'long', day: 'numeric' };
     const startTime = new Date(timeslot.startTime);
     const endTime = new Date(timeslot.endTime);
+    let artistName;
 
-    artistCell.innerHTML = `${timeslot.artist.name} <br> ${startTime.toLocaleDateString(undefined, options)}, ${startTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} - ${endTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+    const ticketType = getTicketType(timeslot);
+    if (ticketType === 'day ticket') {
+        artistName = 'Day Ticket';
+    } else if (ticketType === 'week ticket') {
+        artistName = 'Week Ticket';
+    }
+    else {
+        artistName = timeslot.artist.name;
+    }
+    artistCell.innerHTML = `${artistName} <br> ${startTime.toLocaleDateString(undefined, options)}, ${startTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} - ${endTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
 
     return artistCell;
 }
+function getTicketType(timeslot) {
+    const startTime = new Date(timeslot.startTime);
+    const endTime = new Date(timeslot.endTime);
 
+    // Get difference in milliseconds
+    const durationMs = endTime - startTime;
+
+    // Convert duration to minutes
+    const durationMinutes = durationMs / (1000 * 60);
+
+    if (durationMinutes >= 2 * 24 * 60) {
+        return 'week ticket';
+    } else if (durationMinutes >= 23 * 60 + 59) {
+        return 'day ticket';
+    } else {
+        return 'regular ticket';
+    }
+}
 function createLocationCell(timeslot) {
     const locationCell = document.createElement('td');
-    locationCell.innerHTML = `Location: <br> ${timeslot.jazzLocation.locationName}, ${timeslot.hall.hallName}`;
+    const ticketType = getTicketType(timeslot);
+    if (ticketType !== 'regular ticket') {
+        locationCell.innerHTML = `Location: <br> You choose!`;
+    }
+    else {
+        locationCell.innerHTML = `Location: <br> ${timeslot.jazzLocation.locationName}, ${timeslot.hall.hallName}`;
+    }
     return locationCell;
 }
 
@@ -193,6 +227,7 @@ function createDeleteCell(timeslot, index) {
     });
 
     const deleteCell = document.createElement('td');
+    deleteCell.classList.add('d-flex', 'justify-content-end');
     deleteCell.appendChild(deleteButton);
     return deleteCell;
 }
@@ -250,7 +285,8 @@ function createYummyAmountCell(timeslot, index) {
     input.disabled = true;
 
     amountCell.appendChild(amountText);
-    amountCell.appendChild( document.createElement('br'));
+    amountCell.appendChild(document.createElement('br'));
+    input.classList.add('text-center');
     amountCell.appendChild(input);
 
     return amountCell;
@@ -270,6 +306,7 @@ function createYummyDeleteCell(timeslot, index) {
     });
 
     const deleteCell = document.createElement('td');
+    deleteCell.classList.add('d-flex', 'justify-content-end');
     deleteCell.appendChild(deleteButton);
     return deleteCell;
 }

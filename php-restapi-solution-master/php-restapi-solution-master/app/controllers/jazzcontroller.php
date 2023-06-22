@@ -11,7 +11,8 @@ class JazzController extends Controller {
         $models = [
             "artists" => $this->service->getAllArtists(),
             "locations" => $this->service->getAllLocations(),
-            "timeSlots" => $this->service->getAllTimeSlots()
+            "timeSlots" => $this->service->getAllTimeSlots(),
+            "dayTickets" => $this->service->getAllDayTicketsTimeSlots()
         ];
         $this->displayView($models);
     }

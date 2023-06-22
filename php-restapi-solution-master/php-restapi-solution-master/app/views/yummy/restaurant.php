@@ -402,7 +402,7 @@
                                     This fee will be deducted from the final check on visiting the restaurant.
                                 </p>
                                 <button id="submitButtonReservation" class="btn btn-primary" type="submit" for="form">Continue</button>
-                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="closeModal">Cancel</button>
                             </div>
                         </div>
                     </form>

@@ -10,7 +10,7 @@ function configureEditModalArtists(button) {
     updateModalContent(form);
 }
 function updateArtist(row) {
-    fetch('/test/updateArtist', {
+    fetch('/admin/updateArtist', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -47,7 +47,7 @@ function configureAddModalArtists() {
 }
 
 function createArtist() {
-    fetch('/test/createArtist', {
+    fetch('/admin/createArtist', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -78,7 +78,7 @@ function configureDeleteModalArtists(button) {
 }
 
 function confirmDeleteArtist(row) {
-    fetch('/test/deleteArtist', {
+    fetch('/admin/deleteArtist', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

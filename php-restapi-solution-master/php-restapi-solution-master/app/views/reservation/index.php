@@ -147,7 +147,7 @@
                                 This fee will be deducted from the final check on visiting the restaurant.
                             </p>
                             <input class="btn btn-primary" type="submit" value="Continue">
-                            <button type="button" class="btn btn-danger">Cancel</button>
+                            <button type="button" class="btn btn-danger" id="closeModal">Cancel</button>
                         </div>
                     </div>
                 </div>

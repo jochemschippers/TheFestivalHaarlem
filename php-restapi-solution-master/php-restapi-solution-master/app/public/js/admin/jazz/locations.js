@@ -10,7 +10,7 @@ function configureEditModalLocations(button) {
     updateModalContent(form);
 }
 function updateLocation(row) {
-    fetch('/test/updateLocation', {
+    fetch('/admin/updateLocation', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -48,7 +48,7 @@ function configureDeleteModalLocations(button) {
 }
 function confirmDeleteLocation(row) {
     const locationID = row.dataset.locationId;
-    fetch('/test/deleteLocation', {
+    fetch('/admin/deleteLocation', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -83,7 +83,7 @@ function configureAddModalLocations(button) {
     updateModalContent(form);
 }
 function createLocation() {
-    fetch('/test/createLocation', {
+    fetch('/admin/createLocation', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
