@@ -77,7 +77,7 @@ class MailService
     {
         try {
             $subject = 'Password Reset';
-            $body    = 'Hello, you have requested to reset your password. Please click on the link below to reset your password. <br> <a href="http://localhost/account/reset_password?email=' . urlencode($email) . '">Reset Password</a>';
+            $body    = 'Hello, you have requested to reset your password. Please click on the link below to reset your password. <br> <a href="http://localhost/account/reset_password?email=' . urlencode(base64_encode($email)) . '">Reset Password</a>';
             $altBody = 'This is the body in plain text for non-HTML mail clients';
             $this->sendEmail($email, $nameReceiver, $subject, $body, $altBody);
         } catch (Exception $e) {

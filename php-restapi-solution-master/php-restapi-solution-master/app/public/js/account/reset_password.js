@@ -2,7 +2,7 @@ window.onload = function() {
     var resetForm = document.getElementById('resetPasswordEmailForm');
     var newPassword = document.getElementById('newPassword');
     const urlParams = new URLSearchParams(window.location.search);
-    const email = decodeURIComponent(urlParams.get('email'));
+    let email = decodeURIComponent(atob(urlParams.get('email')));
     var confirmNewPassword = document.getElementById('confirmNewPassword');
     var alertMessage = document.getElementById("alert");
 

@@ -28,9 +28,9 @@ document.querySelector('form').addEventListener('submit', function(event) {
         body: JSON.stringify(data)
     })
     .then(response => response.json())
-    .then(data => console.log(data))
+    // .then(data => console.log(data))
     .then(data => {
-        // console.log(data);
+        console.log(data);
         if (data.status === 1) {
             alertMessageElement.innerHTML = data.message;
             alert("User details updated successfully!")
