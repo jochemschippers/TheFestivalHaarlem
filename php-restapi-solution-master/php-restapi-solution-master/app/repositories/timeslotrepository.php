@@ -1,11 +1,11 @@
 <?php
 require_once __DIR__ . '/repository.php';
-require_once __DIR__ . '/../models/timeSlot.php';
-require_once __DIR__ . '/../models/JazzArtist.php';
-require_once __DIR__ . '/../models/TimeSlotsJazz.php';
-require_once __DIR__ . '/../models/timeSlotsYummy.php';
-require_once __DIR__ . '/../models/JazzLocation.php';
-require_once __DIR__ . '/../models/timeSlotReservationYummy.php';
+require_once __DIR__ . '/../models/timeslot.php';
+require_once __DIR__ . '/../models/jazzartist.php';
+require_once __DIR__ . '/../models/timeslotsjazz.php';
+require_once __DIR__ . '/../models/timeslotsyummy.php';
+require_once __DIR__ . '/../models/jazzlocation.php';
+require_once __DIR__ . '/../models/timeslotreservationyummy.php';
 
 
 

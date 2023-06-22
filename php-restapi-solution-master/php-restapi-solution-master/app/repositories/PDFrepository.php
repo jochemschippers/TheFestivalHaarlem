@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/repository.php';
-require __DIR__ . '/../models/PDF.php';
+require __DIR__ . '/../models/pdf.php';
 
 class PDFRepository extends Repository
 {

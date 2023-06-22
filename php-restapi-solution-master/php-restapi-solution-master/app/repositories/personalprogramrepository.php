@@ -1,6 +1,6 @@
 <?php
 require __DIR__ . '/../models/personalprogram.php';
-require __DIR__ . '/../models/personalprogramitemDTO.php';
+require __DIR__ . '/../models/personalprogramitemdto.php';
 
 
 class PersonalProgramRepository extends Repository

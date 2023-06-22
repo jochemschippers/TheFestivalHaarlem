@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/controller.php';
 require __DIR__ . '/../services/accountservice.php';
-require_once __DIR__ . '/../services/mailService.php';
+require_once __DIR__ . '/../services/mailservice.php';
 require_once __DIR__ . '/../models/user.php';
 
 class AccountController extends Controller
