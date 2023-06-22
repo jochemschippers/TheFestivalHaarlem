@@ -4,24 +4,26 @@ let dataTable = new DataTable("#dataTableUsers", {
     perPageSelect: [10, 25, 50, 100],
     fixedHeight: true
 });
-function createUser() {
+function createNewUser() {
+    console.log('Creating user');
     let userEmail = document.getElementById('addUserEmail').value;
     let userRole = document.getElementById('addUserRole').value;
     let userFullName = document.getElementById('addUserFullName').value;
     let userPhoneNumber = document.getElementById('addUserPhoneNumber').value;
     let userPassword = document.getElementById('addUserPassword').value;
 
+    let data = {
+        userEmail: userEmail,
+        userRole: userRole,
+        userFullName: userFullName,
+        userPhoneNumber: userPhoneNumber,
+        userPassword: userPassword
+    };
+
     fetch('/admin/createUser', {
         method: 'POST',
-        body: JSON.stringify({
-            task: 'create',
-            userEmail: userEmail,
-            userRole: userRole,
-            userFullName: userFullName,
-            userPhoneNumber: userPhoneNumber,
-            userPassword: userPassword
-        }),
-        headers: { 'Content-Type': 'application/json' }
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({data})
     })
     .then(response => response.json())
     .then(data => {
@@ -33,25 +35,27 @@ function createUser() {
         }
     });
 }
-function editUser(userId) {
+function editSelectedUser(userId) {
+    console.log('Editing user');
     let userEmail = document.getElementById('editUserEmail-' + userId).value;
     let userRole = document.getElementById('editUserRole-' + userId).value;
     let userFullName = document.getElementById('editUserFullName-' + userId).value;
     let userPhoneNumber = document.getElementById('editUserPhoneNumber-' + userId).value;
     let userPassword = document.getElementById('editUserPassword-' + userId).value;
 
-    fetch('/admin/updateUser', {
-        method: 'POST',
-        body: JSON.stringify({
-            task: 'update',
-            userId: userId,
+    let data = {
+        userId: userId,
             userEmail: userEmail,
             userRole: userRole,
             userFullName: userFullName,
             userPhoneNumber: userPhoneNumber,
             userPassword: userPassword
-        }),
-        headers: { 'Content-Type': 'application/json' }
+    };
+
+    fetch('/admin/updateUser', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({data})
     })
     .then(response => response.json())
     .then(data => {
@@ -63,14 +67,15 @@ function editUser(userId) {
         }
     });
 }
-function deleteUser(userId) {
+function deleteSelectedUser(userId) {
+    console.log('Deleting user');
+    let data = {
+        userId: userId
+    };
     fetch('/admin/deleteUser', {
         method: 'POST',
-        body: JSON.stringify({
-            task: 'delete',
-            userId: userId
-        }),
-        headers: { 'Content-Type': 'application/json' }
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({data})
     })
     .then(response => response.json())
     .then(data => {

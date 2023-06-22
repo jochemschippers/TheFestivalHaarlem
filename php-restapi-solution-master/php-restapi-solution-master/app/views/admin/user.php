@@ -34,8 +34,8 @@
                                         </td>
                                         <td>
                                         <form method="post" enctype="multipart/form-data" id="delete-<?= $user->getUserID() ?>" 
-                                            onsubmit="event.preventDefault(); if (confirm('Are you sure you want to delete user: <?= $user->getEmail() ?>?')) deleteUser(<?= $user->getUserID() ?>);">
-                                            <input type="hidden" id="deleteUserID" name="deleteUserID" value="<?= $user->getUserID() ?>">
+                                            onsubmit="event.preventDefault(); if (confirm('Are you sure you want to delete user: <?= $user->getEmail() ?>?')) deleteSelectedUser(<?= $user->getUserID() ?>);">
+                                            <input type="hidden" id="deleteUserID-<?= $user->getUserID() ?>" name="deleteUserID" value="<?= $user->getUserID() ?>">
                                             <button type="submit" class="btn btn-danger delete-btn" form="delete-<?= $user->getUserID() ?>">Delete</button>
                                         </form>
                                         </td>
@@ -48,7 +48,7 @@
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form method="POST" role="form" enctype="multipart/form-data" id="editUserForm-<?= $user->getUserID() ?>" onsubmit="event.preventDefault(); editUser(<?= $user->getUserID() ?>);">
+                                                    <form method="POST" role="form" enctype="multipart/form-data" id="editUserForm-<?= $user->getUserID() ?>" onsubmit="event.preventDefault(); editSelectedUser(<?= $user->getUserID() ?>);">
 
                                                         <p>user-ID: <?= $user->getUserID() ?></p>
 
@@ -70,10 +70,10 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="editUserPassword-<?= $user->getUserID() ?>">user-Password</label>
-                                                            <input type="number" class="form-control" id="editUserPassword-<?= $user->getUserID() ?>" name="editUserPassword" required>
+                                                            <input type="password" class="form-control" id="editUserPassword-<?= $user->getUserID() ?>" name="editUserPassword" required>
                                                         </div>
 
-                                                        <button type="submit" class="btn btn-primary" id="confirmEditbutton">Edit user</button>
+                                                        <button type="submit" class="btn btn-primary" id="confirmEditUserbutton-<?= $user->getUserID() ?>">Edit user</button>
 
                                                     </form>
                                                 </div>
@@ -101,7 +101,7 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form role="form" method="post" id="addUserForm" enctype="multipart/form-data" onsubmit="event.preventDefault(); createUser();">
+                                        <form role="form" method="POST" id="addUserForm" enctype="multipart/form-data" onsubmit="event.preventDefault(); createNewUser();">
 
                                             <div class="mb-3">
                                                 <label for="addUserEmail">user-Email</label>
