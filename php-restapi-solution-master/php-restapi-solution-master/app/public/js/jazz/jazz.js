@@ -48,32 +48,35 @@ addButtonElements.forEach(addButton => {
     });
 });
 
-let dayTicketButton = document.getElementById('day-ticket');
-dayTicketButton.addEventListener('click', function () {
-    ticketInfo = JSON.parse(this.dataset.ticketInfo);
+const dayTicketButtons = document.querySelectorAll('#day-ticket');
+dayTicketButtons.forEach(dayTicketButton => {
+    dayTicketButton.addEventListener('click', function () {
+        ticketInfo = JSON.parse(this.dataset.ticketInfo);
 
-    ticketDateElement.textContent = ticketInfo.date;
-    ticketArtist.textContent = ticketInfo.artistName !== 'Day ticket' ? ticketInfo.artistName : 'Day Ticket';
-    ticketTimeRange.textContent = ticketInfo.timeRange !== 'Day ticket' ? ticketInfo.timeRange : 'Not Applicable';
-    ticketLocationElement.textContent = ticketInfo.location !== 'Day ticket' ? ticketInfo.location : 'Not Applicable';
-    ticketPriceElement.textContent = '€' + parseFloat(ticketInfo.price).toFixed(2);
-    ticketTotalElement.textContent = '€' + parseFloat(ticketInfo.price).toFixed(2);
-    ticketsLeft.innerHTML = "tickets left: " + ticketInfo.ticketsLeft;
-    ticketQuantityElement.max = ticketInfo.ticketsLeft;
-    currentMaximum = ticketInfo.ticketsLeft;
-    ticketQuantityElement.value = 1;
+        ticketDateElement.textContent = ticketInfo.date;
+        ticketArtist.textContent = ticketInfo.artistName !== 'Day ticket' ? ticketInfo.artistName : 'Day Ticket';
+        ticketTimeRange.textContent = ticketInfo.timeRange !== 'Day ticket' ? ticketInfo.timeRange : 'Not Applicable';
+        ticketLocationElement.textContent = ticketInfo.location !== 'Day ticket' ? ticketInfo.location : 'Not Applicable';
+        ticketPriceElement.textContent = '€' + parseFloat(ticketInfo.price).toFixed(2);
+        ticketTotalElement.textContent = '€' + parseFloat(ticketInfo.price).toFixed(2);
+        ticketsLeft.innerHTML = "tickets left: " + ticketInfo.ticketsLeft;
+        ticketQuantityElement.max = ticketInfo.ticketsLeft;
+        currentMaximum = ticketInfo.ticketsLeft;
+        ticketQuantityElement.value = 1;
 
-    if (ticketInfo.colorID == 0) {
-        dateLocation.classList.remove("secondary-ticket");
-        dateLocation.classList.add("primary-ticket");
-    } else {
-        dateLocation.classList.remove("primary-ticket");
-        dateLocation.classList.add("secondary-ticket");
-    }
+        if (ticketInfo.colorID == 0) {
+            dateLocation.classList.remove("secondary-ticket");
+            dateLocation.classList.add("primary-ticket");
+        } else {
+            dateLocation.classList.remove("primary-ticket");
+            dateLocation.classList.add("secondary-ticket");
+        }
 
-    ticketModal.show();
+        ticketModal.show();
+    });
 });
-let weekTicketButton = document.getElementById('week-ticket');
+const weekTicketButtons = document.querySelectorAll('#week-ticket');
+weekTicketButtons.forEach(weekTicketButton => {
 weekTicketButton.addEventListener('click', function () {
     ticketInfo = JSON.parse(this.dataset.ticketInfo);
 
@@ -97,6 +100,7 @@ weekTicketButton.addEventListener('click', function () {
     }
 
     ticketModal.show();
+});
 });
 plusButton.addEventListener("click", () => {
     const ticketQuantityValue = parseInt(ticketQuantity.value);
@@ -159,3 +163,4 @@ function parseDateString(dateString) {
 
     return new Date(year, month, day);
 }
+
