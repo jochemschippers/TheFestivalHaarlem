@@ -11,6 +11,6 @@ try{
     
     $router->route($uri, $urlParts['query'] ?? '');
     
-}catch(Error $e){
-    var_dump($e);
+} catch (Exception $e) {
+    echo $e->getMessage();
 }
