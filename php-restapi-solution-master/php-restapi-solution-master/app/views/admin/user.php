@@ -121,11 +121,11 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label for="addUserPassword">user-Password</label>
-                                                <input type="password" class="form-control" form="addUserForm" id="addUserPassword" name="addUserPassword">
+                                                <input type="text" class="form-control" form="addUserForm" id="addUserPassword" name="addUserPassword" value="">
                                             </div>
 
                                             <div class="d-grid gap-2" id="createButtons">
-                                                <button type="submit" class="btn btn-primary btn-lg" form="">Create</button>
+                                                <button type="submit" class="btn btn-primary btn-lg" form="addUserForm">Create</button>
                                             </div>
                                         </form>
                                     </div>

@@ -228,7 +228,8 @@ class AccountRepository extends Repository
     function deleteUser($id)
     {
         try {
-            $stmt = $this->connection->prepare("DELETE FROM `Users` WHERE ID = ?");
+            error_log("User ID: " . $id);
+            $stmt = $this->connection->prepare("DELETE FROM `Users` WHERE userID = ?");
             $stmt->execute([$id]);
             return true;
         } catch (Exception $e) {

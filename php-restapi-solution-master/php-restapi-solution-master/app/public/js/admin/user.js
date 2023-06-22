@@ -12,6 +12,10 @@ function createNewUser() {
     let userPhoneNumber = document.getElementById('addUserPhoneNumber').value;
     let userPassword = document.getElementById('addUserPassword').value;
 
+    if (!userEmail || !userRole || !userFullName || !userPhoneNumber || !userPassword) {
+        alert("Please fill in all the fields.");
+        return;
+    }
     let data = {
         userEmail: userEmail,
         userRole: userRole,
@@ -23,7 +27,7 @@ function createNewUser() {
     fetch('/admin/createUser', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({data})
+        body: JSON.stringify(data)
     })
     .then(response => response.json())
     .then(data => {
@@ -43,6 +47,10 @@ function editSelectedUser(userId) {
     let userPhoneNumber = document.getElementById('editUserPhoneNumber-' + userId).value;
     let userPassword = document.getElementById('editUserPassword-' + userId).value;
 
+    if (!userEmail || !userRole || !userFullName || !userPhoneNumber || !userPassword) {
+        alert("Please fill in all the fields.");
+        return;
+    }
     let data = {
         userId: userId,
             userEmail: userEmail,
@@ -55,7 +63,7 @@ function editSelectedUser(userId) {
     fetch('/admin/updateUser', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({data})
+        body: JSON.stringify(data)
     })
     .then(response => response.json())
     .then(data => {
@@ -75,7 +83,7 @@ function deleteSelectedUser(userId) {
     fetch('/admin/deleteUser', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({data})
+        body: JSON.stringify(data)
     })
     .then(response => response.json())
     .then(data => {
@@ -83,7 +91,7 @@ function deleteSelectedUser(userId) {
             // Reload the page or update the table to reflect the deleted user
             location.reload();
         } else {
-            alert('Error deleting user');
+            alert('Error deleting user: ' + data.message);
         }
     });
 }

@@ -123,8 +123,9 @@ class AdminController extends Controller
             $userPhoneNumber = isset($data['userPhoneNumber']) ? (string)$data['userPhoneNumber'] : '';
             $userPassword = isset($data['userPassword']) ? (string)$data['userPassword'] : '';
 
+            $hashedPassword = password_hash($userPassword, PASSWORD_DEFAULT);
             // Create a new User object
-            $user = new User($userFullName, $userRole, $userEmail, $userPhoneNumber, $userPassword);
+            $user = new User($userFullName, $userRole, $userEmail, $userPhoneNumber, $hashedPassword);
 
             // Call the create method from the userService
             $result = $this->accountService->createUser($user);
@@ -173,6 +174,8 @@ class AdminController extends Controller
         $this->handleRequest(function ($data, &$response) {
             // Get the data from the request
             $userId = isset($data['userId']) ? (int)$data['userId'] : 0;
+
+            error_log($data['userId']);
 
             // Call the delete method from the userService
             $result = $this->accountService->deleteUser($userId);
@@ -358,7 +361,7 @@ class AdminController extends Controller
                 $_POST['editReservationRestaurantID'],
                 $_POST['editReservationName'],
                 $_POST['editReservationPhoneNumber'],
-                $_POST['numberAdults'],
+                $_POST['editReservationNumberAdults'],
                 $_POST['editReservationNumberChildren'],
                 $_POST['editReservationRemark'],
                 $_POST['editReservationTicketID']
@@ -548,13 +551,12 @@ class AdminController extends Controller
 
     public function editReservation()
     {
-
         if (isset(
             $_POST['editReservationTimeSlotID'],
             $_POST['editReservationRestaurantID'],
             $_POST['editReservationName'],
             $_POST['editReservationPhoneNumber'],
-            $_POST['numberAdults'],
+            $_POST['editReservationNumberAdults'],
             $_POST['editReservationNumberChildren'],
             $_POST['editReservationRemark'],
             $_POST['editReservationTicketID']
@@ -565,7 +567,7 @@ class AdminController extends Controller
                 $_POST['editReservationRestaurantID'],
                 $_POST['editReservationName'],
                 $_POST['editReservationPhoneNumber'],
-                $_POST['numberAdults'],
+                $_POST['editReservationNumberAdults'],
                 $_POST['editReservationNumberChildren'],
                 $_POST['editReservationRemark'],
                 1
