@@ -1,6 +1,6 @@
 <?php
 require __DIR__ . '/controller.php';
-require __DIR__ . '/../services/PDFservice.php';
+require __DIR__ . '/../services/pdfservice.php';
 
 class PDFController extends Controller {
 

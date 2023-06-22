@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../models/timeSlotsYummy.php';
+require_once __DIR__ . '/../models/timeslotsyummy.php';
 
 class Restaurantreservation extends TimeSlotsYummy
 {

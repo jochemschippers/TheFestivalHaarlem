@@ -1,9 +1,9 @@
 <?php
 require_once __DIR__ . '/repository.php';
-require_once __DIR__ . '/../models/timeSlot.php';
-require_once __DIR__ . '/../models/JazzArtist.php';
-require_once __DIR__ . '/../models/TimeSlotsJazz.php';
-require_once __DIR__ . '/../models/JazzLocation.php';
+require_once __DIR__ . '/../models/timeslot.php';
+require_once __DIR__ . '/../models/jazzsartist.php';
+require_once __DIR__ . '/../models/timeslotsjazz.php';
+require_once __DIR__ . '/../models/jazzlocation.php';
 
 
 class JazzRepository extends Repository

@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../models/timeSlot.php';
+require_once __DIR__ . '/../models/timeslot.php';
 require_once __DIR__ . '/../models/reservation.php';
 
 class TimeSlotReservationYummy extends TimeSlot implements JsonSerializable

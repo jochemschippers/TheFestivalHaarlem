@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../repositories/jazzRepository.php';
+require_once __DIR__ . '/../repositories/jazzrepository.php';
 require_once __DIR__ . '/utilityservice.php';
 
 
