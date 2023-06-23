@@ -18,44 +18,68 @@ class UtilityService
 
         foreach ($constructorArgs as $index => $value) {
             $type = gettype($value);
-            //to catch a warning when the amount of parameters in $argKeys do not allign with amount in $constructorArgs
-            $key = $index < count($argKeys) ? $argKeys[$index] : "unknown";
-            if ($key === "unknown") {
-                throw new TypeError("Something went wrong! Please contact support.");
-            }
+            $key = $this->checkForUnknownKey($index, $argKeys);
             $expectedType = $argTypes[$index];
+
             if ($type !== $expectedType) {
-                // Attempt to cast the value to the expected type 
-                $castedValue = null;
-                if ($expectedType === 'integer') {
-                    $castedValue = (int) $value;
-                } elseif ($expectedType === 'string') {
-                    $castedValue = (string) $value;
-                } //casted into float, because in the models, we have all objects stored as float, however when using getType, the gettype() 
-                //function will return 'double' since that's how PHP internally represents floating-point numbers. 
-                elseif ($expectedType === 'double') {
-                    $castedValue = (float) $value;
-                    //checks if the value is supossed to be 0. If it isn't suposed to be 0, then you want it to make the castedValue invalid. This way it still sends an error if you
-                    //were to send it a give a string
-                    if ($value != '0' && $castedValue == 0) {
-                        $castedValue = '';
-                    }
-                } elseif ($expectedType === 'object') {
-                    $castedValue = $value;
-                } elseif ($expectedType === 'dateTime') {
-                    $castedValue = DateTime::createFromFormat('Y-m-d H:i:s', $value);
-                }
-                // Check if the casted value matches the expected type
-                if (gettype($castedValue) === $expectedType) {
-                    // Update the value in constructor arguments to the casted value, prevents error in the object creation class
-                    $constructorArgs[$index] = $castedValue;
-                } else {
-                    throw new TypeError("Something went wrong! We expected a {$expectedType} value for the {$this->toReadableString($key)}, but a {$type} value was given. Please check the provided data.");
-                }
+                $castedValue = $this->castValueToExpectedType($expectedType, $value);
+                $this->checkCastedValue($castedValue, $expectedType, $key, $type, $index, $constructorArgs);
             }
         }
 
         return $constructorArgs;
+    }
+
+    private function checkForUnknownKey($index, $argKeys)
+    {
+        $key = $index < count($argKeys) ? $argKeys[$index] : "unknown";
+
+        if ($key === "unknown") {
+            throw new TypeError("Something went wrong! Please contact support.");
+        }
+
+        return $key;
+    }
+
+    private function castValueToExpectedType($expectedType, $value)
+    {
+        switch ($expectedType) {
+            case 'integer':
+                return (int) $value;
+            case 'string':
+                return (string) $value;
+            case 'double':
+                return $this->castDouble($value);
+            case 'object':
+                return $value;
+            case 'dateTime':
+                return DateTime::createFromFormat('Y-m-d H:i:s', $value);
+            default:
+                return null;
+        }
+    }
+
+    private function castDouble($value)
+    {
+        //casted into float, because in the models, we have all objects stored as float, however when using getType, the gettype() 
+        //function will return 'double' since that's how PHP internally represents floating-point numbers.  
+        $castedValue = (float) $value;
+
+        if ($value != '0' && $castedValue == 0) {
+            $castedValue = '';
+        }
+
+        return $castedValue;
+    }
+
+    private function checkCastedValue($castedValue, $expectedType, $key, $type, $index, &$constructorArgs)
+    {
+        if (gettype($castedValue) === $expectedType) {
+            // Update the value in constructor arguments to the casted value, prevents error in the object creation class
+            $constructorArgs[$index] = $castedValue;
+        } else {
+            throw new TypeError("Something went wrong! We expected a {$expectedType} value for the {$this->toReadableString($key)}, but a {$type} value was given. Please check the provided data.");
+        }
     }
     private function createObject($className, $constructorArgs, $data)
     {
@@ -82,11 +106,11 @@ class UtilityService
         }
         return $object;
     }
-    private function toReadableString($input) {
-        $output = preg_replace('/(?<=\\w)(?=[A-Z])/'," $1", $input);
+    private function toReadableString($input)
+    {
+        $output = preg_replace('/(?<=\\w)(?=[A-Z])/', " $1", $input);
         $output = ucfirst($output);
-    
+
         return $output;
     }
-    
 }
