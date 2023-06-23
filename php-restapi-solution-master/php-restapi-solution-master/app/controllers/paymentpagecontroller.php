@@ -98,7 +98,6 @@ class paymentpageController extends Controller
         $paymentId = $_POST['id'];
         if ($this->paymentService->checkIfPaymentPaid($paymentId)) {
             $programId = $this->paymentService->getProgramIdByPaymentId($paymentId);
-            //get userIdByProgramId
 
             $userId = $this->personalProgramService->getUserIdByProgramId($programId);
             $combinedId = $userId . '|' . $programId;

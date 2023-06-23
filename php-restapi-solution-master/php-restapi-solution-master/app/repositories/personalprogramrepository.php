@@ -155,4 +155,23 @@ class PersonalProgramRepository extends Repository
             throw new ErrorException("It seems something went wrong with our database! Please try again later. If the issue persists, please contact support with error code: NOP012");
         }
     }
+    public function getUserIdByProgramId($programID){
+        try {
+            $stmt = $this->connection->prepare(
+                "SELECT userID FROM PersonalPrograms WHERE programId = ?"
+            );
+            $stmt->execute([$programID]);
+            $result = $stmt->fetch();
+
+            // Check if a result was found
+            if ($result) {
+                return $result['userID'];
+            } else {
+                return null;
+            }
+        } catch (PDOException $e) {
+            error_log($e->getMessage());
+            throw new ErrorException("It seems something went wrong with our database! Please try again later. If the issue persists, please contact support with error code: QRS345");
+        }
+    }
 }
