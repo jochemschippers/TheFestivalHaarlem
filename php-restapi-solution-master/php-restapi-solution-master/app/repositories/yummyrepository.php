@@ -1,7 +1,7 @@
 <?php
 include_once __DIR__ . '/repository.php';
-require_once __DIR__ . '/../models/timeSlot.php';
-require_once __DIR__ . '/../models/foodType.php';
+require_once __DIR__ . '/../models/timeslot.php';
+require_once __DIR__ . '/../models/foodtype.php';
 require_once __DIR__ . '/../models/timeslotsyummy.php';
 require_once __DIR__ . '/../models/yummyrestaurant.php';
 require_once __DIR__ . '/../models/restaurantimage.php';

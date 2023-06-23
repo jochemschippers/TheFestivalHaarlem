@@ -97,9 +97,11 @@ class paymentpageController extends Controller
         $paymentId = $_POST['id'];
         if ($this->paymentService->checkIfPaymentPaid($paymentId)) {
             $programId = $this->paymentService->getProgramIdByPaymentId($paymentId);
-            
-            $userId = $_SESSION['userID'];
+            //get userIdByProgramId
+
+            $userId = $this->personalProgramService->getUserIdByProgramId($programId);
             $combinedId = $userId . '|' . $programId;
+            error_log("COMBINED ID HEREEEEEEEE" .$combinedId);
             $encryptedId = $this->encryptionService->encryptId($combinedId);
             
             $this->mailService->sendPaymentEmail($encryptedId);
@@ -125,6 +127,7 @@ class paymentpageController extends Controller
             $personalProgramId = $personalProgram->getProgramId();
 
             $combinedId = $userId . '|' . $personalProgramId;
+            error_log("COMBINED ID HEREEEEEEEE" .$combinedId);
             $encryptedId = $this->encryptionService->encryptId($combinedId);
             $url = 'https://' . $_SERVER['HTTP_HOST'] . "/paymentPage/personalProgram?id={$encryptedId}";
             header("Location: $url");

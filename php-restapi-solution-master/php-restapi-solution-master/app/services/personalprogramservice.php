@@ -169,6 +169,9 @@ class PersonalProgramService
         }
         return $personalProgram;
     }
+    public function getUserIdByProgramId($programID){
+        return $this->personalProgramRepository->getUserIdByProgramId($programID);
+    }
     public function getPersonalProgramById($personalProgramId, $userId)
     {
         $personalProgram = $this->personalProgramRepository->getPersonalProgramByIds($personalProgramId, $userId);

@@ -49,6 +49,7 @@ class PatternRouter
                 $methodName = $defaultMethod;
             }
         }
+        
         if ($explodedUri[0] === 'admin') {
             if (session_status() == PHP_SESSION_NONE) {
                 session_start();
