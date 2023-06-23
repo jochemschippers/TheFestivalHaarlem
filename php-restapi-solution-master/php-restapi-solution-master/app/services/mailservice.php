@@ -35,6 +35,7 @@ class MailService
                 // echo 'Message has been sent';
             } else {
                 // echo 'Message could not be sent.';
+                //gooi errorexception
             }
         } catch (Exception $e) {
             // echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
