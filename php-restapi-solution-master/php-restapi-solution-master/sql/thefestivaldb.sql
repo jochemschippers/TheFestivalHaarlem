@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql
--- Generation Time: Apr 13, 2023 at 04:02 PM
--- Server version: 10.9.4-MariaDB-1:10.9.4+maria~ubu2204
--- PHP Version: 8.0.25
+-- Gegenereerd op: 24 jun 2023 om 16:05
+-- Serverversie: 10.9.4-MariaDB-1:10.9.4+maria~ubu2204
+-- PHP-versie: 8.0.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `APIs`
+-- Tabelstructuur voor tabel `APIs`
 --
 
 CREATE TABLE `APIs` (
@@ -34,7 +34,7 @@ CREATE TABLE `APIs` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `APIs`
+-- Gegevens worden geëxporteerd voor tabel `APIs`
 --
 
 INSERT INTO `APIs` (`ApiID`, `APIName`, `APIKEY`) VALUES
@@ -43,7 +43,7 @@ INSERT INTO `APIs` (`ApiID`, `APIName`, `APIKEY`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `EventTickets`
+-- Tabelstructuur voor tabel `EventTickets`
 --
 
 CREATE TABLE `EventTickets` (
@@ -52,10 +52,114 @@ CREATE TABLE `EventTickets` (
   `programID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Gegevens worden geëxporteerd voor tabel `EventTickets`
+--
+
+INSERT INTO `EventTickets` (`ticketID`, `timeSlotID`, `programID`) VALUES
+(1, 1001, 12),
+(697, 1000, 108),
+(698, 1000, 108),
+(699, 1000, 108),
+(700, 1000, 108),
+(701, 1000, 108),
+(702, 1000, 108),
+(703, 1000, 108),
+(704, 1000, 108),
+(705, 1000, 108),
+(706, 1000, 108),
+(707, 1000, 108),
+(708, 1000, 108),
+(709, 1000, 108),
+(710, 1000, 108),
+(711, 1000, 108),
+(712, 1000, 108),
+(713, 1000, 108),
+(714, 1000, 108),
+(715, 1000, 108),
+(716, 1000, 108),
+(717, 1000, 108),
+(718, 1000, 108),
+(719, 1000, 108),
+(720, 1000, 108),
+(721, 1000, 108),
+(722, 1000, 108),
+(723, 1000, 108),
+(724, 1000, 108),
+(725, 1000, 108),
+(726, 1000, 108),
+(727, 1000, 108),
+(728, 1000, 108),
+(729, 1000, 108),
+(730, 1000, 108),
+(731, 1000, 108),
+(732, 1000, 108),
+(733, 1000, 108),
+(734, 1000, 108),
+(735, 1000, 108),
+(736, 1000, 108),
+(737, 1000, 108),
+(738, 1000, 108),
+(739, 1000, 108),
+(740, 1000, 108),
+(741, 1000, 108),
+(742, 1000, 108),
+(743, 1000, 108),
+(744, 509, 108),
+(819, 1000, 122),
+(820, 1000, 122),
+(821, 1000, 122),
+(822, 1000, 122),
+(823, 500, 122),
+(824, 500, 122),
+(825, 500, 122),
+(826, 1997, 123),
+(827, 1997, 123),
+(828, 1999, 124),
+(829, 1999, 124),
+(830, 1000, 124),
+(831, 1000, 124),
+(832, 1997, 124),
+(833, 1997, 124),
+(1252, 1000, 145),
+(1253, 1000, 145),
+(1254, 1000, 145),
+(1255, 1000, 145),
+(1256, 1000, 145),
+(1257, 1000, 145),
+(1258, 1000, 145),
+(1259, 1000, 145),
+(1260, 1000, 145),
+(1261, 1000, 145),
+(1262, 1000, 145),
+(1263, 1996, 145),
+(1264, 1996, 145),
+(1265, 1998, 145),
+(1266, 1999, 145),
+(1267, 500, 145),
+(1268, 500, 145),
+(1269, 500, 145),
+(1270, 500, 145),
+(1271, 500, 145),
+(1272, 542, 146),
+(1273, 542, 146),
+(1274, 542, 146),
+(1275, 542, 146),
+(1276, 542, 146),
+(1277, 1006, 146),
+(1278, 1006, 146),
+(1279, 1006, 146),
+(1280, 1006, 146),
+(1281, 1999, 146),
+(1282, 1999, 146),
+(1283, 1996, 146),
+(1284, 1000, 147),
+(1285, 1000, 147);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `FestivalEvents`
+-- Tabelstructuur voor tabel `FestivalEvents`
 --
 
 CREATE TABLE `FestivalEvents` (
@@ -67,18 +171,18 @@ CREATE TABLE `FestivalEvents` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `FestivalEvents`
+-- Gegevens worden geëxporteerd voor tabel `FestivalEvents`
 --
 
 INSERT INTO `FestivalEvents` (`eventID`, `eventName`, `bannerImage`, `bannerDescription`, `eventTitle`) VALUES
 (1, 'Jazz', '/image/home/Jazz-picture.jpg', 'Haarlem Jazz is a premier annual event for all jazz lovers. With more than 10 years of experience in showcasing the best in local and international jazz talent, you’d be certain to experience a vibrant and lively atmosphere for music fans! ', 'The Haarlem Jazz Event'),
-(2, 'Yummy', '/image/home/history-picture.jpg', 'Explore every Food and Drink in this years Haarlem Yummy! event. Here its Eat first Talk later.\r\nCome and enjoy all culinary options Haarlem has to offer in this cities most versitile Food and Drink Festival.', 'Explore the TASTE of Haarlem'),
-(3, 'Stroll Through History', '/image/home/yummy-picture.jpg', 'See what cultural monuments the city of Haarlem has to offer and walk with one of our guides to get to know the stories behind them during our guided tour through the streets of Haarlem.', 'A Stroll Through History');
+(2, 'Yummy', '/image/home/yummy-picture.jpg', 'Explore every Food and Drink in this years Haarlem Yummy! event. Here its Eat first Talk later.\r\nCome and enjoy all culinary options Haarlem has to offer in this cities most versitile Food and Drink Festival.', 'Explore the TASTE of Haarlem'),
+(3, 'Stroll Through History', '/image/home/history-picture.jpg', 'See what cultural monuments the city of Haarlem has to offer and walk with one of our guides to get to know the stories behind them during our guided tour through the streets of Haarlem.', 'A Stroll Through History');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `FestivalInformation`
+-- Tabelstructuur voor tabel `FestivalInformation`
 --
 
 CREATE TABLE `FestivalInformation` (
@@ -88,10 +192,17 @@ CREATE TABLE `FestivalInformation` (
   `reservationFee` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Gegevens worden geëxporteerd voor tabel `FestivalInformation`
+--
+
+INSERT INTO `FestivalInformation` (`festivalID`, `startDate`, `endDate`, `reservationFee`) VALUES
+(1, '2023-07-27 00:00:00', '2023-07-30 23:59:59', 10);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `FoodTypes`
+-- Tabelstructuur voor tabel `FoodTypes`
 --
 
 CREATE TABLE `FoodTypes` (
@@ -100,7 +211,7 @@ CREATE TABLE `FoodTypes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `FoodTypes`
+-- Gegevens worden geëxporteerd voor tabel `FoodTypes`
 --
 
 INSERT INTO `FoodTypes` (`foodTypeID`, `foodTypeName`) VALUES
@@ -113,7 +224,7 @@ INSERT INTO `FoodTypes` (`foodTypeID`, `foodTypeName`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Guides`
+-- Tabelstructuur voor tabel `Guides`
 --
 
 CREATE TABLE `Guides` (
@@ -125,7 +236,7 @@ CREATE TABLE `Guides` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Halls`
+-- Tabelstructuur voor tabel `Halls`
 --
 
 CREATE TABLE `Halls` (
@@ -135,7 +246,7 @@ CREATE TABLE `Halls` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `Halls`
+-- Gegevens worden geëxporteerd voor tabel `Halls`
 --
 
 INSERT INTO `Halls` (`hallID`, `locationID`, `hallName`) VALUES
@@ -147,7 +258,7 @@ INSERT INTO `Halls` (`hallID`, `locationID`, `hallName`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `History`
+-- Tabelstructuur voor tabel `History`
 --
 
 CREATE TABLE `History` (
@@ -162,7 +273,7 @@ CREATE TABLE `History` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `HistoryDetailPages`
+-- Tabelstructuur voor tabel `HistoryDetailPages`
 --
 
 CREATE TABLE `HistoryDetailPages` (
@@ -175,7 +286,7 @@ CREATE TABLE `HistoryDetailPages` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `JazzAlbums`
+-- Tabelstructuur voor tabel `JazzAlbums`
 --
 
 CREATE TABLE `JazzAlbums` (
@@ -190,7 +301,7 @@ CREATE TABLE `JazzAlbums` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `JazzArtists`
+-- Tabelstructuur voor tabel `JazzArtists`
 --
 
 CREATE TABLE `JazzArtists` (
@@ -202,11 +313,11 @@ CREATE TABLE `JazzArtists` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `JazzArtists`
+-- Gegevens worden geëxporteerd voor tabel `JazzArtists`
 --
 
 INSERT INTO `JazzArtists` (`artistID`, `description`, `image`, `imageSmall`, `name`) VALUES
-(1, 'Hans and Candy Dulfer are as a father-daughter duo both inseparable from their saxophones. Hans is a renowned saxophonist, known for his soulful and energetic performances, while Candy is a skilled saxophonist and flautist in her own right. Together, they have had multiple successful albums and have performed at some of the most prestigious jazz festivals around the world! ', '/image/jazz/candyAndHansDulfer.png', '/image/jazz/artist1.png', 'Candy and Hans Dulfer'),
+(1, 'Hans and Candy Dulfer are as a father-daughter duo both inseparable from their saxophones. Hans is a renowned saxophonist, known for his soulful and energetic performances, while Candy is a skilled saxophonist and flautist in her own right. Together, they have had multiple successful albums and have performed at some of the most prestigious jazz festivals around the world!', '/image/jazz/candyAndHansDulfer.png', '/image/jazz/artist1.png', 'Candy and Hans Dulfer'),
 (2, 'Myles Sanko is a dynamic jazz singer and songwriter based in the city of London, England. Born in the coast of Ghana, Myles Sanko has quickly established himself as a force to be reckoned with on the local and global jazz scene with his unique Ghanian soul/jazz songs. Myles Sanko has already played at major jazz festivals around the Netherlands!', '/image/jazz/MylesSanko.png', '/image/jazz/artist2.png', 'Myles sanko'),
 (3, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae velit eget sem facilisis iaculis. Morbi euismod nulla eget massa tempor, a facilisis quam lacinia. Donec euismod orci vel quam hendrerit, ac dictum enim malesuada. Nulla facilisi. Vestibulum eu turpis vitae nisi consequat finibus. Nullam nec odio quis nunc euismod auctor. Curabitur eu sapien ac nisi consectetur imperdiet.', 'https://via.placeholder.com/470x480', '/image/jazz/artist3.png', 'Gumbo Kings'),
 (4, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae velit eget sem facilisis iaculis. Morbi euismod nulla eget massa tempor, a facilisis quam lacinia. Donec euismod orci vel quam hendrerit, ac dictum enim malesuada. Nulla facilisi. Vestibulum eu turpis vitae nisi consequat finibus. Nullam nec odio quis nunc euismod auctor. Curabitur eu sapien ac nisi consectetur imperdiet.', 'https://via.placeholder.com/470x480', '/image/jazz/artist4.png', 'Evolve'),
@@ -215,7 +326,7 @@ INSERT INTO `JazzArtists` (`artistID`, `description`, `image`, `imageSmall`, `na
 (7, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae velit eget sem facilisis iaculis. Morbi euismod nulla eget massa tempor, a facilisis quam lacinia. Donec euismod orci vel quam hendrerit, ac dictum enim malesuada. Nulla facilisi. Vestibulum eu turpis vitae nisi consequat finibus. Nullam nec odio quis nunc euismod auctor. Curabitur eu sapien ac nisi consectetur imperdiet.', 'https://via.placeholder.com/470x480', '/image/jazz/artist7.png', 'Tom Thomsom Assemble'),
 (8, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae velit eget sem facilisis iaculis. Morbi euismod nulla eget massa tempor, a facilisis quam lacinia. Donec euismod orci vel quam hendrerit, ac dictum enim malesuada. Nulla facilisi. Vestibulum eu turpis vitae nisi consequat finibus. Nullam nec odio quis nunc euismod auctor. Curabitur eu sapien ac nisi consectetur imperdiet.', 'https://via.placeholder.com/470x480', '/image/jazz/artist8.png', 'Jonna Frazer'),
 (9, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae velit eget sem facilisis iaculis. Morbi euismod nulla eget massa tempor, a facilisis quam lacinia. Donec euismod orci vel quam hendrerit, ac dictum enim malesuada. Nulla facilisi. Vestibulum eu turpis vitae nisi consequat finibus. Nullam nec odio quis nunc euismod auctor. Curabitur eu sapien ac nisi consectetur imperdiet.', 'https://via.placeholder.com/470x480', '/image/jazz/artist9.png', 'Fox & The Mayors'),
-(10, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae velit eget sem facilisis iaculis. Morbi euismod nulla eget massa tempor, a facilisis quam lacinia. Donec euismod orci vel quam hendrerit, ac dictum enim malesuada. Nulla facilisi. Vestibulum eu turpis vitae nisi consequat finibus. Nullam nec odio quis nunc euismod auctor. Curabitur eu sapien ac nisi consectetur imperdiet.', 'https://via.placeholder.com/470x480', '/image/jazz/artist10.png', 'Uncle Sue'),
+(10, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae velit eget sem facilisis iaculis. Morbi euismod nulla eget massa tempor, a facilisis quam lacinia. Donec euismod orci vel quam hendrerit, ac dictum enim malesuada. Nulla facilisi. Vestibulum eu turpis vitae nisi consequat finibus. Nullam nec odio quis nunc euismod auctor. Curabitur eu sapien ac nisi consectetur imperdiet.', 'https://via.placeholder.com/470x480.png', '/image/jazz/artist10.png', 'Uncle Sue'),
 (11, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae velit eget sem facilisis iaculis. Morbi euismod nulla eget massa tempor, a facilisis quam lacinia. Donec euismod orci vel quam hendrerit, ac dictum enim malesuada. Nulla facilisi. Vestibulum eu turpis vitae nisi consequat finibus. Nullam nec odio quis nunc euismod auctor. Curabitur eu sapien ac nisi consectetur imperdiet.', 'https://via.placeholder.com/470x480', '/image/jazz/artist11.png', 'Ruis Soundsystem'),
 (12, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae velit eget sem facilisis iaculis. Morbi euismod nulla eget massa tempor, a facilisis quam lacinia. Donec euismod orci vel quam hendrerit, ac dictum enim malesuada. Nulla facilisi. Vestibulum eu turpis vitae nisi consequat finibus. Nullam nec odio quis nunc euismod auctor. Curabitur eu sapien ac nisi consectetur imperdiet.', 'https://via.placeholder.com/470x480', '/image/jazz/artist12.png', 'The Family XL'),
 (13, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae velit eget sem facilisis iaculis. Morbi euismod nulla eget massa tempor, a facilisis quam lacinia. Donec euismod orci vel quam hendrerit, ac dictum enim malesuada. Nulla facilisi. Vestibulum eu turpis vitae nisi consequat finibus. Nullam nec odio quis nunc euismod auctor. Curabitur eu sapien ac nisi consectetur imperdiet.', 'https://via.placeholder.com/470x480', '/image/jazz/artist13.png', 'Gare du Nord'),
@@ -223,13 +334,26 @@ INSERT INTO `JazzArtists` (`artistID`, `description`, `image`, `imageSmall`, `na
 (15, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae velit eget sem facilisis iaculis. Morbi euismod nulla eget massa tempor, a facilisis quam lacinia. Donec euismod orci vel quam hendrerit, ac dictum enim malesuada. Nulla facilisi. Vestibulum eu turpis vitae nisi consequat finibus. Nullam nec odio quis nunc euismod auctor. Curabitur eu sapien ac nisi consectetur imperdiet.', 'https://via.placeholder.com/470x480', '/image/jazz/artist15.png', 'Soul Six'),
 (16, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae velit eget sem facilisis iaculis. Morbi euismod nulla eget massa tempor, a facilisis quam lacinia. Donec euismod orci vel quam hendrerit, ac dictum enim malesuada. Nulla facilisi. Vestibulum eu turpis vitae nisi consequat finibus. Nullam nec odio quis nunc euismod auctor. Curabitur eu sapien ac nisi consectetur imperdiet.', 'https://via.placeholder.com/470x480', '/image/jazz/artist16.png', 'Han Bennink'),
 (17, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae velit eget sem facilisis iaculis. Morbi euismod nulla eget massa tempor, a facilisis quam lacinia. Donec euismod orci vel quam hendrerit, ac dictum enim malesuada. Nulla facilisi. Vestibulum eu turpis vitae nisi consequat finibus. Nullam nec odio quis nunc euismod auctor. Curabitur eu sapien ac nisi consectetur imperdiet.', 'https://via.placeholder.com/470x480', '/image/jazz/artist17.png', 'The Nordanians'),
-(18, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae velit eget sem facilisis iaculis. Morbi euismod nulla eget massa tempor, a facilisis quam lacinia. Donec euismod orci vel quam hendrerit, ac dictum enim malesuada. Nulla facilisi. Vestibulum eu turpis vitae nisi consequat finibus. Nullam nec odio quis nunc euismod auctor. Curabitur eu sapien ac nisi consectetur imperdiet.', 'https://via.placeholder.com/470x480', '/image/jazz/artist18.png', 'Lilith Merlot'),
-(20, 'test', 'test', 'test', 'test');
+(18, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,\nmolestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum\nnumquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium\noptio, eaque rerum! Provident similique accusantium nemo autem. Veritatis\nobcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam\nnihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit,\ntenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit,\nquia. Quo neque error repudiandae fuga? Ipsa laudantium molestias eos \nsapiente officiis modi at sunt excepturi expedita sint? Sed quibusdam\nrecusandae alias error harum maxime adipisc', 'https://via.placeholder.com/470x480.png', 'artist18.png', 'Lilith Merlot');
+
+--
+-- Triggers `JazzArtists`
+--
+DELIMITER $$
+CREATE TRIGGER `delete_related_timeslots` BEFORE DELETE ON `JazzArtists` FOR EACH ROW BEGIN
+  DELETE FROM TimeSlots
+  WHERE timeSlotID IN (SELECT timeSlotID FROM TimeSlotsJazz WHERE artistID = OLD.artistID);
+  
+  DELETE FROM TimeSlotsJazz
+  WHERE artistID = OLD.artistID;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `JazzLocations`
+-- Tabelstructuur voor tabel `JazzLocations`
 --
 
 CREATE TABLE `JazzLocations` (
@@ -242,17 +366,17 @@ CREATE TABLE `JazzLocations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `JazzLocations`
+-- Gegevens worden geëxporteerd voor tabel `JazzLocations`
 --
 
 INSERT INTO `JazzLocations` (`locationID`, `locationName`, `address`, `locationImage`, `toAndFromText`, `accessibillityText`) VALUES
-(1, 'Patronaat', 'Zijlsingel 2, 2013 DN Haarlem', '/image/jazz/location-patronaat.png', ' Patronaat is about <span>15 minutes walking distance</span> from Haarlem station <br>(a 1km distance)\n          </p>\n          <p>\n            Alternatively, you can take ride <span>buses 340, 346 or 356 one stop</span> to the Raaksburg. From there, it’ll be a minute on foot<br></p>\n          <p>\n            There are also <span>several parking options available</span>, like the parking garage RAAKS, which is a 5 minute walk away from the Patronaat\n          </p>', 'Do you have a disability? We and our partners at the Patronaat strive to make your visit as comfortable and enjoyable as possible<br>\n      </p><p> To see the facilities the patronaat has to offer, please download the <span>\'Ongehinderd\' mobile app here</span> and/or contact the patronaat through mail on info@patronaat.nl to discuss the options'),
-(2, 'Grote Markt', 'Grote Markt 2011 RD Haarlem\r\n', '/image/jazz/location-grote-markt.png', 'Grote Markt is easily accessible <span>by foot</span> within just 10 minutes from the station (800m distance)</p>\r\n<p>It is also accessible with <span>buses 3, 73 or 300</span>. Ride <span>two stops</span> for busses <span>3 and 73</span> to Ruychaverstraat, which is right next to the Grote Markt</p>\r\n<p>There are also <span>several parking options</span> available, like the parking garage De Appelaar', 'Do you have a disability? The square is located at ground level and is <span>easily accessible by wheelchair or other assistive devices</span></p>\n<p>Many of the shops and restaurants around the square have <span>wheelchair ramps</span> and other accessibility features</p>\n<p>Also <span>special toilets</span> have been placed around the square in order to accommodate for people with disabilities');
+(1, 'Patronaat', 'Zijlsingel 2, 2013 DN Haarlem', '/image/jazz/location-patronaat.png', ' Patronaat is about <span>15 minutes walking distance</span> from Haarlem station <br>(a 1km distance)\n          </p>\n          <p>\n            Alternatively, you can take ride <span>buses 340, 346 or 356 one stop</span> to the Raaksburg. From there, it’ll be a minute on foot<br></p>\n          <p>\n            There are also <span>several parking options available</span>, like the parking garage RAAKS, which is a 5 minute walk away from the Patronaat\n          </p>', ' Patronaat is about <span>15 minutes walking distance</span> from Haarlem station <br>(a 1km distance)\n          </p>\n          <p>\n            Alternatively, you can take ride <span>buses 340, 346 or 356 one stop</span> to the Raaksburg. From there, it’ll be a minute on foot<br></p>\n          <p>\n            There are also <span>several parking options available</span>, like the parking garage RAAKS, which is a 5 minute walk away from the Patronaat\n          </p>'),
+(2, 'Grote Markt', 'Grote Markt 2011 RD Haarlem', '/image/jazz/location-grote-markt.png', 'Grote Markt is easily accessible <span>by foot</span> within just 10 minutes from the station (800m distance)</p>\n<p>It is also accessible with <span>buses 3, 73 or 300</span>. Ride <span>two stops</span> for busses <span>3 and 73</span> to Ruychaverstraat, which is right next to the Grote Markt</p>\n<p>There are also <span>several parking options</span> available, like the parking garage De Appelaar', 'Grote Markt is easily accessible <span>by foot</span> within just 10 minutes from the station (800m distance)</p>\n<p>It is also accessible with <span>buses 3, 73 or 300</span>. Ride <span>two stops</span> for busses <span>3 and 73</span> to Ruychaverstraat, which is right next to the Grote Markt</p>\n<p>There are also <span>several parking options</span> available, like the parking garage De Appelaar');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `LandMarks`
+-- Tabelstructuur voor tabel `LandMarks`
 --
 
 CREATE TABLE `LandMarks` (
@@ -265,7 +389,7 @@ CREATE TABLE `LandMarks` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Languages`
+-- Tabelstructuur voor tabel `Languages`
 --
 
 CREATE TABLE `Languages` (
@@ -278,20 +402,47 @@ CREATE TABLE `Languages` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `PersonalPrograms`
+-- Tabelstructuur voor tabel `Payments`
 --
 
-CREATE TABLE `PersonalPrograms` (
-  `programID` int(11) NOT NULL,
-  `userID` int(11) DEFAULT NULL,
-  `paymentMethod` int(11) NOT NULL,
-  `isPaid` bit(1) NOT NULL
+CREATE TABLE `Payments` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `payment_id` varchar(255) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `programID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `RestaurantFoodTypes`
+-- Tabelstructuur voor tabel `PersonalPrograms`
+--
+
+CREATE TABLE `PersonalPrograms` (
+  `programID` int(11) NOT NULL,
+  `userID` int(11) DEFAULT NULL,
+  `isPaid` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `PersonalPrograms`
+--
+
+INSERT INTO `PersonalPrograms` (`programID`, `userID`, `isPaid`) VALUES
+(12, 20, 1),
+(108, 20, 1),
+(122, 20, 1),
+(123, 20, 1),
+(124, 20, 1),
+(145, 20, 1),
+(146, 23, 1),
+(147, 25, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `RestaurantFoodTypes`
 --
 
 CREATE TABLE `RestaurantFoodTypes` (
@@ -300,7 +451,7 @@ CREATE TABLE `RestaurantFoodTypes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `RestaurantFoodTypes`
+-- Gegevens worden geëxporteerd voor tabel `RestaurantFoodTypes`
 --
 
 INSERT INTO `RestaurantFoodTypes` (`foodType`, `restaurantID`) VALUES
@@ -319,7 +470,7 @@ INSERT INTO `RestaurantFoodTypes` (`foodType`, `restaurantID`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `RestaurantImages`
+-- Tabelstructuur voor tabel `RestaurantImages`
 --
 
 CREATE TABLE `RestaurantImages` (
@@ -330,7 +481,7 @@ CREATE TABLE `RestaurantImages` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `RestaurantImages`
+-- Gegevens worden geëxporteerd voor tabel `RestaurantImages`
 --
 
 INSERT INTO `RestaurantImages` (`imageID`, `restaurantID`, `imageLink`, `imageIndex`) VALUES
@@ -360,7 +511,7 @@ INSERT INTO `RestaurantImages` (`imageID`, `restaurantID`, `imageLink`, `imageIn
 -- --------------------------------------------------------
 
 --
--- Table structure for table `RestaurantMenuItems`
+-- Tabelstructuur voor tabel `RestaurantMenuItems`
 --
 
 CREATE TABLE `RestaurantMenuItems` (
@@ -374,7 +525,7 @@ CREATE TABLE `RestaurantMenuItems` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `RestaurantMenuItems`
+-- Gegevens worden geëxporteerd voor tabel `RestaurantMenuItems`
 --
 
 INSERT INTO `RestaurantMenuItems` (`menuItemID`, `restaurantID`, `courseID`, `name`, `description`, `price`, `specialty`) VALUES
@@ -423,13 +574,12 @@ INSERT INTO `RestaurantMenuItems` (`menuItemID`, `restaurantID`, `courseID`, `na
 -- --------------------------------------------------------
 
 --
--- Table structure for table `RestaurantReservation`
+-- Tabelstructuur voor tabel `RestaurantReservation`
 --
 
 CREATE TABLE `RestaurantReservation` (
   `ticketID` int(11) NOT NULL,
   `timeSlotID` int(11) NOT NULL,
-  `restaurantID` int(11) NOT NULL,
   `reservationName` varchar(255) NOT NULL,
   `phoneNumber` int(30) NOT NULL,
   `numberAdults` int(11) NOT NULL,
@@ -439,18 +589,28 @@ CREATE TABLE `RestaurantReservation` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `RestaurantReservation`
+-- Gegevens worden geëxporteerd voor tabel `RestaurantReservation`
 --
 
-INSERT INTO `RestaurantReservation` (`ticketID`, `timeSlotID`, `restaurantID`, `reservationName`, `phoneNumber`, `numberAdults`, `numberChildren`, `remark`, `isActive`) VALUES
-(1, 500, 1, 'luukie', 987654338, 1, 2, 'lekker bij het raampje', b'1'),
-(501, 2, 2, 'ad', 13, 1, 1, '1', b'0'),
-(502, 2, 2, 'ad', 13, 1, 1, '1', b'0');
+INSERT INTO `RestaurantReservation` (`ticketID`, `timeSlotID`, `reservationName`, `phoneNumber`, `numberAdults`, `numberChildren`, `remark`, `isActive`) VALUES
+(823, 500, 'asdddddd', 615448399, 2, 1, '', b'0'),
+(824, 500, 'asdddddd', 615448399, 2, 1, '', b'0'),
+(825, 500, 'asdddddd', 615448399, 2, 1, '', b'0'),
+(1267, 500, 'asdddddd', 615448329, 3, 2, '', b'0'),
+(1268, 500, 'asdddddd', 615448329, 3, 2, '', b'0'),
+(1269, 500, 'asdddddd', 615448329, 3, 2, '', b'0'),
+(1270, 500, 'asdddddd', 615448329, 3, 2, '', b'0'),
+(1271, 500, 'asdddddd', 615448329, 3, 2, '', b'0'),
+(1272, 542, 'Luuk Bakkum', 622134514, 3, 2, '', b'0'),
+(1273, 542, 'Luuk Bakkum', 622134514, 3, 2, '', b'0'),
+(1274, 542, 'Luuk Bakkum', 622134514, 3, 2, '', b'0'),
+(1275, 542, 'Luuk Bakkum', 622134514, 3, 2, '', b'0'),
+(1276, 542, 'Luuk Bakkum', 622134514, 3, 2, '', b'0');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `StaticPage`
+-- Tabelstructuur voor tabel `StaticPage`
 --
 
 CREATE TABLE `StaticPage` (
@@ -464,7 +624,7 @@ CREATE TABLE `StaticPage` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `TimeSlots`
+-- Tabelstructuur voor tabel `TimeSlots`
 --
 
 CREATE TABLE `TimeSlots` (
@@ -477,7 +637,7 @@ CREATE TABLE `TimeSlots` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `TimeSlots`
+-- Gegevens worden geëxporteerd voor tabel `TimeSlots`
 --
 
 INSERT INTO `TimeSlots` (`timeSlotID`, `eventID`, `price`, `startTime`, `endTime`, `maximumAmountTickets`) VALUES
@@ -530,7 +690,7 @@ INSERT INTO `TimeSlots` (`timeSlotID`, `eventID`, `price`, `startTime`, `endTime
 (546, 2, 10, '2023-07-29 18:30:00', '2023-07-29 20:00:00', 35),
 (547, 2, 10, '2023-07-29 20:00:00', '2023-07-29 21:30:00', 35),
 (1000, 1, 15, '2023-07-27 18:00:00', '2023-07-27 19:00:00', 300),
-(1001, 1, 15, '2023-07-27 19:30:00', '2023-07-27 20:30:00', 300),
+(1001, 1, 15, '2023-07-27 19:30:00', '2023-07-27 20:30:00', 1),
 (1002, 1, 15, '2023-07-27 21:00:00', '2023-07-27 22:00:00', 300),
 (1003, 1, 10, '2023-07-27 18:00:00', '2023-07-27 19:00:00', 200),
 (1004, 1, 10, '2023-07-27 19:30:00', '2023-07-27 20:30:00', 200),
@@ -548,16 +708,19 @@ INSERT INTO `TimeSlots` (`timeSlotID`, `eventID`, `price`, `startTime`, `endTime
 (1016, 1, 10, '2023-07-29 19:30:00', '2023-07-29 20:30:00', 150),
 (1017, 1, 10, '2023-07-29 21:00:00', '2023-07-29 22:00:00', 150),
 (1018, 1, 0, '2023-07-30 15:00:00', '2023-07-30 16:00:00', 0),
-(1019, 1, 0, '2023-07-30 16:00:00', '2023-07-30 17:00:00', 0),
 (1020, 1, 0, '2023-07-30 17:00:00', '2023-07-30 18:00:00', 0),
 (1021, 1, 0, '2023-07-30 18:00:00', '2023-07-30 19:00:00', 0),
 (1022, 1, 0, '2023-07-30 19:00:00', '2023-07-30 20:00:00', 0),
-(1023, 1, 0, '2023-07-30 20:00:00', '2023-07-30 21:00:00', 0);
+(1023, 1, 1, '2023-07-30 20:00:00', '2023-07-30 21:00:00', 0),
+(1996, 1, 35, '2023-07-27 00:00:00', '2023-07-27 23:59:59', 50),
+(1997, 1, 35, '2023-07-28 00:00:00', '2023-07-28 23:59:59', 50),
+(1998, 1, 35, '2023-07-29 00:00:00', '2023-07-29 23:59:59', 50),
+(1999, 1, 80, '2023-07-27 00:00:00', '2023-07-29 23:59:59', 50);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `TimeSlotsJazz`
+-- Tabelstructuur voor tabel `TimeSlotsJazz`
 --
 
 CREATE TABLE `TimeSlotsJazz` (
@@ -568,7 +731,7 @@ CREATE TABLE `TimeSlotsJazz` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `TimeSlotsJazz`
+-- Gegevens worden geëxporteerd voor tabel `TimeSlotsJazz`
 --
 
 INSERT INTO `TimeSlotsJazz` (`timeSlotID`, `artistID`, `locationID`, `hallID`) VALUES
@@ -589,18 +752,17 @@ INSERT INTO `TimeSlotsJazz` (`timeSlotID`, `artistID`, `locationID`, `hallID`) V
 (1014, 15, 1, 0),
 (1015, 16, 1, 2),
 (1016, 17, 1, 2),
-(1017, 18, 1, 2),
+(1017, 8, 1, 2),
 (1018, 9, 2, 0),
-(1019, 18, 2, 0),
-(1020, 15, 2, 0),
-(1021, 11, 2, 0),
-(1022, 3, 2, 0),
-(1023, 2, 2, 0);
+(1020, 11, 2, 0),
+(1021, 15, 2, 0),
+(1022, 2, 2, 0),
+(1023, 3, 2, 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `TimeSlotsStrollThroughHistory`
+-- Tabelstructuur voor tabel `TimeSlotsStrollThroughHistory`
 --
 
 CREATE TABLE `TimeSlotsStrollThroughHistory` (
@@ -612,7 +774,7 @@ CREATE TABLE `TimeSlotsStrollThroughHistory` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `TimeSlotsYummy`
+-- Tabelstructuur voor tabel `TimeSlotsYummy`
 --
 
 CREATE TABLE `TimeSlotsYummy` (
@@ -621,7 +783,7 @@ CREATE TABLE `TimeSlotsYummy` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `TimeSlotsYummy`
+-- Gegevens worden geëxporteerd voor tabel `TimeSlotsYummy`
 --
 
 INSERT INTO `TimeSlotsYummy` (`timeSlotID`, `restaurantID`) VALUES
@@ -677,7 +839,7 @@ INSERT INTO `TimeSlotsYummy` (`timeSlotID`, `restaurantID`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Users`
+-- Tabelstructuur voor tabel `Users`
 --
 
 CREATE TABLE `Users` (
@@ -690,18 +852,25 @@ CREATE TABLE `Users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `Users`
+-- Gegevens worden geëxporteerd voor tabel `Users`
 --
 
 INSERT INTO `Users` (`userID`, `email`, `userRole`, `fullName`, `phoneNumber`, `password`) VALUES
-(13, 'john.doe@example.com', 1, 'john.doe@example.com', '4545454545', '$2y$10$cXg37zWeGgb56l7JMoudT.8.5ONfdYgRRNxp1AEdf3EJSdvUrsnq6'),
+(13, 'john.doe@example.com', 1, 'john.doe@example.com', '4545454545', '$2y$10$IhjUAu37AKW/bQD5Rzw3wux0cVhGn8LfG5wdj11GvEGzi9oCQBLQO'),
 (18, 'regularUser@gmail.com', 0, 'Harry', '0615335353', '$2y$10$okCM8QH82kYm4qhq.yoobeurw2UyP5YKAn287f.TDcvTiZSEV.rYe'),
-(19, 'adminUser@gmail.com', 1, 'Tayam', '0615151515', '$2y$10$uYAlMthlE8ZJ74qUHZmPKO7BbGihg3ADjE5RTM.xWLsdiomEVBAnO');
+(19, 'adminUser@gmail.com', 1, 'Tayam', '0615151515', '$2y$10$uYAlMthlE8ZJ74qUHZmPKO7BbGihg3ADjE5RTM.xWLsdiomEVBAnO'),
+(20, 'admin@admin.com', 1, 'John William Theodorus Johannes Biggus Dickus The Second', '0615448322', '$2y$10$uYAlMthlE8ZJ74qUHZmPKO7BbGihg3ADjE5RTM.xWLsdiomEVBAnO'),
+(21, 'Gebruiker1@gmail.com', 0, 'aaaaaaaa', '3298123982398', '$2y$10$hp3NOPqG8fKZaDkKtTmX9ewAorL7CpCEWM6Jq3AgP8ZXV59Ke4m8m'),
+(22, 'Tayam0nline@gmail.com', 0, 'Tayam', '05216318753283129873', '$2y$10$g3Ur/6G.O7X40qbIoS/YM.3/PKNNKAwIcooaqzII82.dlUhhiAbh.'),
+(23, 'admin@thefestival.com', 1, 'Tatsuro Yamashita', '0615151515', '$2y$10$q6Qq0gjgo2CTvcnqHXzkcO6SYJ52Mnvpp/Byd0yJZAgmja8eq8P9K'),
+(24, 'testUser@testuser.com', 0, 'testUser@testuser.com', '0615151515', '$2y$10$h7hGQ.CXaO8u.wCHKGZNmOJGFylNWKwt2BUZckOjJMEa7TF4TkWim'),
+(25, 'luuk.bakkum2000@gmail.com', 0, 'luuk.bakkum2000@gmail.com', '0616161616', '$2y$10$He90w4W2dLNm.Waa4M7F9O59lX.UW2Ru8m5eRQVGZ2YeLP.v.8ooa'),
+(26, 'mark@gmail.com', 0, 'mark de haan', '0615151515', '$2y$10$V3gLwcnoyH//r6Hb55Bu9Oj/q.3AHArAz/6anSEOISvw5NGPEkdBe');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `YummyRestaurants`
+-- Tabelstructuur voor tabel `YummyRestaurants`
 --
 
 CREATE TABLE `YummyRestaurants` (
@@ -720,7 +889,7 @@ CREATE TABLE `YummyRestaurants` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `YummyRestaurants`
+-- Gegevens worden geëxporteerd voor tabel `YummyRestaurants`
 --
 
 INSERT INTO `YummyRestaurants` (`restaurantID`, `restaurantName`, `address`, `contact`, `cardDescription`, `description`, `amountOfStars`, `bannerImage`, `headChef`, `amountSessions`, `adultPrice`, `childPrice`) VALUES
@@ -730,146 +899,154 @@ INSERT INTO `YummyRestaurants` (`restaurantID`, `restaurantName`, `address`, `co
 (4, 'Specktakel', 'Spekstraat 4, 2011 HM / Haarlem', 'Tel: 023-2071006,info@specktakel.nl', 'With its rustic decor, the food stands out even more. Get a delecious steak or try out their famous burger. They offer a variaty of dishes from around the world.', 'Here at Specktakel we focus on pure and quality products, in the kitchen as behind the bar and in our service, accessable but of high quality. A table full dilicious foods and wines, thats what we think a great evening out looks like.', 3, 'yummy/detail/specktakel/speckLogo.jpg\n', 'Piet Weghorst', 3, 35, 17.5);
 
 --
--- Indexes for dumped tables
+-- Indexen voor geëxporteerde tabellen
 --
 
 --
--- Indexes for table `APIs`
+-- Indexen voor tabel `APIs`
 --
 ALTER TABLE `APIs`
   ADD PRIMARY KEY (`ApiID`);
 
 --
--- Indexes for table `EventTickets`
+-- Indexen voor tabel `EventTickets`
 --
 ALTER TABLE `EventTickets`
   ADD PRIMARY KEY (`ticketID`),
-  ADD KEY `timeSlotID` (`timeSlotID`);
+  ADD KEY `timeSlotID` (`timeSlotID`),
+  ADD KEY `programID` (`programID`);
 
 --
--- Indexes for table `FestivalEvents`
+-- Indexen voor tabel `FestivalEvents`
 --
 ALTER TABLE `FestivalEvents`
   ADD PRIMARY KEY (`eventID`);
 
 --
--- Indexes for table `FestivalInformation`
+-- Indexen voor tabel `FestivalInformation`
 --
 ALTER TABLE `FestivalInformation`
   ADD PRIMARY KEY (`festivalID`);
 
 --
--- Indexes for table `FoodTypes`
+-- Indexen voor tabel `FoodTypes`
 --
 ALTER TABLE `FoodTypes`
   ADD PRIMARY KEY (`foodTypeID`);
 
 --
--- Indexes for table `Guides`
+-- Indexen voor tabel `Guides`
 --
 ALTER TABLE `Guides`
   ADD PRIMARY KEY (`guideID`),
   ADD KEY `languageID` (`languageID`);
 
 --
--- Indexes for table `Halls`
+-- Indexen voor tabel `Halls`
 --
 ALTER TABLE `Halls`
   ADD PRIMARY KEY (`hallID`,`locationID`) USING BTREE,
   ADD KEY `locationID` (`locationID`);
 
 --
--- Indexes for table `History`
+-- Indexen voor tabel `History`
 --
 ALTER TABLE `History`
   ADD PRIMARY KEY (`eventID`);
 
 --
--- Indexes for table `HistoryDetailPages`
+-- Indexen voor tabel `HistoryDetailPages`
 --
 ALTER TABLE `HistoryDetailPages`
   ADD PRIMARY KEY (`landMarkID`);
 
 --
--- Indexes for table `JazzAlbums`
+-- Indexen voor tabel `JazzAlbums`
 --
 ALTER TABLE `JazzAlbums`
   ADD PRIMARY KEY (`albumID`),
   ADD KEY `artistID` (`artistID`);
 
 --
--- Indexes for table `JazzArtists`
+-- Indexen voor tabel `JazzArtists`
 --
 ALTER TABLE `JazzArtists`
   ADD PRIMARY KEY (`artistID`);
 
 --
--- Indexes for table `JazzLocations`
+-- Indexen voor tabel `JazzLocations`
 --
 ALTER TABLE `JazzLocations`
   ADD PRIMARY KEY (`locationID`);
 
 --
--- Indexes for table `LandMarks`
+-- Indexen voor tabel `LandMarks`
 --
 ALTER TABLE `LandMarks`
   ADD PRIMARY KEY (`landMarkID`);
 
 --
--- Indexes for table `Languages`
+-- Indexen voor tabel `Languages`
 --
 ALTER TABLE `Languages`
   ADD PRIMARY KEY (`languageID`);
 
 --
--- Indexes for table `PersonalPrograms`
+-- Indexen voor tabel `Payments`
+--
+ALTER TABLE `Payments`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexen voor tabel `PersonalPrograms`
 --
 ALTER TABLE `PersonalPrograms`
   ADD PRIMARY KEY (`programID`),
   ADD KEY `userID` (`userID`);
 
 --
--- Indexes for table `RestaurantFoodTypes`
+-- Indexen voor tabel `RestaurantFoodTypes`
 --
 ALTER TABLE `RestaurantFoodTypes`
   ADD PRIMARY KEY (`restaurantID`,`foodType`),
   ADD KEY `foodType` (`foodType`);
 
 --
--- Indexes for table `RestaurantImages`
+-- Indexen voor tabel `RestaurantImages`
 --
 ALTER TABLE `RestaurantImages`
   ADD PRIMARY KEY (`imageID`),
   ADD KEY `restaurantID` (`restaurantID`);
 
 --
--- Indexes for table `RestaurantMenuItems`
+-- Indexen voor tabel `RestaurantMenuItems`
 --
 ALTER TABLE `RestaurantMenuItems`
   ADD PRIMARY KEY (`menuItemID`),
   ADD KEY `restaurantID` (`restaurantID`);
 
 --
--- Indexes for table `RestaurantReservation`
+-- Indexen voor tabel `RestaurantReservation`
 --
 ALTER TABLE `RestaurantReservation`
-  ADD PRIMARY KEY (`ticketID`);
+  ADD PRIMARY KEY (`ticketID`),
+  ADD KEY `timeSlotID` (`timeSlotID`);
 
 --
--- Indexes for table `StaticPage`
+-- Indexen voor tabel `StaticPage`
 --
 ALTER TABLE `StaticPage`
   ADD PRIMARY KEY (`pageID`);
 
 --
--- Indexes for table `TimeSlots`
+-- Indexen voor tabel `TimeSlots`
 --
 ALTER TABLE `TimeSlots`
   ADD PRIMARY KEY (`timeSlotID`),
   ADD KEY `eventID` (`eventID`);
 
 --
--- Indexes for table `TimeSlotsJazz`
+-- Indexen voor tabel `TimeSlotsJazz`
 --
 ALTER TABLE `TimeSlotsJazz`
   ADD PRIMARY KEY (`timeSlotID`),
@@ -878,234 +1055,259 @@ ALTER TABLE `TimeSlotsJazz`
   ADD KEY `hallID` (`hallID`);
 
 --
--- Indexes for table `TimeSlotsStrollThroughHistory`
+-- Indexen voor tabel `TimeSlotsStrollThroughHistory`
 --
 ALTER TABLE `TimeSlotsStrollThroughHistory`
   ADD PRIMARY KEY (`timeSlotID`),
   ADD KEY `languageID` (`languageID`);
 
 --
--- Indexes for table `TimeSlotsYummy`
+-- Indexen voor tabel `TimeSlotsYummy`
 --
 ALTER TABLE `TimeSlotsYummy`
   ADD PRIMARY KEY (`timeSlotID`),
   ADD KEY `restaurantID` (`restaurantID`);
 
 --
--- Indexes for table `Users`
+-- Indexen voor tabel `Users`
 --
 ALTER TABLE `Users`
   ADD PRIMARY KEY (`userID`);
 
 --
--- Indexes for table `YummyRestaurants`
+-- Indexen voor tabel `YummyRestaurants`
 --
 ALTER TABLE `YummyRestaurants`
   ADD PRIMARY KEY (`restaurantID`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT voor geëxporteerde tabellen
 --
 
 --
--- AUTO_INCREMENT for table `APIs`
+-- AUTO_INCREMENT voor een tabel `APIs`
 --
 ALTER TABLE `APIs`
   MODIFY `ApiID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `EventTickets`
+-- AUTO_INCREMENT voor een tabel `EventTickets`
 --
 ALTER TABLE `EventTickets`
-  MODIFY `ticketID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ticketID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1286;
 
 --
--- AUTO_INCREMENT for table `FestivalEvents`
+-- AUTO_INCREMENT voor een tabel `FestivalEvents`
 --
 ALTER TABLE `FestivalEvents`
   MODIFY `eventID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `FestivalInformation`
+-- AUTO_INCREMENT voor een tabel `FestivalInformation`
 --
 ALTER TABLE `FestivalInformation`
-  MODIFY `festivalID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `festivalID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `Guides`
+-- AUTO_INCREMENT voor een tabel `Guides`
 --
 ALTER TABLE `Guides`
   MODIFY `guideID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `JazzAlbums`
+-- AUTO_INCREMENT voor een tabel `JazzAlbums`
 --
 ALTER TABLE `JazzAlbums`
   MODIFY `albumID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `JazzArtists`
+-- AUTO_INCREMENT voor een tabel `JazzArtists`
 --
 ALTER TABLE `JazzArtists`
-  MODIFY `artistID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `artistID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=148;
 
 --
--- AUTO_INCREMENT for table `JazzLocations`
+-- AUTO_INCREMENT voor een tabel `JazzLocations`
 --
 ALTER TABLE `JazzLocations`
-  MODIFY `locationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `locationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
--- AUTO_INCREMENT for table `LandMarks`
+-- AUTO_INCREMENT voor een tabel `LandMarks`
 --
 ALTER TABLE `LandMarks`
   MODIFY `landMarkID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `Languages`
+-- AUTO_INCREMENT voor een tabel `Languages`
 --
 ALTER TABLE `Languages`
   MODIFY `languageID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `PersonalPrograms`
+-- AUTO_INCREMENT voor een tabel `Payments`
 --
-ALTER TABLE `PersonalPrograms`
-  MODIFY `programID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+ALTER TABLE `Payments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
--- AUTO_INCREMENT for table `RestaurantImages`
+-- AUTO_INCREMENT voor een tabel `PersonalPrograms`
+--
+ALTER TABLE `PersonalPrograms`
+  MODIFY `programID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=148;
+
+--
+-- AUTO_INCREMENT voor een tabel `RestaurantImages`
 --
 ALTER TABLE `RestaurantImages`
   MODIFY `imageID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
--- AUTO_INCREMENT for table `RestaurantMenuItems`
+-- AUTO_INCREMENT voor een tabel `RestaurantMenuItems`
 --
 ALTER TABLE `RestaurantMenuItems`
   MODIFY `menuItemID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
--- AUTO_INCREMENT for table `RestaurantReservation`
+-- AUTO_INCREMENT voor een tabel `RestaurantReservation`
 --
 ALTER TABLE `RestaurantReservation`
-  MODIFY `ticketID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=503;
+  MODIFY `ticketID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1277;
 
 --
--- AUTO_INCREMENT for table `StaticPage`
+-- AUTO_INCREMENT voor een tabel `StaticPage`
 --
 ALTER TABLE `StaticPage`
   MODIFY `pageID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `TimeSlots`
+-- AUTO_INCREMENT voor een tabel `TimeSlots`
 --
 ALTER TABLE `TimeSlots`
-  MODIFY `timeSlotID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1025;
+  MODIFY `timeSlotID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2000;
 
 --
--- AUTO_INCREMENT for table `Users`
+-- AUTO_INCREMENT voor een tabel `Users`
 --
 ALTER TABLE `Users`
-  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
--- AUTO_INCREMENT for table `YummyRestaurants`
+-- AUTO_INCREMENT voor een tabel `YummyRestaurants`
 --
 ALTER TABLE `YummyRestaurants`
   MODIFY `restaurantID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- Constraints for dumped tables
+-- Beperkingen voor geëxporteerde tabellen
 --
 
 --
--- Constraints for table `EventTickets`
+-- Beperkingen voor tabel `EventTickets`
 --
 ALTER TABLE `EventTickets`
-  ADD CONSTRAINT `EventTickets_ibfk_1` FOREIGN KEY (`timeSlotID`) REFERENCES `TimeSlots` (`timeSlotID`);
+  ADD CONSTRAINT `EventTickets_ibfk_1` FOREIGN KEY (`timeSlotID`) REFERENCES `TimeSlots` (`timeSlotID`),
+  ADD CONSTRAINT `EventTickets_ibfk_2` FOREIGN KEY (`programID`) REFERENCES `PersonalPrograms` (`programID`) ON DELETE CASCADE;
 
 --
--- Constraints for table `Guides`
+-- Beperkingen voor tabel `Guides`
 --
 ALTER TABLE `Guides`
   ADD CONSTRAINT `Guides_ibfk_1` FOREIGN KEY (`languageID`) REFERENCES `Languages` (`languageID`);
 
 --
--- Constraints for table `Halls`
+-- Beperkingen voor tabel `Halls`
 --
 ALTER TABLE `Halls`
   ADD CONSTRAINT `Halls_ibfk_1` FOREIGN KEY (`locationID`) REFERENCES `JazzLocations` (`locationID`);
 
 --
--- Constraints for table `History`
+-- Beperkingen voor tabel `History`
 --
 ALTER TABLE `History`
   ADD CONSTRAINT `History_ibfk_1` FOREIGN KEY (`eventID`) REFERENCES `FestivalEvents` (`eventID`);
 
 --
--- Constraints for table `HistoryDetailPages`
+-- Beperkingen voor tabel `HistoryDetailPages`
 --
 ALTER TABLE `HistoryDetailPages`
   ADD CONSTRAINT `HistoryDetailPages_ibfk_1` FOREIGN KEY (`landMarkID`) REFERENCES `LandMarks` (`landMarkID`);
 
 --
--- Constraints for table `JazzAlbums`
+-- Beperkingen voor tabel `JazzAlbums`
 --
 ALTER TABLE `JazzAlbums`
   ADD CONSTRAINT `JazzAlbums_ibfk_1` FOREIGN KEY (`artistID`) REFERENCES `JazzArtists` (`artistID`);
 
 --
--- Constraints for table `PersonalPrograms`
+-- Beperkingen voor tabel `PersonalPrograms`
 --
 ALTER TABLE `PersonalPrograms`
   ADD CONSTRAINT `PersonalPrograms_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `Users` (`userID`);
 
 --
--- Constraints for table `RestaurantFoodTypes`
+-- Beperkingen voor tabel `RestaurantFoodTypes`
 --
 ALTER TABLE `RestaurantFoodTypes`
   ADD CONSTRAINT `RestaurantFoodTypes_ibfk_1` FOREIGN KEY (`restaurantID`) REFERENCES `YummyRestaurants` (`restaurantID`),
   ADD CONSTRAINT `RestaurantFoodTypes_ibfk_2` FOREIGN KEY (`foodType`) REFERENCES `FoodTypes` (`foodTypeID`);
 
 --
--- Constraints for table `RestaurantImages`
+-- Beperkingen voor tabel `RestaurantImages`
 --
 ALTER TABLE `RestaurantImages`
   ADD CONSTRAINT `RestaurantImages_ibfk_1` FOREIGN KEY (`restaurantID`) REFERENCES `YummyRestaurants` (`restaurantID`);
 
 --
--- Constraints for table `RestaurantMenuItems`
+-- Beperkingen voor tabel `RestaurantMenuItems`
 --
 ALTER TABLE `RestaurantMenuItems`
   ADD CONSTRAINT `RestaurantMenuItems_ibfk_1` FOREIGN KEY (`restaurantID`) REFERENCES `YummyRestaurants` (`restaurantID`);
 
 --
--- Constraints for table `TimeSlots`
+-- Beperkingen voor tabel `RestaurantReservation`
+--
+ALTER TABLE `RestaurantReservation`
+  ADD CONSTRAINT `RestaurantReservation_ibfk_1` FOREIGN KEY (`timeSlotID`) REFERENCES `TimeSlots` (`timeSlotID`),
+  ADD CONSTRAINT `RestaurantReservation_ibfk_2` FOREIGN KEY (`ticketID`) REFERENCES `EventTickets` (`ticketID`);
+
+--
+-- Beperkingen voor tabel `TimeSlots`
 --
 ALTER TABLE `TimeSlots`
   ADD CONSTRAINT `TimeSlots_ibfk_1` FOREIGN KEY (`eventID`) REFERENCES `FestivalEvents` (`eventID`);
 
 --
--- Constraints for table `TimeSlotsJazz`
+-- Beperkingen voor tabel `TimeSlotsJazz`
 --
 ALTER TABLE `TimeSlotsJazz`
-  ADD CONSTRAINT `TimeSlotsJazz_ibfk_1` FOREIGN KEY (`timeSlotID`) REFERENCES `TimeSlots` (`timeSlotID`),
+  ADD CONSTRAINT `TimeSlotsJazz_ibfk_1` FOREIGN KEY (`timeSlotID`) REFERENCES `TimeSlots` (`timeSlotID`) ON DELETE CASCADE,
   ADD CONSTRAINT `TimeSlotsJazz_ibfk_2` FOREIGN KEY (`artistID`) REFERENCES `JazzArtists` (`artistID`),
   ADD CONSTRAINT `TimeSlotsJazz_ibfk_3` FOREIGN KEY (`locationID`) REFERENCES `JazzLocations` (`locationID`),
   ADD CONSTRAINT `TimeSlotsJazz_ibfk_4` FOREIGN KEY (`hallID`) REFERENCES `Halls` (`hallID`);
 
 --
--- Constraints for table `TimeSlotsStrollThroughHistory`
+-- Beperkingen voor tabel `TimeSlotsStrollThroughHistory`
 --
 ALTER TABLE `TimeSlotsStrollThroughHistory`
   ADD CONSTRAINT `TimeSlotsStrollThroughHistory_ibfk_1` FOREIGN KEY (`languageID`) REFERENCES `Languages` (`languageID`);
 
 --
--- Constraints for table `TimeSlotsYummy`
+-- Beperkingen voor tabel `TimeSlotsYummy`
 --
 ALTER TABLE `TimeSlotsYummy`
   ADD CONSTRAINT `TimeSlotsYummy_ibfk_1` FOREIGN KEY (`timeSlotID`) REFERENCES `TimeSlots` (`timeSlotID`),
   ADD CONSTRAINT `TimeSlotsYummy_ibfk_2` FOREIGN KEY (`restaurantID`) REFERENCES `YummyRestaurants` (`restaurantID`);
+
+DELIMITER $$
+--
+-- Gebeurtenissen
+--
+CREATE DEFINER=`root`@`%` EVENT `delete_old_payments` ON SCHEDULE EVERY 1 HOUR STARTS '2023-06-19 11:35:36' ON COMPLETION NOT PRESERVE ENABLE DO DELETE FROM payments WHERE created_at < (NOW() - INTERVAL 24 HOUR)$$
+
+DELIMITER ;
 COMMIT;
 
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
