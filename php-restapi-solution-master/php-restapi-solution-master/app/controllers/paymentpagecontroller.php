@@ -68,7 +68,6 @@ class paymentpageController extends Controller
         } catch (ErrorException $e) {
             $response['message'] = $e->getMessage();
         }
-
         echo json_encode($response);
     }
     public function createMolliePayment()
