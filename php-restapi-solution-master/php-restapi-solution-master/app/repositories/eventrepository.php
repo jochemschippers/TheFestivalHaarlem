@@ -15,7 +15,7 @@ class EventRepository extends Repository
 
             return $events;
         } catch (PDOException $e) {
-            echo $e;
+            throw new ErrorException("It seems something went wrong with our database! Please try again later.");
         }
     }
 }

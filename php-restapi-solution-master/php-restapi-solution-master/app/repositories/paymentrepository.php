@@ -9,10 +9,10 @@ class PaymentRepository extends Repository
     function GetJazzTickets()
 {
     try {
-        $stmt = $this->connection->prepare("SELECT eventTickets.ticketID, timeSlots.startTime, timeSlots.endTime, JazzArtists.name, JazzLocations.locationName, TimeSlotsJazz.hallID, timeSlots.price
-        FROM eventTickets
-        JOIN timeSlots ON eventTickets.timeSlotID = timeSlots.timeSlotID
-        JOIN TimeSlotsJazz ON timeSlots.timeSlotID = TimeSlotsJazz.timeSlotID
+        $stmt = $this->connection->prepare("SELECT EventTickets.ticketID, TimeSlots.startTime, TimeSlots.endTime, JazzArtists.name, JazzLocations.locationName, TimeSlotsJazz.hallID, TimeSlots.price
+        FROM EventTickets
+        JOIN TimeSlots ON EventTickets.timeSlotID = TimeSlots.timeSlotID
+        JOIN TimeSlotsJazz ON TimeSlots.timeSlotID = TimeSlotsJazz.timeSlotID
         JOIN JazzArtists ON JazzArtists.artistID = TimeSlotsJazz.artistID
         JOIN JazzLocations ON JazzLocations.locationID = TimeSlotsJazz.locationID");
 

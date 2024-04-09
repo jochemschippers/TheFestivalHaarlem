@@ -1,0 +1,19 @@
+.title {
+    margin-top: 80px;
+    text-align: center;
+}
+
+#cardBody {
+    min-height: 450px;
+}
+
+#buttons {
+    /* align-self: end;
+    align-content: end;
+    margin-top: auto; */
+
+    justify-self: center;
+    position: absolute;
+    bottom: 0;
+    width: 95%;
+}

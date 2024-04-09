@@ -14,8 +14,6 @@ class YummyRestaurant{
 		private string $amountSessions;
         private float $adultPrice;
         private float $childPrice;
-        private DateTime $startTime;
-        private DateTime $duration;
 
         public function __construct(
                 int $restaurantID,
@@ -30,8 +28,6 @@ class YummyRestaurant{
 				int $amountSessions,
                 float $adultPrice,
                 float $childPrice,
-                DateTime $startTime,
-                DateTime $duration
             ) {
                 $this->restaurantID = $restaurantID;
                 $this->restaurantName = $restaurantName;
@@ -45,8 +41,6 @@ class YummyRestaurant{
 				$this->amountSessions = $amountSessions;
                 $this->adultPrice = $adultPrice;
                 $this->childPrice = $childPrice;
-                $this->startTime = $startTime;
-                $this->duration = $duration;
             }
 
 	/**
@@ -194,38 +188,6 @@ class YummyRestaurant{
 	}
 
 	/**
-	 * @return DateTime
-	 */
-	public function getStartTime(): DateTime {
-		return $this->startTime;
-	}
-	
-	/**
-	 * @param DateTime $startTime 
-	 * @return self
-	 */
-	public function setStartTime(DateTime $startTime): self {
-		$this->startTime = $startTime;
-		return $this;
-	}
-
-	/**
-	 * @return DateTime
-	 */
-	public function getDuration(): DateTime {
-		return $this->duration;
-	}
-	
-	/**
-	 * @param DateTime $duration 
-	 * @return self
-	 */
-	public function setDuration(DateTime $duration): self {
-		$this->duration = $duration;
-		return $this;
-	}
-	
-	/**
 	 * @return string
 	 */
 	public function getAmountSessions(): string {
@@ -273,4 +235,3 @@ class YummyRestaurant{
 		return $this;
 	}
 }
-?>

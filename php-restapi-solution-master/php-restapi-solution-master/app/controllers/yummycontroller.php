@@ -8,8 +8,8 @@ class YummyController extends Controller
     private $yummyService;
 
     // initialize services
-    function __construct() {
-        parent::__construct();
+    function __construct()
+    {
         $this->yummyService = new YummyService();
     }
 
@@ -17,36 +17,65 @@ class YummyController extends Controller
     {
         $models = [
             "restaurants" => $this->yummyService->getAll(),
-            "foodTypes" =>  $this->yummyService->getFoodTypes(),
-            "restaurantFoodTypes" => $this->yummyService->getRestaurantFoodTypes(),
+            "foodTypes" => $this->yummyService->getFoodTypes(),
+            "restaurantFoodTypes" => $this->yummyService->getAllRestaurantFoodTypes(),
         ];
 
-        
+
 
         $this->displayView($models);
     }
-    public function restaurant() {
-        
-        $restaurantId = $_GET['restaurantId'];
-        $models = [
-            "restaurantId"=> $restaurantId,
-            "restaurant" => $this->yummyService->getOne($restaurantId),
-            "menuItems" =>  $this->yummyService->getMenuItems($restaurantId),
-            "images" => $this->yummyService->getImages($restaurantId),
-            "restaurantFoodTypes" => $this->yummyService->getRestaurantFoodTypes(),
-        ];
+    public function restaurant()
+    {
+        if (isset($_GET['restaurantId'])) {
 
-       $this->displayView($models);
+            $restaurantId = $_GET['restaurantId'];
+            $models = [
+                "restaurantId" => $restaurantId,
+                "timeSlots" => $this->yummyService->getAllTimeSlots(),
+                "images" => $this->yummyService->getImages($restaurantId),
+                "restaurant" => $this->yummyService->getOne($restaurantId),
+                "menuItems" => $this->yummyService->getMenuItems($restaurantId),
+                "restaurantFoodTypes" => $this->yummyService->getAllRestaurantFoodTypes(),
+                "timeSlotsYummy" => $this->yummyService->getRestaurantReservationInfo($restaurantId),
+                "restaurantReservations" => $this->yummyService->getAllRestaurantReservations(),
+            ];
+            $this->displayView($models);
+        }
+        if ($_SERVER["REQUEST_METHOD"] === 'POST' && !empty($_POST)) {
+            // var_dump($_POST);
+            if (isset($_POST['btnradio'], $_POST['customerName'], $_POST['phoneNr'], $_POST['nrAdult'], $_POST['nrChild'], $_POST['remark'])) { //if posts then
+
+                // create a DateTime object for the start time
+                $timeSlot = $_POST['btnradio'];
+                $customerName = $_POST['customerName'];
+                $phoneNr = $_POST['phoneNr'];
+                $nrAdult = $_POST['nrAdult'];
+                $nrChild = $_POST['nrChild'];
+                $remark = $_POST['remark'];
+
+                if ($this->createReservation($restaurantId, $timeSlot, $customerName, $phoneNr, $nrAdult, $nrChild, $remark)) {
+                    // HIER EEN POPUP MELDING TONEN IS GESLAAGD
+                    // if reservation is created successfully
+                    echo "<script>alert('Reservation created successfully!')</script>";
+                } else {
+                    // HIER MELDEN DAT EEN WAARDE VERKEERD INGEVULD IS. OF DAT ER EEN ERROR IS
+                    // if reservation creation fails
+                    echo "<script>alert('Failed to create reservation. Please check your inputs and try again.')</script>";
+                }
+            }
+        }
     }
-    public function YummyReservation() {
-        
+    public function YummyReservation()
+    {
+
         $restaurantId = $_GET['restaurantId'];
         $models = [
-            "restaurantId"=> $restaurantId,
+            "restaurantId" => $restaurantId,
             "restaurant" => $this->yummyService->getOne($restaurantId)
         ];
 
-       $this->displayView($models);
+        $this->displayView($models);
     }
     public function getAll()
     {
@@ -60,9 +89,10 @@ class YummyController extends Controller
         return $this->yummyService->getOne($restaurantId);
     }
 
-    public function getMenuItems($restaurantId){
-       // retrieve data
-       return $this->yummyService->getMenuItems($restaurantId);
+    public function getMenuItems($restaurantId)
+    {
+        // retrieve data
+        return $this->yummyService->getMenuItems($restaurantId);
     }
     public function getAllImages()
     {
@@ -79,8 +109,44 @@ class YummyController extends Controller
         // retrieve data
         return $this->yummyService->getFoodTypes();
     }
-    public function getRestaurantFoodTypes(){
+    public function getRestaurantFoodTypes()
+    {
         // retrieve data
-        return $this->yummyService->getRestaurantFoodTypes();
+        return $this->yummyService->getAllRestaurantFoodTypes();
+    }
+    public function getAllTimeSlots()
+    {
+        // retrieve data
+        return $this->yummyService->getAllTimeSlots();
+    }
+
+    public function getRestaurantReservationInfo()
+    {
+        $restaurantId = $_GET['restaurantId'];
+
+        return $this->yummyService->getRestaurantReservationInfo($restaurantId);
+    }
+
+    public function createReservation($restaurantId, $timeSlotId, $customerName, $phoneNr, $nrAdult, $nrChild, $remark)
+    {
+
+        $reservation = [
+            'ticketID' => 0,
+            'timeSlotId' => $timeSlotId,
+            'restaurantId' => $restaurantId,
+            'customerName' => $customerName,
+            'phoneNr' => $phoneNr,
+            'nrAdult' => $nrAdult,
+            'nrChild' => $nrChild,
+            'remark' => $remark,
+            'isActive' => true
+        ];
+
+        // call the createRestaurant method of the YummyService object with the restaurant object as the parameter
+        if ($this->yummyService->createReservation($reservation)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

@@ -36,16 +36,38 @@
             $button_link = "/" . $event->getEventName();
         ?>
 
-        <div class="card <?php echo $alignment ?>" style="background-image: url('<?php echo $background_image ?>'">
-            <div class="container" style="<?php echo $position ?>">
-                <h2><ins><?php echo $title ?></ins></h2>
-                <p><?php echo $description ?></p>
-                <a class="btn btn-primary" href="<?php echo $button_link ?>" role="button">Learn More</a>
+        <div class="card <?= $alignment ?>" style="background-image: url('<?= $background_image ?>'">
+            <div class="container" style="<?= $position ?>">
+                <h2><ins><?= $title ?></ins></h2>
+                <p><?= $description ?></p>
+                <a class="btn btn-primary" href="<?= $button_link ?>" role="button">Learn More</a>
             </div>
         </div>
 
     <?php
     }
+
+
+    // <!-- INSTAGRAM FEED CODE --> SHOULD HAVE
+
+    // set Instagram API endpoint
+    // $apiEndpoint = 'https://api.instagram.com/v1/users/self/media/recent/?access_token=ACCESS_TOKEN';
+
+    // // fetch Instagram feed data
+    // $ch = curl_init();
+    // curl_setopt($ch, CURLOPT_URL, $apiEndpoint);
+    // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    // $response = curl_exec($ch);
+    // curl_close($ch);
+
+    // // decode the JSON response
+    // $data = json_decode($response);
+
+    // // display the Instagram feed
+    // foreach ($data->data as $post) {
+    //   echo '<img src="' . $post->images->standard_resolution->url . '" alt="' . $post->caption->text . '">';
+    // }
     ?>
+    <!-- INSTAGRAM FEED COMPLETED -->
 
 </body>
